@@ -1,12 +1,17 @@
 const path = require('path');
 
 module.exports = {
-	mode: 'production',
-	entry: {},
+	mode: 'development',
+	entry: {
+		FollowUp: './src/page-specific/BaltCoGo/FollowUp.js'
+	},
 	output: {
-		path: path.join(__dirname, 'lib'),
-		filename: '[name].min.js',
+		path: path.join(__dirname, 'dist'),
+		filename: 'assets/dotgov-[name].min.js'.toLowerCase(),
 		library: 'Bc[name]'
+	},
+	devServer: {
+		contentBase: './dist'
 	},
 	module: {
 		rules: [
