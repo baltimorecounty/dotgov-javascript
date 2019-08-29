@@ -1,45 +1,90 @@
-function CheckID() {
-	var animalVendorComplaint = RegExp(/^(ACCMP)/i);
-	var standardVendorComplaint = RegExp(/^(CC|CRH|CS|PP|TS|CE|CP|CB|CG)\d+$/i);
-	var standardComplaint = RegExp(/^\d+$/i);
-	var AlertURL = '';
+import axios from '../../lib/axios';
+import { defaultErrorTemplate, errorTemplateFn, reportDetailsTemplateFn } from '../../templates/BaltCoGo-Templates';
 
-	var trackingNumber = document.getElementById('TrackingNumber').value;
-	var UserInfoPanel = document.getElementById('citizen-access-info');
-	var UserInfoPanelBadID = document.getElementById('UserBadIDPanel');
+/**
+ * Displays any Result Success or Failure
+ * @param {*} html
+ */
+const displayResults = (html) => {
+	const resultsElm = document.getElementById('report-details');
+	resultsElm.innerHTML = '';
+	resultsElm.appendChild(html);
+};
 
-	var RedirectURL = document.getElementById('RedirectURLParameter');
+const displayServiceRequest = (serviceRequest) => {
+	const { report = {}, comments = [] } = serviceRequest;
 
-	UserInfoPanel.style.display = 'none';
-	UserInfoPanelBadID.style.display = 'none';
-
-	if (animalVendorComplaint.test(trackingNumber)) {
-		UserInfoPanel.style.display = '';
-		AlertURL = 'https://citizenaccess.baltimorecountymd.gov/CitizenAccess/Cap/CapHome.aspx?&Module=Enforce';
-		RedirectURL.setAttribute('href', AlertURL);
-	} else if (standardVendorComplaint.test(trackingNumber)) {
-		UserInfoPanel.style.display = '';
-		AlertURL = 'https://citizenaccess.baltimorecountymd.gov/CitizenAccess/Cap/CapHome.aspx?&Module=Enforcement';
-		RedirectURL.setAttribute('href', AlertURL);
-	} else if (standardComplaint.test(trackingNumber)) {
-		GetReport();
+	if (report.ErrorsCount === 0) {
+		const reportDetails = reportDetailsTemplateFn(report.Results, comments.Results);
+		displayResults(reportDetails);
 	} else {
-		UserInfoPanelBadID.style.display = '';
+		displayDefaultError();
 	}
 
-	function GetReport() {
-		var reportTemplate = '{{#each (limit Data 3)}}<p>{{Comment}}</p>{{/each}}';
-		reportTemplate += '<div id="target">{{#each (skip Data 3)}}<p>{{Comment}}</p>{{/each}}</div>';
-		reportTemplate += '<button type="button" data-a11y-toggle="target">Show more...</button>';
-		BcApiHelpers.display({
-			url:
-				'https://testservices.baltimorecountymd.gov/platform.citysourced.net/servicerequests/' +
-				document.getElementById('TrackingNumber').value,
-			params: {},
-			template: reportTemplate,
-			targetId: 'app'
-		}).then(function() {
-			window.a11yToggle();
-		});
+	return serviceRequest;
+};
+
+const displayDefaultError = () => {
+	displayResults(defaultErrorTemplate);
+};
+
+/**
+ * Display an error showing the report tracking info is stored in another system
+ * @param {*} url
+ */
+const displayWrongTrackingSystem = (url) => {
+	const errorHtml = errorTemplateFn({
+		url
+	});
+	displayResults(errorHtml);
+};
+
+const reportTypes = [
+	{
+		name: 'AnimalServiceRequest',
+		testRegex: RegExp(/^(ACCMP)/i),
+		action: () => {
+			displayWrongTrackingSystem(
+				'https://citizenaccess.baltimorecountymd.gov/CitizenAccess/Cap/CapHome.aspx?&Module=Enforce'
+			);
+		}
+	},
+	{
+		name: 'VendorServiceRequest',
+		testRegex: RegExp(/^(CC|CRH|CS|PP|TS|CE|CP|CB|CG)\d+$/i),
+		action: () => {
+			displayWrongTrackingSystem(
+				'https://citizenaccess.baltimorecountymd.gov/CitizenAccess/Cap/CapHome.aspx?&Module=Enforcement'
+			);
+		}
+	},
+	{
+		name: 'StandardServiceReqeust',
+		testRegex: RegExp(/^\d+$/i),
+		action: (trackingNumber) => {
+			axios
+				.get(`//testservices.baltimorecountymd.gov/platform.citysourced.net/servicerequests/${trackingNumber}`)
+				.then((response) => response.data)
+				.then(displayServiceRequest)
+				.catch(console.warn || displayDefaultError);
+		}
+	},
+	{
+		name: 'default',
+		action: displayDefaultError
 	}
-}
+];
+
+const GetReport = () => {
+	const trackingNumber = document.getElementById('TrackingNumber').value;
+	for (let i = 0, len = reportTypes.length; i < len; i++) {
+		const reportType = reportTypes[i];
+		if (reportType.name === 'default' || reportType.testRegex.test(trackingNumber)) {
+			reportType.action(trackingNumber);
+			break;
+		}
+	}
+};
+
+/** Events */
+document.getElementById('get-report').addEventListener('click', GetReport);
