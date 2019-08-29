@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"build": "webpack",
-		"test": "echo \"Error: no test specified\" && exit 1",
+		"test": "jest",
 		"start": "webpack-dev-server --open"
 	},
 	"repository": {
@@ -21,7 +21,11 @@
 	"devDependencies": {
 		"@babel/core": "^7.5.5",
 		"@babel/preset-env": "^7.5.5",
+		"@testing-library/dom": "^6.1.0",
+		"babel-jest": "^24.9.0",
 		"babel-loader": "^8.0.6",
+		"babel-plugin-transform-object-rest-spread": "^6.26.0",
+		"jest": "^24.9.0",
 		"webpack": "^4.39.3",
 		"webpack-cli": "^3.3.7",
 		"webpack-dev-server": "^3.8.0"

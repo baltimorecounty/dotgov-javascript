@@ -63,10 +63,10 @@ const reportTypes = [
 		testRegex: RegExp(/^\d+$/i),
 		action: (trackingNumber) => {
 			axios
-				.get(`//testservices.baltimorecountymd.gov/platform.citysourced.net/servicerequests/${trackingNumber}`)
+				.get(`//localhost:54727/platform.citysourced.net/servicerequests/${trackingNumber}`)
 				.then((response) => response.data)
 				.then(displayServiceRequest)
-				.catch(console.warn || displayDefaultError);
+				.catch(displayDefaultError);
 		}
 	},
 	{

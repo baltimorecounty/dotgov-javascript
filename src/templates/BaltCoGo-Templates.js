@@ -25,6 +25,7 @@ const reportDetailsTemplateFn = (report, comments) => {
 		? 'Open'
 		: report.StatusTypeReadable === 'On Hold' ? report.StatusTypeReadable : 'Closed';
 	const sortedComments = [ ...comments ].reverse();
+
 	return compileTemplate(
 		`<div class="bc-citysourced-reporter">
 			<div class="callout_gray" id="citysourced-viewer">
