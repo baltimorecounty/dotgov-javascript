@@ -7,7 +7,10 @@ module.exports = {
 	},
 	output: {
 		path: path.join(__dirname, 'dist'),
-		filename: 'assets/dotgov-[name].min.js'.toLowerCase(),
+		filename: (chunkData) => {
+			const { chunk: { name } } = chunkData;
+			return `assets/dotgov-${name.toLowerCase()}.min.js`;
+		},
 		library: 'Bc[name]'
 	},
 	devServer: {
