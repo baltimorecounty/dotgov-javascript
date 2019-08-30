@@ -57,7 +57,7 @@ const reportDetailsTemplateFn = (report, comments) => {
 const defaultErrorTemplate = compileTemplate(
 	`<div role="alert" class="alert-information bc_alert" id="UserBadIDPanel">
 		<i class="fa fa-icon fa-2x fa-info-circle"></i>
-		<p>We are having trouble looking up this record. Please call 410-887-2450 to verify your tracking number.</p>
+		<p>We couldn’t find any records that match the ID number you entered. Please double check the number and try again.</p>
 	</div>`
 );
 
