@@ -28,7 +28,7 @@ const reportDetailsTemplateFn = (report, comments) => {
 
 	return compileTemplate(
 		`<div class="bc-citysourced-reporter">
-			<div class="callout_gray" id="citysourced-viewer">
+			<div id="citysourced-viewer">
 				<h2>
 					Report Status <span class=${statusClass.toLowerCase()}>${statusText}</span>
 				</h2>
