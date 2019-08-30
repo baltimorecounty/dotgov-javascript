@@ -1,14 +1,28 @@
 import axios from '../../lib/axios';
 import { defaultErrorTemplate, errorTemplateFn, reportDetailsTemplateFn } from '../../templates/BaltCoGo-Templates';
 
+const appDocumentIds = {
+	form: 'service-request-form',
+	loadingIndicator: 'sr-loading-indicator',
+	reportDetails: 'report-details',
+	resetForm: 'sr-reset-form',
+	submit: 'get-report'
+};
+
+const clearResults = () => {
+	displayResults('');
+};
+
 /**
  * Displays any Result Success or Failure
  * @param {*} html
  */
 const displayResults = (html) => {
-	const resultsElm = document.getElementById('report-details');
+	const resultsElm = document.getElementById(appDocumentIds.reportDetails);
 	resultsElm.innerHTML = '';
-	resultsElm.appendChild(html);
+	if (html) {
+		resultsElm.appendChild(html);
+	}
 };
 
 const displayServiceRequest = (serviceRequest) => {
@@ -39,10 +53,12 @@ const displayWrongTrackingSystem = (url) => {
 	displayResults(errorHtml);
 };
 
-const getLoadingIndicatorElm = () => document.getElementById('sr-loading-indicator');
+const getElmById = (id) => document.getElementById(id);
 
-const toggleElm = (elm, status = 'show') => {
-	elm.style.display = status.toLowerCase() === 'show' ? 'block' : 'none';
+const toggleElm = (elms = [], status = 'show') => {
+	elms.forEach((elm) => {
+		elm.style.display = status.toLowerCase() === 'show' ? 'block' : 'none';
+	});
 };
 
 const reportTypes = [
@@ -65,20 +81,14 @@ const reportTypes = [
 		}
 	},
 	{
-		name: 'StandardServiceReqeust',
+		name: 'StandardServiceRequest',
 		testRegex: RegExp(/^\d+$/i),
-		action: (trackingNumber) => {
-			const loadingIndicatorElm = getLoadingIndicatorElm();
-			toggleElm(loadingIndicatorElm, 'show');
+		action: (trackingNumber) =>
 			axios
 				.get(`//localhost:54727/platform.citysourced.net/servicerequests/${trackingNumber}`)
 				.then((response) => response.data)
 				.then(displayServiceRequest)
 				.catch(displayDefaultError)
-				.finally(() => {
-					toggleElm(loadingIndicatorElm, 'hide');
-				});
-		}
 	},
 	{
 		name: 'default',
@@ -86,16 +96,30 @@ const reportTypes = [
 	}
 ];
 
-const GetReport = () => {
+const GetReport = async () => {
 	const trackingNumber = document.getElementById('TrackingNumber').value;
 	for (let i = 0, len = reportTypes.length; i < len; i++) {
 		const reportType = reportTypes[i];
 		if (reportType.name === 'default' || reportType.testRegex.test(trackingNumber)) {
-			reportType.action(trackingNumber);
+			toggleElm([ getElmById(appDocumentIds.form) ], 'hide');
+			toggleElm([ getElmById(appDocumentIds.loadingIndicator) ], 'show');
+
+			await reportType.action(trackingNumber);
+
+			toggleElm([ getElmById(appDocumentIds.loadingIndicator) ], 'hide');
+			toggleElm([ getElmById(appDocumentIds.resetForm) ], 'show');
+
 			break;
 		}
 	}
 };
 
+const ResetForm = () => {
+	clearResults();
+	toggleElm([ getElmById(appDocumentIds.form) ], 'show');
+	toggleElm([ getElmById(appDocumentIds.resetForm) ], 'hide');
+};
+
 /** Events */
-document.getElementById('get-report').addEventListener('click', GetReport);
+document.getElementById(appDocumentIds.submit).addEventListener('click', GetReport);
+document.getElementById(appDocumentIds.resetForm).addEventListener('click', ResetForm);
