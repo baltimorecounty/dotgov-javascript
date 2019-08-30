@@ -39,6 +39,12 @@ const displayWrongTrackingSystem = (url) => {
 	displayResults(errorHtml);
 };
 
+const getLoadingIndicatorElm = () => document.getElementById('sr-loading-indicator');
+
+const toggleElm = (elm, status = 'show') => {
+	elm.style.display = status.toLowerCase() === 'show' ? 'block' : 'none';
+};
+
 const reportTypes = [
 	{
 		name: 'AnimalServiceRequest',
@@ -62,11 +68,16 @@ const reportTypes = [
 		name: 'StandardServiceReqeust',
 		testRegex: RegExp(/^\d+$/i),
 		action: (trackingNumber) => {
+			const loadingIndicatorElm = getLoadingIndicatorElm();
+			toggleElm(loadingIndicatorElm, 'show');
 			axios
 				.get(`//localhost:54727/platform.citysourced.net/servicerequests/${trackingNumber}`)
 				.then((response) => response.data)
 				.then(displayServiceRequest)
-				.catch(displayDefaultError);
+				.catch(displayDefaultError)
+				.finally(() => {
+					toggleElm(loadingIndicatorElm, 'hide');
+				});
 		}
 	},
 	{
