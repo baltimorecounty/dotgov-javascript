@@ -1,5 +1,7 @@
 import axios from '../../lib/axios';
 import { defaultErrorTemplate, errorTemplateFn, reportDetailsTemplateFn } from '../../templates/BaltCoGo-Templates';
+//const targetEndpoint = '//localhost:54727/platform.citysourced.net/servicerequests';
+const targetEndpoint = '//testservices.baltimorecountymd.gov/platform.citysourced.net/servicerequests';
 
 const appDocumentIds = {
 	form: 'service-request-form',
@@ -57,7 +59,11 @@ const getElmById = (id) => document.getElementById(id);
 
 const toggleElm = (elms = [], status = 'show') => {
 	elms.forEach((elm) => {
-		elm.style.display = status.toLowerCase() === 'show' ? 'block' : 'none';
+		if (status.toLowerCase() === 'show') {
+			elm.classList.remove('hidden');
+		} else {
+			elm.classList.add('hidden');
+		}
 	});
 };
 
@@ -85,7 +91,7 @@ const reportTypes = [
 		testRegex: RegExp(/^\d+$/i),
 		action: (trackingNumber) =>
 			axios
-				.get(`//localhost:54727/platform.citysourced.net/servicerequests/${trackingNumber}`)
+				.get(`${targetEndpoint}/${trackingNumber}`)
 				.then((response) => response.data)
 				.then(displayServiceRequest)
 				.catch(displayDefaultError)
@@ -96,7 +102,8 @@ const reportTypes = [
 	}
 ];
 
-const GetReport = async () => {
+const GetReport = async (submitEvent) => {
+	submitEvent.preventDefault();
 	const trackingNumber = document.getElementById('TrackingNumber').value;
 	for (let i = 0, len = reportTypes.length; i < len; i++) {
 		const reportType = reportTypes[i];
@@ -104,10 +111,13 @@ const GetReport = async () => {
 			toggleElm([ getElmById(appDocumentIds.form) ], 'hide');
 			toggleElm([ getElmById(appDocumentIds.loadingIndicator) ], 'show');
 
-			await reportType.action(trackingNumber);
-
-			toggleElm([ getElmById(appDocumentIds.loadingIndicator) ], 'hide');
-			toggleElm([ getElmById(appDocumentIds.resetForm) ], 'show');
+			try {
+				await reportType.action(trackingNumber);
+			} catch (ex) {
+			} finally {
+				toggleElm([ getElmById(appDocumentIds.loadingIndicator) ], 'hide');
+				toggleElm([ getElmById(appDocumentIds.resetForm) ], 'show');
+			}
 
 			break;
 		}
@@ -116,10 +126,12 @@ const GetReport = async () => {
 
 const ResetForm = () => {
 	clearResults();
-	toggleElm([ getElmById(appDocumentIds.form) ], 'show');
+	const formElm = getElmById(appDocumentIds.form);
+	toggleElm([ formElm ], 'show');
 	toggleElm([ getElmById(appDocumentIds.resetForm) ], 'hide');
+	formElm.scrollIntoView();
 };
 
 /** Events */
-document.getElementById(appDocumentIds.submit).addEventListener('click', GetReport);
+document.getElementById(appDocumentIds.form).addEventListener('submit', GetReport);
 document.getElementById(appDocumentIds.resetForm).addEventListener('click', ResetForm);

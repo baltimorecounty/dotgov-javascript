@@ -23,51 +23,48 @@
 			<div class="row">
 				<div class="col-xs-12">
 						<h1 class="text-center">BaltCoGo Follow Up Demo</h1>
-					   <div id="service-request-form">
+						<!-- start copying for html snippet here -->
+					   <div>
 						   <strong>
 							   <div class="seform">
-								   <form>
-									   <div class="SEAFGroupVertical vertical">
-										   <div class="SEAFGroupVertical vertical">
-											   <div class="SEAFGroupVertical vertical">
+								   <form id="service-request-form">
+											<p class="SEAFWrapper">
+												<div class="seText" style="width: 100%;">
+													<span>Fields marked with </span>
+													<span class="seRequiredMarker">*</span>
+													<span> are required.</span>
+												</div>
+												<p class="SEAFWrapper">
+													<p class="SEAFGroupHorizontal horizontal">
+														<div class="seLabelCell seLabelCellHorizontal">
+															<div class="seText">
+																<label for="TrackingNumber">Tracking Number
+																	<span class="seRequiredMarker">*</span>
+																</label>
+															</div>
+														</div>
+														<p class="seFieldCell seFieldCellHorizontal">
+															<p>Use '262255' for a valid test, this should be removed after testing.</p>
+															<input class="seInput seRequiredElement" id="TrackingNumber" name="TrackingNumber" type="text" value="" />
+														</p>
 												   <div class="SEAFWrapper">
-													   <div class="seText" style="width: 100%;">
-														   <span>Fields marked with </span>
-														   <span class="seRequiredMarker">*</span>
-														   <span> are required.</span>
-													   </div>
-													   <div class="SEAFWrapper">
-														   <div class="SEAFGroupHorizontal horizontal">
-															   <div class="seLabelCell seLabelCellHorizontal">
-																   <div class="seText">
-																	   <label for="TrackingNumber">Tracking Number
-																		   <span class="seRequiredMarker">*</span>
-																	   </label>
-																   </div>
-															   </div>
-															   <p class="seFieldCell seFieldCellHorizontal">
-																   <p>Use '262255' for a valid test, this should be removed after testing.</p>
-																   <input class="seInput seRequiredElement" id="TrackingNumber" name="TrackingNumber" type="text" value="" />
-															   </div>
-														   </div>
-													   </div>
+													   <button class="seButton" type="submit" style="float:left;" id="get-report" >Track Now</button>
 												   </div>
-												   <div class="SEAFWrapper">
-													   <button class="seButton" type="button" style="float:left;" id="get-report" >Track Now</button>
-												   </div>
-											   </div>
-										   </div>
+											   </p>
+										   </p>
 									   </div>
 								   </form>
 							   </div>
 						   </strong>
 					   </div>
-					   <div id="sr-loading-indicator" style="display: none;">
+					   <div id="sr-loading-indicator" class="hidden">
 					   		<p><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i> Loading your service request.</p>
 					   		<span class="sr-only">Loading Service Request...</span>
 						</div>
+						<!-- App Container -->
 					   <div id="report-details"></div>
-					   <button id="sr-reset-form" class="seButton" type="button" style="display:none;float:left;">Look Up Another Report</button>
+					   <button id="sr-reset-form" class="seButton hidden" type="button" style="float:left;">Look Up Another Report</button>
+					   <!-- end copying here -->
 				</div>
 			</div>
 		</div>
