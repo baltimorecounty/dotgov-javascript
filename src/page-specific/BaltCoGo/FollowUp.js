@@ -1,5 +1,10 @@
 import axios from '../../lib/axios';
-import { defaultErrorTemplate, errorTemplateFn, reportDetailsTemplateFn } from '../../templates/BaltCoGo-Templates';
+import {
+	defaultErrorTemplate,
+	defaultServerErrorTemplate,
+	errorTemplateFn,
+	reportDetailsTemplateFn
+} from '../../templates/BaltCoGo-Templates';
 //const targetEndpoint = '//localhost:54727/platform.citysourced.net/servicerequests';
 const targetEndpoint = '//testservices.baltimorecountymd.gov/platform.citysourced.net/servicerequests';
 
@@ -94,7 +99,7 @@ const reportTypes = [
 				.get(`${targetEndpoint}/${trackingNumber}`)
 				.then((response) => response.data)
 				.then(displayServiceRequest)
-				.catch(displayDefaultError)
+				.catch(defaultServerErrorTemplate)
 	},
 	{
 		name: 'default',

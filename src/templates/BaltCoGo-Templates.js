@@ -54,11 +54,20 @@ const reportDetailsTemplateFn = (report, comments) => {
 	);
 };
 
-const defaultErrorTemplate = compileTemplate(
-	`<div role="alert" class="alert-information bc_alert" id="UserBadIDPanel">
+const error = (text) =>
+	compileTemplate(
+		`<div role="alert" class="alert-information bc_alert" id="UserBadIDPanel">
 		<i class="fa fa-icon fa-2x fa-info-circle"></i>
-		<p>We couldn’t find any records that match the ID number you entered. Please double check the number and try again.</p>
+		<p>${text}</p>
 	</div>`
+	);
+
+const defaultErrorTemplate = error(
+	'We couldn’t find any records that match the ID number you entered. Please double check the number and try again.'
+);
+
+const defaultServerErrorTemplate = error(
+	'We’re having trouble connecting to our servers right now. Please try again in a few minutes.'
 );
 
 const errorTemplateFn = (error) =>
@@ -69,4 +78,10 @@ const errorTemplateFn = (error) =>
 		</div>`
 	);
 
-export { defaultErrorTemplate, commentsTemplateFn, errorTemplateFn, reportDetailsTemplateFn };
+export {
+	defaultErrorTemplate,
+	defaultServerErrorTemplate,
+	commentsTemplateFn,
+	errorTemplateFn,
+	reportDetailsTemplateFn
+};
