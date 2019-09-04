@@ -11,9 +11,9 @@ Home of site, template and page specific javascript for the Baltimore County [we
 
 1. Determine whether your script is `site`, `template` or `page-specific`
 2. Based on your decision in #1 add your new files to the corresponding folder in `src`
-  1. **{file}.js** - The actual script you are developing
-  2. **{fileName}.md** - Adds documentation for your script
-  3. **{fileName}.test.js** - Unit and/or Integration tests for your script
+    - **{file}.js** - The actual script you are developing
+    - **{fileName}.md** - Adds documentation for your script
+    - **{fileName}.test.js** - Unit and/or Integration tests for your script
 3. Go the `webpack.config.js` file and add a friendly name for your script to the `entry`. Reference the path `js` file from step 2, to generate your file during the build process
 
 ### Demo
