@@ -1,11 +1,12 @@
 import axios from "../../lib/axios";
 import {
-  defaultErrorTemplate,
-  defaultServerErrorTemplate,
+  defaultErrorTemplateFn,
+  defaultServerErrorTemplateFn,
   errorTemplateFn,
   reportDetailsTemplateFn
 } from "../../templates/BaltCoGo-Templates";
-//const targetEndpoint = '//localhost:54727/platform.citysourced.net/servicerequests';
+// const targetEndpoint =
+//   "//localhost:54727/platform.citysourced.net/servicerequests";
 const targetEndpoint =
   "//testservices.baltimorecountymd.gov/platform.citysourced.net/servicerequests";
 
@@ -50,7 +51,11 @@ const displayServiceRequest = serviceRequest => {
 };
 
 const displayDefaultError = () => {
-  displayResults(defaultErrorTemplate);
+  displayResults(defaultErrorTemplateFn());
+};
+
+const displayServerError = () => {
+  displayResults(defaultServerErrorTemplateFn());
 };
 
 /**
@@ -103,7 +108,7 @@ const reportTypes = [
         .get(`${targetEndpoint}/${trackingNumber}`)
         .then(response => response.data)
         .then(displayServiceRequest)
-        .catch(defaultServerErrorTemplate)
+        .catch(displayServerError)
   },
   {
     name: "default",
@@ -113,7 +118,7 @@ const reportTypes = [
 
 const GetReport = async submitEvent => {
   submitEvent.preventDefault();
-  const trackingNumber = document.getElementById("TrackingNumber").value;
+  const trackingNumber = document.getElementById("TrackingNumber").value.trim();
   for (let i = 0, len = reportTypes.length; i < len; i++) {
     const reportType = reportTypes[i];
     if (
@@ -141,7 +146,7 @@ const ResetForm = () => {
   const formElm = getElmById(appDocumentIds.form);
   toggleElm([formElm], "show");
   toggleElm([getElmById(appDocumentIds.resetForm)], "hide");
-  formElm.scrollIntoView();
+  getElmById("mainContent").scrollIntoView();
 };
 
 /** Events */

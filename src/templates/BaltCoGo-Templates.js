@@ -20,18 +20,13 @@ const commentsTemplateFn = comments =>
     </ul>`;
 
 const reportDetailsTemplateFn = (report, comments) => {
-  const statusClass = report.IsOpen
-    ? "open"
-    : report.StatusTypeReadable === "On Hold"
-    ? "on-hold"
-    : "closed";
   const sortedComments = [...comments].reverse();
 
   return compileTemplate(
     `<div class="bc-citysourced-reporter">
         <div id="citysourced-viewer">
             <h2>
-                Report Status <span>${StatusTypeReadable}</span>
+                Report Status <span>${report.StatusTypeReadable}</span>
             </h2>
             <dl id="meta">
                 <dt>Request ID</dt>
@@ -61,19 +56,21 @@ const reportDetailsTemplateFn = (report, comments) => {
 
 const error = text =>
   compileTemplate(
-    `<div role="alert" class="alert-information bc_alert" id="UserBadIDPanel">
+    `<div role="alert" class="alert-information bc_alert">
         <i class="fa fa-icon fa-2x fa-info-circle"></i>
         <p>${text}</p>
     </div>`
   );
 
-const defaultErrorTemplate = error(
-  "We couldn’t find any records that match the ID number you entered. Please double check the number and try again."
-);
+const defaultErrorTemplateFn = () =>
+  error(
+    "We couldn’t find any records that match the ID number you entered. Please double check the number and try again."
+  );
 
-const defaultServerErrorTemplate = error(
-  "We’re having trouble connecting to our servers right now. Please try again in a few minutes."
-);
+const defaultServerErrorTemplateFn = () =>
+  error(
+    "We’re having trouble connecting to our servers right now. Please try again in a few minutes."
+  );
 
 const errorTemplateFn = error =>
   compileTemplate(
@@ -84,8 +81,8 @@ const errorTemplateFn = error =>
   );
 
 export {
-  defaultErrorTemplate,
-  defaultServerErrorTemplate,
+  defaultErrorTemplateFn,
+  defaultServerErrorTemplateFn,
   commentsTemplateFn,
   errorTemplateFn,
   reportDetailsTemplateFn
