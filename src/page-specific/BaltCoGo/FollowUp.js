@@ -1,14 +1,32 @@
 import axios from "../../lib/axios";
 import {
+  setConfig,
+  getValue as getConfigValue
+} from "@baltimorecounty/javascript-utilities/config";
+import {
   defaultErrorTemplateFn,
   defaultServerErrorTemplateFn,
   errorTemplateFn,
   reportDetailsTemplateFn
 } from "../../templates/BaltCoGo-Templates";
-// const targetEndpoint =
-//   "//localhost:54727/platform.citysourced.net/servicerequests";
-const targetEndpoint =
-  "//testservices.baltimorecountymd.gov/platform.citysourced.net/servicerequests";
+
+setConfig({
+  local: {
+    targetEndpoint: "//localhost:54727/platform.citysourced.net/servicerequests"
+  },
+  development: {
+    targetEndpoint:
+      "//testservices.baltimorecountymd.gov/platform.citysourced.net/servicerequests"
+  },
+  staging: {
+    targetEndpoint:
+      "//testservices.baltimorecountymd.gov/platform.citysourced.net/servicerequests"
+  },
+  production: {
+    targetEndpoint:
+      "services.baltimorecountymd.gov/platform.citysourced.net/servicerequests"
+  }
+});
 
 const appDocumentIds = {
   form: "service-request-form",
@@ -105,7 +123,7 @@ const reportTypes = [
     testRegex: RegExp(/^\d+$/i),
     action: trackingNumber =>
       axios
-        .get(`${targetEndpoint}/${trackingNumber}`)
+        .get(`${getConfigValue("targetEndpoint")}/${trackingNumber}`)
         .then(response => response.data)
         .then(displayServiceRequest)
         .catch(displayServerError)
