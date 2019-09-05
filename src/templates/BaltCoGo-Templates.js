@@ -25,18 +25,13 @@ const reportDetailsTemplateFn = (report, comments) => {
     : report.StatusTypeReadable === "On Hold"
     ? "on-hold"
     : "closed";
-  const statusText = report.IsOpen
-    ? "Open"
-    : report.StatusTypeReadable === "On Hold"
-    ? report.StatusTypeReadable
-    : "Closed";
   const sortedComments = [...comments].reverse();
 
   return compileTemplate(
     `<div class="bc-citysourced-reporter">
         <div id="citysourced-viewer">
             <h2>
-                Report Status <span class=${statusClass.toLowerCase()}>${statusText}</span>
+                Report Status <span>${StatusTypeReadable}</span>
             </h2>
             <dl id="meta">
                 <dt>Request ID</dt>
