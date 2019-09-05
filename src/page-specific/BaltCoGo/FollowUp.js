@@ -10,6 +10,9 @@ import {
   reportDetailsTemplateFn
 } from "../../templates/BaltCoGo-Templates";
 
+/**
+ * Setup the api endpoints for the different environments
+ */
 setConfig({
   local: {
     targetEndpoint: "//localhost:54727/platform.citysourced.net/servicerequests"
@@ -36,6 +39,9 @@ const appDocumentIds = {
   submit: "get-report"
 };
 
+/**
+ * Clear the results container
+ */
 const clearResults = () => {
   displayResults("");
 };
@@ -52,6 +58,10 @@ const displayResults = html => {
   }
 };
 
+/**
+ * Displays a service request based on the report details template
+ * @param {object} serviceRequest
+ */
 const displayServiceRequest = serviceRequest => {
   const { report = {}, comments = [] } = serviceRequest;
 
@@ -68,10 +78,16 @@ const displayServiceRequest = serviceRequest => {
   return serviceRequest;
 };
 
+/**
+ * Displays a default error for the application
+ */
 const displayDefaultError = () => {
   displayResults(defaultErrorTemplateFn());
 };
 
+/**
+ * Displays a server error
+ */
 const displayServerError = () => {
   displayResults(defaultServerErrorTemplateFn());
 };
@@ -87,18 +103,32 @@ const displayWrongTrackingSystem = url => {
   displayResults(errorHtml);
 };
 
+/** Shortcut function for document */
 const getElmById = id => document.getElementById(id);
 
-const toggleElm = (elms = [], status = "show") => {
+/** Toggle the visibility of an element  */
+const toggleElm = (elm, status = "show") => {
+  if (status.toLowerCase() === "show") {
+    elm.classList.remove("hidden");
+  } else {
+    elm.classList.add("hidden");
+  }
+};
+
+/**
+ * Toggle a list of elements visibility
+ * @param {*} elms
+ * @param {*} status
+ */
+const toggleElms = (elms = [], status = "show") => {
   elms.forEach(elm => {
-    if (status.toLowerCase() === "show") {
-      elm.classList.remove("hidden");
-    } else {
-      elm.classList.add("hidden");
-    }
+    toggleElm(elm, status);
   });
 };
 
+/**
+ * List of actions for a service request based on the format of the service request number
+ */
 const reportTypes = [
   {
     name: "AnimalServiceRequest",
@@ -134,6 +164,10 @@ const reportTypes = [
   }
 ];
 
+/**
+ * Get follow up information based on a given service request number
+ * @param {*} submitEvent
+ */
 const GetReport = async submitEvent => {
   submitEvent.preventDefault();
   const trackingNumber = document.getElementById("TrackingNumber").value.trim();
@@ -143,15 +177,15 @@ const GetReport = async submitEvent => {
       reportType.name === "default" ||
       reportType.testRegex.test(trackingNumber)
     ) {
-      toggleElm([getElmById(appDocumentIds.form)], "hide");
-      toggleElm([getElmById(appDocumentIds.loadingIndicator)], "show");
+      toggleElms([getElmById(appDocumentIds.form)], "hide");
+      toggleElms([getElmById(appDocumentIds.loadingIndicator)], "show");
 
       try {
         await reportType.action(trackingNumber);
       } catch (ex) {
       } finally {
-        toggleElm([getElmById(appDocumentIds.loadingIndicator)], "hide");
-        toggleElm([getElmById(appDocumentIds.resetForm)], "show");
+        toggleElms([getElmById(appDocumentIds.loadingIndicator)], "hide");
+        toggleElms([getElmById(appDocumentIds.resetForm)], "show");
       }
 
       break;
@@ -159,11 +193,12 @@ const GetReport = async submitEvent => {
   }
 };
 
+/** Reset the follow up form to it's initial state */
 const ResetForm = () => {
   clearResults();
   const formElm = getElmById(appDocumentIds.form);
-  toggleElm([formElm], "show");
-  toggleElm([getElmById(appDocumentIds.resetForm)], "hide");
+  toggleElms([formElm], "show");
+  toggleElms([getElmById(appDocumentIds.resetForm)], "hide");
   getElmById("mainContent").scrollIntoView();
 };
 

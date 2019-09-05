@@ -1,74 +1,89 @@
-
 <!DOCTYPE html>
 <html lang="">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>BaltCoGo Follow Up Demo</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BaltCoGo Follow Up Demo</title>
 
-		<!-- Bootstrap CSS -->
-		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-		<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
 
-		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
-			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
-	</head>
-	<body>
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12">
-						<h1 class="text-center">BaltCoGo Follow Up Demo</h1>
-						<!-- start copying for html snippet here -->
-					   <div>
-						   <strong>
-							   <div class="seform">
-								   <form id="service-request-form">
-											<p class="SEAFWrapper">
-												<div class="seText" style="width: 100%;">
-													<span>Fields marked with </span>
-													<span class="seRequiredMarker">*</span>
-													<span> are required.</span>
-												</div>
-												<p class="SEAFWrapper">
-													<p class="SEAFGroupHorizontal horizontal">
-														<div class="seLabelCell seLabelCellHorizontal">
-															<div class="seText">
-																<label for="TrackingNumber">Tracking Number
-																	<span class="seRequiredMarker">*</span>
-																</label>
-															</div>
-														</div>
-														<p class="seFieldCell seFieldCellHorizontal">
-															<p>Use '262255' for a valid test, this should be removed after testing.</p>
-															<input class="seInput seRequiredElement" id="TrackingNumber" name="TrackingNumber" type="text" value="" />
-														</p>
-												   <div class="SEAFWrapper">
-													   <button class="seButton" type="submit" style="float:left;" id="get-report" >Track Now</button>
-												   </div>
-											   </p>
-										   </p>
-									   </div>
-								   </form>
-							   </div>
-						   </strong>
-					   </div>
-					   <div id="sr-loading-indicator" class="hidden">
-					   		<p><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i> Loading your service request.</p>
-					   		<span class="sr-only">Loading Service Request...</span>
-						</div>
-						<!-- App Container -->
-					   <div id="report-details"></div>
-					   <button id="sr-reset-form" class="seButton hidden" type="button" style="float:left;">Look Up Another Report</button>
-					   <div class="clearfix"></div>
-					   <!-- end copying here -->
-				</div>
-			</div>
-		</div>
-		<script src="/assets/dotgov-followUp.min.js"></script>
-	</body>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container" id="mainContent">
+      <div class="row">
+        <div class="col-xs-12">
+          <h1 class="text-center">BaltCoGo Follow Up Demo</h1>
+          <!-- start copying for html snippet here -->
+          <div>
+            <strong></strong>
+            <form id="service-request-form" name="service-request-form">
+              <div>
+                <p>
+                  Use '262255' for a valid test, this should be removed after
+                  testing.
+                </p>
+                <strong
+                  ><label for="TrackingNumber">Tracking Number </label></strong
+                >
+              </div>
+              <strong
+                ><input
+                  class="seInput seRequiredElement"
+                  id="TrackingNumber"
+                  name="TrackingNumber"
+                  type="text"
+                  value=""/><br />
+                <br
+              /></strong>
+              <strong
+                ><button
+                  class="seButton"
+                  id="get-report"
+                  style="float:left;"
+                  type="submit"
+                >
+                  <strong><strong>Track Now</strong></strong>
+                </button></strong
+              >
+            </form>
+          </div>
+          <div class="hidden" id="sr-loading-indicator">
+            <p>
+              <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i> Loading your
+              service request.
+            </p>
+            <span class="sr-only">Loading Service Request...</span>
+          </div>
+          <!-- App Container -->
+          <div id="report-details"></div>
+          <button
+            class="seButton hidden"
+            id="sr-reset-form"
+            style="float:left;"
+            type="button"
+          >
+            Look Up Another Report
+          </button>
+          <div class="clearfix"></div>
+          <!-- end copying here -->
+        </div>
+      </div>
+    </div>
+    <script src="/assets/dotgov-followUp.min.js"></script>
+  </body>
 </html>
