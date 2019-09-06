@@ -1,24 +1,17 @@
-$(document).ready(function() {
-  $("#menu-trigger-btn").click(function() {
-    $(this).toggleClass("open");
-    $("#slide-menu,#menu-toggle,#content,#menu-overlay").toggleClass(
-      "menu-active"
-    );
+document.addEventListener("DOMContentLoaded", function() {
+  var menu, toggleButton, closeButton;
+
+  menu = document.getElementById("slide-menu");
+  toggleButton = document.getElementById("menu-trigger-btn");
+  closeButton = document.getElementById("cntnt-ovrly");
+
+  toggleButton.addEventListener("click", function(e) {
+    e.preventDefault();
+    document.body.classList.toggle("open");
   });
 
-  $("#cntnt-ovrly").click(function() {
-    $("*").removeClass("menu-active");
-    $("*").removeClass("disabled");
-  });
-
-  $("#logo_toggle").click(function() {
-    $("*").removeClass("menu-active");
+  closeButton.addEventListener("click", function(e) {
+    e.preventDefault();
+    document.body.classList.remove("open");
   });
 });
-
-document.getElementById("menu-trigger-btn").addEventListener("click", mainMenu);
-document.addEventListener("DOMContentLoaded", function(){
-function mainMenu() {
-  var element = document.getElementById("wrapper");
-  document.body.classList.toggleClass("menu-open");
-}
