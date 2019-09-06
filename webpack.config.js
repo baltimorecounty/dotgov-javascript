@@ -23,7 +23,7 @@ module.exports = {
     rules: [
       {
         test: /\.m?js$/,
-        exclude: /(node_modules)/,
+        exclude: /node_modules\/(?!(@baltimorecounty\/javascript-utilities)\/).*/,
         use: {
           loader: "babel-loader",
           options: {
