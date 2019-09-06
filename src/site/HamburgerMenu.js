@@ -1,17 +1,20 @@
 document.addEventListener("DOMContentLoaded", function() {
-  var menu, toggleButton, closeButton;
+  var contentWrapper, menu, menuToggle, toggleButton, closeButton;
 
+  contentWrapper = document.getElementById("content");
   menu = document.getElementById("slide-menu");
+  menuToggle = document.getElementById("menu-toggle");
   toggleButton = document.getElementById("menu-trigger-btn");
   closeButton = document.getElementById("cntnt-ovrly");
 
-  toggleButton.addEventListener("click", function(e) {
-    e.preventDefault();
-    document.body.classList.toggle("open");
+  toggleButton.addEventListener("click", function(c) {
+    c.preventDefault();
+    contentWrapper.classList.toggle("menu-active");
+    menu.classList.toggle("menu-active");
   });
 
-  closeButton.addEventListener("click", function(e) {
-    e.preventDefault();
-    document.body.classList.remove("open");
+  closeButton.addEventListener("click", function(c) {
+    c.preventDefault();
+    menu.classList.toggle("menu-active");
   });
 });

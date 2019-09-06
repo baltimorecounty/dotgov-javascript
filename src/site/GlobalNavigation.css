@@ -114,7 +114,6 @@ nav#slide-menu ul li a:hover > .i-float-right {
 nav#slide-menu ul li:before {
   font-style: normal;
   font-weight: normal;
-  speak: none;
   display: inline-block;
   text-decoration: inherit;
   width: 1em;
