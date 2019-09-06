@@ -15,3 +15,10 @@ $(document).ready(function() {
     $("*").removeClass("menu-active");
   });
 });
+
+document.getElementById("menu-trigger-btn").addEventListener("click", mainMenu);
+document.addEventListener("DOMContentLoaded", function(){
+function mainMenu() {
+  var element = document.getElementById("wrapper");
+  document.body.classList.toggleClass("menu-open");
+}
