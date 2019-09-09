@@ -122,10 +122,21 @@
   transform: rotate(-45deg);
 }
 
+/* RESPONSIVE UTILITIES */
+
 @media (max-width: 396px) {
   .menu-trigger {
     width: 100%;
     max-width: 60px !important;
+    min-height: 80px !important;
+    height: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .menu-trigger {
+    width: 100%;
+    max-width: 75px;
     min-height: 80px !important;
     height: 100%;
   }

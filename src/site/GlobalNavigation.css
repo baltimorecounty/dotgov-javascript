@@ -32,6 +32,8 @@ nav#slide-menu a {
   transition: all 0.3s ease 0s;
 }
 
+/* OVERLAY STYLING */
+
 .menu-active .nav-shade {
   opacity: 0.9;
   pointer-events: auto;
@@ -55,6 +57,8 @@ nav#slide-menu a {
   width: 100%;
   z-index: 299;
 }
+
+/* OVERLAY STYLING */
 
 nav#dg_slide-menu {
   font-family: "Montserrat", sans-serif;
@@ -184,6 +188,8 @@ nav#dg_slide-menu.menu-active ul {
   }
 }
 
+/* RESPONSIVE UTILITITES */
+
 @media (max-width: 396px) {
   .menu-trigger {
     width: 100%;
@@ -194,15 +200,9 @@ nav#dg_slide-menu.menu-active ul {
 
   nav#dg_slide-menu ul li a {
     display: flex;
-    color: #f7f7f7;
-    width: 100%;
+    color: #ffffff;
     font-family: "Montserrat", sans-serif;
     font-size: 12px;
-    border: 1px solid #feb30c;
-    height: 80px;
-    padding-right: 10px;
-    padding-left: 15px;
-    padding-top: 27px;
     text-transform: uppercase;
   }
 
