@@ -1,12 +1,16 @@
 .menu-text {
+  color: #000000;
   display: block;
   padding-top: 40px;
+}
+
+.menu-trigger:hover > .menu-wrapper .menu-text {
+  color: #ffffff;
 }
 
 .menu-trigger {
   background: #feb30c;
   border: none;
-  color: #000000;
   cursor: pointer;
   float: left;
   font-family: "Montserrat", sans-serif;
@@ -23,7 +27,6 @@
 }
 .menu-trigger:hover {
   background: #1076bc;
-  color: #ffffff;
 }
 
 .menu-trigger:hover > .menu-wrapper .hamburger-menu {
@@ -90,10 +93,6 @@
   background: #000000;
   position: relative;
   transform: translateY(25px);
-  transition: all 0.3s ease 0s;
-  -moz-transition: all 0.3s ease 0s;
-  -o-transition: ll 0.3s ease 0s;
-  -webkit-transition: all 0.3s ease 0s;
 }
 
 .hamburger-menu:before {
@@ -102,10 +101,6 @@
   content: "";
   left: 0;
   position: absolute;
-  transition: all 0.3s ease 0s;
-  -moz-transition: all 0.3s ease 0s;
-  -o-transition: ll 0.3s ease 0s;
-  -webkit-transition: all 0.3s ease 0s;
 }
 
 .hamburger-menu:after {
@@ -114,10 +109,6 @@
   left: 0;
   position: absolute;
   top: 10px;
-  transition: all 0.3s ease 0s;
-  -moz-transition: all 0.3s ease 0s;
-  -o-transition: ll 0.3s ease 0s;
-  -webkit-transition: all 0.3s ease 0s;
 }
 
 .menu-active .hamburger-menu:after {
