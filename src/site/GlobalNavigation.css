@@ -6,7 +6,7 @@ nav#slide-menu a {
 
 .i-float-right {
   float: right;
-  color: #cccccc;
+  color: #ffffff;
   font-size: 25px;
 }
 
@@ -103,12 +103,13 @@ nav#dg_slide-menu ul li a {
   color: #ffffff;
   display: flex;
   font-family: "Montserrat", sans-serif;
-  height: 80px;
+  font-size: 20px;
   padding-left: 15px;
   padding-right: 10px;
-  padding-top: 27px;
+  padding-bottom: 30px;
+  padding-top: 30px;
+  text-decoration: none;
   text-transform: uppercase;
-  width: 100%;
 }
 nav#dg_slide-menu ul li a:hover {
   color: #ffffff;
@@ -160,6 +161,28 @@ nav#dg_slide-menu.menu-active ul {
 }
 
 /* GLOBAL NAVIGATION */
+
+@media (max-width: 575px) {
+  nav#dg_slide-menu {
+    width: 100%;
+    max-width: 260px !important;
+  }
+
+  #content.menu-active {
+    left: 260px !important;
+    border-radius: 0px 0 0 0px;
+    position: fixed;
+    overflow: hidden;
+  }
+
+  nav#dg_slide-menu ul li a .i-float-right {
+    font-size: 20px;
+  }
+
+  nav#dg_slide-menu ul li a .nav-icon-left {
+    font-size: 20px;
+  }
+}
 
 @media (max-width: 396px) {
   .menu-trigger {
