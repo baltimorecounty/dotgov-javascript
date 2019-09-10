@@ -45,7 +45,7 @@ const reportDetailsTemplateFn = (report, comments) => {
                 <dd id="location">${report.FormattedAddress}</dd>
             </dl>
             ${
-              comments
+              comments && comments.length > 0
                 ? commentsTemplateFn(sortedComments)
                 : "<p>No comments available at this time</p>"
             }
