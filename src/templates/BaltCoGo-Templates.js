@@ -47,7 +47,7 @@ const reportDetailsTemplateFn = (report, comments) => {
             ${
               comments && comments.length > 0
                 ? commentsTemplateFn(sortedComments)
-                : "<p>No comments available at this time</p>"
+                : ""
             }
         </div>
     </div>`
