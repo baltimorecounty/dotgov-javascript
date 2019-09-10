@@ -20,7 +20,7 @@ nav#dg_slide-menu a {
   padding-top: 1rem;
 }
 
-.slide-menu-seal {
+.dg_slide-menu-seal {
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -80,7 +80,7 @@ nav#dg_slide-menu {
   transition: all 300ms;
   background: #1b2e46;
 }
-nav#dg_slide-menu .wrap {
+nav#dg_slide-menu .dg_gn-wrap {
   height: 100%;
   overflow-y: auto;
   max-width: 400px;
@@ -159,7 +159,7 @@ nav#dg_slide-menu.menu-active ul {
   opacity: 1;
 }
 
-.nav-icon-left {
+.dg_nav-icon-left {
   font-size: 23px;
   padding-right: 10px;
 }
@@ -183,7 +183,7 @@ nav#dg_slide-menu.menu-active ul {
     font-size: 20px;
   }
 
-  nav#dg_slide-menu ul li a .nav-icon-left {
+  nav#dg_slide-menu ul li a .dg_nav-icon-left {
     font-size: 20px;
   }
 }
@@ -210,7 +210,7 @@ nav#dg_slide-menu.menu-active ul {
     font-size: 20px;
   }
 
-  nav#dg_slide-menu ul li a .nav-icon-left {
+  nav#dg_slide-menu ul li a .dg_nav-icon-left {
     font-size: 20px;
   }
 }
