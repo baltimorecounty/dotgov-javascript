@@ -33,7 +33,7 @@
 
       /* GLOBAL NAVIGATION */
 
-      nav#dg_slide-menu a {
+      nav#dg_site-menu a {
         text-decoration: none;
       }
 
@@ -53,7 +53,7 @@
         padding-top: 1rem;
       }
 
-      .dg_slide-menu-seal {
+      .dg_site-menu-seal {
         background-color: transparent;
         border: none;
         cursor: pointer;
@@ -96,7 +96,7 @@
 
       /* OVERLAY STYLING */
 
-      nav#dg_slide-menu {
+      nav#dg_site-menu {
         font-family: "Montserrat", sans-serif;
         font-weight: bold;
         position: fixed;
@@ -116,12 +116,12 @@
         transition: all 300ms;
         background: #1b2e46;
       }
-      nav#dg_slide-menu .dg_gn-wrap {
+      nav#dg_site-menu .dg_gn-wrap {
         height: 100%;
         overflow-y: auto;
         max-width: 400px;
       }
-      nav#dg_slide-menu ul {
+      nav#dg_site-menu ul {
         display: block;
         margin: 0 0 0 0;
         padding: 0px;
@@ -131,13 +131,13 @@
         -webkit-transition: all 300ms;
         transition: all 300ms;
       }
-      nav#dg_slide-menu ul li {
+      nav#dg_site-menu ul li {
         padding: 10px 0;
         padding-left: 20px;
         padding-right: 20px;
         cursor: pointer;
       }
-      nav#dg_slide-menu ul li a {
+      nav#dg_site-menu ul li a {
         background-color: #1b2e46;
         border: 1px solid #ffffff;
         color: #ffffff;
@@ -151,7 +151,7 @@
         text-decoration: none;
         text-transform: uppercase;
       }
-      nav#dg_slide-menu ul li a:hover {
+      nav#dg_site-menu ul li a:hover {
         color: #ffffff;
         text-decoration: none;
         background-color: #8091c0;
@@ -161,7 +161,7 @@
         transition: all 0.3s ease 0s;
       }
 
-      nav#dg_slide-menu ul li a:hover > .i-float-right {
+      nav#dg_site-menu ul li a:hover > .i-float-right {
         color: #ffffff;
         -webkit-transition: all 0.3s ease 0s;
         -moz-transition: all 0.3s ease 0s;
@@ -169,7 +169,7 @@
         transition: all 0.3s ease 0s;
       }
 
-      nav#dg_slide-menu ul li:before {
+      nav#dg_site-menu ul li:before {
         font-style: normal;
         font-weight: normal;
         display: inline-block;
@@ -184,13 +184,13 @@
         line-height: 1em;
       }
 
-      nav#dg_slide-menu.menu-active {
+      nav#dg_site-menu.menu-active {
         left: 0px;
         visibility: visible !important;
         border-top: 10px solid #c51110;
       }
 
-      nav#dg_slide-menu.menu-active ul {
+      nav#dg_site-menu.menu-active ul {
         left: 0px;
         opacity: 1;
       }
@@ -203,7 +203,7 @@
       /* GLOBAL NAVIGATION */
 
       @media (max-width: 575px) {
-        nav#dg_slide-menu {
+        nav#dg_site-menu {
           width: 100%;
           max-width: 260px !important;
         }
@@ -215,11 +215,11 @@
           overflow: hidden;
         }
 
-        nav#dg_slide-menu ul li a .i-float-right {
+        nav#dg_site-menu ul li a .i-float-right {
           font-size: 20px;
         }
 
-        nav#dg_slide-menu ul li a .dg_nav-icon-left {
+        nav#dg_site-menu ul li a .dg_nav-icon-left {
           font-size: 20px;
         }
       }
@@ -234,7 +234,7 @@
           height: 100%;
         }
 
-        nav#dg_slide-menu ul li a {
+        nav#dg_site-menu ul li a {
           display: flex;
           color: #ffffff;
           font-family: "Montserrat", sans-serif;
@@ -242,11 +242,11 @@
           text-transform: uppercase;
         }
 
-        nav#dg_slide-menu ul li a .i-float-right {
+        nav#dg_site-menu ul li a .i-float-right {
           font-size: 20px;
         }
 
-        nav#dg_slide-menu ul li a .dg_nav-icon-left {
+        nav#dg_site-menu ul li a .dg_nav-icon-left {
           font-size: 20px;
         }
       }
@@ -261,12 +261,12 @@
       }
 
       #content {
+        position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
         overflow-y: scroll;
-        position: fixed;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
@@ -432,10 +432,10 @@
     <![endif]-->
   </head>
   <body>
-    <nav id="dg_slide-menu">
+    <nav id="dg_site-menu">
       <div class="dg_gn-wrap">
         <div class="dg_menu-logo">
-          <button id="logo_toggle" class="dg_slide-menu-seal">
+          <button id="logo_toggle" class="dg_site-menu-seal">
             <img
               src="http://staging.baltimorecountymd.gov/sebin/h/i/seal-color-74.png"
               alt="Baltimore County Seal"
