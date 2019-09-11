@@ -9,13 +9,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
   toggleButton.addEventListener("click", function(c) {
     c.preventDefault();
-    closeButton.classList.toggle("menu-active");
     contentWrapper.classList.toggle("menu-active");
     menu.classList.toggle("menu-active");
   });
 
   closeButton.addEventListener("click", function(c) {
     c.preventDefault();
-    menu.classList.toggle("menu-active");
+    contentWrapper.classList.remove("menu-active");
+    menu.classList.remove("menu-active");
+    closeButton.classList.toggle("menu-active");
   });
 });

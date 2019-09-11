@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   toggleButton.addEventListener("click", function(c) {
     c.preventDefault();
-    this.classList.toggle("menu-active");
     contentWrapper.classList.toggle("menu-active");
     menu.classList.toggle("menu-active");
   });
