@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Title Page</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://kit-pro.fontawesome.com/releases/latest/css/pro.min.css"
+      media="all"
+    />
+    <style>
+      .dg_menu-text {
+        color: #000000;
+        display: block;
+        padding-top: 40px;
+      }
+
+      .dg_menu-trigger:hover > .dg_menu-wrapper .dg_menu-text {
+        color: #ffffff;
+      }
+
+      .dg_menu-trigger {
+        background: #feb30c;
+        border: none;
+        cursor: pointer;
+        font-family: "Montserrat", sans-serif;
+        font-size: 12px;
+        min-height: 90px;
+        position: relative;
+        text-align: center;
+        text-transform: uppercase;
+        transition: all 0.3s ease 0s;
+        -moz-transition: all 0.3s ease 0s;
+        -o-transition: ll 0.3s ease 0s;
+        -webkit-transition: all 0.3s ease 0s;
+        width: 90px;
+        z-index: 300;
+        transition: left 0.3s ease 0s;
+        left: 0;
+      }
+      .dg_menu-trigger:hover {
+        background: #1076bc;
+      }
+
+      .dg_menu-trigger:hover > .dg_menu-wrapper .dg_hamburger-menu {
+        background: #ffffff;
+      }
+
+      .dg_menu-trigger:hover > .dg_menu-wrapper .dg_hamburger-menu:after {
+        background: #ffffff;
+      }
+
+      .dg_menu-trigger:hover > .dg_menu-wrapper .dg_hamburger-menu:before {
+        background: #ffffff;
+      }
+
+      .dg_menu-trigger:disabled,
+      .disabled {
+        background: #ffd986;
+        color: #7f5906;
+      }
+
+      .dg_menu-trigger:disabled,
+      .disabled > .dg_menu-wrapper .dg_hamburger-menu {
+        background: #7f5906;
+      }
+
+      .dg_menu-trigger:disabled,
+      .disabled > .dg_menu-wrapper .dg_hamburger-menu:before {
+        background: #7f5906;
+      }
+
+      .dg_menu-trigger:disabled,
+      .disabled > .dg_menu-wrapper .dg_hamburger-menu:after {
+        background: #7f5906;
+      }
+
+      .dg_menu-wrapper {
+        bottom: 0;
+        cursor: pointer;
+        display: block;
+        left: 0;
+        margin: auto;
+        position: absolute;
+        right: 0;
+        top: 10px;
+        width: 40px;
+      }
+
+      .dg_hamburger-menu,
+      .dg_hamburger-menu:after,
+      .dg_hamburger-menu:before {
+        width: 100%;
+        height: 5px;
+      }
+
+      .menu-active .dg_hamburger-menu {
+        background: rgba(255, 255, 255, 0);
+      }
+
+      .dg_menu-trigger.menu-active {
+        left: 400px;
+      }
+
+      .menu-active
+        .dg_menu-trigger:hover
+        > .dg_menu-wrapper
+        .dg_hamburger-menu {
+        background: rgba(255, 255, 255, 0);
+      }
+
+      .dg_hamburger-menu {
+        background: #000000;
+        position: relative;
+        transform: translateY(25px);
+      }
+
+      .dg_hamburger-menu:before {
+        background: #000000;
+        bottom: 10px;
+        content: "";
+        left: 0;
+        position: absolute;
+      }
+
+      .dg_hamburger-menu:after {
+        background: #000000;
+        content: "";
+        left: 0;
+        position: absolute;
+        top: 10px;
+      }
+
+      .menu-active .dg_hamburger-menu:after {
+        top: 0;
+        transform: rotate(45deg);
+      }
+
+      .menu-active .dg_hamburger-menu:before {
+        bottom: 0;
+        transform: rotate(-45deg);
+      }
+
+      @media (max-width: 396px) {
+        .menu-trigger {
+          width: 100%;
+          max-width: 60px !important;
+          min-height: 80px !important;
+          height: 100%;
+        }
+      }
+
+      /* GLOBAL NAVIGATION */
+
+      /* GLOBAL NAVIGATION */
+
+      /* GLOBAL NAVIGATION */
+      /* GLOBAL NAVIGATION */
+
+      nav#dg_slide-menu a {
+        text-decoration: none;
+      }
+
+      .i-float-right {
+        float: right;
+        color: #ffffff;
+        font-size: 25px;
+      }
+
+      .dg_gn-list-text {
+        margin-right: auto !important;
+      }
+
+      .dg_menu-logo {
+        text-align: center;
+        padding-bottom: 1.5rem;
+        padding-top: 1rem;
+      }
+
+      .slide-menu-seal {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        position: relative;
+        text-align: center;
+        -moz-transition: all 0.3s ease 0s;
+        -o-transition: ll 0.3s ease 0s;
+        -webkit-transition: all 0.3s ease 0s;
+        transition: all 0.3s ease 0s;
+      }
+
+      .menu-active .nav-shade {
+        opacity: 0.9;
+        pointer-events: auto;
+        -webkit-transition: opacity 0.3s;
+        -o-transition: opacity 0.3s;
+        transition: opacity 0.3s;
+        visibility: visible;
+      }
+
+      .nav-shade {
+        opacity: 0;
+        background: #000000;
+        -webkit-transition: opacity 0.3s, visibility 0s 0.6s;
+        -o-transition: opacity 0.3s, visibility 0s 0.3s;
+        transition: opacity 0.3s, visibility 0s 0.3s;
+        height: 100%;
+        pointer-events: none;
+        position: absolute;
+        visibility: hidden;
+        width: 0;
+        width: 100%;
+        z-index: 299;
+      }
+
+      nav#dg_slide-menu {
+        font-family: "Montserrat", sans-serif;
+        font-weight: bold;
+        position: fixed;
+        top: 0;
+        left: -400px;
+        bottom: 0;
+        display: block;
+        float: left;
+        width: 100%;
+        max-width: 400px;
+        height: 100%;
+        text-transform: uppercase;
+        -moz-transition: all 300ms;
+        -o-transition: all 300ms;
+        -webkit-transition: all 300ms;
+        transition: all 300ms;
+        background: #1b2e46;
+      }
+      nav#dg_slide-menu .wrap {
+        height: 100%;
+        overflow-y: auto;
+        max-width: 400px;
+      }
+      nav#dg_slide-menu ul {
+        display: block;
+        margin: 0 0 0 0;
+        padding: 0px;
+        list-style: none;
+        -moz-transition: all 300ms;
+        -o-transition: all 300ms;
+        -webkit-transition: all 300ms;
+        transition: all 300ms;
+      }
+      nav#dg_slide-menu ul li {
+        padding: 10px 0;
+        padding-left: 20px;
+        padding-right: 20px;
+        cursor: pointer;
+      }
+      nav#dg_slide-menu ul li a {
+        background-color: #1b2e46;
+        border: 1px solid #ffffff;
+        color: #ffffff;
+        display: flex;
+        font-family: "Montserrat", sans-serif;
+        font-size: 20px;
+        padding-left: 15px;
+        padding-right: 10px;
+        padding-bottom: 30px;
+        padding-top: 30px;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+      nav#dg_slide-menu ul li a:hover {
+        color: #ffffff;
+        text-decoration: none;
+        background-color: #8091c0;
+        -webkit-transition: all 0.3s ease 0s;
+        -moz-transition: all 0.3s ease 0s;
+        -o-transition: all 0.3s ease 0s;
+        transition: all 0.3s ease 0s;
+      }
+
+      nav#dg_slide-menu ul li a:hover > .i-float-right {
+        color: #ffffff;
+        -webkit-transition: all 0.3s ease 0s;
+        -moz-transition: all 0.3s ease 0s;
+        -o-transition: all 0.3s ease 0s;
+        transition: all 0.3s ease 0s;
+      }
+
+      nav#dg_slide-menu ul li:before {
+        font-style: normal;
+        font-weight: normal;
+        display: inline-block;
+        text-decoration: inherit;
+        width: 1em;
+        color: #59e9df;
+        margin-right: 12px;
+        text-align: center;
+        font-variant: normal;
+        font-size: 0.75em;
+        text-transform: none;
+        line-height: 1em;
+      }
+
+      nav#dg_slide-menu.menu-active {
+        left: 0px;
+        visibility: visible !important;
+      }
+
+      nav#dg_slide-menu.menu-active ul {
+        left: 0px;
+        opacity: 1;
+      }
+
+      .nav-icon-left {
+        font-size: 23px;
+        padding-right: 10px;
+      }
+
+      /* GLOBAL NAVIGATION */
+
+      @media (max-width: 575px) {
+        nav#dg_slide-menu {
+          width: 100%;
+          max-width: 260px !important;
+        }
+
+        #content.menu-active {
+          left: 260px !important;
+          border-radius: 0px 0 0 0px;
+          position: fixed;
+          overflow: hidden;
+        }
+
+        nav#dg_slide-menu ul li a .i-float-right {
+          font-size: 20px;
+        }
+
+        nav#dg_slide-menu ul li a .nav-icon-left {
+          font-size: 20px;
+        }
+      }
+
+      @media (max-width: 396px) {
+        .menu-trigger {
+          width: 100%;
+          max-width: 60px !important;
+          min-height: 80px !important;
+          height: 100%;
+        }
+
+        nav#dg_slide-menu ul li a {
+          display: flex;
+          font-size: 12px;
+        }
+
+        nav#dg_slide-menu ul li a .i-float-right {
+          font-size: 20px;
+        }
+
+        nav#dg_slide-menu ul li a .nav-icon-left {
+          font-size: 20px;
+        }
+      }
+
+      /*CONTENT*/
+
+      #content.menu-active {
+        left: 400px;
+        border-radius: 0px 0 0 0px;
+        position: fixed;
+        overflow: hidden;
+      }
+
+      #content {
+        background: #ffffff;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        -moz-transition: all 300ms;
+        -o-transition: all 300ms;
+        -webkit-transition: all 300ms;
+        transition: all 300ms;
+      }
+    </style>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <header>
+      <button class="dg_menu-trigger" id="dg_menu-trigger-btn">
+        <div class="dg_menu-wrapper">
+          <div class="dg_hamburger-menu"></div>
+          <span class="dg_menu-text">Menu</span>
+        </div>
+      </button>
+      <nav id="dg_slide-menu">
+        <div class="wrap">
+          <div class="dg_menu-logo">
+            <button id="logo_toggle" class="slide-menu-seal">
+              <img
+                src="https://www.baltimorecountymd.gov/sebin/l/e/header-county-seal.png"
+                alt="Baltimore County Seal"
+              />
+            </button>
+          </div>
+          <ul>
+            <li>
+              <a href="#">
+                <i class="nav-icon-left fas fa-star" aria-hidden="true"></i>
+                <span class="dg_gn-list-text">Link</span>
+                <i
+                  class="fa fa-angle-right i-float-right"
+                  aria-hidden="true"
+                ></i>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="nav-icon-left fas fa-star" aria-hidden="true"></i>
+                <span class="dg_gn-list-text">Link</span>
+                <i
+                  class="fa fa-angle-right i-float-right"
+                  aria-hidden="true"
+                ></i>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="nav-icon-left fas fa-star" aria-hidden="true"></i>
+                <span class="dg_gn-list-text">Link</span>
+                <i
+                  class="fa fa-angle-right i-float-right"
+                  aria-hidden="true"
+                ></i>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="nav-icon-left fas fa-star" aria-hidden="true"></i>
+                <span class="dg_gn-list-text">Link</span>
+                <i
+                  class="fa fa-angle-right i-float-right"
+                  aria-hidden="true"
+                ></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <div id="content">
+      <div class="anyipsum-output">
+        <h1>A Really Important Title</h1>
+        <p>
+          Bacon ipsum dolor amet shoulder picanha pork belly sirloin strip
+          steak, drumstick kielbasa. Fatback capicola ground round prosciutto
+          pork chop doner. Shankle short ribs turducken, biltong sausage
+          leberkas jowl flank landjaeger tri-tip pastrami alcatra strip steak
+          bacon. Bresaola rump meatloaf short loin salami tongue pork chop filet
+          mignon buffalo andouille tenderloin spare ribs. Andouille ball tip
+          bacon, doner ham hock ground round short ribs chicken pork belly
+          fatback meatloaf shoulder pancetta.
+        </p>
+        <p>
+          Short ribs venison pork belly pastrami tongue. Pancetta swine
+          capicola, jerky kevin pig ham hock short loin shank ribeye frankfurter
+          chicken doner hamburger flank. Beef ribs corned beef ground round
+          shank pork pork chop shoulder pork loin frankfurter fatback andouille
+          meatloaf. Ham hock capicola pig, tail burgdoggen ground round brisket
+          kielbasa pork pork belly filet mignon sausage ham. Sirloin buffalo
+          turkey pig. Turkey biltong burgdoggen chuck jerky pork spare ribs
+          drumstick hamburger buffalo meatball landjaeger strip steak.
+        </p>
+        <p>
+          Beef meatloaf tenderloin, meatball picanha pig shoulder andouille
+          sirloin pork loin flank t-bone. Tenderloin filet mignon pork chop
+          ribeye. Meatloaf fatback swine alcatra leberkas turducken rump
+          porchetta boudin beef ribs biltong doner ball tip pig. Salami pastrami
+          venison drumstick landjaeger capicola. Burgdoggen cupim shankle, pig
+          tail pork chop alcatra. Filet mignon bacon ham capicola andouille
+          biltong shankle tenderloin ground round drumstick short ribs ham hock.
+        </p>
+        <p>
+          Spare ribs pancetta shank pork loin filet mignon drumstick boudin, pig
+          strip steak venison sausage. Alcatra kielbasa bacon boudin drumstick,
+          t-bone rump pastrami pork loin filet mignon corned beef ham hock
+          ribeye bresaola. Flank pork venison corned beef bacon turducken
+          drumstick spare ribs jowl kevin sausage. Ribeye frankfurter kevin,
+          t-bone pork belly burgdoggen short ribs meatball porchetta tenderloin
+          kielbasa spare ribs jowl bresaola.
+        </p>
+        <p>
+          Flank short loin burgdoggen, prosciutto chuck brisket salami
+          tenderloin spare ribs porchetta doner ribeye beef ribs. Landjaeger
+          venison andouille, salami strip steak porchetta meatloaf cow. Pastrami
+          pork belly biltong, porchetta leberkas pig cupim ham. Frankfurter
+          spare ribs andouille shank, bacon tenderloin short ribs meatloaf
+          landjaeger venison fatback pork loin. Chuck ball tip shank capicola
+          drumstick, shankle corned beef beef ribs turkey leberkas kielbasa
+          tail.
+        </p>
+      </div>
+      <div id="dg_cntnt-ovrly" class="nav-shade"></div>
+    </div>
+    <script src="/assets/dotgov-sitenavigation.min.js"></script>
+  </body>
+</html>
