@@ -11,21 +11,14 @@ const createAppContainer = () => {
         </form>
         <div class="hidden" id="sr-loading-indicator">
             <p>
-              <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i> Loading your
-              service request.
+                <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i> Loading your
+                service request.
             </p>
             <span class="sr-only">Loading Service Request...</span>
-          </div>
-          <!-- App Container -->
-          <div id="report-details"></div>
-          <button
-            class="seButton hidden"
-            id="sr-reset-form"
-            style="float:left;"
-            type="button"
-          >
-            Look Up Another Report
-          </button>
+        </div>
+        <!-- App Container -->
+        <div id="report-details"></div>
+        <button class="seButton hidden" id="sr-reset-form" type="button">Look Up Another Report</button>
     </div>`;
 };
 
