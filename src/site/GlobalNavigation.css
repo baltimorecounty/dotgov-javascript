@@ -34,7 +34,7 @@ nav#dg_site-menu a {
 
 /* OVERLAY STYLING */
 
-.menu-active .dg_overlay {
+.active .dg_overlay {
   opacity: 0.9;
   pointer-events: auto;
   -webkit-transition: opacity 0.3s;
@@ -151,13 +151,13 @@ nav#dg_site-menu ul li:before {
   line-height: 1em;
 }
 
-nav#dg_site-menu.menu-active {
+nav#dg_site-menu.active {
   left: 0px;
   visibility: visible !important;
   border-top: 10px solid #c51110;
 }
 
-nav#dg_site-menu.menu-active ul {
+nav#dg_site-menu.active ul {
   left: 0px;
   opacity: 1;
 }
@@ -175,7 +175,7 @@ nav#dg_site-menu.menu-active ul {
     max-width: 260px !important;
   }
 
-  #content.menu-active {
+  #content.active {
     left: 260px !important;
     border-radius: 0px 0 0 0px;
     position: fixed;
@@ -220,7 +220,7 @@ nav#dg_site-menu.menu-active ul {
 
 /*CONTENT*/
 
-#content.menu-active {
+#content.active {
   left: 400px;
   border-radius: 0px 0 0 0px;
   position: fixed;
