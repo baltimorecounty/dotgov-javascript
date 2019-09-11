@@ -4,10 +4,28 @@ let axios;
 const createAppContainer = () => {
   document.body.innerHTML = `
     <div>
-        <label for="TrackingNumber">Tracking Number</label>
-        <input class="seInput seRequiredElement" id="TrackingNumber" name="TrackingNumber" type="text" />
-        <button class="seButton" type="button" style="float:left;" id="get-report" >Track Now</button>
-        <div id="report-details"></div>
+        <form id="service-request-form" name="service-request-form">
+            <label for="TrackingNumber">Tracking Number</label>
+            <input class="seInput seRequiredElement" id="TrackingNumber" name="TrackingNumber" type="text" />
+            <button class="seButton" type="submit" id="get-report">Track Now</button>
+        </form>
+        <div class="hidden" id="sr-loading-indicator">
+            <p>
+              <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i> Loading your
+              service request.
+            </p>
+            <span class="sr-only">Loading Service Request...</span>
+          </div>
+          <!-- App Container -->
+          <div id="report-details"></div>
+          <button
+            class="seButton hidden"
+            id="sr-reset-form"
+            style="float:left;"
+            type="button"
+          >
+            Look Up Another Report
+          </button>
     </div>`;
 };
 
@@ -50,7 +68,7 @@ afterEach(() => {
 beforeEach(() => {
   createAppContainer();
   require("./FollowUp");
-  axios = require("axios");
+  axios = require("../../lib/axios").default;
 });
 
 jest.mock("axios");
@@ -106,7 +124,7 @@ test("should display a link when a user enters a vendor service request id", () 
 });
 
 test("should display the default error on a server failure", async () => {
-  axios.get.mockRejectedValue({ data: mockSuccessResponse });
+  axios.get.mockRejectedValue(new Error("Server Error"));
   const serviceRequestInput = getByLabelText(document, "Tracking Number");
   const submitButton = getByText(document, "Track Now");
 
@@ -114,8 +132,12 @@ test("should display the default error on a server failure", async () => {
   submitButton.click();
 
   await wait(() => {
-    const defaultErrorAlert = document.getElementById("UserBadIDPanel");
+    const alertPanel = document.getElementById("report-details");
+    const differentTrackingMessage = getByText(
+      alertPanel,
+      /.*connecting to our servers right now*/i
+    );
 
-    expect(defaultErrorAlert).toBeTruthy();
+    expect(differentTrackingMessage).toBeTruthy();
   });
 });
