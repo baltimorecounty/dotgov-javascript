@@ -4,7 +4,7 @@ nav#dg_site-menu a {
   text-decoration: none;
 }
 
-.i-float-right {
+.i-arrow-right {
   float: right;
   color: #ffffff;
   font-size: 25px;
@@ -128,7 +128,7 @@ nav#dg_site-menu ul li a:hover {
   transition: all 0.3s ease 0s;
 }
 
-nav#dg_site-menu ul li a:hover > .i-float-right {
+nav#dg_site-menu ul li a:hover > .i-arrow-right {
   color: #ffffff;
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
@@ -182,7 +182,7 @@ nav#dg_site-menu.menu-active ul {
     overflow: hidden;
   }
 
-  nav#dg_site-menu ul li a .i-float-right {
+  nav#dg_site-menu ul li a .i-arrow-right {
     font-size: 20px;
   }
 
@@ -209,7 +209,7 @@ nav#dg_site-menu.menu-active ul {
     text-transform: uppercase;
   }
 
-  nav#dg_site-menu ul li a .i-float-right {
+  nav#dg_site-menu ul li a .i-arrow-right {
     font-size: 20px;
   }
 
