@@ -26,7 +26,7 @@ const reportDetailsTemplateFn = (report, comments) => {
     `<div class="bc-citysourced-reporter">
         <div id="citysourced-viewer">
             <h2>
-                Report Status <span>${report.StatusTypeReadable}</span>
+                Report Status: <span>${report.StatusTypeReadable}</span>
             </h2>
             <dl id="meta">
                 <dt>Request ID</dt>
