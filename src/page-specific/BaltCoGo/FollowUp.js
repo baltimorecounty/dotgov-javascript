@@ -27,7 +27,7 @@ setConfig({
   },
   production: {
     targetEndpoint:
-      "services.baltimorecountymd.gov/platform.citysourced.net/servicerequests"
+      "//services.baltimorecountymd.gov/platform.citysourced.net/servicerequests"
   }
 });
 
