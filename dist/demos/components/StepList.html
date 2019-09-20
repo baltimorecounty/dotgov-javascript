@@ -18,36 +18,80 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <style></style>
+    <style>
+      .dg_step-list {
+        counter-reset: my-awesome-counter;
+        list-style: none;
+        padding-left: 60px;
+      }
+
+      .dg_step-list li {
+        border-bottom: 1px solid #e0e0e0;
+        margin-bottom: 15px;
+        counter-increment: my-awesome-counter;
+        position: relative;
+      }
+
+      .dg_step-list li:first-child {
+        border-top: 1px solid #e0e0e0;
+      }
+
+      .dg_step-list li::before {
+        border: 1px solid black;
+        content: counter(my-awesome-counter);
+        font-weight: bold;
+        font-size: 20px;
+        position: absolute;
+        top: -5px;
+        bottom: 0;
+        left: -60px;
+        height: 40px;
+        width: 40px;
+        line-height: 40px;
+        border-radius: 50%;
+        text-align: center;
+      }
+
+      .dg_step-list li:first-child::before {
+        top: 15px;
+      }
+    </style>
   </head>
   <body>
-    <h2>My Sample Step List</h2>
-    <p>
-      Some really smart words go here. I'm sure they do, now I'm just wasting
-      time.
-    </p>
-    <ol class="dg_step-list">
-      <li>
-        <h3>Step 1</h3>
-        <p>Some description text goes here.</p>
-      </li>
-      <li>
-        <h3>Step 2</h3>
-        <p>Some description text goes here.</p>
-      </li>
-      <li>
-        <h3>Step 3</h3>
-        <p>Some description text goes here.</p>
-      </li>
-      <li>
-        <h3>Step 4</h3>
-        <p>Some description text goes here.</p>
-      </li>
-      <li>
-        <h3>Step 5</h3>
-        <p>Some description text goes here.</p>
-      </li>
-    </ol>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>My Sample Step List</h2>
+          <p>
+            Some really smart words go here. I'm sure they do, now I'm just
+            wasting time.
+          </p>
+          <ol class="dg_step-list">
+            <li>
+              <h3>Step 1</h3>
+              <p>Some description text goes here.</p>
+            </li>
+            <li>
+              <h3>Step 2</h3>
+              <p>Some description text goes here.</p>
+            </li>
+            <li>
+              <h3>Step 3</h3>
+              <p>Some description text goes here.</p>
+            </li>
+            <li>
+              <h3>Step 4</h3>
+              <p>Some description text goes here.</p>
+            </li>
+            <li>
+              <h3>Step 5</h3>
+              <p>Some description text goes here.</p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
     <script src="/assets/dotgov-stepList.min.js"></script>
   </body>
 </html>
