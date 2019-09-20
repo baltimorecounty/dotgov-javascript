@@ -31,22 +31,43 @@ const handleDetailsToggleButtonClick = clickEvent => {
   updateToggleAllButton(detailElms, buttonState);
 };
 
+/**
+ * Manages the visible state of the toggle button based on a given details section
+ * @param {*} detailElms
+ * @param {string} buttonState The given details existing button state "Show" or "Hide"
+ */
 const updateToggleAllButton = (detailElms, buttonState) => {
-  const showAllButtonElm = detailElms
-    ? getFirstElementOrDefault(
-        detailElms[0].closest(`.${cssClasses.stepList}`),
-        `.${cssClasses.showAllStepsButton}`
-      )
-    : null;
-
-  const isAtLeastOneDetailSectionVisible = isButtonStateShow(
-    getOppositeButtonState(buttonState)
+  if (!detailElms) {
+    console.error(
+      "There must be a least one details section per step list item."
+    );
+    return;
+  }
+  const stepListElm = detailElms[0].closest(`.${cssClasses.stepList}`);
+  const showAllButtonElm = getFirstElementOrDefault(
+    stepListElm,
+    `.${cssClasses.showAllStepsButton}`
+  );
+  const canHideAll = isHideAllVisible(showAllButtonElm);
+  const isAtLeastOneSectionDetailVisible = hasAtLeastOneDetailSectionVisible(
+    stepListElm
   );
 
-  if (isHideAllVisible(showAllButtonElm) && isAtLeastOneDetailSectionVisible) {
+  if (canHideAll && isAtLeastOneSectionDetailVisible) {
     setButtonState(showAllButtonElm, states.showAll);
   }
+
+  if (!isAtLeastOneSectionDetailVisible) {
+    setButtonState(showAllButtonElm, states.hideAll);
+  }
 };
+
+const hasAtLeastOneDetailSectionVisible = stepListElm =>
+  [
+    ...stepListElm.querySelectorAll(`.${cssClasses.detailsToggleButton}`)
+  ].filter(
+    elm => elm.innerText.toLowerCase().indexOf(states.show.toLowerCase()) > -1
+  ).length > 0;
 
 const isHideAllVisible = showAllButtonElm =>
   showAllButtonElm &&
@@ -57,7 +78,7 @@ const handleAllStepButtonClick = clickEvent => {
   const sectionElm = buttonElm.closest(`.${cssClasses.stepList}`);
   const buttonState = buttonElm.innerText;
 
-  updateSections(sectionElm, getOppositeButtonState(buttonState));
+  updateSections(sectionElm, getOppositeDetailsToggleButtonState(buttonState));
   toggleAllButtonText(buttonElm, buttonState);
 };
 
@@ -95,10 +116,7 @@ const toggleAllButtonText = (buttonElm, buttonState) => {
 };
 
 const toggleDetailButtonText = (buttonElm, buttonState) => {
-  setButtonState(
-    buttonElm,
-    isButtonStateShow(buttonState) ? states.hide : states.show
-  );
+  setButtonState(buttonElm, getOppositeDetailsToggleButtonState(buttonState));
 };
 
 const setButtonState = (elm, state) => {
@@ -110,7 +128,7 @@ const getFirstElementOrDefault = (elm, querySelector) => {
   return elms ? elms[0] : null;
 };
 
-const getOppositeButtonState = buttonText =>
+const getOppositeDetailsToggleButtonState = buttonText =>
   isButtonStateShow(buttonText) ? states.hide : states.show;
 
 const isButtonStateShow = buttonText =>
@@ -131,7 +149,10 @@ const updateSections = (stepListElm, newButtonState) => {
     const buttonState = newButtonState || toggleBtnElm.innerText;
 
     detailElms.forEach(elm => {
-      displaySectionDetails(elm, getOppositeButtonState(buttonState));
+      displaySectionDetails(
+        elm,
+        getOppositeDetailsToggleButtonState(buttonState)
+      );
     });
 
     setButtonState(toggleBtnElm, buttonState);
