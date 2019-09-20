@@ -1,8 +1,117 @@
 <!DOCTYPE html>
-<html lang="">
-  <body>
-    <div class="container" id="mainContent"></div>
+<style>
+  /* Style the buttons that are used to open and close the accordion panel */
+  .accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+  }
 
-    <script src="/assets/dotgov-accordion.min.js"></script>
-  </body>
+  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+  .active,
+  .accordion:hover {
+    background-color: #ccc;
+  }
+
+  /* Style the accordion panel. Note: hidden by default */
+  .panel {
+    padding: 0 18px;
+    background-color: white;
+    display: none;
+    overflow: hidden;
+  }
+</style>
+
+<html lang="">
+  <head>
+    <script type="text/javascript" language="javascript">
+      function MenuAction(button) {
+        /* Toggle between adding and removing the "active" class,
+                    to highlight the button that controls the panel */
+        button.classList.toggle("active");
+
+        /* Toggle between hiding and showing the active panel */
+        var panel = button.nextElementSibling;
+        if (panel.style.display === "block") {
+          panel.style.display = "none";
+        } else {
+          panel.style.display = "block";
+        }
+      }
+      function AllMenuItemsAction(button) {
+        var status = button.innerHTML.trim();
+        var body = button.parentElement;
+        var menuItems = body.getElementsByClassName("accordion");
+        var i;
+
+        if (button.innerHTML.trim() == "Open All") {
+          button.innerHTML = "Close All";
+        } else {
+          button.innerHTML = "Open All";
+        }
+
+        for (i = 0; i < menuItems.length; i++) {
+          var panel = menuItems[i].nextElementSibling;
+
+          if (status == "Open All") {
+            menuItems[i].class = "active";
+            panel.style.display = "block";
+          } else {
+            menuItems[i].class = "";
+            panel.style.display = "none";
+          }
+        }
+      }
+    </script>
+  </head>
+
+  <div>
+    <button class="allitems" onclick="AllMenuItemsAction(this)">
+      Open All
+    </button>
+    <button class="accordion" onclick="MenuAction(this)">Section 1</button>
+    <div class="panel">
+      <p>Lorem ipsum...</p>
+    </div>
+    <button class="accordion" onclick="MenuAction(this)">Section 2</button>
+    <div class="panel">
+      <p>Lorem ipsum...</p>
+    </div>
+    <button class="accordion" onclick="MenuAction(this)">Section 3</button>
+    <div class="panel">
+      <p>Lorem ipsum...</p>
+    </div>
+  </div>
+  <div>
+    <button class="allitems" onclick="AllMenuItemsAction(this)">
+      Open All
+    </button>
+    <button class="accordion" onclick="MenuAction(this)">New Section 1</button>
+    <div class="panel">
+      <img
+        width="188"
+        height="54"
+        alt="Baltcogo Issue Reporting System"
+        src="/sebin/w/q/baltcogo.gif"
+        border="0"
+        vspace="0"
+        hspace="0"
+      />
+    </div>
+    <button class="accordion" onclick="MenuAction(this)">New Section 2</button>
+    <div class="panel">
+      <p>Lorem ipsum...</p>
+    </div>
+    <button class="accordion" onclick="MenuAction(this)">New Section 3</button>
+    <div class="panel">
+      <p>Lorem ipsum...</p>
+    </div>
+  </div>
+  <!-- <script type="text/javascript" src="/assets/dotgov-accordion.min.js"></script> -->
 </html>
