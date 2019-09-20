@@ -16,7 +16,55 @@ const cssClasses = {
   showAllStepsButton: "dg_step-list__show-all-btn"
 };
 
-/**  */
+/**
+ * Display or Hide Details for a given section of the step list based on the button state (show/hide)
+ * @param {HTMLElement} detailsSectionElm
+ * @return {void}
+ */
+const displaySectionDetails = (detailsSectionElm, buttonState) => {
+  detailsSectionElm.style.display = isButtonStateShow(buttonState)
+    ? "block"
+    : "none";
+};
+
+/**
+ *
+ * @param {string} buttonText  buttonElm.innerText, will be "Show" or "Hide"
+ * @returns {string} "Show" if the button text is equal to "Hide" or vice-versa
+ */
+const getOppositeDetailsToggleButtonState = buttonText =>
+  isButtonStateShow(buttonText) ? states.hide : states.show;
+
+/**
+ * Determine if a step list has at least one section open
+ * @param {HTMLElement} stepListElm
+ * @returns {boolean} true if the given step list has at least one section open
+ */
+const hasAtLeastOneDetailSectionVisible = stepListElm =>
+  [
+    ...stepListElm.querySelectorAll(`.${cssClasses.detailsToggleButton}`)
+  ].filter(
+    elm => elm.innerText.toLowerCase().indexOf(states.show.toLowerCase()) > -1
+  ).length > 0;
+
+/**
+ * Handle "Show All" Button Click based on a Step List
+ * @param {Object} clickEvent
+ * @return {void}
+ */
+const handleAllStepButtonClick = clickEvent => {
+  const buttonElm = clickEvent.target;
+  const sectionElm = buttonElm.closest(`.${cssClasses.stepList}`);
+  const buttonState = buttonElm.innerText;
+
+  updateSections(sectionElm, getOppositeDetailsToggleButtonState(buttonState));
+  toggleAllButtonText(buttonElm, buttonState);
+};
+
+/**
+ * Handle the details button toggle click for a given step list section detail button
+ * @param {object} clickEvent
+ */
 const handleDetailsToggleButtonClick = clickEvent => {
   const buttonElm = clickEvent.target;
   const buttonState = buttonElm.innerText;
@@ -30,85 +78,25 @@ const handleDetailsToggleButtonClick = clickEvent => {
 
   toggleDetailButtonText(buttonElm, buttonState);
 
-  updateToggleAllButton(detailElms, buttonState);
+  updateToggleAllButton(detailElms);
 };
 
 /**
- * Manages the visible state of the toggle button based on a given details section
- * @param {*} detailElms
- * @param {string} buttonState The given details existing button state "Show" or "Hide"
+ * Determine if the given button text is equal to "Show" (case insensitive)
+ * @param {string} buttonText buttonElm.innerText, will be "Show" or "Hide"
+ * @returns {boolean} true if the button text is "Show" (case insensitive)
  */
-const updateToggleAllButton = (detailElms, buttonState) => {
-  if (!detailElms) {
-    console.error(
-      "There must be a least one details section per step list item."
-    );
-    return;
-  }
-  const stepListElm = detailElms[0].closest(`.${cssClasses.stepList}`);
-  const showAllButtonElm = getFirstElementOrDefault(
-    stepListElm,
-    `.${cssClasses.showAllStepsButton}`
-  );
-  const canHideAll = isHideAllVisible(showAllButtonElm);
-  const isAtLeastOneSectionDetailVisible = hasAtLeastOneDetailSectionVisible(
-    stepListElm
-  );
-
-  if (canHideAll && isAtLeastOneSectionDetailVisible) {
-    setButtonState(showAllButtonElm, states.showAll);
-  }
-
-  if (!isAtLeastOneSectionDetailVisible) {
-    setButtonState(showAllButtonElm, states.hideAll);
-  }
-};
+const isButtonStateShow = buttonText =>
+  buttonText.toLowerCase().indexOf(states.show.toLowerCase()) > -1;
 
 /**
  * Determine if the show all button's active text is "Hide All"
- * @param {*} showAllButtonElm
+ * @param {HTMLElement} showAllButtonElm
  * @returns {boolean} true if the show all button's text is set to "hide all"
  */
 const isHideAllVisible = showAllButtonElm =>
   showAllButtonElm &&
   showAllButtonElm.innerText.toLowerCase() === states.hideAll.toLowerCase();
-
-/**
- * Determine if a step list has at least one section open
- * @param {*} stepListElm
- * @returns {boolean} true if the given step list has at least one section open
- */
-const hasAtLeastOneDetailSectionVisible = stepListElm =>
-  [
-    ...stepListElm.querySelectorAll(`.${cssClasses.detailsToggleButton}`)
-  ].filter(
-    elm => elm.innerText.toLowerCase().indexOf(states.show.toLowerCase()) > -1
-  ).length > 0;
-
-/**
- * Handle "Show All" Button Click based on a Step List
- * @param {*} clickEvent
- * @return {void}
- */
-const handleAllStepButtonClick = clickEvent => {
-  const buttonElm = clickEvent.target;
-  const sectionElm = buttonElm.closest(`.${cssClasses.stepList}`);
-  const buttonState = buttonElm.innerText;
-
-  updateSections(sectionElm, getOppositeDetailsToggleButtonState(buttonState));
-  toggleAllButtonText(buttonElm, buttonState);
-};
-
-/**
- * Display or Hide Details for a given section of the step list based on the button state (show/hide)
- * @param {*} detailsSectionElm
- * @return {void}
- */
-const displaySectionDetails = (detailsSectionElm, buttonState) => {
-  detailsSectionElm.style.display = isButtonStateShow(buttonState)
-    ? "block"
-    : "none";
-};
 
 /**
  * Scripts to run after the page has loaded for this file
@@ -130,35 +118,40 @@ const onDocumentReady = () => {
 };
 
 /**
- *
- * @param {*} buttonElm
- * @param {*} buttonState
- * @return {void}
+ * Helper to set an elements text
+ * @param {*} elm
+ * @param {string} text desired text for element
+ */
+const setElementText = (elm, text) => {
+  elm.innerText = text;
+};
+
+/**
+ * Toggles all toggle button text for a given button state
+ * @param {HTMLElement} buttonElm
+ * @param {string} buttonState representation of the button state as a string
+ * @return {void} if button state is "Show All" then the button text will be "Hide All" or vice-versa
  */
 const toggleAllButtonText = (buttonElm, buttonState) => {
-  setButtonState(
+  setElementText(
     buttonElm,
     isButtonStateShow(buttonState) ? states.hideAll : states.showAll
   );
 };
 
+/**
+ * Toggles detail toggle button text for a given button state
+ * @param {HTMLElement} buttonElm
+ * @param {string} buttonState representation of the button state as a string
+ * @return {void} if button state is "Show" then the button text will be "Hide" or vice-versa
+ */
 const toggleDetailButtonText = (buttonElm, buttonState) => {
-  setButtonState(buttonElm, getOppositeDetailsToggleButtonState(buttonState));
+  setElementText(buttonElm, getOppositeDetailsToggleButtonState(buttonState));
 };
-
-const setButtonState = (elm, state) => {
-  elm.innerText = state;
-};
-
-const getOppositeDetailsToggleButtonState = buttonText =>
-  isButtonStateShow(buttonText) ? states.hide : states.show;
-
-const isButtonStateShow = buttonText =>
-  buttonText.toLowerCase().indexOf(states.show.toLowerCase()) > -1;
 
 /**
  * Adjust the details section for a given step list, based on it's state
- * @param {*} stepListElm
+ * @param {HTMLElement} stepListElm
  */
 const updateSections = (stepListElm, newButtonState) => {
   const stepListSections = stepListElm.querySelectorAll("li");
@@ -177,8 +170,39 @@ const updateSections = (stepListElm, newButtonState) => {
       );
     });
 
-    setButtonState(toggleBtnElm, buttonState);
+    setElementText(toggleBtnElm, buttonState);
   });
+};
+
+/**
+ * Manages the visible state of the toggle button based on a given details section
+ * @param {NodeList} detailElms
+ */
+const updateToggleAllButton = detailElms => {
+  if (!detailElms) {
+    console.error(
+      "There must be a least one details section per step list item."
+    );
+    return;
+  }
+
+  const stepListElm = detailElms[0].closest(`.${cssClasses.stepList}`);
+  const showAllButtonElm = getFirstElementOrDefault(
+    stepListElm,
+    `.${cssClasses.showAllStepsButton}`
+  );
+  const canHideAll = isHideAllVisible(showAllButtonElm);
+  const isAtLeastOneSectionDetailVisible = hasAtLeastOneDetailSectionVisible(
+    stepListElm
+  );
+
+  if (canHideAll && isAtLeastOneSectionDetailVisible) {
+    setElementText(showAllButtonElm, states.showAll);
+  }
+
+  if (!isAtLeastOneSectionDetailVisible) {
+    setElementText(showAllButtonElm, states.hideAll);
+  }
 };
 
 // Events
