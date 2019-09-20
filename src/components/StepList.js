@@ -1,3 +1,5 @@
+import { GetFirstElementOrDefault } from "../utilities/dom.utils";
+
 const states = {
   collapsed: "collapsed",
   hide: "Hide",
@@ -62,6 +64,20 @@ const updateToggleAllButton = (detailElms, buttonState) => {
   }
 };
 
+/**
+ * Determine if the show all button's active text is "Hide All"
+ * @param {*} showAllButtonElm
+ * @returns {boolean} true if the show all button's text is set to "hide all"
+ */
+const isHideAllVisible = showAllButtonElm =>
+  showAllButtonElm &&
+  showAllButtonElm.innerText.toLowerCase() === states.hideAll.toLowerCase();
+
+/**
+ * Determine if a step list has at least one section open
+ * @param {*} stepListElm
+ * @returns {boolean} true if the given step list has at least one section open
+ */
 const hasAtLeastOneDetailSectionVisible = stepListElm =>
   [
     ...stepListElm.querySelectorAll(`.${cssClasses.detailsToggleButton}`)
@@ -69,10 +85,11 @@ const hasAtLeastOneDetailSectionVisible = stepListElm =>
     elm => elm.innerText.toLowerCase().indexOf(states.show.toLowerCase()) > -1
   ).length > 0;
 
-const isHideAllVisible = showAllButtonElm =>
-  showAllButtonElm &&
-  showAllButtonElm.innerText.toLowerCase() === states.hideAll.toLowerCase();
-
+/**
+ * Handle "Show All" Button Click based on a Step List
+ * @param {*} clickEvent
+ * @return {void}
+ */
 const handleAllStepButtonClick = clickEvent => {
   const buttonElm = clickEvent.target;
   const sectionElm = buttonElm.closest(`.${cssClasses.stepList}`);
@@ -83,8 +100,9 @@ const handleAllStepButtonClick = clickEvent => {
 };
 
 /**
- * Hide details for a given section of the step list
+ * Display or Hide Details for a given section of the step list based on the button state (show/hide)
  * @param {*} detailsSectionElm
+ * @return {void}
  */
 const displaySectionDetails = (detailsSectionElm, buttonState) => {
   detailsSectionElm.style.display = isButtonStateShow(buttonState)
@@ -92,6 +110,9 @@ const displaySectionDetails = (detailsSectionElm, buttonState) => {
     : "none";
 };
 
+/**
+ * Scripts to run after the page has loaded for this file
+ */
 const onDocumentReady = () => {
   // Get All Accordions
   const stepListElms = document.querySelectorAll(`.${cssClasses.stepList}`);
@@ -108,6 +129,12 @@ const onDocumentReady = () => {
   });
 };
 
+/**
+ *
+ * @param {*} buttonElm
+ * @param {*} buttonState
+ * @return {void}
+ */
 const toggleAllButtonText = (buttonElm, buttonState) => {
   setButtonState(
     buttonElm,
@@ -123,11 +150,6 @@ const setButtonState = (elm, state) => {
   elm.innerText = state;
 };
 
-const getFirstElementOrDefault = (elm, querySelector) => {
-  const elms = elm.querySelectorAll(querySelector);
-  return elms ? elms[0] : null;
-};
-
 const getOppositeDetailsToggleButtonState = buttonText =>
   isButtonStateShow(buttonText) ? states.hide : states.show;
 
@@ -141,7 +163,7 @@ const isButtonStateShow = buttonText =>
 const updateSections = (stepListElm, newButtonState) => {
   const stepListSections = stepListElm.querySelectorAll("li");
   stepListSections.forEach(sectionElm => {
-    const toggleBtnElm = getFirstElementOrDefault(
+    const toggleBtnElm = GetFirstElementOrDefault(
       sectionElm,
       `.${cssClasses.detailsToggleButton}`
     );
