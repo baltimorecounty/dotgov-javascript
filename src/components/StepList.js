@@ -21,13 +21,31 @@ const handleDetailsToggleButtonClick = clickEvent => {
   const detailElms = buttonElm
     .closest("li")
     .querySelectorAll(`.${cssClasses.details}`);
+  const showAllButtonElm = detailElms
+    ? getFirstElementOrDefault(
+        detailElms[0].closest(`.${cssClasses.stepList}`),
+        `.${cssClasses.showAllStepsButton}`
+      )
+    : null;
 
   detailElms.forEach(detailElm => {
     displaySectionDetails(detailElm, buttonState);
   });
 
   toggleDetailButtonText(buttonElm, buttonState);
+
+  const isAtLeastOneDetailSectionVisible = isButtonStateShow(
+    getOppositeButtonState(buttonState)
+  );
+
+  if (isHideAllVisible(showAllButtonElm) && isAtLeastOneDetailSectionVisible) {
+    setButtonState(showAllButtonElm, states.showAll);
+  }
 };
+
+const isHideAllVisible = showAllButtonElm =>
+  showAllButtonElm &&
+  showAllButtonElm.innerText.toLowerCase() === states.hideAll.toLowerCase();
 
 const handleAllStepButtonClick = clickEvent => {
   const buttonElm = clickEvent.target;
@@ -78,6 +96,10 @@ const toggleDetailButtonText = (buttonElm, buttonState) => {
   );
 };
 
+const setButtonState = (elm, state) => {
+  elm.innerText = state;
+};
+
 const getFirstElementOrDefault = (elm, querySelector) => {
   const elms = elm.querySelectorAll(querySelector);
   return elms ? elms[0] : null;
@@ -85,10 +107,6 @@ const getFirstElementOrDefault = (elm, querySelector) => {
 
 const getOppositeButtonState = buttonText =>
   isButtonStateShow(buttonText) ? states.hide : states.show;
-
-const setButtonState = (elm, state) => {
-  elm.innerText = state;
-};
 
 const isButtonStateShow = buttonText =>
   buttonText.toLowerCase().indexOf(states.show.toLowerCase()) > -1;
