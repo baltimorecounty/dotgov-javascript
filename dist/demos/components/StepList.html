@@ -19,24 +19,24 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style>
-      .dg_step-list {
+      .dg_step-list__list {
         counter-reset: my-awesome-counter;
         list-style: none;
         padding-left: 60px;
       }
 
-      .dg_step-list li {
+      .dg_step-list__list li {
         border-bottom: 1px solid #e0e0e0;
         margin-bottom: 15px;
         counter-increment: my-awesome-counter;
         position: relative;
       }
 
-      .dg_step-list li:first-child {
+      .dg_step-list__list li:first-child {
         border-top: 1px solid #e0e0e0;
       }
 
-      .dg_step-list li::before {
+      .dg_step-list__list li::before {
         background: white;
         border: 2px solid black;
         content: counter(my-awesome-counter);
@@ -53,7 +53,7 @@
         text-align: center;
       }
 
-      .dg_step-list li::after {
+      .dg_step-list__list li::after {
         content: "";
         position: absolute;
         z-index: -2;
@@ -65,11 +65,11 @@
         top: 30px;
       }
 
-      .dg_step-list li:last-child::after {
+      .dg_step-list__list li:last-child::after {
         border: none;
       }
 
-      .dg_step-list li:first-child::before {
+      .dg_step-list__list li:first-child::before {
         top: 15px;
       }
     </style>
@@ -114,57 +114,59 @@
             Some really smart words go here. I'm sure they do, now I'm just
             wasting time.
           </p>
-          <ol class="dg_step-list collapsed">
-            <li>
-              <h3>Step 1</h3>
-              <button class="dg_step-list__toggle-btn" type="button">
-                Show
-              </button>
-              <div class="dg_step-list__details">
-                <p>Some description text goes here.</p>
-              </div>
-            </li>
-            <li>
-              <h3>Step 2</h3>
-              <button class="dg_step-list__toggle-btn" type="button">
-                Hide
-              </button>
-              <div class="dg_step-list__details">
-                <p>Some description text goes here.</p>
-              </div>
-            </li>
-            <li>
-              <h3>Step 3</h3>
-              <button class="dg_step-list__toggle-btn" type="button">
-                Show
-              </button>
-              <div class="dg_step-list__details">
-                <p>Some description text goes here.</p>
-              </div>
-            </li>
-            <li>
-              <h3>Step 4</h3>
-              <button class="dg_step-list__toggle-btn" type="button">
-                Show
-              </button>
-              <div class="dg_step-list__details">
-                <p>Some description text goes here.</p>
-              </div>
-            </li>
-            <li>
-              <h3>Step 5</h3>
-              <button class="dg_step-list__toggle-btn" type="button">
-                Show
-              </button>
-              <div class="dg_step-list__details">
-                <p>Some description text goes here.</p>
-              </div>
-            </li>
-          </ol>
+          <div class="dg_step-list collapsed">
+            <button class="dg_step-list__show-all-btn">Show All</button>
+            <ol class="dg_step-list__list">
+              <li>
+                <h3>Step 1</h3>
+                <button class="dg_step-list__toggle-btn" type="button">
+                  Show
+                </button>
+                <div class="dg_step-list__details">
+                  <p>Some description text goes here.</p>
+                </div>
+              </li>
+              <li>
+                <h3>Step 2</h3>
+                <button class="dg_step-list__toggle-btn" type="button">
+                  Hide
+                </button>
+                <div class="dg_step-list__details">
+                  <p>Some description text goes here.</p>
+                </div>
+              </li>
+              <li>
+                <h3>Step 3</h3>
+                <button class="dg_step-list__toggle-btn" type="button">
+                  Show
+                </button>
+                <div class="dg_step-list__details">
+                  <p>Some description text goes here.</p>
+                </div>
+              </li>
+              <li>
+                <h3>Step 4</h3>
+                <button class="dg_step-list__toggle-btn" type="button">
+                  Show
+                </button>
+                <div class="dg_step-list__details">
+                  <p>Some description text goes here.</p>
+                </div>
+              </li>
+              <li>
+                <h3>Step 5</h3>
+                <button class="dg_step-list__toggle-btn" type="button">
+                  Show
+                </button>
+                <div class="dg_step-list__details">
+                  <p>Some description text goes here.</p>
+                </div>
+              </li>
+            </ol>
+          </div>
         </div>
       </div>
     </div>
-
     <script src="/assets/dotgov-stepList.min.js"></script>
   </body>
 </html>

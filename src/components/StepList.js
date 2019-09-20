@@ -1,14 +1,17 @@
 const states = {
   collapsed: "collapsed",
   hide: "Hide",
-  show: "Show"
+  hideAll: "Hide All",
+  show: "Show",
+  showAll: "Show All"
 };
 
 const cssClasses = {
   collapsed: "collapsed",
   stepList: "dg_step-list",
   detailsToggleButton: "dg_step-list__toggle-btn",
-  details: "dg_step-list__details"
+  details: "dg_step-list__details",
+  showAllStepsButton: "dg_step-list__show-all-btn"
 };
 
 /**  */
@@ -23,7 +26,16 @@ const handleDetailsToggleButtonClick = clickEvent => {
     displaySectionDetails(detailElm, buttonState);
   });
 
-  toggleButtonText(buttonElm, buttonState);
+  toggleDetailButtonText(buttonElm, buttonState);
+};
+
+const handleAllStepButtonClick = clickEvent => {
+  const buttonElm = clickEvent.target;
+  const sectionElm = buttonElm.closest(`.${cssClasses.stepList}`);
+  const buttonState = buttonElm.innerText;
+
+  updateSections(sectionElm, getOppositeButtonState(buttonState));
+  toggleAllButtonText(buttonElm, buttonState);
 };
 
 /**
@@ -52,10 +64,18 @@ const onDocumentReady = () => {
   });
 };
 
-const toggleButtonText = (buttonElm, buttonState) => {
-  buttonElm.innerText = isButtonStateShow(buttonState)
-    ? states.hide
-    : states.show;
+const toggleAllButtonText = (buttonElm, buttonState) => {
+  setButtonState(
+    buttonElm,
+    isButtonStateShow(buttonState) ? states.hideAll : states.showAll
+  );
+};
+
+const toggleDetailButtonText = (buttonElm, buttonState) => {
+  setButtonState(
+    buttonElm,
+    isButtonStateShow(buttonState) ? states.hide : states.show
+  );
 };
 
 const getFirstElementOrDefault = (elm, querySelector) => {
@@ -63,29 +83,21 @@ const getFirstElementOrDefault = (elm, querySelector) => {
   return elms ? elms[0] : null;
 };
 
-const getButtonState = buttonElms =>
-  buttonElms &&
-  buttonElms[0].innerText.toLowerCase() === states.hide.toLowerCase()
-    ? states.hide
-    : states.show;
-
 const getOppositeButtonState = buttonText =>
-  buttonText.toLowerCase() === states.show.toLowerCase()
-    ? states.hide
-    : states.show;
+  isButtonStateShow(buttonText) ? states.hide : states.show;
 
 const setButtonState = (elm, state) => {
   elm.innerText = state;
 };
 
 const isButtonStateShow = buttonText =>
-  buttonText.toLowerCase() === states.show.toLowerCase();
+  buttonText.toLowerCase().indexOf(states.show.toLowerCase()) > -1;
 
 /**
  * Adjust the details section for a given step list, based on it's state
  * @param {*} stepListElm
  */
-const updateSections = (stepListElm, targetButtonState) => {
+const updateSections = (stepListElm, newButtonState) => {
   const stepListSections = stepListElm.querySelectorAll("li");
   stepListSections.forEach(sectionElm => {
     const toggleBtnElm = getFirstElementOrDefault(
@@ -93,7 +105,7 @@ const updateSections = (stepListElm, targetButtonState) => {
       `.${cssClasses.detailsToggleButton}`
     );
     const detailElms = sectionElm.querySelectorAll(`.${cssClasses.details}`);
-    const buttonState = targetButtonState || toggleBtnElm.innerText;
+    const buttonState = newButtonState || toggleBtnElm.innerText;
 
     detailElms.forEach(elm => {
       displaySectionDetails(elm, getOppositeButtonState(buttonState));
@@ -113,12 +125,15 @@ document.addEventListener("DOMContentLoaded", onDocumentReady);
  */
 document.addEventListener(
   "click",
-  function(clickEvent) {
+  clickEvent => {
+    const { target } = clickEvent;
     // If the clicked element doesn't have the right selector, bail
-    if (!clickEvent.target.matches(`.${cssClasses.detailsToggleButton}`)) {
-      return;
-    } else {
+    if (target.matches(`.${cssClasses.detailsToggleButton}`)) {
       handleDetailsToggleButtonClick(clickEvent);
+    } else if (target.matches(`.${cssClasses.showAllStepsButton}`)) {
+      handleAllStepButtonClick(clickEvent);
+    } else {
+      return;
     }
   },
   false
