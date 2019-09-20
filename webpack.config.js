@@ -3,6 +3,7 @@ const path = require("path");
 module.exports = {
   mode: "development",
   entry: {
+    StepList: "./src/components/StepList.js",
     FollowUp: "./src/page-specific/BaltCoGo/FollowUp.js"
   },
   output: {
