@@ -21,18 +21,23 @@ const handleDetailsToggleButtonClick = clickEvent => {
   const detailElms = buttonElm
     .closest("li")
     .querySelectorAll(`.${cssClasses.details}`);
-  const showAllButtonElm = detailElms
-    ? getFirstElementOrDefault(
-        detailElms[0].closest(`.${cssClasses.stepList}`),
-        `.${cssClasses.showAllStepsButton}`
-      )
-    : null;
 
   detailElms.forEach(detailElm => {
     displaySectionDetails(detailElm, buttonState);
   });
 
   toggleDetailButtonText(buttonElm, buttonState);
+
+  updateToggleAllButton(detailElms, buttonState);
+};
+
+const updateToggleAllButton = (detailElms, buttonState) => {
+  const showAllButtonElm = detailElms
+    ? getFirstElementOrDefault(
+        detailElms[0].closest(`.${cssClasses.stepList}`),
+        `.${cssClasses.showAllStepsButton}`
+      )
+    : null;
 
   const isAtLeastOneDetailSectionVisible = isButtonStateShow(
     getOppositeButtonState(buttonState)
