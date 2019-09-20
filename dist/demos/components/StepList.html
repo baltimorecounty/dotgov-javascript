@@ -37,7 +37,8 @@
       }
 
       .dg_step-list li::before {
-        border: 1px solid black;
+        background: white;
+        border: 2px solid black;
         content: counter(my-awesome-counter);
         font-weight: bold;
         font-size: 20px;
@@ -47,9 +48,25 @@
         left: -60px;
         height: 40px;
         width: 40px;
-        line-height: 40px;
+        line-height: 38px; /* Offset by the border width */
         border-radius: 50%;
         text-align: center;
+      }
+
+      .dg_step-list li::after {
+        content: "";
+        position: absolute;
+        z-index: -2;
+        width: 0;
+        height: 100%;
+        border-left: 2px solid #e0e0e0;
+        background: white;
+        left: -41px; /* I think this offset is being caused by the border width */
+        top: 30px;
+      }
+
+      .dg_step-list li:last-child::after {
+        border: none;
       }
 
       .dg_step-list li:first-child::before {
@@ -61,7 +78,7 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-12">
-          <h2>My Sample Step List</h2>
+          <h2>Example 1 - Basic Static Example</h2>
           <p>
             Some really smart words go here. I'm sure they do, now I'm just
             wasting time.
