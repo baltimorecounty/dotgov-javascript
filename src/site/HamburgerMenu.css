@@ -82,11 +82,11 @@
   height: 5px;
 }
 
-.menu-active .dg_hamburger-menu {
+.active .dg_hamburger-menu {
   background: rgba(255, 255, 255, 0);
 }
 
-.menu-active .dg_menu-trigger:hover > .dg_menu-wrapper .dg_hamburger-menu {
+.active .dg_menu-trigger:hover > .dg_menu-wrapper .dg_hamburger-menu {
   background: rgba(255, 255, 255, 0);
 }
 
@@ -112,12 +112,12 @@
   top: 10px;
 }
 
-.menu-active .dg_hamburger-menu:after {
+.active .dg_hamburger-menu:after {
   top: 0;
   transform: rotate(45deg);
 }
 
-.menu-active .dg_hamburger-menu:before {
+.active .dg_hamburger-menu:before {
   bottom: 0;
   transform: rotate(-45deg);
 }
