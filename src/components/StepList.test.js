@@ -8,8 +8,6 @@ import { createAppContainer, resetAppContainer } from "../utilities/test.utils";
 import { default as StepListFixture } from "./StepList.fixture";
 let stepList;
 
-jest.autoMockOff();
-
 afterEach(() => {
   /** Reset document.body */
   resetAppContainer(document);
