@@ -176,7 +176,6 @@ const handleAllStepButtonClick = clickEvent => {
 const handleDetailsToggleButtonClick = clickEvent => {
   const buttonElm = clickEvent.target;
   const buttonState = buttonElm.textContent;
-  console.log(buttonState);
   const detailElms = buttonElm
     .closest("li")
     .querySelectorAll(`.${cssClasses.details}`);
