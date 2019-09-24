@@ -344,9 +344,18 @@ const onDocumentReady = () => {
       states.collapsed
     );
 
-    if (isDefaultStateCollapsed) {
-      updateSections(stepListElm, states.show);
+    if (!isDefaultStateCollapsed) {
+      const toggleAllButtonElm = GetFirstElementOrDefault(
+        stepListElm,
+        `.${cssClasses.showAllStepsButton}`
+      );
+      toggleAllButtonText(toggleAllButtonElm, states.show);
     }
+
+    updateSections(
+      stepListElm,
+      isDefaultStateCollapsed ? states.show : states.hide
+    );
   });
 };
 
