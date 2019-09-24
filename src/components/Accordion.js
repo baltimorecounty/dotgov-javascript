@@ -1,26 +1,27 @@
-const menuOpen = "dg_menuopened";
-const menuClose = "dg_menuclosed";
+const menuOpen = "collapse show";
 const buttonOpenAll = "Open All";
 const buttonCloseAll = "Close All";
 
-function MenuAction(button) {
-  var body = button.parentElement;
-  var menuItems = body.getElementsByClassName("dg_accordion");
-  var panel = button.nextElementSibling;
-  var menuID = panel.id;
+function MenuAction(element) {
+  var mainDiv = element.parentElement.parentElement;
+  var menuItems = mainDiv.getElementsByClassName("multi-collapse");
+  var childDiv = element.firstElementChild;
+  var menuID = childDiv.id;
 
   for (i = 0; i < menuItems.length; i++) {
-    var menuPanel = menuItems[i].nextElementSibling;
-    if (menuID !== menuPanel.id) {
-      menuPanel.className =
-        body.className === "dg_toggleall" ? menuPanel.className : menuClose;
+    if (menuID !== menuItems[i].id) {
+      menuItems[i].className = mainDiv.className.includes("allowmutlipleopen")
+        ? menuItems[i].className
+        : menuState("close");
     } else {
-      if (panel.className.includes(menuOpen)) {
-        panel.className = menuState(panel, "close");
-        menuItems[i].className = "dg_accordion";
+      if (menuItems[i].className.includes(menuOpen)) {
+        menuItems[i].className = menuState("close");
+        menuItems[i].setAttribute("aria-expanded", false);
+        element.parentElement.className = "card fa collapsed dg_menuitem";
       } else {
-        panel.className = menuState(panel, "open");
-        menuItems[i].className = "dg_accordion-down";
+        menuItems[i].className = menuState("open");
+        menuItems[i].setAttribute("aria-expanded", true);
+        element.parentElement.className = "card fa dg_menuitem";
       }
     }
   }
@@ -29,7 +30,7 @@ function MenuAction(button) {
 function AllMenuItemsAction(button) {
   var status = button.innerHTML.trim();
   var body = button.parentElement;
-  var menuItems = body.getElementsByClassName("dg_accordion");
+  var menuItems = body.getElementsByClassName("multi-collapse");
 
   if (button.innerHTML.trim() === buttonOpenAll) {
     button.innerHTML = buttonCloseAll;
@@ -38,95 +39,24 @@ function AllMenuItemsAction(button) {
   }
 
   for (i = 0; i < menuItems.length; i++) {
-    var panel = menuItems[i].nextElementSibling;
-
     if (status == "Open All") {
-      panel.className = menuState(panel, "open");
-      menuItems[i].className = "dg_accordion-down";
+      menuItems[i].className = menuState("open");
+      menuItems[i].setAttribute("aria-expanded", true);
+      menuItems[i].parentElement.parentElement.className =
+        "card fa dg_menuitem";
     } else {
-      panel.className = menuState(panel, "close");
-      menuItems[i].className = "dg_accordion";
+      menuItems[i].className = menuState("close");
+      menuItems[i].setAttribute("aria-expanded", false);
+      menuItems[i].parentElement.parentElement.className =
+        "card fa collapsed dg_menuitem";
     }
   }
 }
 
-function menuState(panel, state) {
+function menuState(state) {
   if (state === "open") {
-    return (panel.className = panel.className.includes(menuClose)
-      ? panel.className.replace(menuClose, menuOpen)
-      : panel.className.includes(menuOpen)
-      ? panel.className
-      : panel.className + " " + menuOpen);
+    return "multi-collapse collapse show";
   } else {
-    return (panel.className = panel.className.includes(menuOpen)
-      ? panel.className.replace(menuOpen, menuClose)
-      : panel.className.includes(menuClose)
-      ? panel.className
-      : panel.className + " " + menuClose);
+    return "multi-collapse collapse";
   }
-}
-
-{
-  /* <div class="dg_toggleall">
-    <button
-      class="dg_allitems"
-      id="menuActionButton"
-      onclick="AllMenuItemsAction(this)"
-    >
-      Open All
-    </button>
-    <button class="dg_accordion" onclick="MenuAction(this)">
-      Section 1
-    </button>
-    <div class="panel dg_menuclosed" id="menuItem1">
-      <p>Lorem ipsum...</p>
-    </div>
-    <button class="dg_accordion" onclick="MenuAction(this)">
-      Section 2
-    </button>
-    <div class="panel dg_menuclosed" id="menuItem2">
-      <p>Lorem ipsum...</p>
-    </div>
-    <button class="dg_accordion" onclick="MenuAction(this)">
-      Section 3
-    </button>
-    <div class="panel dg_menuclosed" id="menuItem3">
-      <p>Lorem ipsum...</p>
-    </div>
-  </div>
-  <div>
-    <button
-      class="dg_allitems"
-      id="menuActionButton"
-      onclick="AllMenuItemsAction(this)"
-    >
-      Open All
-    </button>
-    <button class="dg_accordion" onclick="MenuAction(this)">
-      New Section 1
-    </button>
-    <div class="panel dg_menuclosed" id="menuItem1">
-      <img
-        width="300"
-        height="200"
-        alt="Stuff goes here"
-        src="//baltimorecountymd.gov/sebin/t/t/homepage-county-executive.jpg"
-        border="0"
-        vspace="0"
-        hspace="0"
-      />
-    </div>
-    <button class="dg_accordion" onclick="MenuAction(this)">
-      New Section 2
-    </button>
-    <div class="panel dg_menuclosed" id="menuItem2">
-      <p>Lorem ipsum...</p>
-    </div>
-    <button class="dg_accordion" onclick="MenuAction(this)">
-      New Section 3
-    </button>
-    <div class="panel dg_menuclosed" id="menuItem3">
-      <p>Lorem ipsum...</p>
-    </div>
-  </div> */
 }
