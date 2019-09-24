@@ -255,7 +255,7 @@ const toggleDetailButtonText = (buttonElm, buttonState) => {
 
   setElementText(
     elmToUpdate,
-    isButtonStateShow(buttonState) ? states.hideAll : states.showAll
+    isButtonStateShow(buttonState) ? states.hide : states.show
   );
 };
 
