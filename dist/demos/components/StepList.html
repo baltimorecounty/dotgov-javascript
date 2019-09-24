@@ -25,18 +25,19 @@
         padding-left: 60px;
       }
 
-      .dg_step-list__list li {
+      .dg_step-list__list > li {
         border-bottom: 1px solid #e0e0e0;
         margin-bottom: 15px;
+        padding-bottom: 15px;
         counter-increment: my-awesome-counter;
         position: relative;
       }
 
-      .dg_step-list__list li:first-child {
+      .dg_step-list__list > li:first-child {
         border-top: 1px solid #e0e0e0;
       }
 
-      .dg_step-list__list li::before {
+      .dg_step-list__list > li::before {
         background: white;
         border: 2px solid black;
         content: counter(my-awesome-counter);
@@ -53,7 +54,7 @@
         text-align: center;
       }
 
-      .dg_step-list__list li::after {
+      .dg_step-list__list > li::after {
         content: "";
         position: absolute;
         z-index: -2;
@@ -65,48 +66,44 @@
         top: 30px;
       }
 
-      .dg_step-list__list li:last-child::after {
+      .dg_step-list__list > li:last-child::after {
         border: none;
       }
 
-      .dg_step-list__list li:first-child::before {
+      .dg_step-list__list > li:first-child::before {
         top: 15px;
+      }
+
+      .dg_step-list__toggle-btn,
+      .dg_step-list__toggle-btn__title {
+        display: inline-block;
+      }
+
+      .dg_step-list__toggle-btn {
+        background: none;
+        border: none;
+        text-align: left;
+      }
+
+      .dg_step-list__toggle-btn__title {
+        font-size: 24px;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .dg_step-list__toggle-btn__btn-text {
+        color: #002280;
+        display: block;
+      }
+
+      .dg_step-list__toggle-btn__btn-text:hover {
+        color: #1076bc;
+        cursor: pointer;
+        text-decoration: none;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <!-- <div class="row">
-        <div class="col-xs-12">
-          <h2>Example 1 - Basic Static Example</h2>
-          <p>
-            Some really smart words go here. I'm sure they do, now I'm just
-            wasting time.
-          </p>
-          <ol class="dg_step-list">
-            <li>
-              <h3>Step 1</h3>
-              <p>Some description text goes here.</p>
-            </li>
-            <li>
-              <h3>Step 2</h3>
-              <p>Some description text goes here.</p>
-            </li>
-            <li>
-              <h3>Step 3</h3>
-              <p>Some description text goes here.</p>
-            </li>
-            <li>
-              <h3>Step 4</h3>
-              <p>Some description text goes here.</p>
-            </li>
-            <li>
-              <h3>Step 5</h3>
-              <p>Some description text goes here.</p>
-            </li>
-          </ol>
-        </div>
-      </div> -->
       <div class="row">
         <div class="col-xs-12">
           <h2>Example 2 - Basic Static Collapsed by Default</h2>
@@ -118,49 +115,178 @@
           <div class="dg_step-list collapsed">
             <button class="dg_step-list__show-all-btn">Show All</button>
             <ol class="dg_step-list__list">
-              <li>
-                <h3>Step 1</h3>
-                <button class="dg_step-list__toggle-btn" type="button">
-                  Show
+              <li class="dg_step-list__list-section">
+                <button
+                  class="dg_step-list__toggle-btn"
+                  aria-expanded="false"
+                  type="button"
+                >
+                  <span class="dg_step-list__toggle-btn__title"
+                    >Step 1: Know the Registration Fees</span
+                  >
+                  <span class="dg_step-list__toggle-btn__btn-text">Show</span>
                 </button>
                 <div class="dg_step-list__details">
-                  <p>Some description text goes here.</p>
+                  <ul>
+                    <li>
+                      Owner-occupied, one or two tenants: $48&nbsp;per unit
+                    </li>
+                    <li>
+                      Owner-occupied, three or more tenants: $60&nbsp;per unit
+                    </li>
+                    <li>Not owner-occupied: $60&nbsp;per unit</li>
+                  </ul>
                 </div>
               </li>
-              <li>
-                <h3>Step 2</h3>
-                <button class="dg_step-list__toggle-btn" type="button">
-                  Hide
+              <li class="dg_step-list__list-section">
+                <button
+                  class="dg_step-list__toggle-btn"
+                  aria-expanded="false"
+                  type="button"
+                >
+                  <span class="dg_step-list__toggle-btn__title"
+                    >Step 2: Have Your Property Inspected</span
+                  >
+                  <span class="dg_step-list__toggle-btn__btn-text">Show</span>
                 </button>
                 <div class="dg_step-list__details">
-                  <p>Some description text goes here.</p>
+                  <p>
+                    Have an inspection performed by a
+                    <a
+                      title="Find state licensed home inspectors."
+                      href="http://www.dllr.state.md.us/pq/"
+                      >state-licensed home inspector</a
+                    >. The inspector must complete an
+                    <a
+                      target="_blank"
+                      onclick="window.open('http://resources.baltimorecountymd.gov/Documents/Permits/rental_registration/5inspectionsheet.pdf', '_blank', 'toolbar=yes,menubar=yes,location=yes,scrollbars=yes,resizable=yes,status=yes,width=800,height=600'); return false;"
+                      title="Download inspection sheet filled out by an inspector. (opens new window)"
+                      href="http://resources.baltimorecountymd.gov/Documents/Permits/rental_registration/5inspectionsheet.pdf"
+                      >Inspection Sheet</a
+                    >
+                    (PDF) for each unit you intend to rent.
+                  </p>
                 </div>
               </li>
-              <li>
-                <h3>Step 3</h3>
-                <button class="dg_step-list__toggle-btn" type="button">
-                  Show
+              <li class="dg_step-list__list-section">
+                <button
+                  class="dg_step-list__toggle-btn"
+                  aria-expanded="false"
+                  type="button"
+                >
+                  <span class="dg_step-list__toggle-btn__title"
+                    >Step 3: Gather Required Documentation</span
+                  >
+                  <span class="dg_step-list__toggle-btn__btn-text">Show</span>
                 </button>
                 <div class="dg_step-list__details">
-                  <p>Some description text goes here.</p>
+                  <p>You must provide the following with your application:</p>
+                  <ul>
+                    <li>
+                      The
+                      <a
+                        target="_blank"
+                        onclick="window.open('http://resources.baltimorecountymd.gov/Documents/Permits/rental_registration/5inspectionsheet.pdf', '_blank', 'toolbar=yes,menubar=yes,location=yes,scrollbars=yes,resizable=yes,status=yes,width=800,height=600'); return false;"
+                        title="Download the inspection sheet to be filled out by inspector. (opens new window)"
+                        href="http://resources.baltimorecountymd.gov/Documents/Permits/rental_registration/5inspectionsheet.pdf"
+                        >Inspection Sheet</a
+                      >
+                      (PDF) completed by a
+                      <a
+                        title="Find state-licensed home inspectors."
+                        href="http://www.dllr.state.md.us/pq/"
+                        >licensed home inspector</a
+                      >
+                      in Step 2 above
+                    </li>
+                    <li>
+                      A
+                      <a
+                        target="_blank"
+                        onclick="window.open('http://resources.baltimorecountymd.gov/Documents/Permits/rental_registration/alarmverificationform.pdf', '_blank', 'toolbar=yes,menubar=yes,location=yes,scrollbars=yes,resizable=yes,status=yes,width=800,height=600'); return false;"
+                        title="Download form to verify carbon monoxide alarm is installed. (opens new window)"
+                        href="http://resources.baltimorecountymd.gov/Documents/Permits/rental_registration/alarmverificationform.pdf"
+                        >Carbon Monoxide Alarm Verification</a
+                      >
+                      (PDF)
+                    </li>
+                    <li>
+                      If the home was built before 1978, a lead inspection
+                      certificate
+                    </li>
+                  </ul>
                 </div>
               </li>
-              <li>
-                <h3>Step 4</h3>
-                <button class="dg_step-list__toggle-btn" type="button">
-                  Show
+              <li class="dg_step-list__list-section">
+                <button
+                  class="dg_step-list__toggle-btn"
+                  aria-expanded="false"
+                  type="button"
+                >
+                  <span class="dg_step-list__toggle-btn__title"
+                    >Step 4: Read the Non-Discrimination Regulations</span
+                  >
+                  <span class="dg_step-list__toggle-btn__btn-text">Show</span>
                 </button>
                 <div class="dg_step-list__details">
-                  <p>Some description text goes here.</p>
+                  <p>
+                    You must comply with federal, State and County
+                    non-discrimination and accessibility regulations, as
+                    applicable. The regulations, exceptions and waiver
+                    conditions are described in the following pamphlets:
+                  </p>
+                  <ul>
+                    <li>
+                      <a
+                        target="_blank"
+                        onclick="window.open('http://resources.baltimorecountymd.gov/Documents/Permits/rental_registration/fairhousingpamphlet.pdf', '_blank', 'toolbar=yes,menubar=yes,location=yes,scrollbars=yes,resizable=yes,status=yes,width=800,height=600'); return false;"
+                        title="Read the Fair Housing Law. (opens new wondow)"
+                        href="http://resources.baltimorecountymd.gov/Documents/Permits/rental_registration/fairhousingpamphlet.pdf"
+                        >Fair Housing Law</a
+                      >
+                      (PDF)
+                    </li>
+                    <li>
+                      <a
+                        target="_blank"
+                        onclick="window.open('http://resources.baltimorecountymd.gov/Documents/Permits/rental_registration/accessibilitypamphlet.pdf', '_blank', 'toolbar=yes,menubar=yes,location=yes,scrollbars=yes,resizable=yes,status=yes,width=800,height=600'); return false;"
+                        title="Review the Maryland Accessibility Act. (opens new window)"
+                        href="http://resources.baltimorecountymd.gov/Documents/Permits/rental_registration/accessibilitypamphlet.pdf"
+                        >Maryland Accessibility Act</a
+                      >
+                      (PDF)
+                    </li>
+                  </ul>
+                  <p>
+                    You will be required to attest that you have reviewed and
+                    understand the regulations before completing your
+                    application.
+                  </p>
                 </div>
               </li>
-              <li>
-                <h3>Step 5</h3>
-                <button class="dg_step-list__toggle-btn" type="button">
-                  Show
+              <li class="dg_step-list__list-section">
+                <button
+                  class="dg_step-list__toggle-btn"
+                  aria-expanded="false"
+                  type="button"
+                >
+                  <span class="dg_step-list__toggle-btn__title"
+                    >Step 5: Decide How You Want to Apply</span
+                  >
+                  <span class="dg_step-list__toggle-btn__btn-text">Show</span>
                 </button>
                 <div class="dg_step-list__details">
-                  <p>Some description text goes here.</p>
+                  <p>
+                    <strong>Note:</strong> Please be sure to check that your
+                    rental property complies with all the Baltimore County
+                    Zoning Regulations. To locate your Zoning Designation,
+                    please visit
+                    <a
+                      title="View and search My Neighborhood."
+                      href="https://www.baltimorecountymd.gov/Agencies/infotech/GIS/MyNeighborhood/index.html"
+                      >My Neighborhood</a
+                    >.
+                  </p>
                 </div>
               </li>
             </ol>

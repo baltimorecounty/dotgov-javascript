@@ -121,7 +121,10 @@ const cssClasses = {
   stepList: "dg_step-list",
   detailsToggleButton: "dg_step-list__toggle-btn",
   details: "dg_step-list__details",
-  showAllStepsButton: "dg_step-list__show-all-btn"
+  showAllStepsButton: "dg_step-list__show-all-btn",
+  toggleButtonHeading: "dg_step-list__toggle-btn__title",
+  toggleButtonText: "dg_step-list__toggle-btn__btn-text",
+  section: "dg_step-list__list-section"
 };
 
 /**
@@ -174,10 +177,13 @@ const handleAllStepButtonClick = clickEvent => {
  * @param {object} clickEvent
  */
 const handleDetailsToggleButtonClick = clickEvent => {
-  const buttonElm = clickEvent.target;
+  const { target } = clickEvent;
+  const buttonElm = target.classList.contains(cssClasses.toggleBtnElm)
+    ? target
+    : target.parentElement;
   const buttonState = buttonElm.textContent;
   const detailElms = buttonElm
-    .closest("li")
+    .closest(`.${cssClasses.section}`)
     .querySelectorAll(`.${cssClasses.details}`);
 
   Array.from(detailElms).forEach(detailElm => {
@@ -235,7 +241,22 @@ const toggleAllButtonText = (buttonElm, buttonState) => {
  * @return {void} if button state is "Show" then the button text will be "Hide" or vice-versa
  */
 const toggleDetailButtonText = (buttonElm, buttonState) => {
-  setElementText(buttonElm, getOppositeDetailsToggleButtonState(buttonState));
+  const buttonTextElm = buttonElm.querySelectorAll(
+    `.${cssClasses.toggleButtonText}`
+  );
+  const elmToUpdate = buttonTextElm ? buttonTextElm[0] : null;
+
+  if (!elmToUpdate) {
+    console.error(
+      "Something is wrong with your markup, please verify your step is setup properly"
+    );
+    return;
+  }
+
+  setElementText(
+    elmToUpdate,
+    isButtonStateShow(buttonState) ? states.hideAll : states.showAll
+  );
 };
 
 /**
@@ -243,11 +264,17 @@ const toggleDetailButtonText = (buttonElm, buttonState) => {
  * @param {HTMLElement} stepListElm
  */
 const updateSections = (stepListElm, newButtonState) => {
-  const stepListSections = stepListElm.querySelectorAll("li");
+  const stepListSections = stepListElm.querySelectorAll(
+    `.${cssClasses.section}`
+  );
   Array.from(stepListSections).forEach(sectionElm => {
     const toggleBtnElm = GetFirstElementOrDefault(
       sectionElm,
       `.${cssClasses.detailsToggleButton}`
+    );
+    const toggleButtonTextElm = GetFirstElementOrDefault(
+      toggleBtnElm,
+      `.${cssClasses.toggleButtonText}`
     );
     const detailElms = sectionElm.querySelectorAll(`.${cssClasses.details}`);
     const buttonState = newButtonState || toggleBtnElm.textContent;
@@ -259,7 +286,7 @@ const updateSections = (stepListElm, newButtonState) => {
       );
     });
 
-    setElementText(toggleBtnElm, buttonState);
+    setElementText(toggleButtonTextElm, buttonState);
   });
 };
 
@@ -311,10 +338,6 @@ const onDocumentReady = () => {
       updateSections(stepListElm, states.show);
     }
   });
-
-  if (onComplete && typeof onComplete === "function") {
-    onComplete();
-  }
 };
 
 // Events
@@ -331,7 +354,11 @@ document.addEventListener(
   clickEvent => {
     const { target } = clickEvent;
     // If the clicked element doesn't have the right selector, bail
-    if (target.classList.contains(cssClasses.detailsToggleButton)) {
+    const isDetailsToggleClick =
+      target.parentElement.classList.contains(cssClasses.detailsToggleButton) ||
+      target.classList.contains(cssClasses.detailsToggleButton);
+
+    if (isDetailsToggleClick) {
       handleDetailsToggleButtonClick(clickEvent);
     } else if (target.classList.contains(cssClasses.showAllStepsButton)) {
       handleAllStepButtonClick(clickEvent);
