@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="">
-  
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -17,210 +16,201 @@
       rel="stylesheet"
     />
     <style>
-        /* Style the buttons that are used to open and close the accordion panel */
-        .dg_menuitem {
-          background-color: #eee;
-          color: #444;
-          cursor: pointer;
-          padding: 18px;
-          width: 100%;
-          text-align: left;
-          border: none;
-          outline: none;
-          transition: 0.4s;
-          position: relative;
-        }
-    
-        button:focus {
-          color: #444;
-        }
-    
-        /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-        .card:hover {
-          background-color: #ccc;
-        }
-    
-        .card::after {
-          position: absolute;
-          cursor: pointer;
-          content: "\f107";
-        }
-        .card.collapsed::after {
-          position: absolute;
-          cursor: pointer;
-          content: "\f105";
-        }
-      </style>
-      
+      /* Style the buttons that are used to open and close the accordion panel */
+      .dg_menuitem {
+        background-color: #eee;
+        color: #444;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        text-align: left;
+        border: none;
+        outline: none;
+        transition: 0.4s;
+        position: relative;
+      }
+
+      button:focus {
+        color: #444;
+      }
+
+      /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+      .card:hover {
+        background-color: #ccc;
+      }
+
+      .btn::after {
+        position: absolute;
+        cursor: pointer;
+        content: "\f107";
+      }
+      .btn.collapsed::after {
+        position: absolute;
+        cursor: pointer;
+        content: "\f105";
+      }
+    </style>
   </head>
   <script src="/assets/dotgov-accordion.min.js"></script>
+  <script src="/assets/dotgov-polyfill.min.js"></script>
   <body>
     <div class="accordion dg_allowmutlipleopen" id="accordionExample1">
-    <button
-      class="dg_allitems"
-      id="menuActionButton1"
-      onclick="AllMenuItemsAction(this)"
-    >
-      Open All
-    </button>
-    <div class="card fa collapsed dg_menuitem">
-      <button
-        class="btn btn-link"
-        type="button"
-        data-toggle="collapse"
-        data-target="#collapseOne1"
-        aria-expanded="true"
-        aria-controls="collapseOne"
-        style="text-align: left; width:100%;"
-        onclick="MenuAction(this)"
-      >
-        Collapsible Group Item #1
-      <div
-        id="collapseOne1"
-        class="multi-collapse collapse"
-        data-parent="#accordionExample1"
-      >
-        <div class="card-body">
-          occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt
-          you probably haven't heard of them accusamus labore sustainable VHS.
+      <button class="dg_allitems" id="menuActionButton1">
+        Open All
+      </button>
+      <div class="card fa collapsed dg_menuitem">
+        <button
+          class="btn btn-link"
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapseOne1"
+          aria-expanded="true"
+          aria-controls="collapseOne"
+          style="text-align: left; width:100%;"
+        >
+          Collapsible Group Item #1
+        </button>
+        <div
+          id="collapseOne1"
+          class="multi-collapse collapse"
+          data-parent="#accordionExample1"
+        >
+          <div class="card-body">
+            occaecat craft beer farm-to-table, raw denim aesthetic synth
+            nesciunt you probably haven't heard of them accusamus labore
+            sustainable VHS.
+          </div>
+        </div>
+      </div>
+      <div class="card fa collapsed dg_menuitem">
+        <button
+          class="btn btn-link"
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapseTwo2"
+          aria-expanded="false"
+          aria-controls="collapseTwo"
+          style="text-align: left; width: 100%;"
+        >
+          Collapsible Group Item #2
+        </button>
+        <div
+          id="collapseTwo2"
+          class="multi-collapse collapse"
+          data-parent="#accordionExample1"
+        >
+          <div class="card-body">
+            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
+          </div>
+        </div>
+      </div>
+      <div class="card fa collapsed dg_menuitem">
+        <button
+          class="btn btn-link"
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapseThree3"
+          aria-expanded="false"
+          aria-controls="collapseThree"
+          style="text-align: left; width:100%;"
+        >
+          Collapsible Group Item #3
+        </button>
+        <div
+          id="collapseThree3"
+          class="multi-collapse collapse"
+          data-parent="#accordionExample1"
+        >
+          <div class="card-body">
+            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
+            terry richardson ad squid. 3 wolf moon officia aute, non cupidatat
+            you probably haven't heard of them accusamus labore sustainable VHS.
+          </div>
         </div>
       </div>
     </div>
-    <div class="card fa collapsed dg_menuitem">
-      <button
-        class="btn btn-link"
-        type="button"
-        data-toggle="collapse"
-        data-target="#collapseTwo2"
-        aria-expanded="false"
-        aria-controls="collapseTwo"
-        style="text-align: left; width:100%;"
-        onclick="MenuAction(this)"
-      >
-        Collapsible Group Item #2
-      <div
-        id="collapseTwo2"
-        class="multi-collapse collapse"
-        data-parent="#accordionExample1"
-      >
-        <div class="card-body">
-          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-        </div>
-      </div>
-    </div>
-    <div class="card fa collapsed dg_menuitem">
-      <button
-        class="btn btn-link"
-        type="button"
-        data-toggle="collapse"
-        data-target="#collapseThree3"
-        aria-expanded="false"
-        aria-controls="collapseThree"
-        style="text-align: left; width:100%;"
-        onclick="MenuAction(this)"
-      >
-        Collapsible Group Item #3
-      <div
-        id="collapseThree3"
-        class="multi-collapse collapse"
-        data-parent="#accordionExample1"
-      >
-        <div class="card-body">
-          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-          terry richardson ad squid. 3 wolf moon officia aute, non cupidatat you
-          probably haven't heard of them accusamus labore sustainable VHS.
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="accordion" id="accordionExample2">
-   
-    <button
-      class="dg_allitems"
-      id="menuActionButton2"
-      onclick="AllMenuItemsAction(this)"
-    >
-      Open All
-    </button>
-  
-    <div class="card fa collapsed dg_menuitem">
-      <button
-        class="btn btn-link"
-        type="button"
-        data-toggle="collapse"
-        data-target="#collapseOne"
-        aria-expanded="true"
-        aria-controls="collapseOne"
-        style="text-align: left; width:100%;"
-        onclick="MenuAction(this)"
-      >
-        New Collapsible Group Item #1
-      <div
-        id="collapseOne"
-        class="multi-collapse collapse"
-        data-parent="#accordionExample2"
-      >
-        <div class="card-body">
-          occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt
-          you probably haven't heard of them accusamus labore sustainable VHS.
+    <div class="accordion" id="accordionExample2">
+      <button class="dg_allitems" id="menuActionButton2">
+        Open All
+      </button>
+
+      <div class="card fa collapsed dg_menuitem">
+        <button
+          class="btn btn-link"
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapseOne"
+          aria-expanded="true"
+          aria-controls="collapseOne"
+          style="text-align: left; width:100%;"
+        >
+          New Collapsible Group Item #1
+        </button>
+        <div
+          id="collapseOne"
+          class="multi-collapse collapse"
+          data-parent="#accordionExample2"
+        >
+          <div class="card-body">
+            occaecat craft beer farm-to-table, raw denim aesthetic synth
+            nesciunt you probably haven't heard of them accusamus labore
+            sustainable VHS.
+          </div>
+        </div>
+      </div>
+      <div class="card fa collapsed dg_menuitem">
+        <button
+          class="btn btn-link"
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapseTwo"
+          aria-expanded="false"
+          aria-controls="collapseTwo"
+          style="text-align: left; width:100%;"
+        >
+          New Collapsible Group Item #2
+        </button>
+        <div
+          id="collapseTwo"
+          class="multi-collapse collapse"
+          data-parent="#accordionExample2"
+        >
+          <div class="card-body">
+            <a href="https://www.w3schools.com">This is a link </a>
+          </div>
+        </div>
+      </div>
+      <div class="card fa collapsed dg_menuitem">
+        <button
+          class="btn btn-link"
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapseThree"
+          aria-expanded="false"
+          aria-controls="collapseThree"
+          style="text-align: left; width:100%;"
+        >
+          New Collapsible Group Item #3
+        </button>
+        <div
+          id="collapseThree"
+          class="multi-collapse collapse"
+          data-parent="#accordionExample2"
+        >
+          <div class="card-body">
+            <img
+              width="300"
+              height="200"
+              alt="Stuff goes here"
+              src="//baltimorecountymd.gov/sebin/t/t/homepage-county-executive.jpg"
+              border="0"
+              vspace="0"
+              hspace="0"
+            />
+          </div>
         </div>
       </div>
     </div>
-    <div class="card fa collapsed dg_menuitem">
-      <button
-        class="btn btn-link"
-        type="button"
-        data-toggle="collapse"
-        data-target="#collapseTwo"
-        aria-expanded="false"
-        aria-controls="collapseTwo"
-        style="text-align: left; width:100%;"
-        onclick="MenuAction(this)"
-      >
-        New Collapsible Group Item #2
-      <div
-        id="collapseTwo"
-        class="multi-collapse collapse"
-        data-parent="#accordionExample2"
-      >
-        <div class="card-body">
-          <a href="https://www.w3schools.com">This is a link </a>
-        </div>
-      </div>
-    </div>
-    <div class="card fa collapsed dg_menuitem">
-      <button
-        class="btn btn-link"
-        type="button"
-        data-toggle="collapse"
-        data-target="#collapseThree"
-        aria-expanded="false"
-        aria-controls="collapseThree"
-        style="text-align: left; width:100%;"
-        onclick="MenuAction(this)"
-      >
-        New Collapsible Group Item #3
-     
-      <div
-        id="collapseThree"
-        class="multi-collapse collapse"
-        data-parent="#accordionExample2"
-      >
-        <div class="card-body">
-          <img
-            width="300"
-            height="200"
-            alt="Stuff goes here"
-            src="//baltimorecountymd.gov/sebin/t/t/homepage-county-executive.jpg"
-            border="0"
-            vspace="0"
-            hspace="0"
-          />
-        </div>
-      </div>
-    </div>
-  </div>
   </body>
 </html>
-

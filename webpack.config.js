@@ -4,7 +4,8 @@ module.exports = {
   mode: "development",
   entry: {
     FollowUp: "./src/page-specific/BaltCoGo/FollowUp.js",
-    Accordion: "./src/components/Accordion.js"
+    Accordion: "./src/components/Accordion.js",
+    PolyFill: "./src/includes/Polyfill.js"
   },
   output: {
     path: path.join(__dirname, "dist"),
