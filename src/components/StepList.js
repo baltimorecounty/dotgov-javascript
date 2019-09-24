@@ -287,7 +287,7 @@ const updateSections = (stepListElm, newButtonState) => {
     );
     const detailElms = sectionElm.querySelectorAll(`.${cssClasses.details}`);
     const buttonState = newButtonState || toggleBtnElm.textContent;
-    setAriaExpanded(toggleBtnElm, isButtonStateShow(buttonState));
+    setAriaExpanded(toggleBtnElm, !isButtonStateShow(buttonState));
 
     Array.from(detailElms).forEach(elm => {
       displaySectionDetails(
