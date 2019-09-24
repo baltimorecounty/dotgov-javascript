@@ -190,8 +190,8 @@ const handleDetailsToggleButtonClick = clickEvent => {
     displaySectionDetails(detailElm, buttonState);
   });
 
+  setAriaExpanded(buttonElm, isButtonStateShow(buttonState));
   toggleDetailButtonText(buttonElm, buttonState);
-
   updateToggleAllButton(detailElms);
 };
 
@@ -219,6 +219,15 @@ const isHideAllVisible = showAllButtonElm =>
  */
 const setElementText = (elm, text) => {
   elm.textContent = text;
+};
+
+/**
+ * Set aria expanded based on isExpanded flag
+ * @param {HTMLElement} elm
+ * @param {boolean} isExpanded
+ */
+const setAriaExpanded = (elm, isExpanded) => {
+  elm.setAttribute("aria-expanded", isExpanded);
 };
 
 /**
@@ -278,6 +287,7 @@ const updateSections = (stepListElm, newButtonState) => {
     );
     const detailElms = sectionElm.querySelectorAll(`.${cssClasses.details}`);
     const buttonState = newButtonState || toggleBtnElm.textContent;
+    setAriaExpanded(toggleBtnElm, isButtonStateShow(buttonState));
 
     Array.from(detailElms).forEach(elm => {
       displaySectionDetails(
