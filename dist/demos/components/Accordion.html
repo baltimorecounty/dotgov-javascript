@@ -1,46 +1,12 @@
 <!DOCTYPE html>
 <html lang="">
-<style>
-  /* Style the buttons that are used to open and close the accordion panel */
-  .dg_menuitem {
-    background-color: #eee;
-    color: #444;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    text-align: left;
-    border: none;
-    outline: none;
-    transition: 0.4s;
-    position: relative;
-  }
-
-  button:focus {
-    color: #444;
-  }
-
-  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-  .card:hover {
-    background-color: #ccc;
-  }
-
-  .card::after {
-    position: absolute;
-    cursor: pointer;
-    content: "\f107";
-  }
-  .card.collapsed::after {
-    position: absolute;
-    cursor: pointer;
-    content: "\f105";
-  }
-</style>
-  <head>
-      <meta charset="utf-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>Accordion Demo</title>
   
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Accordion Demo</title>
+
     <!-- Bootstrap CSS -->
     <link
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -50,10 +16,46 @@
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       rel="stylesheet"
     />
+    <style>
+        /* Style the buttons that are used to open and close the accordion panel */
+        .dg_menuitem {
+          background-color: #eee;
+          color: #444;
+          cursor: pointer;
+          padding: 18px;
+          width: 100%;
+          text-align: left;
+          border: none;
+          outline: none;
+          transition: 0.4s;
+          position: relative;
+        }
+    
+        button:focus {
+          color: #444;
+        }
+    
+        /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+        .card:hover {
+          background-color: #ccc;
+        }
+    
+        .card::after {
+          position: absolute;
+          cursor: pointer;
+          content: "\f107";
+        }
+        .card.collapsed::after {
+          position: absolute;
+          cursor: pointer;
+          content: "\f105";
+        }
+      </style>
+      
   </head>
-  
+  <script src="/assets/dotgov-accordion.min.js"></script>
   <body>
-  <div class="accordion allowmutlipleopen" id="accordionExample1">
+    <div class="accordion dg_allowmutlipleopen" id="accordionExample1">
     <button
       class="dg_allitems"
       id="menuActionButton1"
@@ -133,6 +135,7 @@
   </div>
 
   <div class="accordion" id="accordionExample2">
+   
     <button
       class="dg_allitems"
       id="menuActionButton2"
@@ -140,6 +143,7 @@
     >
       Open All
     </button>
+  
     <div class="card fa collapsed dg_menuitem">
       <button
         class="btn btn-link"
@@ -162,7 +166,7 @@
           you probably haven't heard of them accusamus labore sustainable VHS.
         </div>
       </div>
-      </div>
+    </div>
     <div class="card fa collapsed dg_menuitem">
       <button
         class="btn btn-link"
@@ -217,6 +221,6 @@
       </div>
     </div>
   </div>
-  <script src="/assets/dotgov-accordion.min.js"></script>
-</body>
+  </body>
 </html>
+

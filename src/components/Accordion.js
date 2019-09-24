@@ -10,11 +10,13 @@ function MenuAction(element) {
 
   for (i = 0; i < menuItems.length; i++) {
     if (menuID !== menuItems[i].id) {
-      menuItems[i].className = mainDiv.className.includes("allowmutlipleopen")
+      menuItems[i].className = mainDiv.className.prototype.includes(
+        "dg_allowmutlipleopen"
+      )
         ? menuItems[i].className
         : menuState("close");
     } else {
-      if (menuItems[i].className.includes(menuOpen)) {
+      if (menuItems[i].className.prototype.includes(menuOpen)) {
         menuItems[i].className = menuState("close");
         menuItems[i].setAttribute("aria-expanded", false);
         element.parentElement.className = "card fa collapsed dg_menuitem";
