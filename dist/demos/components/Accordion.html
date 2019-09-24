@@ -38,13 +38,18 @@
       .card:hover {
         background-color: #ccc;
       }
+      .dg_accordian-btn {
+        position: relative;
+      }
 
-      .btn::after {
+      .dg_accordian-btn::after {
         position: absolute;
         cursor: pointer;
         content: "\f107";
+        top: 0;
+        right: 0;
       }
-      .btn.collapsed::after {
+      .collapsed .dg_accordian-btn::after {
         position: absolute;
         cursor: pointer;
         content: "\f105";
@@ -60,7 +65,7 @@
       </button>
       <div class="card fa collapsed dg_menuitem">
         <button
-          class="btn btn-link"
+          class="dg_accordian-btn btn-link"
           type="button"
           data-toggle="collapse"
           data-target="#collapseOne1"
@@ -84,7 +89,7 @@
       </div>
       <div class="card fa collapsed dg_menuitem">
         <button
-          class="btn btn-link"
+          class="dg_accordian-btn btn-link"
           type="button"
           data-toggle="collapse"
           data-target="#collapseTwo2"
@@ -106,7 +111,7 @@
       </div>
       <div class="card fa collapsed dg_menuitem">
         <button
-          class="btn btn-link"
+          class="dg_accordian-btn btn-link"
           type="button"
           data-toggle="collapse"
           data-target="#collapseThree3"
@@ -137,7 +142,7 @@
 
       <div class="card fa collapsed dg_menuitem">
         <button
-          class="btn btn-link"
+          class="dg_accordian-btn btn-link"
           type="button"
           data-toggle="collapse"
           data-target="#collapseOne"
@@ -161,7 +166,7 @@
       </div>
       <div class="card fa collapsed dg_menuitem">
         <button
-          class="btn btn-link"
+          class="dg_accordian-btn btn-link"
           type="button"
           data-toggle="collapse"
           data-target="#collapseTwo"
@@ -183,7 +188,7 @@
       </div>
       <div class="card fa collapsed dg_menuitem">
         <button
-          class="btn btn-link"
+          class="dg_accordian-btn btn-link"
           type="button"
           data-toggle="collapse"
           data-target="#collapseThree"
