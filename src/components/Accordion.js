@@ -1,21 +1,8 @@
+import "../polyfills/includes.polyfill";
+
 const menuOpen = "collapse show";
 const buttonOpenAll = "Open All";
 const buttonCloseAll = "Close All";
-
-if (!String.prototype.includes) {
-  String.prototype.includes = function(search, start) {
-    "use strict";
-    if (typeof start !== "number") {
-      start = 0;
-    }
-
-    if (start + search.length > this.length) {
-      return false;
-    } else {
-      return this.indexOf(search, start) !== -1;
-    }
-  };
-}
 
 document.addEventListener(
   "click",
@@ -39,7 +26,7 @@ function MenuAction(element) {
   var childDiv = element.nextElementSibling;
   var menuID = childDiv.id;
 
-  for (i = 0; i < menuItems.length; i++) {
+  for (var i = 0; i < menuItems.length; i++) {
     if (menuID !== menuItems[i].id) {
       menuItems[i].className = mainDiv.className.includes(
         "dg_allowmutlipleopen"
@@ -71,7 +58,7 @@ function AllMenuItemsAction(button) {
     button.innerHTML = buttonOpenAll;
   }
 
-  for (i = 0; i < menuItems.length; i++) {
+  for (var i = 0; i < menuItems.length; i++) {
     if (status == "Open All") {
       menuItems[i].className = menuState("open");
       menuItems[i].setAttribute("aria-expanded", true);
