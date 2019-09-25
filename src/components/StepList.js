@@ -113,7 +113,8 @@ const states = {
   hide: "Hide",
   hideAll: "Hide All",
   show: "Show",
-  showAll: "Show All"
+  showAll: "Show All",
+  static: "static"
 };
 
 const cssClasses = {
@@ -193,6 +194,22 @@ const handleDetailsToggleButtonClick = clickEvent => {
   setAriaExpanded(buttonElm, isButtonStateShow(buttonState));
   toggleDetailButtonText(buttonElm, buttonState);
   updateToggleAllButton(detailElms);
+};
+
+const handleDocumentClick = clickEvent => {
+  const { target } = clickEvent;
+  // If the clicked element doesn't have the right selector, bail
+  const isDetailsToggleClick =
+    target.parentElement.classList.contains(cssClasses.detailsToggleButton) ||
+    target.classList.contains(cssClasses.detailsToggleButton);
+
+  if (isDetailsToggleClick) {
+    handleDetailsToggleButtonClick(clickEvent);
+  } else if (target.classList.contains(cssClasses.showAllStepsButton)) {
+    handleAllStepButtonClick(clickEvent);
+  } else {
+    return;
+  }
 };
 
 /**
@@ -340,6 +357,18 @@ const onDocumentReady = () => {
 
   // Check the state of each accordion
   Array.from(stepListElms).forEach(stepListElm => {
+    const isDefaultStateStatic = stepListElm.classList.contains(states.static);
+
+    if (isDefaultStateStatic) {
+      return;
+    }
+
+    /**
+     * Ensure we capture all events
+     * https://gomakethings.com/listening-for-click-events-with-vanilla-javascript/
+     */
+    document.addEventListener("click", handleDocumentClick, false);
+
     const isDefaultStateCollapsed = stepListElm.classList.contains(
       states.collapsed
     );
@@ -359,31 +388,5 @@ const onDocumentReady = () => {
   });
 };
 
-// Events
-
 /** Handler when the DOM is fully loaded */
 document.addEventListener("DOMContentLoaded", onDocumentReady);
-
-/**
- * Ensure we capture all events
- * https://gomakethings.com/listening-for-click-events-with-vanilla-javascript/
- */
-document.addEventListener(
-  "click",
-  clickEvent => {
-    const { target } = clickEvent;
-    // If the clicked element doesn't have the right selector, bail
-    const isDetailsToggleClick =
-      target.parentElement.classList.contains(cssClasses.detailsToggleButton) ||
-      target.classList.contains(cssClasses.detailsToggleButton);
-
-    if (isDetailsToggleClick) {
-      handleDetailsToggleButtonClick(clickEvent);
-    } else if (target.classList.contains(cssClasses.showAllStepsButton)) {
-      handleAllStepButtonClick(clickEvent);
-    } else {
-      return;
-    }
-  },
-  false
-);
