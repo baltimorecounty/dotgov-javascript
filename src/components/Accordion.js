@@ -26,7 +26,7 @@ function MenuAction(element) {
   var childDiv = element.nextElementSibling;
   var menuID = childDiv.id;
 
-  for (var i = 0; i < menuItems.length; i++) {
+  for (let i = 0; i < menuItems.length; i++) {
     if (menuID !== menuItems[i].id) {
       menuItems[i].className = mainDiv.className.includes(
         "dg_allowmutlipleopen"
@@ -58,7 +58,7 @@ function AllMenuItemsAction(button) {
     button.innerHTML = buttonOpenAll;
   }
 
-  for (var i = 0; i < menuItems.length; i++) {
+  for (let i = 0; i < menuItems.length; i++) {
     if (status == "Open All") {
       menuItems[i].className = menuState("open");
       menuItems[i].setAttribute("aria-expanded", true);
