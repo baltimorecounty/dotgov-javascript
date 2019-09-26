@@ -4,9 +4,19 @@ import {
   getAllByText,
   findAllByText
 } from "@testing-library/dom";
+import { toBeVisible } from "@testing-library/jest-dom/extend-expect";
 import { createAppContainer, resetAppContainer } from "../utilities/test.utils";
 import { default as StepListFixture } from "./StepList.fixture";
 let stepList;
+
+const triggerDomContentLoaded = () => {
+  window.document.dispatchEvent(
+    new Event("DOMContentLoaded", {
+      bubbles: true,
+      cancelable: true
+    })
+  );
+};
 
 afterEach(() => {
   /** Reset document.body */
@@ -18,34 +28,18 @@ afterEach(() => {
 beforeEach(() => {
   createAppContainer(document, StepListFixture);
   stepList = require("./StepList");
+  triggerDomContentLoaded();
 });
 
 test("should show details when an section toggle button is selected", async () => {
-  const stepListContainer = document.getElementsByClassName("dg_step-list")[0];
-  const showButtons = await findAllByText(stepListContainer, "Show");
-  const firstSectionToggleButton = showButtons[0];
-  const firstSection = firstSectionToggleButton.closest("li");
+  const step1Button = getByText(document, /Step 1:/i);
 
-  firstSectionToggleButton.click();
+  step1Button.click();
 
-  const details = firstSection.querySelectorAll(".dg_step-list__details")[0];
-  const isDetailsSectionVisible = details.style.display === "block";
+  const detailsTest = getByText(
+    document,
+    /Step 1 details/i
+  ); /** contents of the step 1 details panel */
 
-  expect(isDetailsSectionVisible).toEqual(true);
-  expect(firstSectionToggleButton.textContent).toEqual("Hide");
-});
-
-test("should show all details when the 'Show All' button is selected", async () => {
-  const stepListContainer = document.getElementsByClassName("dg_step-list")[0];
-  const showAllButton = getByText(stepListContainer, "Show All");
-
-  console.log(showAllButton.textContent);
-
-  showAllButton.click();
-
-  //   const hideButtons = await findAllByText(stepListContainer, "Hide");
-
-  //   console.log(document.body.innerHTML);
-
-  //   expect(hideButtons.length).toEqual(14);
+  expect(detailsTest).toBeVisible();
 });
