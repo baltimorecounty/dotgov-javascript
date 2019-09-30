@@ -9,9 +9,9 @@ document.addEventListener(
   onDocumentClick => {
     const { target } = onDocumentClick;
 
-    if (target && target.className === "dg_allitems") {
+    if (target.className.includes("dg_allitems")) {
       allMenuItemsAction(target);
-    } else if (target) {
+    } else if (target.className.includes("dg_accordian-btn")) {
       menuAction(target);
     } else {
       return;
@@ -41,7 +41,7 @@ const menuAction = element => {
             "collapsed dg_menuitem"))
         : ((menuItem.className = menuState("open")),
           menuItem.setAttribute("aria-expanded", true),
-          (menuItem.closest(".collapsed").className = "dg_menuitem"));
+          (menuItem.closest(".dg_menuitem").className = "dg_menuitem"));
     }
   }
 };
@@ -61,7 +61,7 @@ const allMenuItemsAction = button => {
     status.toLowerCase() === "open all"
       ? ((menuItem.className = menuState("open")),
         menuItem.setAttribute("aria-expanded", true),
-        (menuItem.closest(".collapsed").className = "dg_menuitem"))
+        (menuItem.closest(".dg_menuitem").className = "dg_menuitem"))
       : ((menuItem.className = menuState("close")),
         menuItem.setAttribute("aria-expanded", false),
         (menuItem.closest(".dg_menuitem").className = "collapsed dg_menuitem"));
