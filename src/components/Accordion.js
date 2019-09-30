@@ -4,13 +4,13 @@ const menuOpen = "collapse show";
 const buttonOpenAll = "Open All";
 const buttonCloseAll = "Close All";
 
-const onDocumentClick = document.addEventListener(
+document.addEventListener(
   "click",
-  clickEvent => {
-    const { target } = clickEvent;
+  onDocumentClick => {
+    const { target } = onDocumentClick;
 
     if (target && target.className === "dg_allitems") {
-      AllMenuItemsAction(target);
+      allMenuItemsAction(target);
     } else if (target) {
       menuAction(target);
     } else {
@@ -47,15 +47,15 @@ const menuAction = element => {
   }
 };
 
-const AllMenuItemsAction = button => {
-  var status = button.innerHTML.trim();
+const allMenuItemsAction = button => {
+  var status = button.textContent.trim();
   var body = button.parentElement;
   var menuItems = body.getElementsByClassName("multi-collapse");
 
-  if (button.innerHTML.trim() === buttonOpenAll) {
-    button.innerHTML = buttonCloseAll;
+  if (button.textContent.trim() === buttonOpenAll) {
+    button.textContent = buttonCloseAll;
   } else {
-    button.innerHTML = buttonOpenAll;
+    button.textContent = buttonOpenAll;
   }
 
   for (let i = 0; i < menuItems.length; i++) {
@@ -73,10 +73,10 @@ const AllMenuItemsAction = button => {
   }
 };
 
-function menuState(state) {
+const menuState = state => {
   if (state === "open") {
     return "multi-collapse collapse show";
   } else {
     return "multi-collapse collapse";
   }
-}
+};
