@@ -18,11 +18,82 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+      header {
+        background: #e0e0e0;
+        border-bottom: 5px solid navy;
+      }
+
+      .hidden-init {
+        display: none;
+      }
+
+      #bc_site-nav__links {
+        color: white;
+        width: 265px;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        overflow-y: auto;
+        background-color: #091f2f;
+        transition: opacity 0.5s;
+      }
+
+      #bc_site-nav__links.hidden {
+        position: fixed;
+        opacity: 0;
+        z-index: -1;
+      }
+
+      #bc_site-header {
+        position: relative;
+        left: 0;
+        transition: left 0.2s;
+      }
+
+      #bc_site-header.active {
+        left: 265px;
+        top: 0;
+      }
+
+      #bc_site-header.active #bc_site-nav__links {
+        opacity: 1;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        transition: opacity 0s;
+      }
+
+      #bc_page {
+        background: yellow;
+        position: relative;
+        left: 0;
+        min-height: 100%;
+        min-width: 100%;
+        transition: left 0.2s;
+      }
+
+      #bc_page.active {
+        overflow-y: hidden;
+        left: 265px;
+      }
+
+      /* DEMO ONLY*/
+      body {
+        padding: 0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+    </style>
   </head>
   <body>
     <header id="bc_site-header">
       <nav id="bc_site-nav" role="navigation">
-        <button id="bc_hambuger-btn" class="hidden-init" aria-expanded="false">
+        <button
+          id="bc_site-nav__toggle-btn"
+          class="hidden-init"
+          aria-expanded="false"
+        >
           <span class="sr-only">Show </span> Menu
         </button>
         <ol id="bc_site-nav__links">
@@ -32,7 +103,7 @@
         </ol>
       </nav>
     </header>
-    <div id="main-content">
+    <div id="bc_page">
       <div class="anyipsum-output">
         <p>
           Bacon ipsum dolor amet shoulder sirloin pork swine biltong, jerky

@@ -13,7 +13,8 @@ const ids = {
 
 const cssClasses = {
   active: "active",
-  hidden: "hidden"
+  hidden: "hidden",
+  hiddenInit: "hidden-init"
 };
 
 const handleDocumentClick = clickEvent => {
@@ -38,8 +39,27 @@ const handleSiteNavigationButtonClick = clickEvent => {
   toggleNavigationButton(target);
 };
 
+/**
+ *
+ */
+const onDocumentReady = () => {
+  // Allows users to use the menu even if javascript is not enabled
+  document
+    .getElementById(ids.siteNavBtn)
+    .classList.remove(cssClasses.hiddenInit);
+
+  const siteNav = document.getElementById(ids.siteNavLinks);
+
+  siteNav.classList.add(cssClasses.hidden);
+  SetAttribute(siteNav.querySelectorAll("a"), "tabindex", "-1");
+};
+
+/**
+ *
+ * @param {*} navButtonElm
+ */
 const toggleNavigationButton = navButtonElm => {
-  const willCollapse = !!btn.getAttribute("aria-expanded");
+  const willCollapse = !!navButtonElm.getAttribute("aria-expanded");
   const siteNavLinkElms = document.querySelectorAll(`#${ids.siteNavLinks} a`);
 
   if (willCollapse) {
@@ -51,15 +71,14 @@ const toggleNavigationButton = navButtonElm => {
   // tabindex is set to -1 when the menu is not visible
   // so the user can navigate what is visible on the screen.
   SetAttribute(siteNavLinkElms, "tabindex", willCollapse ? "-1" : "");
-  navButtonElm.setAttribute("aria-expanded", !isExpanded);
+  navButtonElm.setAttribute("aria-expanded", !willCollapse);
 };
 
-const init = (options = {}) => {
-  /**
-   * Ensure we capture all events
-   * https://gomakethings.com/listening-for-click-events-with-vanilla-javascript/
-   */
-  document.addEventListener("click", handleDocumentClick, false);
-};
+/** Handler when the DOM is fully loaded */
+document.addEventListener("DOMContentLoaded", onDocumentReady);
 
-// TODO: Add document.ready
+/**
+ * Ensure we capture all events
+ * https://gomakethings.com/listening-for-click-events-with-vanilla-javascript/
+ */
+document.addEventListener("click", handleDocumentClick, false);
