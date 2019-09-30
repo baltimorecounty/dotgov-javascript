@@ -4,7 +4,7 @@ const menuOpen = "collapse show";
 const buttonOpenAll = "Open All";
 const buttonCloseAll = "Close All";
 
-document.addEventListener(
+const onDocumentClick = document.addEventListener(
   "click",
   clickEvent => {
     const { target } = clickEvent;
@@ -12,7 +12,7 @@ document.addEventListener(
     if (target && target.className === "dg_allitems") {
       AllMenuItemsAction(target);
     } else if (target) {
-      MenuAction(target);
+      menuAction(target);
     } else {
       return;
     }
@@ -20,34 +20,34 @@ document.addEventListener(
   false
 );
 
-function MenuAction(element) {
+const menuAction = element => {
   var mainDiv = element.parentElement.parentElement;
   var menuItems = mainDiv.getElementsByClassName("multi-collapse");
   var childDiv = element.nextElementSibling;
   var menuID = childDiv.id;
 
   for (let i = 0; i < menuItems.length; i++) {
+    var menuItem = menuItems[i];
+
     if (menuID !== menuItems[i].id) {
-      menuItems[i].className = mainDiv.className.includes(
-        "dg_allowmutlipleopen"
-      )
-        ? menuItems[i].className
+      menuItem.className = mainDiv.className.includes("dg_allowmutlipleopen")
+        ? menuItem.className
         : menuState("close");
     } else {
-      if (menuItems[i].className.includes(menuOpen)) {
-        menuItems[i].className = menuState("close");
-        menuItems[i].setAttribute("aria-expanded", false);
-        element.parentElement.className = "card fa collapsed dg_menuitem";
+      if (menuItem.className.includes(menuOpen)) {
+        menuItem.className = menuState("close");
+        menuItem.setAttribute("aria-expanded", false);
+        element.parentElement.className = "collapsed dg_menuitem";
       } else {
-        menuItems[i].className = menuState("open");
-        menuItems[i].setAttribute("aria-expanded", true);
-        element.parentElement.className = "card fa dg_menuitem";
+        menuItem.className = menuState("open");
+        menuItem.setAttribute("aria-expanded", true);
+        element.parentElement.className = "dg_menuitem";
       }
     }
   }
-}
+};
 
-function AllMenuItemsAction(button) {
+const AllMenuItemsAction = button => {
   var status = button.innerHTML.trim();
   var body = button.parentElement;
   var menuItems = body.getElementsByClassName("multi-collapse");
@@ -59,17 +59,19 @@ function AllMenuItemsAction(button) {
   }
 
   for (let i = 0; i < menuItems.length; i++) {
+    var menuItem = menuItems[i];
+
     if (status == "Open All") {
-      menuItems[i].className = menuState("open");
-      menuItems[i].setAttribute("aria-expanded", true);
-      menuItems[i].parentElement.className = "card fa dg_menuitem";
+      menuItem.className = menuState("open");
+      menuItem.setAttribute("aria-expanded", true);
+      menuItem.parentElement.className = "dg_menuitem";
     } else {
-      menuItems[i].className = menuState("close");
-      menuItems[i].setAttribute("aria-expanded", false);
-      menuItems[i].parentElement.className = "card fa collapsed dg_menuitem";
+      menuItem.className = menuState("close");
+      menuItem.setAttribute("aria-expanded", false);
+      menuItem.parentElement.className = "collapsed dg_menuitem";
     }
   }
-}
+};
 
 function menuState(state) {
   if (state === "open") {
