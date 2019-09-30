@@ -61,7 +61,7 @@ const allMenuItemsAction = button => {
   for (let i = 0; i < menuItems.length; i++) {
     var menuItem = menuItems[i];
 
-    if (status == "Open All") {
+    if (status.toLowerCase() == "open all") {
       menuItem.className = menuState("open");
       menuItem.setAttribute("aria-expanded", true);
       menuItem.closest(".collapsed").className = "dg_menuitem";
@@ -74,7 +74,7 @@ const allMenuItemsAction = button => {
 };
 
 const menuState = state => {
-  if (state === "open") {
+  if (state.toLowerCase() === "open") {
     return "multi-collapse collapse show";
   } else {
     return "multi-collapse collapse";
