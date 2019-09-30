@@ -3,7 +3,8 @@ const path = require("path");
 module.exports = {
   mode: "development",
   entry: {
-    FollowUp: "./src/page-specific/BaltCoGo/FollowUp.js"
+    FollowUp: "./src/page-specific/BaltCoGo/FollowUp.js",
+    SiteNavigation: "./src/site/SiteNavigation.js"
   },
   output: {
     path: path.join(__dirname, "dist"),
