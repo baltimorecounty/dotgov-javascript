@@ -13,13 +13,15 @@ const ids = {
 
 const cssClasses = {
   active: "active",
+  disabled: "disabled",
   hidden: "hidden",
   hiddenInit: "hidden-init"
 };
 
 const handleDocumentClick = clickEvent => {
   const { target } = clickEvent;
-  const isSiteNavButtonClick = target.id === ids.siteNavBtn;
+  const isSiteNavButtonClick =
+    target.id === ids.siteNavBtn || target.closest(`${ids.siteNavBtn}`);
 
   if (isSiteNavButtonClick) {
     handleSiteNavigationButtonClick(clickEvent);
@@ -60,17 +62,21 @@ const onDocumentReady = () => {
  */
 const toggleNavigationButton = navButtonElm => {
   const willCollapse = !!navButtonElm.getAttribute("aria-expanded");
-  const siteNavLinkElms = document.querySelectorAll(`#${ids.siteNavLinks} a`);
+  const siteNavLinksElm = document.getElementById(`${ids.siteNavLinks}`);
+  const body = document.getElementsByTagName("body")[0];
 
-  if (willCollapse) {
-    AddClass(siteNavLinkElms, cssClasses.hidden);
-  } else {
-    RemoveClass(siteNavLinkElms, cssClasses.hidden);
-  }
+  siteNavLinksElm.classList[willCollapse ? "remove" : "add"](cssClasses.hidden);
 
   // tabindex is set to -1 when the menu is not visible
   // so the user can navigate what is visible on the screen.
-  SetAttribute(siteNavLinkElms, "tabindex", willCollapse ? "-1" : "");
+  SetAttribute(
+    siteNavLinksElm.querySelectorAll("a"),
+    "tabindex",
+    willCollapse ? "" : "-1"
+  );
+
+  body.classList.toggle(cssClasses.disabled);
+
   navButtonElm.setAttribute("aria-expanded", !willCollapse);
 };
 
