@@ -21,7 +21,7 @@ document.addEventListener(
 );
 
 const menuAction = element => {
-  var mainDiv = element.parentElement.parentElement;
+  var mainDiv = element.closest(".dg_accordion");
   var menuItems = mainDiv.getElementsByClassName("multi-collapse");
   var childDiv = element.nextElementSibling;
   var menuID = childDiv.id;
@@ -37,11 +37,11 @@ const menuAction = element => {
       if (menuItem.className.includes(menuOpen)) {
         menuItem.className = menuState("close");
         menuItem.setAttribute("aria-expanded", false);
-        element.parentElement.className = "collapsed dg_menuitem";
+        menuItem.closest(".dg_menuitem").className = "collapsed dg_menuitem";
       } else {
         menuItem.className = menuState("open");
         menuItem.setAttribute("aria-expanded", true);
-        element.parentElement.className = "dg_menuitem";
+        menuItem.closest(".collapsed").className = "dg_menuitem";
       }
     }
   }
@@ -49,7 +49,7 @@ const menuAction = element => {
 
 const allMenuItemsAction = button => {
   var status = button.textContent.trim();
-  var body = button.parentElement;
+  var body = button.closest(".dg_accordion");
   var menuItems = body.getElementsByClassName("multi-collapse");
 
   if (button.textContent.trim() === buttonOpenAll) {
@@ -64,11 +64,11 @@ const allMenuItemsAction = button => {
     if (status == "Open All") {
       menuItem.className = menuState("open");
       menuItem.setAttribute("aria-expanded", true);
-      menuItem.parentElement.className = "dg_menuitem";
+      menuItem.closest(".collapsed").className = "dg_menuitem";
     } else {
       menuItem.className = menuState("close");
       menuItem.setAttribute("aria-expanded", false);
-      menuItem.parentElement.className = "collapsed dg_menuitem";
+      menuItem.closest(".dg_menuitem").className = "collapsed dg_menuitem";
     }
   }
 };
