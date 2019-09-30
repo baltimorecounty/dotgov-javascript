@@ -2,11 +2,11 @@ import {
   getByText,
   wait,
   getAllByText,
-  findAllByText
+  queryAllByText
 } from "@testing-library/dom";
-import { toBeVisible } from "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom/extend-expect";
 import { createAppContainer, resetAppContainer } from "../utilities/test.utils";
-import { default as StepListFixture } from "./StepList.fixture";
+import { default as GetStepListFixture } from "./StepList.fixture";
 let stepList;
 
 const triggerDomContentLoaded = () => {
@@ -25,13 +25,36 @@ afterEach(() => {
   jest.resetModules();
 });
 
-beforeEach(() => {
-  createAppContainer(document, StepListFixture);
-  stepList = require("./StepList");
-  triggerDomContentLoaded();
+beforeEach(() => {});
+
+describe("step list - page load", () => {
+  test("displays a static on page load", () => {
+    createAppContainer(document, GetStepListFixture("static"));
+    stepList = require("./StepList");
+    triggerDomContentLoaded();
+
+    const stepButtons = getAllByText(document, /Step [0-9]:/i);
+
+    console.log(stepButtons);
+
+    const showAllButton = getByText(document, /show all/i);
+    expect(showAllButton).not.toBeVisible();
+  });
+
+  //   test("displays a step list with all items collapsed on page load by default", () => {
+  //     createAppContainer(document, GetStepListFixture("collapsed"));
+  //     stepList = require("./StepList");
+  //     triggerDomContentLoaded();
+
+  //     const showAllButton = getByText(document, /show all/i);
+
+  //     expect(showAllButton).not.toBeVisible();
+  //   });
+  // test("displays a step list with all items expanded on page load by default");
 });
 
 test("should show details when an section toggle button is selected", async () => {
+  createAppContainer(document, GetStepListFixture("collapsed"));
   const step1Button = getByText(document, /Step 1:/i);
 
   step1Button.click();

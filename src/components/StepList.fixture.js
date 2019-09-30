@@ -1,5 +1,107 @@
-export default `
-    <div class="dg_step-list collapsed">
+export default (type = null) => `
+<style>
+      .dg_step-list.static .dg_step-list__toggle-btn {
+        cursor: default;
+      }
+      .dg_step-list.static .dg_step-list__toggle-btn__btn-text,
+      .dg_step-list.static .dg_step-list__show-all-btn {
+        display: none;
+      }
+
+      .dg_step-list__list {
+        counter-reset: my-awesome-counter;
+        list-style: none;
+        padding-left: 60px;
+      }
+
+      .dg_step-list__list > li {
+        border-bottom: 1px solid #e0e0e0;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        counter-increment: my-awesome-counter;
+        position: relative;
+      }
+
+      .dg_step-list__list > li:first-child {
+        border-top: 1px solid #e0e0e0;
+        padding-top: 15px;
+      }
+
+      .dg_step-list__list > li::before {
+        background: white;
+        border: 2px solid black;
+        content: counter(my-awesome-counter);
+        font-weight: bold;
+        font-size: 20px;
+        position: absolute;
+        top: -5px;
+        bottom: 0;
+        left: -60px;
+        height: 40px;
+        width: 40px;
+        line-height: 38px; /* Offset by the border width */
+        border-radius: 50%;
+        text-align: center;
+      }
+
+      .dg_step-list__list > li::after {
+        content: "";
+        position: absolute;
+        z-index: -2;
+        width: 0;
+        height: 100%;
+        border-left: 2px solid #e0e0e0;
+        background: white;
+        left: -41px; /* I think this offset is being caused by the border width */
+        top: 30px;
+      }
+
+      .dg_step-list__list > li:last-child::after {
+        border: none;
+      }
+
+      .dg_step-list__list > li:first-child::before {
+        top: 15px;
+      }
+
+      .dg_step-list__toggle-btn,
+      .dg_step-list__toggle-btn__title {
+        display: inline-block;
+      }
+
+      .dg_step-list__toggle-btn {
+        background: none;
+        border: none;
+        padding: 0;
+        text-align: left;
+      }
+
+      .dg_step-list__toggle-btn__title {
+        font-size: 24px;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .dg_step-list__toggle-btn__btn-text {
+        color: #002280;
+        display: block;
+        font-size: 16px;
+      }
+
+      .dg_step-list__toggle-btn__btn-text:hover {
+        color: #1076bc;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .dg_step-list__show-all-btn {
+        margin-bottom: 15px;
+      }
+
+      .dg_step-list__details {
+        margin-top: 15px;
+      }
+    </style>
+    <div class="dg_step-list ${type}">
     <button class="dg_step-list__show-all-btn">Show All</button>
     <ol class="dg_step-list__list">
         <li class="dg_step-list__list-section" id="registration-step-1">
