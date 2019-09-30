@@ -34,15 +34,14 @@ const menuAction = element => {
         ? menuItem.className
         : menuState("close");
     } else {
-      if (menuItem.className.includes(menuOpen)) {
-        menuItem.className = menuState("close");
-        menuItem.setAttribute("aria-expanded", false);
-        menuItem.closest(".dg_menuitem").className = "collapsed dg_menuitem";
-      } else {
-        menuItem.className = menuState("open");
-        menuItem.setAttribute("aria-expanded", true);
-        menuItem.closest(".collapsed").className = "dg_menuitem";
-      }
+      menuItem.className.includes(menuOpen)
+        ? ((menuItem.className = menuState("close")),
+          menuItem.setAttribute("aria-expanded", false),
+          (menuItem.closest(".dg_menuitem").className =
+            "collapsed dg_menuitem"))
+        : ((menuItem.className = menuState("open")),
+          menuItem.setAttribute("aria-expanded", true),
+          (menuItem.closest(".collapsed").className = "dg_menuitem"));
     }
   }
 };
@@ -52,31 +51,25 @@ const allMenuItemsAction = button => {
   var body = button.closest(".dg_accordion");
   var menuItems = body.getElementsByClassName("multi-collapse");
 
-  if (button.textContent.trim() === buttonOpenAll) {
-    button.textContent = buttonCloseAll;
-  } else {
-    button.textContent = buttonOpenAll;
-  }
+  button.textContent.trim() === buttonOpenAll
+    ? (button.textContent = buttonCloseAll)
+    : (button.textContent = buttonOpenAll);
 
   for (let i = 0; i < menuItems.length; i++) {
     var menuItem = menuItems[i];
 
-    if (status.toLowerCase() == "open all") {
-      menuItem.className = menuState("open");
-      menuItem.setAttribute("aria-expanded", true);
-      menuItem.closest(".collapsed").className = "dg_menuitem";
-    } else {
-      menuItem.className = menuState("close");
-      menuItem.setAttribute("aria-expanded", false);
-      menuItem.closest(".dg_menuitem").className = "collapsed dg_menuitem";
-    }
+    status.toLowerCase() === "open all"
+      ? ((menuItem.className = menuState("open")),
+        menuItem.setAttribute("aria-expanded", true),
+        (menuItem.closest(".collapsed").className = "dg_menuitem"))
+      : ((menuItem.className = menuState("close")),
+        menuItem.setAttribute("aria-expanded", false),
+        (menuItem.closest(".dg_menuitem").className = "collapsed dg_menuitem"));
   }
 };
 
 const menuState = state => {
-  if (state.toLowerCase() === "open") {
-    return "multi-collapse collapse show";
-  } else {
-    return "multi-collapse collapse";
-  }
+  return state.toLowerCase() === "open"
+    ? "multi-collapse collapse show"
+    : "multi-collapse collapse";
 };
