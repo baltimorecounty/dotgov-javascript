@@ -12,268 +12,170 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link rel="stylesheet" href="//www.baltimorecountymd.gov/sebin/j/d/dotgov.min.css" >
     <style>
-      header {
-        background: #e0e0e0;
-        border-bottom: 5px solid navy;
-      }
+        .dg_site-header.active {
+            overflow-x:hidden;
+        }
 
-      .hidden-init {
-        display: none;
-      }
+        #bc_site-nav {
+            transition: left .3s;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: -400px;
+            height: 0;
+            z-index: 9999;
+            width: 400px;
+        }
 
-      #bc_site-nav__links {
-        color: white;
-        width: 265px;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        overflow-y: auto;
-        background-color: #091f2f;
-        transition: opacity 0.5s;
-        margin: 0;
-        z-index: 99;
-      }
+        .dg_site-header.active #bc_site-nav {
+            position: fixed;
+            left: 0px;
+        }
 
-      #bc_site-nav__links.hidden {
-        position: absolute;
-        opacity: 0;
-        z-index: -1;
-      }
+        #bc_nav-list {
+            border-top: 10px solid #c51110;
+            position: fixed;
+            transition: left .3s;
+            padding: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+            color: white;
+            background: #353535;
+            width: 400px;
 
-      #bc_site-header {
-        left: 0;
-        transition: left 0.2s;
-      }
+            /* reset list styles */
+            list-style-type: none;
+            margin: 0;
+            top: 0;
+            bottom: 0;
+            min-height: 100%;
+        }
 
-      #bc_site-header.active {
-        left: 265px;
-        top: 0;
-      }
+        #bc_nav-list a {
+            display: flex;
+            background: #2d2d2d;
+            color: #f7f7f7;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            border: 1px solid #feb30c;
+            text-transform: uppercase;
+            padding: 30px 15px;
+            margin-bottom: 15px;
+            text-decoration: none;
+        }
 
-      #bc_site-header.active #bc_site-nav__links {
-        opacity: 1;
-        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-        transition: opacity 0s;
-        overflow-y: scroll;
-      }
+        .dg_site-header.active #bc_nav-list {
+            /* left: 0; */
+        }
 
-      #bc_site-nav__toggle-btn {
-        padding: 20px; /* testing only */
-        position: relative;
-        z-index: 3;
-      }
+        #bc_toggle-nav-btn {
+            transition: left .3s;
+            background: gold;
+            position: absolute;
+            left: 0px;
+            z-index: 99;
+            top: 10px;
+            padding: 12px 20px; /* top and bottom are a hack to get this to the right height */
+            width: 82px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            text-transform: uppercase;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 700;
+            font-family: Arial, Helvetica, sans-serif;
+        }
 
-      #bc_page {
-        background: yellow;
-        position: relative;
-        left: 0;
-        min-height: 100%;
-        min-width: 100%;
-        transition: left 0.2s;
-      }
+        #bc_toggle-nav-btn i {
+            display: block;
+            font-size: 35px;
+            margin-bottom: 2.5px;
+        }
 
-      #bc_page.active {
-        position: fixed;
-        overflow: hidden;
-        left: 265px;
-        top: 0;
-      }
+        .dg_site-header.active #bc_toggle-nav-btn {
+            position: fixed;
+            z-index: 9999999;
+            left: 400px;
+        }
 
-      .sr-only {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        border: 0;
-      }
+        /* */
+        #fake-menu-button {
+            background: gray;
+            transition: width .3s;
+            width: 82px;
+            left: 0;
+        }
 
-      /* DEMO ONLY*/
-      body {
-        padding: 0;
-        margin: 0;
-      }
+        .dg_site-header.active #fake-menu-button {
+            width: 482px; /* Nav width + hamburger button width */
+        }
 
-      .dg_overlay {
-        display: none;
-        position: fixed; /* Sit on top of the page content */
-        display: none; /* Hidden by default */
-        width: 100%; /* Full width (cover the whole page) */
-        height: 100%; /* Full height (cover the whole page) */
-        top: 0;
-        left: 265px;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(
-          0,
-          0,
-          0,
-          0.5
-        ); /* Black background with opacity */
-        z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
-        cursor: pointer; /* Add a pointer on hover */
-      }
+        /* Page */
+        #bc_page {
+            transition: left .3s;
+            position: relative;
+            left: 0;
+        }
 
-      body.disabled {
-        position: relative;
-        overflow: hidden;
-      }
+        #bc_page.disabled {
+            overflow-x: hidden;
+            left: 400px;
+        }
 
-      body.disabled .dg_overlay {
-        display: block;
-        transition: opacity 0s;
-      }
+        body.disabled:after {
+            content: '';
+            position: absolute; /* Sit on top of the page content */
+            display: block; /* Hidden by default */
+            width: 100%; /* Full width (cover the whole page) */
+            height: 100%; /* Full height (cover the whole page) */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+            z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+            cursor: pointer; /* Add a pointer on hover */
+            z-index: 99;
+        }
 
-      * {
-        box-sizing: border-box;
-      }
+        #search-form {
+            transition: margin .3s;
+        }
+
+        .dg_site-header.active #search-form {
+            margin-right: -400px;
+        }
+
     </style>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="//kit.fontawesome.com/2475edd293.js"></script>
   </head>
   <body>
-    <header id="bc_site-header">
-      <nav id="bc_site-nav" role="navigation">
-        <button
-          id="bc_site-nav__toggle-btn"
-          class="hidden-init"
-          aria-expanded="false"
-        >
-          <span class="sr-only">Show </span> Menu
-        </button>
-        <ol id="bc_site-nav__links">
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-          <li><a href="#">Item 1</a></li>
-          <li><a href="#">Item 2</a></li>
-          <li><a href="#">Item 3</a></li>
-        </ol>
-      </nav>
-    </header>
+    <header class="dg_header dg_site-header">
+            <nav id="bc_site-nav">
+                <button id="bc_toggle-nav-btn"><i class="fas fa-bars"></i><span class="sr-only">Show </span>Menu</button>
+                <ul id="bc_nav-list">
+                <li><a href="#">Item 1</a></li>
+                <li><a href="#">Item 1</a></li>
+                <li><a href="#">Item 1</a></li>
+                <li><a href="#">Item 1</a></li>
+                <li><a href="#">Item 1</a></li>
+            </nav>
+
+            <div class="dg_brand">
+                <div id="fake-menu-button"></div>
+                <a href="/" title="View the Baltimore County Government homepage.">
+                <div class="dg_brand-text"><span>Baltimore County</span><span>Government</span></div>
+                </a>
+                <p class="dg_status-text">Beta</p>
+            </div>
+            <form class="dg_search-container" id="search-form"><label for="main-search" class="visuallyhidden">Search:</label><input class="dg_search-input" id="main-search" type="text" placeholder="Search for services and more..." autocomplete="off"><button class="dg_search-btn" type="submit"><i class="fas fa-search" aria-hidden="true"></i></button></form>
+            </header>
     <div id="bc_page">
-      <div class="anyipsum-output">
+      <div class="anyipsum-output" style="max-width: 1400px;width: 100%; margin: auto;">
         <p>
           Bacon ipsum dolor amet shoulder sirloin pork swine biltong, jerky
           boudin rump landjaeger cupim tongue. Chuck sausage beef meatball,
@@ -319,6 +221,12 @@
       </div>
     </div>
     <div class="dg_overlay"></div>
-    <script src="/assets/dotgov-siteNavigation.min.js"></script>
+    <!-- <script src="/assets/dotgov-siteNavigation.min.js"></script> -->
+    <script>
+            $(document).on('click', '#bc_toggle-nav-btn', () => {
+                $('.dg_site-header').toggleClass('active');
+                $('body, #bc_page').toggleClass('disabled');
+            });
+        </script>
   </body>
 </html>
