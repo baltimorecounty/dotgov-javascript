@@ -24,8 +24,11 @@ document.addEventListener(
 const menuAction = element => {
   var mainDiv = element.closest(".dg_accordion");
   var menuItems = mainDiv.getElementsByClassName("multi-collapse");
+  var totalCollapsed = mainDiv.getElementsByClassName("show");
   var childDiv = element.nextElementSibling;
   var menuID = childDiv.id;
+
+  var button = mainDiv.getElementsByClassName("dg_allitems");
 
   for (let i = 0; i < menuItems.length; i++) {
     var menuItem = menuItems[i];
@@ -40,6 +43,10 @@ const menuAction = element => {
     } else {
       //If its open then we want to close it and vice versa
       collpasePanelUpdate(!isMenuOpen, menuItem);
+
+      button
+        ? updateButtonStatus(button[0], menuItems.length, totalCollapsed.length)
+        : null;
     }
   }
 };
@@ -50,16 +57,14 @@ const allMenuItemsAction = button => {
 
   var body = button.closest(".dg_accordion");
   var menuItems = body.getElementsByClassName("multi-collapse");
-
-  button.textContent.trim() === buttonOpenAll
-    ? (button.textContent = buttonCloseAll)
-    : (button.textContent = buttonOpenAll);
+  var totalCollapsed = body.getElementsByClassName("show");
 
   for (let i = 0; i < menuItems.length; i++) {
     var menuItem = menuItems[i];
 
     collpasePanelUpdate(isMenuOpen, menuItem);
   }
+  updateButtonStatus(button, menuItems.length, totalCollapsed.length);
 };
 
 const collpasePanelUpdate = (isMenuOpen, menuItem) => {
@@ -76,3 +81,9 @@ const menuState = state =>
   `multi-collapse collapse ${
     state.toLowerCase() === "open" ? "show" : ""
   }`.trim();
+
+const updateButtonStatus = (button, totalCollapsibles, totalCollapsed) => {
+  totalCollapsibles === totalCollapsed
+    ? (button.textContent = buttonCloseAll)
+    : (button.textContent = buttonOpenAll);
+};
