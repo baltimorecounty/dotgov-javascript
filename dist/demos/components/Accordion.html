@@ -17,7 +17,7 @@
     />
     <style>
       /* Style the buttons that are used to open and close the accordion panel */
-      .dg_menuitem {
+      .dg_accordian__collpasible {
         background-color: #eee;
         color: #444;
         cursor: pointer;
@@ -35,7 +35,7 @@
       }
 
       /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-      .dg_menuitem:hover {
+      .dg_accordian__collpasible:hover {
         background-color: #ccc;
       }
       .dg_accordian-btn {
@@ -45,24 +45,25 @@
       .dg_accordian-btn::after {
         position: absolute;
         cursor: pointer;
-        content: "\f107";
+        content: "\f107"; /*Font awesome right arrow*/
         top: 0;
         right: 0;
       }
       .collapsed .dg_accordian-btn::after {
         position: absolute;
         cursor: pointer;
-        content: "\f105";
+        content: "\f105"; /*Font awesome down arrow*/
       }
     </style>
   </head>
+  <script></script>
   <script src="/assets/dotgov-accordion.min.js"></script>
   <body>
     <div class="dg_accordion dg_allowmutlipleopen" id="accordionExample1">
       <button class="dg_allitems" id="menuActionButton1">
         Open All
       </button>
-      <div class="collapsed dg_menuitem">
+      <div class="collapsed dg_accordian__collpasible">
         <button
           class="fa dg_accordian-btn btn-link"
           type="button"
@@ -86,7 +87,7 @@
           </div>
         </div>
       </div>
-      <div class="collapsed dg_menuitem">
+      <div class="collapsed dg_accordian__collpasible">
         <button
           class="fa dg_accordian-btn btn-link"
           type="button"
@@ -108,7 +109,7 @@
           </div>
         </div>
       </div>
-      <div class="collapsed dg_menuitem">
+      <div class="collapsed dg_accordian__collpasible">
         <button
           class="fa dg_accordian-btn btn-link"
           type="button"
@@ -138,7 +139,7 @@
       <button class="dg_allitems" id="menuActionButton2">
         Open All
       </button>
-      <div class="collapsed dg_menuitem">
+      <div class="collapsed dg_accordian__collpasible">
         <button
           class="fa dg_accordian-btn btn-link"
           type="button"
@@ -162,7 +163,7 @@
           </div>
         </div>
       </div>
-      <div class="collapsed dg_menuitem">
+      <div class="collapsed dg_accordian__collpasible">
         <button
           class="fa dg_accordian-btn btn-link"
           type="button"
@@ -184,7 +185,7 @@
           </div>
         </div>
       </div>
-      <div class="collapsed dg_menuitem">
+      <div class="collapsed dg_accordian__collpasible">
         <button
           class="fa dg_accordian-btn btn-link"
           type="button"

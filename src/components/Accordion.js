@@ -1,4 +1,5 @@
 import "../polyfills/includes.polyfill";
+import "../polyfills/closest.polyfill";
 
 const menuOpen = "collapse show";
 const buttonOpenAll = "Open All";
@@ -28,26 +29,25 @@ const menuAction = element => {
 
   for (let i = 0; i < menuItems.length; i++) {
     var menuItem = menuItems[i];
+    var isMenuOpen = menuItem.className.includes(menuOpen);
 
     if (menuID !== menuItems[i].id) {
-      menuItem.className = mainDiv.className.includes("dg_allowmutlipleopen")
+      menuItem.className = mainDiv.className.includes(
+        "dg_allowmutlipleopen" //This class determines if an accordion will allow multiple panels opened
+      )
         ? menuItem.className
         : menuState("close");
     } else {
-      menuItem.className.includes(menuOpen)
-        ? ((menuItem.className = menuState("close")),
-          menuItem.setAttribute("aria-expanded", false),
-          (menuItem.closest(".dg_menuitem").className =
-            "collapsed dg_menuitem"))
-        : ((menuItem.className = menuState("open")),
-          menuItem.setAttribute("aria-expanded", true),
-          (menuItem.closest(".dg_menuitem").className = "dg_menuitem"));
+      //If its open then we want to close it and vice versa
+      collpasePanelUpdate(!isMenuOpen, menuItem);
     }
   }
 };
 
 const allMenuItemsAction = button => {
-  var status = button.textContent.trim();
+  const isMenuOpen =
+    button.textContent.toLowerCase().trim() === "open all" ? true : false;
+
   var body = button.closest(".dg_accordion");
   var menuItems = body.getElementsByClassName("multi-collapse");
 
@@ -58,18 +58,21 @@ const allMenuItemsAction = button => {
   for (let i = 0; i < menuItems.length; i++) {
     var menuItem = menuItems[i];
 
-    status.toLowerCase() === "open all"
-      ? ((menuItem.className = menuState("open")),
-        menuItem.setAttribute("aria-expanded", true),
-        (menuItem.closest(".dg_menuitem").className = "dg_menuitem"))
-      : ((menuItem.className = menuState("close")),
-        menuItem.setAttribute("aria-expanded", false),
-        (menuItem.closest(".dg_menuitem").className = "collapsed dg_menuitem"));
+    collpasePanelUpdate(isMenuOpen, menuItem);
   }
 };
 
-const menuState = state => {
-  return state.toLowerCase() === "open"
-    ? "multi-collapse collapse show"
-    : "multi-collapse collapse";
+const collpasePanelUpdate = (isMenuOpen, menuItem) => {
+  menuItem.className = menuState(isMenuOpen ? "open" : "close");
+  menuItem.setAttribute("aria-expanded", !isMenuOpen);
+  menuItem.closest(
+    ".dg_accordian__collpasible"
+  ).className = `dg_accordian__collpasible ${
+    isMenuOpen ? "" : "collapsed"
+  }`.trim();
 };
+
+const menuState = state =>
+  `multi-collapse collapse ${
+    state.toLowerCase() === "open" ? "show" : ""
+  }`.trim();
