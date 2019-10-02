@@ -21,11 +21,19 @@ document.addEventListener(
   false
 );
 
+const selectElementByClassName = (element, cssName) => {
+  var sibling = element.nextElementSibling;
+  while (sibling) {
+    if (sibling.matches(cssName)) return sibling;
+    sibling = sibling.nextElementSibling;
+  }
+};
+
 const menuAction = element => {
   var mainDiv = element.closest(".dg_accordion");
   var menuItems = mainDiv.getElementsByClassName("multi-collapse");
   var totalCollapsed = mainDiv.getElementsByClassName("show");
-  var childDiv = element.nextElementSibling;
+  var childDiv = selectElementByClassName(element, ".multi-collapse");
   var menuID = childDiv.id;
 
   var button = mainDiv.getElementsByClassName("dg_allitems");
@@ -36,7 +44,7 @@ const menuAction = element => {
 
     if (menuID !== menuItems[i].id) {
       menuItem.className = mainDiv.className.includes(
-        "dg_allowmutlipleopen" //This class determines if an accordion will allow multiple panels opened
+        "dg_allowmultipleopen" //This class determines if an accordion will allow multiple panels opened
       )
         ? menuItem.className
         : menuState("close");
