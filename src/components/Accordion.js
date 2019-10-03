@@ -12,7 +12,7 @@ document.addEventListener(
 
     if (target.className.includes("dg_allitems")) {
       allMenuItemsAction(target);
-    } else if (target.className.includes("dg_accordian-btn")) {
+    } else if (target.className.includes("dg_accordion-btn")) {
       menuAction(target);
     } else {
       return;
@@ -77,10 +77,10 @@ const allMenuItemsAction = button => {
 
 const collpasePanelUpdate = (isMenuOpen, menuItem) => {
   menuItem.className = menuState(isMenuOpen ? "open" : "close");
-  menuItem.setAttribute("aria-expanded", !isMenuOpen);
+  menuItem.setAttribute("aria-expanded", isMenuOpen);
   menuItem.closest(
-    ".dg_accordian__collpasible"
-  ).className = `dg_accordian__collpasible ${
+    ".dg_accordion__collapsible"
+  ).className = `dg_accordion__collapsible ${
     isMenuOpen ? "" : "collapsed"
   }`.trim();
 };
