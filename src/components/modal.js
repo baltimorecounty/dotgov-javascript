@@ -1,15 +1,7 @@
 import "../polyfills/includes.polyfill";
-import "../polyfills/closest.polyfill"; 
- 
- document.addEventListener(
-  "click",
-  onDocumentClick => {
-    const { target } = onDocumentClick;
-    if (target.className.includes("btn-info")) {
-      $("#myModal").modal();
-    } else {
-      return;
-    }
-  },
-  false
-);
+import "../polyfills/closest.polyfill";
+
+var btn = document.getElementById("myBtn");
+btn.onclick = function() {
+  $("#myModal").modal();
+};
