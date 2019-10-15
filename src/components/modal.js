@@ -1,7 +1,12 @@
 import "../polyfills/includes.polyfill";
 import "../polyfills/closest.polyfill";
 
-var btn = document.getElementById("myBtn");
-btn.onclick = function() {
-  $("#myModal").modal();
-};
+document.addEventListener("click", function(event)  {
+  if(event.target.classList.contains('dg_button')){
+   $("#myModal").modal();
+  }
+  else{
+    return;
+  }
+ },
+ false );
