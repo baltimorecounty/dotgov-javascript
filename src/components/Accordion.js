@@ -12,7 +12,10 @@ document.addEventListener(
 
     if (target.className.includes("dg_allitems")) {
       allMenuItemsAction(target);
-    } else if (target.className.includes("dg_accordion-btn")) {
+    } else if (
+      target.className.includes("dg_accordion-btn") ||
+      target.className.includes("dg_accordion_buttontext-holder")
+    ) {
       menuAction(target);
     } else {
       return;
@@ -33,10 +36,10 @@ const menuAction = element => {
   var mainDiv = element.closest(".dg_accordion");
   var menuItems = mainDiv.getElementsByClassName("multi-collapse");
   var totalCollapsed = mainDiv.getElementsByClassName("show");
-  var childDiv = selectElementByClassName(element, ".multi-collapse");
+  var buttonElement = element.closest("button");
+  var childDiv = selectElementByClassName(buttonElement, ".multi-collapse");
   var menuID = childDiv.id;
-
-  var button = mainDiv.getElementsByClassName("dg_allitems");
+  var buttonAll = mainDiv.getElementsByClassName("dg_allitems");
 
   for (let i = 0; i < menuItems.length; i++) {
     var menuItem = menuItems[i];
@@ -44,7 +47,7 @@ const menuAction = element => {
 
     if (menuID !== menuItems[i].id) {
       menuItem.className = mainDiv.className.includes(
-        "dg_allowmultipleopen" //This class determines if an accordion will allow multiple panels opened
+        "canHaveMultiplePanelsOpen" //This class determines if an accordion will allow multiple panels opened
       )
         ? menuItem.className
         : menuState("close");
@@ -52,8 +55,12 @@ const menuAction = element => {
       //If its open then we want to close it and vice versa
       collpasePanelUpdate(!isMenuOpen, menuItem);
 
-      button
-        ? updateButtonStatus(button[0], menuItems.length, totalCollapsed.length)
+      buttonAll
+        ? updateButtonStatus(
+            buttonAll[0],
+            menuItems.length,
+            totalCollapsed.length
+          )
         : null;
     }
   }

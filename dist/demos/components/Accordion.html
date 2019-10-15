@@ -58,7 +58,7 @@
   </head>
   <script src="/assets/dotgov-accordion.min.js"></script>
   <body>
-    <div class="dg_accordion dg_allowmultipleopen" id="accordionExample1">
+    <div class="dg_accordion canHaveMultiplePanelsOpen" id="accordionExample1">
       <button class="dg_allitems dg_button-link" id="menuActionButton1">
         Open All
       </button>
@@ -72,7 +72,9 @@
           aria-controls="collapseOne"
           style="text-align: left; width:100%;"
         >
-          Collapsible Group Item #1
+          <span class="dg_accordion_buttontext-holder">
+            Collapsible Group Item #1
+          </span>
         </button>
         <div
           id="collapseOne1"
