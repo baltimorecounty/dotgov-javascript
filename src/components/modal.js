@@ -1,19 +1,24 @@
 import A11yDialog from "a11y-dialog";
 
 /**
- *
- * @param {string} dialogId
+ *@param {string } modalClass
  * @param {string} contentId
  * @param {function} onShow
  */
-const init = (dialogId, contentId, onShow = () => {}) => {
-  const dialog = document.getElementById(dialogId);
-  const content = document.getElementById(contentId);
-  const modal = new A11yDialog(dialog, content);
+const init = (modalClass, contentId, onShow = () => {}) => {
 
-  modal.on("show", onShow);
+  const modalClasses = document.querySelectorAll(`[class*=${modalClass}]`);
 
-  return modal;
+  modalClasses.forEach(e => {
+    const dialog = document.getElementById(e.id);
+    const content = document.getElementById(contentId);
+    const modal = new A11yDialog(dialog, content);
+    modal.on("show", onShow);
+
+    return modal;
+  });
+
 };
 
 export { init };
+
