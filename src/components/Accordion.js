@@ -38,32 +38,16 @@ const menuAction = element => {
   var totalCollapsed = mainDiv.getElementsByClassName("show");
   var buttonElement = element.closest("button");
   var childDiv = selectElementByClassName(buttonElement, ".multi-collapse");
-  var menuID = childDiv.id;
   var buttonAll = mainDiv.getElementsByClassName("dg_allitems");
 
-  for (let i = 0; i < menuItems.length; i++) {
-    var menuItem = menuItems[i];
-    var isMenuOpen = menuItem.className.includes(menuOpen);
+  var isMenuOpen = childDiv.className.includes(menuOpen);
 
-    if (menuID !== menuItems[i].id) {
-      menuItem.className = mainDiv.className.includes(
-        "canHaveMultiplePanelsOpen" //This class determines if an accordion will allow multiple panels opened
-      )
-        ? menuItem.className
-        : menuState("close");
-    } else {
-      //If its open then we want to close it and vice versa
-      collpasePanelUpdate(!isMenuOpen, menuItem);
+  //If its open then we want to close it and vice versa
+  collpasePanelUpdate(!isMenuOpen, childDiv);
 
-      buttonAll
-        ? updateButtonStatus(
-            buttonAll[0],
-            menuItems.length,
-            totalCollapsed.length
-          )
-        : null;
-    }
-  }
+  buttonAll
+    ? updateButtonStatus(buttonAll[0], menuItems.length, totalCollapsed.length)
+    : null;
 };
 
 const allMenuItemsAction = button => {
@@ -85,9 +69,9 @@ const allMenuItemsAction = button => {
 const collpasePanelUpdate = (isMenuOpen, menuItem) => {
   menuItem.className = menuState(isMenuOpen ? "open" : "close");
   menuItem.setAttribute("aria-expanded", isMenuOpen);
-  menuItem.closest(
-    ".dg_accordion__collapsible"
-  ).className = `dg_accordion__collapsible ${
+  var element = menuItem.closest(".dg_accordion__collapsible");
+
+  element.className = `dg_accordion__collapsible ${
     isMenuOpen ? "" : "collapsed"
   }`.trim();
 };
