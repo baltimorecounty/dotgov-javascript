@@ -64,6 +64,7 @@ const toggleNavigationButton = navButtonElm => {
   const willCollapse = !!navButtonElm.getAttribute("aria-expanded");
   const siteNavLinksElm = document.getElementById(`${ids.siteNavLinks}`);
   const body = document.getElementsByTagName("body")[0];
+  const page = document.getElementById("bc_page");
 
   siteNavLinksElm.classList[willCollapse ? "remove" : "add"](cssClasses.hidden);
 
@@ -76,6 +77,7 @@ const toggleNavigationButton = navButtonElm => {
   );
 
   body.classList.toggle(cssClasses.disabled);
+  page.classList.toggle(cssClasses.disabled);
 
   navButtonElm.setAttribute("aria-expanded", !willCollapse);
 };

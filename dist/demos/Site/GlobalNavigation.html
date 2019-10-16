@@ -26,7 +26,8 @@
             left: -400px;
             height: 0;
             z-index: 9999;
-            width: 400px;
+            max-width: 400px;
+            width: 100%;
         }
 
         .dg_site-header.active #bc_site-nav {
@@ -36,6 +37,7 @@
 
         #bc_nav-list {
             border-top: 10px solid #c51110;
+            overflow-y: scroll;
             position: fixed;
             transition: left .3s;
             padding: 30px;
@@ -51,6 +53,7 @@
             top: 0;
             bottom: 0;
             min-height: 100%;
+            z-index: 9999;
         }
 
         #bc_nav-list a {
@@ -66,14 +69,14 @@
             text-decoration: none;
         }
 
-        .dg_site-header.active #bc_nav-list {
-            /* left: 0; */
+        #bc_site-nav.active {
+            left: 0;
         }
 
         #bc_toggle-nav-btn {
             transition: left .3s;
             background: gold;
-            position: absolute;
+            position: fixed;
             left: 0px;
             z-index: 99;
             top: 10px;
@@ -81,7 +84,6 @@
             width: 82px;
             border: none;
             cursor: pointer;
-            position: relative;
             text-transform: uppercase;
             text-align: center;
             font-size: 12px;
@@ -95,7 +97,7 @@
             margin-bottom: 2.5px;
         }
 
-        .dg_site-header.active #bc_toggle-nav-btn {
+        #bc_site-nav.active #bc_toggle-nav-btn {
             position: fixed;
             z-index: 9999999;
             left: 400px;
@@ -103,25 +105,28 @@
 
         /* */
         #fake-menu-button {
-            background: gray;
-            transition: width .3s;
             width: 82px;
             left: 0;
         }
 
-        .dg_site-header.active #fake-menu-button {
-            width: 482px; /* Nav width + hamburger button width */
-        }
 
         /* Page */
-        #bc_page {
-            transition: left .3s;
-            position: relative;
+
+
+body,
+html {
+    min-height: 100%;
+}
+
+        body {
             left: 0;
+            transition: left .3s;
+
         }
 
-        #bc_page.disabled {
-            overflow-x: hidden;
+        body.disabled {
+            overflow: hidden;
+            position: relative;
             left: 400px;
         }
 
@@ -129,9 +134,10 @@
             content: '';
             position: absolute; /* Sit on top of the page content */
             display: block; /* Hidden by default */
+
             width: 100%; /* Full width (cover the whole page) */
             height: 100%; /* Full height (cover the whole page) */
-            top: 0;
+            top: 10px; /* This accounts for the border-top on the body */
             left: 0;
             right: 0;
             bottom: 0;
@@ -141,30 +147,35 @@
             z-index: 99;
         }
 
-        #search-form {
-            transition: margin .3s;
+        /* Missing from existing header */
+        .dg_site-header .dg_brand {
+            height: 75px;
         }
 
-        .dg_site-header.active #search-form {
-            margin-right: -400px;
-        }
+        @media screen and (max-width: 900px) {
+            /* .dg_status-text {
+                transition: left .3s;
+            }
 
+            .dg_site-header.active .dg_status-text {
+                left: 400px;
+            } */
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="//kit.fontawesome.com/2475edd293.js"></script>
   </head>
   <body>
+    <nav id="bc_site-nav">
+        <button id="bc_toggle-nav-btn"><i class="fas fa-bars"></i><span class="sr-only">Show </span>Menu</button>
+        <ul id="bc_nav-list">
+        <li><a href="#">Item 1</a></li>
+        <li><a href="#">Item 1</a></li>
+        <li><a href="#">Item 1</a></li>
+        <li><a href="#">Item 1</a></li>
+        <li><a href="#">Item 1</a></li>
+    </nav>
     <header class="dg_header dg_site-header">
-            <nav id="bc_site-nav">
-                <button id="bc_toggle-nav-btn"><i class="fas fa-bars"></i><span class="sr-only">Show </span>Menu</button>
-                <ul id="bc_nav-list">
-                <li><a href="#">Item 1</a></li>
-                <li><a href="#">Item 1</a></li>
-                <li><a href="#">Item 1</a></li>
-                <li><a href="#">Item 1</a></li>
-                <li><a href="#">Item 1</a></li>
-            </nav>
-
             <div class="dg_brand">
                 <div id="fake-menu-button"></div>
                 <a href="/" title="View the Baltimore County Government homepage.">
@@ -224,7 +235,7 @@
     <!-- <script src="/assets/dotgov-siteNavigation.min.js"></script> -->
     <script>
             $(document).on('click', '#bc_toggle-nav-btn', () => {
-                $('.dg_site-header').toggleClass('active');
+                $('.dg_site-header, #bc_site-nav').toggleClass('active');
                 $('body, #bc_page').toggleClass('disabled');
             });
         </script>
