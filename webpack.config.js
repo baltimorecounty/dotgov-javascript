@@ -5,7 +5,7 @@ module.exports = {
   entry: {
     FollowUp: "./src/page-specific/BaltCoGo/FollowUp.js",
     Accordion: "./src/components/Accordion.js",
-    modal: "./src/components/modal.js"
+    Modal: "./src/components/Modal.js"
   },
   output: {
     path: path.join(__dirname, "dist"),
