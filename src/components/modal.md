@@ -1,9 +1,6 @@
 Html Snippet: Markup for Dialog Box
-
+Name of the class of a modal should be `dg_modal`
 ```html
-  <!--
-    - class should be `dg_modal`
-  -->
 <div class="dg_modal dialog" id="my-accessible-dialog">
   <div class="dialog-overlay" tabindex="-1" data-a11y-dialog-hide></div>
   <dialog class="dialog-content" aria-labelledby="dialog-title">
@@ -21,12 +18,9 @@ Html Snippet: Markup for Dialog Box
 ```
 
 How to associate button to Dialog Box
-
+  The `id` of the modal dialog must match the `data-a11y-dialog-show` attribute on the button that will trigger the modal.
 ```html
 <button type="button" data-a11y-dialog-show="my-accessible-dialog">
-  <!--
-    The `id` of the modal dialog much match the `data-a11y-dialog-show` attribute on the button that will trigger the modal.
-  -->
   Open Modal
 </button>
 ```
