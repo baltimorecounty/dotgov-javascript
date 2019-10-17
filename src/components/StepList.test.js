@@ -7,7 +7,6 @@ import {
 import "@testing-library/jest-dom/extend-expect";
 import { createAppContainer, resetAppContainer } from "../utilities/test.utils";
 import { default as GetStepListFixture } from "./StepList.fixture";
-let stepList;
 
 const triggerDomContentLoaded = () => {
   window.document.dispatchEvent(
@@ -18,6 +17,18 @@ const triggerDomContentLoaded = () => {
   );
 };
 
+/**
+ * Helper to check if a button contains the text "show"
+ * Uses the parent element button element, because react testing library find by text returns the direct element match
+ * Example: getAllByText(document, /Step [0-9]:/i); selects the span contained inside the button
+ * @param {*} stepButtonElm
+ */
+const hasShowText = stepButtonElm => {
+  const { innerHTML: buttonContent = "" } =
+    stepButtonElm.closest("button") || stepButtonElm.innerHTML;
+  return buttonContent && buttonContent.toLowerCase().indexOf("show") > -1;
+};
+
 afterEach(() => {
   /** Reset document.body */
   resetAppContainer(document);
@@ -25,50 +36,49 @@ afterEach(() => {
   jest.resetModules();
 });
 
-beforeEach(() => {});
-
 describe("step list - page load", () => {
   test("displays a static on page load", () => {
     createAppContainer(document, GetStepListFixture("static"));
-    stepList = require("./StepList");
+    require("./StepList");
     triggerDomContentLoaded();
 
     const stepButtons = getAllByText(document, /Step [0-9]:/i);
 
     stepButtons.forEach(stepButtonElm => {
-      const buttonContainer = stepButtonElm.parentElement.innerHTML;
-      const hasShowText =
-        buttonContainer && buttonContainer.toLowerCase().indexOf("show") > -1;
-      /* Add comment for reasoning here */
-      expect(hasShowText).toEqual(true);
+      expect(hasShowText(stepButtonElm)).toEqual(true);
     });
 
     const showAllButton = getByText(document, /show all/i);
     expect(showAllButton).not.toBeVisible();
   });
 
-  //   test("displays a step list with all items collapsed on page load by default", () => {
-  //     createAppContainer(document, GetStepListFixture("collapsed"));
-  //     stepList = require("./StepList");
-  //     triggerDomContentLoaded();
+  test("displays a dynamic step list on page load with all steps collapsed", () => {
+    createAppContainer(document, GetStepListFixture("collapsed"));
+    require("./StepList");
+    triggerDomContentLoaded();
 
-  //     const showAllButton = getByText(document, /show all/i);
+    const stepButtons = getAllByText(document, /Step [0-9]:/i);
 
-  //     expect(showAllButton).not.toBeVisible();
-  //   });
-  // test("displays a step list with all items expanded on page load by default");
+    stepButtons.forEach(stepButtonElm => {
+      expect(hasShowText(stepButtonElm)).toEqual(true);
+    });
+
+    const showAllButton = getByText(document, /show all/i);
+    expect(showAllButton).toBeVisible();
+  });
+
+  test("displays a dynamic step list on page load with all steps expanded", () => {
+    createAppContainer(document, GetStepListFixture(""));
+    require("./StepList");
+    triggerDomContentLoaded();
+
+    const stepButtons = getAllByText(document, /Step [0-9]:/i);
+
+    stepButtons.forEach(stepButtonElm => {
+      expect(hasShowText(stepButtonElm)).toEqual(false);
+    });
+
+    const showAllButton = getByText(document, /hide all/i);
+    expect(showAllButton).toBeVisible();
+  });
 });
-
-// test("should show details when an section toggle button is selected", async () => {
-//   createAppContainer(document, GetStepListFixture("collapsed"));
-//   const step1Button = getByText(document, /Step 1:/i);
-
-//   step1Button.click();
-
-//   const detailsTest = getByText(
-//     document,
-//     /Step 1 details/i
-//   ); /** contents of the step 1 details panel */
-
-//   expect(detailsTest).toBeVisible();
-// });
