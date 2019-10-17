@@ -12,7 +12,6 @@ const init = (modalClass, onShow = () => {}) => {
     const dialog = modalElm;
     const modal = new A11yDialog(dialog);
     modal.on("show", onShow);
-    return modal;
   });
 };
 
