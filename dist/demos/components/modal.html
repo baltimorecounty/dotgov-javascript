@@ -9,6 +9,145 @@
 
     <style>
 
+
+  [data-a11y-dialog-native] .dialog-overlay {
+    display: none;
+  }
+
+  dialog[open] {
+    display: block;
+    margin-top:150px;
+ 
+  }
+
+  .dialog[aria-hidden="true"] {
+    display: none;
+  }
+
+  .dialog-overlay {
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.66);
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+
+  dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.66);
+  }
+
+  .dialog-content {
+    background-color: rgb(255, 255, 255);
+    z-index: 3;
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    margin: 0;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes appear {
+    from {
+      transform: translate(-50%, -40%);
+      opacity: 0;
+    }
+    to {
+      transform: translate(-50%, -50%);
+      opacity: 1;
+    }
+  }
+
+  .dialog:not([aria-hidden="true"]) > .dialog-overlay {
+    animation: fade-in 200ms 1 both;
+  }
+
+  .dialog:not([aria-hidden="true"]) > .dialog-content {
+    animation: appear 400ms 150ms 1 both;
+  }
+
+  .dialog-content {
+    padding: 1em;
+    max-width: 90%;
+    width: 600px;
+    border-radius: 2px;
+  }
+
+  @media screen and (min-width: 700px) {
+    .dialog-content {
+      padding: 2em;
+    }
+  }
+
+  .dialog-overlay {
+    background-color: rgba(43, 46, 56, 0.9);
+  }
+
+  .dialog h1 {
+    margin: 0 0 10px 0;
+    font-size: 1.25em;
+    text-align: left;
+    color: black;
+  }
+
+  .dialog-close {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    font-weight: bold;
+    font-size: 1.25em;
+    width: 1.2em;
+    height: 1.2em;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.15s;
+    color: black;
+  }
+
+  @media screen and (min-width: 700px) {
+    .dialog-close {
+      top: 1em;
+      right: 1em;
+    }
+  }
+
+  .link-like {
+    background-color: transparent;
+    text-decoration: underline;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .link-like,
+  a {
+    color: red;
+  }
+
+  .link-like:hover,
+  .link-like:active,
+  a:hover,
+  a:active {
+    color: green;
+  }
+
     </style>
   </head>
 
@@ -35,37 +174,11 @@
 </div>
 
 <div class="dg_modal dialog" id="my-accessible-dialog">
-
-  <!--
-    Overlay related notes:
-    - It has to have the `tabindex="-1"` attribute.
-    - It doesn’t have to have the `data-a11y-dialog-hide` attribute, however this is recommended. It hides the dialog when clicking outside of it.
-  -->
   <div class="dialog-overlay" tabindex="-1" data-a11y-dialog-hide></div>
-
-  <!--
-    Dialog window content related notes:
-    - It is the actual visual dialog element.
-    - It may have the `alertdialog` role to make it behave like a “modal”. See the “Usage as a modal” section of the docs.
-    - It doesn’t have to be a `<dialog>` element, it can be a `<div>` element with the `dialog` or `alertdialog` role (e.g. `<div role="dialog">`).
-    - It doesn’t have to have the `aria-labelledby` attribute however this is recommended. It should match the `id` of the dialog title.
-  -->
   <dialog class="dialog-content" aria-labelledby="dialog-title">
-    <!--
-      Closing button related notes:
-      - It does have to have the `type="button"` attribute.
-      - It does have to have the `data-a11y-dialog-hide` attribute.
-      - It does have to have an aria-label attribute if you use an icon as content.
-    -->
     <button type="button" class="dialog-close" data-a11y-dialog-hide aria-label="Close this dialog window">
       &times;
     </button>
-
-    <!--
-      Dialog title related notes:
-      - It should have a different content than `Dialog Title`.
-      - It can have a different id than `dialog-title`.
-    -->
     <h1 id="dialog-title">Dialog Title</h1>
 
     <p>This is content that lives inside of a dialog box. It's fully accessible which makes our users happy. And because it's inside of a dialog that pops up, it makes our designers and UX people happy as well.</p>
@@ -77,37 +190,11 @@
 
 
 <div class="dg_modal dialog" id="my-accessible-dialog1">
-
-    <!--
-      Overlay related notes:
-      - It has to have the `tabindex="-1"` attribute.
-      - It doesn’t have to have the `data-a11y-dialog-hide` attribute, however this is recommended. It hides the dialog when clicking outside of it.
-    -->
     <div class="dialog-overlay" tabindex="-1" data-a11y-dialog-hide></div>
-  
-    <!--
-      Dialog window content related notes:
-      - It is the actual visual dialog element.
-      - It may have the `alertdialog` role to make it behave like a “modal”. See the “Usage as a modal” section of the docs.
-      - It doesn’t have to be a `<dialog>` element, it can be a `<div>` element with the `dialog` or `alertdialog` role (e.g. `<div role="dialog">`).
-      - It doesn’t have to have the `aria-labelledby` attribute however this is recommended. It should match the `id` of the dialog title.
-    -->
     <dialog class="dialog-content" aria-labelledby="dialog-title">
-      <!--
-        Closing button related notes:
-        - It does have to have the `type="button"` attribute.
-        - It does have to have the `data-a11y-dialog-hide` attribute.
-        - It does have to have an aria-label attribute if you use an icon as content.
-      -->
       <button type="button" class="dialog-close" data-a11y-dialog-hide aria-label="Close this dialog window">
         &times;
       </button>
-  
-      <!--
-        Dialog title related notes:
-        - It should have a different content than `Dialog Title`.
-        - It can have a different id than `dialog-title`.
-      -->
       <h1 id="dialog-title">Dialog Title2</h1>
        <p>--This is a test---- for second Dialog box.</p>
       <p>This is content that lives inside of a dialog box. It's fully accessible which makes our users happy. And because it's inside of a dialog that pops up, it makes our designers and UX people happy as well.</p>
@@ -117,21 +204,5 @@
     </section>
   </div>
  <script src="/assets/dotgov-modal.min.js"></script> 
-<!-- <script>
-window.addEventListener(
-  "DOMContentLoaded",
-  init = (dg_modal, onShow = () => {}) => {
-    const modalElms = document.querySelectorAll(`[class*=${"dg_modal"}]`);
-    modalElms.forEach(modalElm => {
-      const dialog = modalElm;
-      const modal = new A11yDialog(dialog);
-      modal.on("show", onShow);
-    });
-  });
-</script> -->
-<script>
-  //  var modal = new window.BcModal.init('dg_modal');
-</script>
-
 </body>
 </html>
