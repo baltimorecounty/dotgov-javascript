@@ -35,7 +35,13 @@ describe("step list - page load", () => {
 
     const stepButtons = getAllByText(document, /Step [0-9]:/i);
 
-    console.log(stepButtons);
+    stepButtons.forEach(stepButtonElm => {
+      const buttonContainer = stepButtonElm.parentElement.innerHTML;
+      const hasShowText =
+        buttonContainer && buttonContainer.toLowerCase().indexOf("show") > -1;
+      /* Add comment for reasoning here */
+      expect(hasShowText).toEqual(true);
+    });
 
     const showAllButton = getByText(document, /show all/i);
     expect(showAllButton).not.toBeVisible();
@@ -53,16 +59,16 @@ describe("step list - page load", () => {
   // test("displays a step list with all items expanded on page load by default");
 });
 
-test("should show details when an section toggle button is selected", async () => {
-  createAppContainer(document, GetStepListFixture("collapsed"));
-  const step1Button = getByText(document, /Step 1:/i);
+// test("should show details when an section toggle button is selected", async () => {
+//   createAppContainer(document, GetStepListFixture("collapsed"));
+//   const step1Button = getByText(document, /Step 1:/i);
 
-  step1Button.click();
+//   step1Button.click();
 
-  const detailsTest = getByText(
-    document,
-    /Step 1 details/i
-  ); /** contents of the step 1 details panel */
+//   const detailsTest = getByText(
+//     document,
+//     /Step 1 details/i
+//   ); /** contents of the step 1 details panel */
 
-  expect(detailsTest).toBeVisible();
-});
+//   expect(detailsTest).toBeVisible();
+// });
