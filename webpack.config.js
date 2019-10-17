@@ -3,8 +3,9 @@ const path = require("path");
 module.exports = {
   mode: "development",
   entry: {
-    StepList: "./src/components/StepList.js",
-    FollowUp: "./src/page-specific/BaltCoGo/FollowUp.js"
+    Accordion: "./src/components/Accordion.js",
+    FollowUp: "./src/page-specific/BaltCoGo/FollowUp.js",
+    StepList: "./src/components/StepList.js"
   },
   output: {
     path: path.join(__dirname, "dist"),
