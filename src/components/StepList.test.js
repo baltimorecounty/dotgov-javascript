@@ -1,22 +1,8 @@
-import {
-  getByText,
-  wait,
-  getAllByText,
-  queryAllByText
-} from "@testing-library/dom";
+import { getByText, getAllByText } from "@testing-library/dom";
 import "@testing-library/jest-dom/extend-expect";
 import { createAppContainer, resetAppContainer } from "../utilities/test.utils";
 import { default as GetStepListFixture } from "./StepList.fixture";
-import StepList from "./StepList";
-
-const triggerDomContentLoaded = () => {
-  window.document.dispatchEvent(
-    new Event("DOMContentLoaded", {
-      bubbles: true,
-      cancelable: true
-    })
-  );
-};
+import StepList from "./StepList"; /** Despite not being used anywhere, this is required to load */
 
 /**
  * Helper to check if a button contains the text "show"
@@ -37,7 +23,6 @@ afterEach(() => {
 
 test("displays a static on page load", () => {
   createAppContainer(document, GetStepListFixture("static"));
-  triggerDomContentLoaded();
 
   const stepButtons = getAllByText(document, /Step [0-9]:/i);
 
@@ -52,8 +37,6 @@ test("displays a static on page load", () => {
 test("displays a dynamic step list on page load with all steps collapsed", () => {
   createAppContainer(document, GetStepListFixture("collapsed"));
 
-  triggerDomContentLoaded();
-
   const stepButtons = getAllByText(document, /Step [0-9]:/i);
 
   stepButtons.forEach(stepButtonElm => {
@@ -67,8 +50,6 @@ test("displays a dynamic step list on page load with all steps collapsed", () =>
 test("displays a dynamic step list on page load with all steps expanded", () => {
   createAppContainer(document, GetStepListFixture(""));
 
-  triggerDomContentLoaded();
-
   const stepButtons = getAllByText(document, /Step [0-9]:/i);
 
   stepButtons.forEach(stepButtonElm => {
@@ -81,7 +62,6 @@ test("displays a dynamic step list on page load with all steps expanded", () => 
 
 test("should toggle details when an section toggle button is selected", () => {
   createAppContainer(document, GetStepListFixture("collapsed"));
-  triggerDomContentLoaded();
 
   const step1Button = getByText(document, /Step 1:/i);
 
@@ -103,7 +83,6 @@ test("should toggle details when an section toggle button is selected", () => {
 
 test("should show all details when the 'Show All' button is selected", () => {
   createAppContainer(document, GetStepListFixture("collapsed"));
-  triggerDomContentLoaded();
 
   const showAllButton = getByText(document, /Show All/i);
 
@@ -125,7 +104,6 @@ test("should show all details when the 'Show All' button is selected", () => {
 
 test("should show all details when the 'Hide All' button is selected", () => {
   createAppContainer(document, GetStepListFixture(""));
-  triggerDomContentLoaded();
 
   const hideAllButton = getByText(document, /Hide All/i);
 
@@ -147,7 +125,6 @@ test("should show all details when the 'Hide All' button is selected", () => {
 
 test("should show 'hide all' button after each individual step has expanded independently", () => {
   createAppContainer(document, GetStepListFixture("collapsed"));
-  triggerDomContentLoaded();
 
   const stepButtons = getAllByText(document, /Step [0-9]:/i);
 
@@ -161,7 +138,6 @@ test("should show 'hide all' button after each individual step has expanded inde
 
 test("should show 'show all' button after a single detail is hidden independently given all other panels were expanded", () => {
   createAppContainer(document, GetStepListFixture(""));
-  triggerDomContentLoaded();
 
   const stepButtons = getAllByText(document, /Step [0-9]:/i);
 
