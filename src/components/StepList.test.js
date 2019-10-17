@@ -7,6 +7,7 @@ import {
 import "@testing-library/jest-dom/extend-expect";
 import { createAppContainer, resetAppContainer } from "../utilities/test.utils";
 import { default as GetStepListFixture } from "./StepList.fixture";
+import StepList from "./StepList";
 
 const triggerDomContentLoaded = () => {
   window.document.dispatchEvent(
@@ -32,53 +33,141 @@ const hasShowText = stepButtonElm => {
 afterEach(() => {
   /** Reset document.body */
   resetAppContainer(document);
-
-  jest.resetModules();
 });
 
-describe("step list - page load", () => {
-  test("displays a static on page load", () => {
-    createAppContainer(document, GetStepListFixture("static"));
-    require("./StepList");
-    triggerDomContentLoaded();
+test("displays a static on page load", () => {
+  createAppContainer(document, GetStepListFixture("static"));
+  triggerDomContentLoaded();
 
-    const stepButtons = getAllByText(document, /Step [0-9]:/i);
+  const stepButtons = getAllByText(document, /Step [0-9]:/i);
 
-    stepButtons.forEach(stepButtonElm => {
-      expect(hasShowText(stepButtonElm)).toEqual(true);
-    });
-
-    const showAllButton = getByText(document, /show all/i);
-    expect(showAllButton).not.toBeVisible();
+  stepButtons.forEach(stepButtonElm => {
+    expect(hasShowText(stepButtonElm)).toEqual(true);
   });
 
-  test("displays a dynamic step list on page load with all steps collapsed", () => {
-    createAppContainer(document, GetStepListFixture("collapsed"));
-    require("./StepList");
-    triggerDomContentLoaded();
+  const showAllButton = getByText(document, /show all/i);
+  expect(showAllButton).not.toBeVisible();
+});
 
-    const stepButtons = getAllByText(document, /Step [0-9]:/i);
+test("displays a dynamic step list on page load with all steps collapsed", () => {
+  createAppContainer(document, GetStepListFixture("collapsed"));
 
-    stepButtons.forEach(stepButtonElm => {
-      expect(hasShowText(stepButtonElm)).toEqual(true);
-    });
+  triggerDomContentLoaded();
 
-    const showAllButton = getByText(document, /show all/i);
-    expect(showAllButton).toBeVisible();
+  const stepButtons = getAllByText(document, /Step [0-9]:/i);
+
+  stepButtons.forEach(stepButtonElm => {
+    expect(hasShowText(stepButtonElm)).toEqual(true);
   });
 
-  test("displays a dynamic step list on page load with all steps expanded", () => {
-    createAppContainer(document, GetStepListFixture(""));
-    require("./StepList");
-    triggerDomContentLoaded();
+  const showAllButton = getByText(document, /show all/i);
+  expect(showAllButton).toBeVisible();
+});
 
-    const stepButtons = getAllByText(document, /Step [0-9]:/i);
+test("displays a dynamic step list on page load with all steps expanded", () => {
+  createAppContainer(document, GetStepListFixture(""));
 
-    stepButtons.forEach(stepButtonElm => {
-      expect(hasShowText(stepButtonElm)).toEqual(false);
-    });
+  triggerDomContentLoaded();
 
-    const showAllButton = getByText(document, /hide all/i);
-    expect(showAllButton).toBeVisible();
+  const stepButtons = getAllByText(document, /Step [0-9]:/i);
+
+  stepButtons.forEach(stepButtonElm => {
+    expect(hasShowText(stepButtonElm)).toEqual(false);
   });
+
+  const showAllButton = getByText(document, /hide all/i);
+  expect(showAllButton).toBeVisible();
+});
+
+test("should toggle details when an section toggle button is selected", () => {
+  createAppContainer(document, GetStepListFixture("collapsed"));
+  triggerDomContentLoaded();
+
+  const step1Button = getByText(document, /Step 1:/i);
+
+  /** Expand the details */
+  step1Button.click();
+
+  const stepDetails = getByText(
+    document,
+    /Step 1 details/i
+  ); /** contents of the step 1 details panel */
+
+  expect(stepDetails).toBeVisible();
+
+  /** Collapse the details */
+  step1Button.click();
+
+  expect(stepDetails).not.toBeVisible();
+});
+
+test("should show all details when the 'Show All' button is selected", () => {
+  createAppContainer(document, GetStepListFixture("collapsed"));
+  triggerDomContentLoaded();
+
+  const showAllButton = getByText(document, /Show All/i);
+
+  /** Expand the details */
+  showAllButton.click();
+
+  const detailPanels = getAllByText(
+    document,
+    /Step\s[0-9]\sdetails/i
+  ); /** contents of the step 1 details panel */
+
+  detailPanels.forEach(detailPanelElm => {
+    expect(detailPanelElm).toBeVisible();
+  });
+
+  const hideAllButton = getByText(document, /Hide All/i);
+  expect(hideAllButton).toBeVisible();
+});
+
+test("should show all details when the 'Hide All' button is selected", () => {
+  createAppContainer(document, GetStepListFixture(""));
+  triggerDomContentLoaded();
+
+  const hideAllButton = getByText(document, /Hide All/i);
+
+  /** Expand the details */
+  hideAllButton.click();
+
+  const detailPanels = getAllByText(
+    document,
+    /Step\s[0-9]\sdetails/i
+  ); /** contents of the step 1 details panel */
+
+  detailPanels.forEach(detailPanelElm => {
+    expect(detailPanelElm).not.toBeVisible();
+  });
+
+  const showAllButton = getByText(document, /Show All/i);
+  expect(showAllButton).toBeVisible();
+});
+
+test("should show 'hide all' button after each individual step has expanded independently", () => {
+  createAppContainer(document, GetStepListFixture("collapsed"));
+  triggerDomContentLoaded();
+
+  const stepButtons = getAllByText(document, /Step [0-9]:/i);
+
+  stepButtons.forEach(stepButtonElm => {
+    stepButtonElm.click();
+  });
+
+  const hideAllButton = getByText(document, /Hide All/i);
+  expect(hideAllButton).toBeVisible();
+});
+
+test("should show 'show all' button after a single detail is hidden independently given all other panels were expanded", () => {
+  createAppContainer(document, GetStepListFixture(""));
+  triggerDomContentLoaded();
+
+  const stepButtons = getAllByText(document, /Step [0-9]:/i);
+
+  /** Doesn't matter which panel is selected, so we will use the first */
+  stepButtons[0].click();
+
+  const hideAllButton = getByText(document, /Show All/i);
+  expect(hideAllButton).toBeVisible();
 });
