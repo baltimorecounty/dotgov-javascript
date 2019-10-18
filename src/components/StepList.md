@@ -13,7 +13,7 @@ The css will handle basic styling, feel free to override the styles with your ow
 
 The script will automatically handle any number of step lists on the page and the functionality to each list.
 
-### Markup
+## Markup
 
 Add your step list markup. It should match the snippet below.
 
@@ -69,8 +69,6 @@ The only two pieces of content that should be modified is the button text and th
     <!-- put any html here -->
 </div>
 ```
-
-
 
 ### Step List Item Association
 
