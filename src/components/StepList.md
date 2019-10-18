@@ -1,8 +1,6 @@
 # Step List
 
-## Usage
-
-### Setup
+## Setup
 
 Include the following in your app or website:
 
@@ -13,7 +11,7 @@ The css will handle basic styling, feel free to override the styles with your ow
 
 The script will automatically handle any number of step lists on the page and the functionality to each list.
 
-## Markup
+# Markup
 
 Add your step list markup. It should match the snippet below.
 
@@ -52,17 +50,17 @@ Add your step list markup. It should match the snippet below.
 </div>
 ```
 
-## Modifying Content
+# Modifying Content
 
 The only two pieces of content that should be modified is the button text and the details.
 
-### Button
+## Button
 
 ```html
 <span class="dg_step-list__toggle-btn__title">Your Step Button Text Goes Here</span>
 ```
 
-### Details
+## Details
 
 ```html
 <div class="dg_step-list__details" id="registration-panel-3" aria-labelledby="registration-step-3">
@@ -70,7 +68,7 @@ The only two pieces of content that should be modified is the button text and th
 </div>
 ```
 
-### Step List Item Association
+## Step List Item Association
 
 The `id` of the step much match the step detail's `aria-labelledby`. In the example below, the id is `registration-step-1`.
 
@@ -86,7 +84,7 @@ The `id` of the step much match the step detail's `aria-labelledby`. In the exam
 <div id="registration-panel-1" class="dg_step-list__details" aria-labelledby="registration-step-1">
 ```
 
-### Step List Button Association
+## Step List Button Association
 
 The `aria-controls` attribute of the step toggle button much match the step detail's `id`. In the example below, the id is `registration-panel-1`.
 
