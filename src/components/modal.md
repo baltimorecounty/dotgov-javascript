@@ -2,9 +2,7 @@
 
 A javascript dialog for your site or app.
 
-## Html Snippet
-
-Markup for Dialog Box
+## Modal Markup
 
 *Note*: The modal must include the `dg_modal` the in order for this to work.
 
