@@ -68,7 +68,7 @@ The only two pieces of content that should be modified is the button text and th
 </div>
 ```
 
-## Step List Item Association
+### Step List Item Association
 
 The `id` of the step much match the step detail's `aria-labelledby`. In the example below, the id is `registration-step-1`.
 
@@ -84,7 +84,7 @@ The `id` of the step much match the step detail's `aria-labelledby`. In the exam
 <div id="registration-panel-1" class="dg_step-list__details" aria-labelledby="registration-step-1">
 ```
 
-## Step List Button Association
+### Step List Button Association
 
 The `aria-controls` attribute of the step toggle button much match the step detail's `id`. In the example below, the id is `registration-panel-1`.
 
