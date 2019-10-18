@@ -11,7 +11,7 @@ The css will handle basic styling, feel free to override the styles with your ow
 
 The script will automatically handle any number of step lists on the page and the functionality to each list.
 
-# Markup
+## Markup
 
 Add your step list markup. It should match the snippet below.
 
@@ -50,17 +50,17 @@ Add your step list markup. It should match the snippet below.
 </div>
 ```
 
-# Modifying Content
+## Modifying Content
 
 The only two pieces of content that should be modified is the button text and the details.
 
-## Button
+### Button
 
 ```html
 <span class="dg_step-list__toggle-btn__title">Your Step Button Text Goes Here</span>
 ```
 
-## Details
+### Details
 
 ```html
 <div class="dg_step-list__details" id="registration-panel-3" aria-labelledby="registration-step-3">
