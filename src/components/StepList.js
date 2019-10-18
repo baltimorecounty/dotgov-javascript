@@ -34,11 +34,15 @@ const addStepListHoverEvents = stepListElm => {
 
   /** Add hover events for individual step list items, to make styling the step circles easier. */
   stepListItemElms.forEach(stepListItemElm => {
-    stepListItemElm.addEventListener("mouseenter", mouseenterEvent => {
-      toggleHoveredStatus(mouseenterEvent.target, true);
+    const itemButtonElm = GetFirstElementOrDefault(
+      stepListItemElm,
+      `.${cssClasses.detailsToggleButton}`
+    );
+    itemButtonElm.addEventListener("mouseenter", mouseenterEvent => {
+      toggleItemHoverStatus(mouseenterEvent, true);
     });
-    stepListItemElm.addEventListener("mouseleave", mouseleaveEvent => {
-      toggleHoveredStatus(mouseleaveEvent.target, false);
+    itemButtonElm.addEventListener("mouseleave", mouseleaveEvent => {
+      toggleItemHoverStatus(mouseleaveEvent, false);
     });
   });
 };
@@ -201,12 +205,13 @@ const toggleDetailButtonText = (buttonElm, buttonState) => {
 };
 
 /**
- * Adds or removed the hovered class based on the isHovered param
+ * Adds or removed the hovered class to a step list item based on the isHovered param
  * @param {*} elm
  * @param {boolean} isHovered whether or not the given element is being hovered
  */
-const toggleHoveredStatus = (elm, isHovered) => {
-  elm.classList[isHovered ? "add" : "remove"](cssClasses.hovered);
+const toggleItemHoverStatus = (event, isHovered) => {
+  const detailsButtonElm = event.target.closest(`.${cssClasses.section}`);
+  detailsButtonElm.classList[isHovered ? "add" : "remove"](cssClasses.hovered);
 };
 
 /**
