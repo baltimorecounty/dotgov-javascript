@@ -13,6 +13,7 @@ const states = {
 
 const cssClasses = {
   collapsed: "collapsed",
+  hovered: "is-hovered",
   stepList: "dg_step-list",
   detailsToggleButton: "dg_step-list__toggle-btn",
   details: "dg_step-list__details",
@@ -20,6 +21,26 @@ const cssClasses = {
   toggleButtonHeading: "dg_step-list__toggle-btn__title",
   toggleButtonText: "dg_step-list__toggle-btn__btn-text",
   section: "dg_step-list__list-section"
+};
+
+/**
+ * Add hover events for each list item for a given step list
+ * @param {*} stepListElm
+ */
+const addStepListHoverEvents = stepListElm => {
+  const stepListItemElms = stepListElm.querySelectorAll(
+    `.${cssClasses.section}`
+  );
+
+  /** Add hover events for individual step list items, to make styling the step circles easier. */
+  stepListItemElms.forEach(stepListItemElm => {
+    stepListItemElm.addEventListener("mouseenter", mouseenterEvent => {
+      toggleHoveredStatus(mouseenterEvent.target, true);
+    });
+    stepListItemElm.addEventListener("mouseleave", mouseleaveEvent => {
+      toggleHoveredStatus(mouseleaveEvent.target, false);
+    });
+  });
 };
 
 /**
@@ -180,6 +201,15 @@ const toggleDetailButtonText = (buttonElm, buttonState) => {
 };
 
 /**
+ * Adds or removed the hovered class based on the isHovered param
+ * @param {*} elm
+ * @param {boolean} isHovered whether or not the given element is being hovered
+ */
+const toggleHoveredStatus = (elm, isHovered) => {
+  elm.classList[isHovered ? "add" : "remove"](cssClasses.hovered);
+};
+
+/**
  * Adjust the details section for a given step list, based on it's state
  * @param {HTMLElement} stepListElm
  */
@@ -262,6 +292,8 @@ const onDocumentReady = () => {
      * https://gomakethings.com/listening-for-click-events-with-vanilla-javascript/
      */
     document.addEventListener("click", handleDocumentClick, false);
+
+    addStepListHoverEvents(stepListElm);
 
     const isDefaultStateCollapsed = stepListElm.classList.contains(
       states.collapsed
