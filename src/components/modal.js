@@ -1,14 +1,24 @@
+import "../polyfills/closest.polyfill";
 import "./w3-dialog";
 
+const cssClasses = {
+  modalCloseButton: "dg_modal__close-button",
+  modalOpenButton: "dg_modal__open-button"
+};
+
+/**
+ * Captures all dom click events in order to bind all event with a particular class
+ * @param {*} clickEvent
+ */
 const handleDocumentClick = clickEvent => {
   const { classList: targetClassList } = clickEvent.target;
   // If the clicked element doesn't have the right selector, bail
   const isModalOpenButtonClick = targetClassList.contains(
-    "dg_modal__open-button"
+    cssClasses.modalOpenButton
   );
-  const isModalCloseButtonClick = targetClassList.contains(
-    "dg_modal__close-button"
-  );
+  const isModalCloseButtonClick =
+    targetClassList.contains(cssClasses.modalCloseButton) ||
+    !!clickEvent.target.closest(`.${cssClasses.modalCloseButton}`);
 
   if (isModalOpenButtonClick) {
     handleModalOpenButtonClick(clickEvent);
