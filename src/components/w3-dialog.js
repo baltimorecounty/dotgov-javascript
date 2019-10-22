@@ -342,7 +342,8 @@ aria.Utils.bindMethods = function(object /* , ...methodNames */) {
     this.addListeners();
     aria.OpenDialogList.push(this);
     this.clearDialog();
-    this.dialogNode.className = "default_dialog"; // make visible
+    /** baltimore county specific - added dg_modal and dark to help with  styling */
+    this.dialogNode.className = "dg_modal default_dialog dark"; // make visible
 
     if (this.focusFirst) {
       this.focusFirst.focus();
