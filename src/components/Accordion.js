@@ -60,7 +60,10 @@ const menuAction = accordionHeaderText => {
 
   if (isIE) {
     var elementClass = accordionHeaderText.className;
-    accordionHeaderText.className = elementClass + " ms-focus-within";
+
+    !elementClass.includes("ms-focus-within")
+      ? (accordionHeaderText.className = elementClass + " ms-focus-within")
+      : null;
   }
 };
 
