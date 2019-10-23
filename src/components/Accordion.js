@@ -32,22 +32,36 @@ const selectElementByClassName = (element, cssName) => {
   }
 };
 
-const menuAction = element => {
-  var mainDiv = element.closest(".dg_accordion");
+const menuAction = accordionHeaderText => {
+  var mainDiv = accordionHeaderText.closest(".dg_accordion");
   var menuItems = mainDiv.getElementsByClassName("multi-collapse");
   var totalCollapsed = mainDiv.getElementsByClassName("show");
-  var buttonElement = element.closest("button");
-  var childDiv = selectElementByClassName(buttonElement, ".multi-collapse");
-  var buttonAll = mainDiv.getElementsByClassName("dg_allitems");
-
-  var isMenuOpen = childDiv.className.includes(menuOpen);
+  var accordionButton = accordionHeaderText.closest("button");
+  var accordionContent = selectElementByClassName(
+    accordionButton,
+    ".multi-collapse"
+  );
+  var accordionButtonAll = mainDiv.getElementsByClassName("dg_allitems");
+  var isMenuOpen = accordionContent.className.includes(menuOpen);
 
   //If its open then we want to close it and vice versa
-  collpasePanelUpdate(!isMenuOpen, childDiv);
+  collpasePanelUpdate(!isMenuOpen, accordionContent);
 
-  buttonAll
-    ? updateButtonStatus(buttonAll[0], menuItems.length, totalCollapsed.length)
+  accordionButtonAll
+    ? updateButtonStatus(
+        accordionButtonAll[0],
+        menuItems.length,
+        totalCollapsed.length
+      )
     : null;
+
+  var ua = window.navigator.userAgent;
+  var isIE = /MSIE|Trident|Edge\//.test(ua);
+
+  if (isIE) {
+    var elementClass = accordionHeaderText.className;
+    accordionHeaderText.className = elementClass + " ms-focus-within";
+  }
 };
 
 const allMenuItemsAction = button => {
