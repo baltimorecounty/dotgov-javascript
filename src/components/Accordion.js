@@ -24,35 +24,37 @@ document.addEventListener(
   false
 );
 
-document.addEventListener(
-  "focusin",
-  onAccordionFocus => {
-    const { target } = onAccordionFocus;
-    changeFocusClass(target, "open");
-  },
-  false
-);
+var ua = window.navigator.userAgent;
+var isIE = /MSIE|Trident|Edge\//.test(ua);
 
-document.addEventListener(
-  "focusout",
-  onAccordionFocus => {
-    const { target } = onAccordionFocus;
-    changeFocusClass(target, "close");
-  },
-  false
-);
+if (isIE) {
+  document.addEventListener(
+    "focusin",
+    onAccordionFocus => {
+      const { target } = onAccordionFocus;
+      changeFocusClass(target, "open");
+    },
+    false
+  );
+
+  document.addEventListener(
+    "focusout",
+    onAccordionFocus => {
+      const { target } = onAccordionFocus;
+      changeFocusClass(target, "close");
+    },
+    false
+  );
+}
 
 const changeFocusClass = (target, status) => {
-  var ua = window.navigator.userAgent;
-  var isIE = /MSIE|Trident|Edge\//.test(ua);
-  if (isIE) {
-    var accordionHeaderText = target.getElementsByClassName(
-      "dg_accordion_buttontext-holder"
-    );
-    status === "open"
-      ? (accordionHeaderText[0].className =
-          "dg_accordion_buttontext-holder ms-focus-within")
-      : (accordionHeaderText[0].className = "dg_accordion_buttontext-holder");
+  var accordionHeaderText = target.getElementsByClassName(
+    "dg_accordion_buttontext-holder"
+  );
+  if (status === "open") {
+    accordionHeaderText[0].classList.add("ms-focus-within");
+  } else {
+    accordionHeaderText[0].classList.remove("ms-focus-within");
   }
 };
 
@@ -64,11 +66,11 @@ const selectElementByClassName = (element, cssName) => {
   }
 };
 
-const menuAction = accordionHeaderText => {
-  var mainDiv = accordionHeaderText.closest(".dg_accordion");
+const menuAction = accordionHeaderElm => {
+  var mainDiv = accordionHeaderElm.closest(".dg_accordion");
   var menuItems = mainDiv.getElementsByClassName("multi-collapse");
   var totalCollapsed = mainDiv.getElementsByClassName("show");
-  var accordionButton = accordionHeaderText.closest("button");
+  var accordionButton = accordionHeaderElm.closest("button");
   var accordionContent = selectElementByClassName(
     accordionButton,
     ".multi-collapse"
