@@ -8,6 +8,10 @@ const cssClasses = {
   canCloseOnOverlayClick: "dismissible"
 };
 
+const handleActiveOverlayClick = clickEvent => {
+  alert("hi");
+};
+
 /**
  * Captures all dom click events in order to bind all event with a particular class
  * @param {*} clickEvent
@@ -21,11 +25,16 @@ const handleDocumentClick = clickEvent => {
   const isModalCloseButtonClick =
     targetClassList.contains(cssClasses.modalCloseButton) ||
     !!clickEvent.target.closest(`.${cssClasses.modalCloseButton}`);
+  const isOverlayClick =
+    targetClassList.contains(`dialog-backdrop`) &&
+    targetClassList.contains(`active`);
 
   if (isModalOpenButtonClick) {
     handleModalOpenButtonClick(clickEvent);
   } else if (isModalCloseButtonClick) {
     handleModalCloseButtonClick(clickEvent);
+  } else if (isOverlayClick) {
+    handleActiveOverlayClick(clickEvent);
   } else {
     return;
   }
