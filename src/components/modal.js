@@ -3,8 +3,10 @@ import "./w3-dialog";
 import { GetFirstElementOrDefault } from "../utilities/dom.utils";
 
 const cssClasses = {
+  active: "active",
   modalCloseButton: "dg_modal__close-button",
   modalOpenButton: "dg_modal__open-button",
+  modalOverlay: "dialog-backdrop",
   /** overlay is transparent gray section around the modal */
   canCloseOnOverlayClick: "can-dismiss"
 };
@@ -56,8 +58,8 @@ const handleDocumentClick = clickEvent => {
     targetClassList.contains(cssClasses.modalCloseButton) ||
     !!clickEvent.target.closest(`.${cssClasses.modalCloseButton}`);
   const isOverlayClick =
-    targetClassList.contains(`dialog-backdrop`) &&
-    targetClassList.contains(`active`);
+    targetClassList.contains(`${cssClasses.modalOverlay}`) &&
+    targetClassList.contains(`${cssClasses.active}`);
 
   if (isModalOpenButtonClick) {
     handleModalOpenButtonClick(clickEvent);
