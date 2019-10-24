@@ -24,6 +24,38 @@ document.addEventListener(
   false
 );
 
+document.addEventListener(
+  "focusin",
+  onAccordionFocus => {
+    const { target } = onAccordionFocus;
+    AddFocus(target, "open");
+  },
+  false
+);
+
+document.addEventListener(
+  "focusout",
+  onAccordionFocus => {
+    const { target } = onAccordionFocus;
+    AddFocus(target, "close");
+  },
+  false
+);
+
+const AddFocus = (target, status) => {
+  var ua = window.navigator.userAgent;
+  var isIE = /MSIE|Trident|Edge\//.test(ua);
+  if (isIE) {
+    var accordionHeaderText = target.getElementsByClassName(
+      "dg_accordion_buttontext-holder"
+    );
+    status === "open"
+      ? (accordionHeaderText[0].className =
+          "dg_accordion_buttontext-holder ms-focus-within")
+      : (accordionHeaderText[0].className = "dg_accordion_buttontext-holder");
+  }
+};
+
 const selectElementByClassName = (element, cssName) => {
   var sibling = element.nextElementSibling;
   while (sibling) {
@@ -54,17 +86,6 @@ const menuAction = accordionHeaderText => {
         totalCollapsed.length
       )
     : null;
-
-  var ua = window.navigator.userAgent;
-  var isIE = /MSIE|Trident|Edge\//.test(ua);
-
-  if (isIE) {
-    var elementClass = accordionHeaderText.className;
-
-    !elementClass.includes("ms-focus-within")
-      ? (accordionHeaderText.className = elementClass + " ms-focus-within")
-      : null;
-  }
 };
 
 const allMenuItemsAction = button => {
