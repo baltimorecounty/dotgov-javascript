@@ -9,6 +9,10 @@ const cssClasses = {
   canCloseOnOverlayClick: "can-dismiss"
 };
 
+const selectors = {
+  activeDismissibleModal: ".dg_modal[data-dismissible]"
+};
+
 /**
  * Handle the modal overlay click.
  * The modal markup will determine whether or not the modal can close on overlay click
@@ -16,14 +20,15 @@ const cssClasses = {
  * @param {*} clickEvent
  */
 const handleActiveOverlayClick = clickEvent => {
-  const activeModalElm = GetFirstElementOrDefault(
+  const activeDismissibleModal = GetFirstElementOrDefault(
     document,
-    ".dg_modal[data-dismissible]"
+    selectors.activeDismissibleModal
   );
 
-  if (activeModalElm) {
+  if (activeDismissibleModal) {
+    /** The  w3 logic we used requires the close button to be passed into the closeDialog function */
     const closeButton = GetFirstElementOrDefault(
-      activeModalElm,
+      activeDismissibleModal,
       `.${cssClasses.modalCloseButton}`
     );
 
