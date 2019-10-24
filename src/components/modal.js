@@ -1,15 +1,40 @@
 import "../polyfills/closest.polyfill";
 import "./w3-dialog";
+import { GetFirstElementOrDefault } from "../utilities/dom.utils";
 
 const cssClasses = {
   modalCloseButton: "dg_modal__close-button",
   modalOpenButton: "dg_modal__open-button",
   /** overlay is transparent gray section around the modal */
-  canCloseOnOverlayClick: "dismissible"
+  canCloseOnOverlayClick: "can-dismiss"
 };
 
+/**
+ * Handle the modal overlay click.
+ * The modal markup will determine whether or not the modal can close on overlay click
+ * based on whether it has the data-dismissible data attribute.
+ * @param {*} clickEvent
+ */
 const handleActiveOverlayClick = clickEvent => {
-  alert("hi");
+  const activeModalElm = GetFirstElementOrDefault(
+    document,
+    ".dg_modal[data-dismissible]"
+  );
+
+  if (activeModalElm) {
+    const closeButton = GetFirstElementOrDefault(
+      activeModalElm,
+      `.${cssClasses.modalCloseButton}`
+    );
+
+    try {
+      window.closeDialog(closeButton);
+    } catch (ex) {
+      console.error(
+        "No modal close button specified, please check the docs to ensure this button exists"
+      );
+    }
+  }
 };
 
 /**
