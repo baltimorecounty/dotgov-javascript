@@ -3,7 +3,9 @@ import "./w3-dialog";
 
 const cssClasses = {
   modalCloseButton: "dg_modal__close-button",
-  modalOpenButton: "dg_modal__open-button"
+  modalOpenButton: "dg_modal__open-button",
+  /** overlay is transparent gray section around the modal */
+  canCloseOnOverlayClick: "dismissible"
 };
 
 /**
