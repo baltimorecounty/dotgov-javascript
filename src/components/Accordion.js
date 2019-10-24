@@ -24,37 +24,43 @@ document.addEventListener(
   false
 );
 
+/**
+ * Handler for all document focus events
+ * @param {*} focusEvent
+ */
+const onDocumentFocus = focusEvent => {
+  const { target } = focusEvent;
+  const isAccordionButtonElm = target.classList.contains("dg_accordion-btn");
+
+  if (isAccordionButtonElm) {
+    toggleAccordionFocus(focusEvent);
+  }
+};
+
 var ua = window.navigator.userAgent;
 var isIE = /MSIE|Trident|Edge\//.test(ua);
-
 if (isIE) {
-  document.addEventListener(
-    "focusin",
-    onAccordionFocus => {
-      const { target } = onAccordionFocus;
-      changeFocusClass(target, "open");
-    },
-    false
-  );
-
-  document.addEventListener(
-    "focusout",
-    onAccordionFocus => {
-      const { target } = onAccordionFocus;
-      changeFocusClass(target, "close");
-    },
-    false
-  );
+  document.addEventListener("focusin", onDocumentFocus, false);
+  document.addEventListener("focusout", onDocumentFocus, false);
 }
 
-const changeFocusClass = (target, status) => {
-  var accordionHeaderText = target.getElementsByClassName(
+/**
+ * Toggles class that enables proper focus
+ * This is a workaround for the IE and Edge Browsers that do not support :focus-within
+ * @param {*} focusEvent
+ */
+const toggleAccordionFocus = focusEvent => {
+  const { target, type: focusType } = focusEvent;
+  var accordionHeaderTextElms = target.getElementsByClassName(
     "dg_accordion_buttontext-holder"
   );
-  if (status === "open") {
-    accordionHeaderText[0].classList.add("ms-focus-within");
-  } else {
-    accordionHeaderText[0].classList.remove("ms-focus-within");
+
+  if (focusType === "focusin") {
+    accordionHeaderTextElms[0].classList.add("ms-focus-within");
+  }
+
+  if (focusType === "focusout") {
+    accordionHeaderTextElms[0].classList.remove("ms-focus-within");
   }
 };
 
