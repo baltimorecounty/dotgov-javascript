@@ -28,7 +28,7 @@ document.addEventListener(
   "focusin",
   onAccordionFocus => {
     const { target } = onAccordionFocus;
-    AddFocus(target, "open");
+    changeFocusClass(target, "open");
   },
   false
 );
@@ -37,12 +37,12 @@ document.addEventListener(
   "focusout",
   onAccordionFocus => {
     const { target } = onAccordionFocus;
-    AddFocus(target, "close");
+    changeFocusClass(target, "close");
   },
   false
 );
 
-const AddFocus = (target, status) => {
+const changeFocusClass = (target, status) => {
   var ua = window.navigator.userAgent;
   var isIE = /MSIE|Trident|Edge\//.test(ua);
   if (isIE) {
