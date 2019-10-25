@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Accordion Demo</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Style the buttons that are used to open and close the accordion panel */
+      .dg_accordion__collapsible {
+        background-color: #eee;
+        color: #444;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        text-align: left;
+        border: none;
+        outline: none;
+        transition: 0.4s;
+        position: relative;
+      }
+
+      button:focus {
+        color: #444;
+      }
+
+      /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+      .dg_accordion__collapsible:hover {
+        background-color: #ccc;
+      }
+      .dg_accordion-btn {
+        position: relative;
+      }
+
+      .dg_accordion-btn::after {
+        position: absolute;
+        cursor: pointer;
+        content: "\f107"; /*Font awesome right arrow*/
+        top: 0;
+        right: 0;
+      }
+      .collapsed .dg_accordion-btn::after {
+        position: absolute;
+        cursor: pointer;
+        content: "\f105"; /*Font awesome down arrow*/
+      }
+    </style>
+  </head>
+  <script src="/assets/dotgov-accordion.min.js"></script>
+  <body>
+    <div class="dg_accordion" id="accordionExample1">
+      <button class="dg_allitems dg_button-link" id="menuActionButton1">
+        Open All
+      </button>
+      <div class="collapsed dg_accordion__collapsible">
+        <button
+          class="fa dg_accordion-btn btn-link"
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapseOne1"
+          aria-expanded="true"
+          aria-controls="collapseOne"
+          style="text-align: left; width:100%;"
+        >
+          <span class="dg_accordion_buttontext-holder">
+            Collapsible Group Item #1
+          </span>
+        </button>
+        <div
+          id="collapseOne1"
+          class="multi-collapse collapse"
+          data-parent="#accordionExample1"
+        >
+          <div class="dg_accordion-item-body">
+            occaecat craft beer farm-to-table, raw denim aesthetic synth
+            nesciunt you probably haven't heard of them accusamus labore
+            sustainable VHS.
+          </div>
+        </div>
+      </div>
+      <div class="collapsed dg_accordion__collapsible">
+        <button
+          class="fa dg_accordion-btn btn-link"
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapseTwo2"
+          aria-expanded="false"
+          aria-controls="collapseTwo"
+          style="text-align: left; width: 100%;"
+        >
+          Collapsible Group Item #2
+        </button>
+        <div>
+          This is a sub header
+        </div>
+        <div
+          id="collapseTwo2"
+          class="multi-collapse collapse"
+          data-parent="#accordionExample1"
+        >
+          <div class="dg_accordion-item-body">
+            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
+          </div>
+        </div>
+      </div>
+      <div class="collapsed dg_accordion__collapsible">
+        <button
+          class="fa dg_accordion-btn btn-link"
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapseThree3"
+          aria-expanded="false"
+          aria-controls="collapseThree"
+          style="text-align: left; width:100%;"
+        >
+          Collapsible Group Item #3
+        </button>
+        <div
+          id="collapseThree3"
+          class="multi-collapse collapse"
+          data-parent="#accordionExample1"
+        >
+          <div class="dg_accordion-item-body">
+            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
+            terry richardson ad squid. 3 wolf moon officia aute, non cupidatat
+            you probably haven't heard of them accusamus labore sustainable VHS.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dg_accordion" id="accordionExample2">
+      <button class="dg_allitems" id="menuActionButton2">
+        Open All
+      </button>
+      <div class="collapsed dg_accordion__collapsible">
+        <button
+          class="fa dg_accordion-btn btn-link"
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapseOne"
+          aria-expanded="true"
+          aria-controls="collapseOne"
+          style="text-align: left; width:100%;"
+        >
+          New Collapsible Group Item #1
+        </button>
+        <div
+          id="collapseOne"
+          class="multi-collapse collapse"
+          data-parent="#accordionExample2"
+        >
+          <div class="dg_accordion-item-body">
+            occaecat craft beer farm-to-table, raw denim aesthetic synth
+            nesciunt you probably haven't heard of them accusamus labore
+            sustainable VHS.
+          </div>
+        </div>
+      </div>
+      <div class="collapsed dg_accordion__collapsible">
+        <button
+          class="fa dg_accordion-btn btn-link"
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapseTwo"
+          aria-expanded="false"
+          aria-controls="collapseTwo"
+          style="text-align: left; width:100%;"
+        >
+          New Collapsible Group Item #2
+        </button>
+        <div
+          id="collapseTwo"
+          class="multi-collapse collapse"
+          data-parent="#accordionExample2"
+        >
+          <div class="dg_accordion-item-body">
+            <a href="https://www.w3schools.com">This is a link </a>
+          </div>
+        </div>
+      </div>
+      <div class="collapsed dg_accordion__collapsible">
+        <button
+          class="fa dg_accordion-btn btn-link"
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapseThree"
+          aria-expanded="false"
+          aria-controls="collapseThree"
+          style="text-align: left; width:100%;"
+        >
+          New Collapsible Group Item #3
+        </button>
+        <div
+          id="collapseThree"
+          class="multi-collapse collapse"
+          data-parent="#accordionExample2"
+        >
+          <div class="dg_accordion-item-body">
+            <img
+              width="300"
+              height="200"
+              alt="Stuff goes here"
+              src="//baltimorecountymd.gov/sebin/t/t/homepage-county-executive.jpg"
+              border="0"
+              vspace="0"
+              hspace="0"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

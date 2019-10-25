@@ -3,7 +3,10 @@ const path = require("path");
 module.exports = {
   mode: "development",
   entry: {
+    Accordion: "./src/components/Accordion.js",
     FollowUp: "./src/page-specific/BaltCoGo/FollowUp.js",
+    Modal: "./src/components/Modal.js",
+    StepList: "./src/components/StepList.js",
     SiteNavigation: "./src/site/SiteNavigation.js"
   },
   output: {
