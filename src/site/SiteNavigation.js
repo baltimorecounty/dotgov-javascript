@@ -1,44 +1,120 @@
-import {
-  AddClass,
-  RemoveClass,
-  ToggleClass,
-  SetAttribute
-} from "../utilities/dom.utilities";
+import { SetAttribute } from "../utilities/dom.utilities";
+import FocusTrap from "focus-trap";
+
+const attributes = {
+  ariaExpanded: "aria-expanded",
+  tabIndex: "tabindex"
+};
+
 const ids = {
-  siteHeader: "bc_site-header",
-  siteNavBtn: "bc_site-nav__toggle-btn",
+  siteNav: "bc_site-nav",
+  siteNavToggleButton: "bc_site-nav__toggle-button",
   siteNavLinks: "bc_site-nav__links",
   page: "bc_page"
 };
 
 const cssClasses = {
-  active: "active",
-  disabled: "disabled",
   hidden: "hidden",
-  hiddenInit: "hidden-init"
+  hiddenInit: "hidden-init",
+  isActive: "is-active",
+  isDisabled: "is-disabled"
 };
 
+const invisibleTabIndex = "-1"; /** Allows us to hide an item from tabbing */
+let siteNavFocusTrap;
+
+/**
+ * * Hide/Show the site navigation based on the given shouldShow param
+ * @param {boolean} shouldShow if set to true the site navigation will be shown
+ */
+const toggleSiteNav = shouldShow => {
+  const classListAction = shouldShow ? "add" : "remove";
+  const siteNavToggleButtonElm = document.getElementById(
+    ids.siteNavToggleButton
+  );
+  const pageElm = document.getElementById(ids.page);
+
+  // Update toggle button text
+  siteNavToggleButtonElm.textContent = shouldShow ? "Close" : "Menu";
+
+  // Set / Remove aria-expanded attributes
+  SetAttribute(
+    [siteNavToggleButtonElm, pageElm],
+    attributes.ariaExpanded,
+    shouldShow
+  );
+
+  // Set / Remove tab-index inside Site Nav
+  updateSiteNavTabIndex(shouldShow);
+
+  // Hide / Show the site nav
+  document
+    .getElementById(ids.siteNav)
+    .classList[classListAction](cssClasses.isActive);
+
+  // Activate or deactivate proper focus state
+  siteNavFocusTrap[shouldShow ? "activate" : "deactivate"]();
+
+  // Add / Remove esc listener
+  document[shouldShow ? "addEventListener" : "removeEventListener"](
+    "keydown",
+    handleDocumentKeyDown,
+    true
+  );
+
+  // Enable / Disabled page and body
+  pageElm.classList[classListAction](cssClasses.isDisabled);
+  document.body.classList[classListAction](cssClasses.isDisabled);
+};
+
+/**
+ * Handle any click on the document. An if else block will handle any specific
+ * click events we want to capture.
+ * @param {*} clickEvent
+ */
 const handleDocumentClick = clickEvent => {
   const { target } = clickEvent;
   const isSiteNavButtonClick =
-    target.id === ids.siteNavBtn || target.closest(`${ids.siteNavBtn}`);
+    target.id === ids.siteNavToggleButton ||
+    target.closest(`${ids.siteNavToggleButton}`);
+  const pageElm = target.closest(`#${ids.page}`);
+  const isDisabledPageClick =
+    pageElm && pageElm.classList.contains(cssClasses.isDisabled);
 
   if (isSiteNavButtonClick) {
     handleSiteNavigationButtonClick(clickEvent);
+  } else if (isDisabledPageClick) {
+    // Close the site nav
+    toggleSiteNav(false);
   }
+
   return;
+};
+
+const handleDocumentKeyDown = keyDownEvent => {
+  switch (event.key) {
+    case "Escape":
+      // Close the site nav
+      toggleSiteNav(false);
+      break;
+    default:
+      return; // Quit when this doesn't handle the key event.
+  }
+
+  // Cancel the default action to avoid it being handled twice
+  event.preventDefault();
 };
 
 const handleSiteNavigationButtonClick = clickEvent => {
   const { target } = clickEvent;
-  const elmsToToggle = document.querySelectorAll(
-    `#${ids.siteHeader}, #${ids.page}`
-  );
+  const buttonAriaExpandedValue = target.getAttribute("aria-expanded");
 
-  // Position the page and header based on the menu state
-  ToggleClass(elmsToToggle, cssClasses.active);
+  /** If no aria attribute exists this means the menu is closed and we want to show it. */
+  const shouldShowNav =
+    !buttonAriaExpandedValue ||
+    !(buttonAriaExpandedValue.toLowerCase() === "true");
 
-  toggleNavigationButton(target);
+  toggleSiteNav(shouldShowNav);
 };
 
 /**
@@ -47,39 +123,44 @@ const handleSiteNavigationButtonClick = clickEvent => {
 const onDocumentReady = () => {
   // Allows users to use the menu even if javascript is not enabled
   document
-    .getElementById(ids.siteNavBtn)
-    .classList.remove(cssClasses.hiddenInit);
+    .getElementById(ids.siteNavToggleButton)
+    .classList.remove(cssClasses.hiddenInit); //TODO: do we still need this?
 
-  const siteNav = document.getElementById(ids.siteNavLinks);
+  const siteNav = document.getElementById(ids.siteNav);
 
-  siteNav.classList.add(cssClasses.hidden);
-  SetAttribute(siteNav.querySelectorAll("a"), "tabindex", "-1");
+  document.getElementById(ids.siteNavLinks).classList.add(cssClasses.hidden);
+
+  SetAttribute(
+    siteNav.querySelectorAll("a"),
+    attributes.tabIndex,
+    invisibleTabIndex
+  );
+
+  /**
+   * Initialize a focus trap for use when the site navigation is active / visible
+   * See http://davidtheclark.github.io/focus-trap/ for more details.
+   */
+
+  siteNavFocusTrap = FocusTrap(document.getElementById(ids.siteNav), {
+    clickOutsideDeactivates: true
+  });
 };
 
 /**
- *
- * @param {*} navButtonElm
+ * Remove site nav items from the tab index if the site nav is hidden
+ * @param {boolean} shouldShow flag that denotes if the site nav should be shown
  */
-const toggleNavigationButton = navButtonElm => {
-  const willCollapse = !!navButtonElm.getAttribute("aria-expanded");
-  const siteNavLinksElm = document.getElementById(`${ids.siteNavLinks}`);
-  const body = document.getElementsByTagName("body")[0];
-  const page = document.getElementById("bc_page");
-
-  siteNavLinksElm.classList[willCollapse ? "remove" : "add"](cssClasses.hidden);
-
-  // tabindex is set to -1 when the menu is not visible
-  // so the user can navigate what is visible on the screen.
-  SetAttribute(
-    siteNavLinksElm.querySelectorAll("a"),
-    "tabindex",
-    willCollapse ? "" : "-1"
-  );
-
-  body.classList.toggle(cssClasses.disabled);
-  page.classList.toggle(cssClasses.disabled);
-
-  navButtonElm.setAttribute("aria-expanded", !willCollapse);
+const updateSiteNavTabIndex = shouldShow => {
+  const siteNavLinkElms = document
+    .getElementById(ids.siteNav)
+    .querySelectorAll("a");
+  siteNavLinkElms.forEach(siteNavLinkElm => {
+    if (shouldShow) {
+      siteNavLinkElm.removeAttribute(attributes.tabIndex);
+    } else {
+      siteNavLinkElm.setAttribute(attributes.tabIndex, invisibleTabIndex);
+    }
+  });
 };
 
 /** Handler when the DOM is fully loaded */
