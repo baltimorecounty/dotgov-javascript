@@ -37,6 +37,7 @@
     "axios": "^0.19.0",
     "date-fns": "^2.0.1",
     "es6-promise": "^4.2.8",
+    "focus-trap": "^5.0.2",
     "regenerator": "^0.14.2"
   }
 }
