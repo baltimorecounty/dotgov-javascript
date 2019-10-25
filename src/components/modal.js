@@ -19,7 +19,8 @@ const selectors = {
  * Handle the modal overlay click.
  * The modal markup will determine whether or not the modal can close on overlay click
  * based on whether it has the data-dismissible data attribute.
- * @param {*} clickEvent
+ * @param {element:click} clickEvent - the observable overlay click event
+ * @listens element:click
  */
 const handleActiveOverlayClick = clickEvent => {
   const activeDismissibleModal = GetFirstElementOrDefault(
@@ -46,7 +47,8 @@ const handleActiveOverlayClick = clickEvent => {
 
 /**
  * Captures all dom click events in order to bind all event with a particular class
- * @param {*} clickEvent
+ * @param {document:click} clickEvent - the observable click event
+ * @listens document:click
  */
 const handleDocumentClick = clickEvent => {
   const { classList: targetClassList } = clickEvent.target;
