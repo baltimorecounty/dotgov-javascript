@@ -70,7 +70,8 @@ const toggleSiteNav = shouldShow => {
 /**
  * Handle any click on the document. An if else block will handle any specific
  * click events we want to capture.
- * @param {*} clickEvent
+ * @param {document:click} clickEvent - the observable click event
+ * @listens document:click
  */
 const handleDocumentClick = clickEvent => {
   const { target } = clickEvent;
@@ -91,6 +92,12 @@ const handleDocumentClick = clickEvent => {
   return;
 };
 
+/**
+ * Handle any keydown on the document. An switch statement will handle any specific
+ * click events we want to capture.
+ * @param {document:keydown} keyDownEvent - the observable keydown event
+ * @listens document:keydown
+ */
 const handleDocumentKeyDown = keyDownEvent => {
   switch (event.key) {
     case "Escape":
