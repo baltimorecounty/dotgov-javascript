@@ -1,6 +1,6 @@
 import {
   GetFirstElementOrDefault,
-  SetAttribute
+  SetAttributeForElms
 } from "../utilities/dom.utilities";
 import FocusTrap from "focus-trap";
 
@@ -56,7 +56,7 @@ const toggleSiteNav = shouldShow => {
   buttonIconElm.classList.add(shouldShow ? icons.close : icons.open);
 
   // Set / Remove aria-expanded attributes
-  SetAttribute(
+  SetAttributeForElms(
     [siteNavToggleButtonElm, pageElm],
     attributes.ariaExpanded,
     shouldShow
@@ -166,7 +166,7 @@ const onDocumentReady = () => {
 
   document.getElementById(ids.siteNavLinks).classList.add(cssClasses.hidden);
 
-  SetAttribute(
+  SetAttributeForElms(
     siteNav.querySelectorAll("a"),
     attributes.tabIndex,
     invisibleTabIndex
