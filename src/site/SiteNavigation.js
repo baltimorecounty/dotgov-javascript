@@ -1,4 +1,6 @@
 import {
+  AddClassToElms,
+  RemoveClassFromElms,
   GetFirstElementOrDefault,
   SetAttributeForElms
 } from "../utilities/dom.utilities";
@@ -65,11 +67,6 @@ const toggleSiteNav = shouldShow => {
   // Set / Remove tab-index inside Site Nav
   updateSiteNavTabIndex(shouldShow);
 
-  // Hide / Show the site nav
-  document
-    .getElementById(ids.siteNav)
-    .classList[classListAction](cssClasses.isActive);
-
   // Activate or deactivate proper focus state
   siteNavFocusTrap[shouldShow ? "activate" : "deactivate"]();
 
@@ -80,9 +77,18 @@ const toggleSiteNav = shouldShow => {
     true
   );
 
+  // Hide / Show the site nav
+  document
+    .getElementById(ids.siteNav)
+    .classList[classListAction](cssClasses.isActive);
+
   // Enable / Disabled page and body
-  pageElm.classList[classListAction](cssClasses.isDisabled);
-  document.body.classList[classListAction](cssClasses.isDisabled);
+  const disabledElms = [pageElm, document.body];
+  if (shouldShow) {
+    AddClassToElms(disabledElms, cssClasses.isDisabled);
+  } else {
+    RemoveClassFromElms(disabledElms, cssClasses.isDisabled);
+  }
 };
 
 /**
