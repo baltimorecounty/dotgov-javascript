@@ -23,25 +23,22 @@ const selectors = {
  * @listens element:click
  */
 const handleActiveOverlayClick = clickEvent => {
-  const activeDismissibleModal = GetFirstElementOrDefault(
+  const activeDismissibleModalElm = GetFirstElementOrDefault(
     document,
     selectors.activeDismissibleModal
   );
+  const isDismissible =
+    activeDismissibleModalElm &&
+    activeDismissibleModalElm.getAttribute("data-dismissible") !== "false";
 
-  if (activeDismissibleModal) {
+  if (isDismissible) {
     /** The  w3 logic we used requires the close button to be passed into the closeDialog function */
     const closeButton = GetFirstElementOrDefault(
-      activeDismissibleModal,
+      activeDismissibleModalElm,
       `.${cssClasses.modalCloseButton}`
     );
 
-    try {
-      window.closeDialog(closeButton);
-    } catch (ex) {
-      console.error(
-        "No modal close button specified, please check the docs to ensure this button exists"
-      );
-    }
+    window.closeDialog(closeButton);
   }
 };
 
