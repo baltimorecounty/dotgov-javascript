@@ -15,7 +15,7 @@ const GetFirstElementOrDefault = (elm, querySelector) => {
  * @param {string} attributeName name of the attribute
  * @param {*} attributeValue attribute value
  */
-const SetAttribute = (elms, attributeName, attributeValue) => {
+const SetAttributeForElms = (elms, attributeName, attributeValue) => {
   elms.forEach(elm => {
     elm.setAttribute(attributeName, attributeValue);
   });
@@ -26,7 +26,7 @@ const SetAttribute = (elms, attributeName, attributeValue) => {
  * @param {NodeList} elms collection of nodes, usually from document.querySelectorAll
  * @param {string} cssClass space separated string of css classes
  */
-const AddClass = (elms, cssClass) => {
+const AddClassToElms = (elms, cssClass) => {
   elms.forEach(elm => {
     elm.classList.add(cssClass);
   });
@@ -37,7 +37,7 @@ const AddClass = (elms, cssClass) => {
  * @param {NodeList} elms collection of nodes, usually from document.querySelectorAll
  * @param {string} cssClass space separated string of css classes
  */
-const RemoveClass = (elms, cssClass) => {
+const RemoveClassFromElms = (elms, cssClass) => {
   elms.forEach(elm => {
     elm.classList.remove(cssClass);
   });
@@ -48,16 +48,16 @@ const RemoveClass = (elms, cssClass) => {
  * @param {NodeList} elms collection of nodes, usually from document.querySelectorAll
  * @param {string} cssClass space separated string of css classes
  */
-const ToggleClass = (elms, cssClass) => {
+const ToggleClassForElms = (elms, cssClass) => {
   elms.forEach(elm => {
     elm.classList.toggle(cssClass);
   });
 };
 
 export {
-  AddClass,
+  AddClassToElms,
   GetFirstElementOrDefault,
-  RemoveClass,
-  SetAttribute,
-  ToggleClass
+  RemoveClassFromElms,
+  SetAttributeForElms,
+  ToggleClassForElms
 };
