@@ -57,8 +57,8 @@ const handleDocumentClick = clickEvent => {
     targetClassList.contains(cssClasses.modalCloseButton) ||
     !!clickEvent.target.closest(`.${cssClasses.modalCloseButton}`);
   const isOverlayClick =
-    targetClassList.contains(`${cssClasses.modalOverlay}`) &&
-    targetClassList.contains(`${cssClasses.active}`);
+    targetClassList.contains(cssClasses.modalOverlay) &&
+    targetClassList.contains(cssClasses.active);
 
   if (isModalOpenButtonClick) {
     handleModalOpenButtonClick(clickEvent);
