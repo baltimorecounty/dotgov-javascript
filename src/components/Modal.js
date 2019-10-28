@@ -1,6 +1,6 @@
 import "../polyfills/closest.polyfill";
 import "./w3-dialog";
-import { GetFirstElementOrDefault } from "../utilities/dom.utils";
+import { GetFirstElementOrDefault } from "../utilities/dom.utilities";
 
 const cssClasses = {
   active: "active",
