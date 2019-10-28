@@ -6,7 +6,8 @@ module.exports = {
     Accordion: "./src/components/Accordion.js",
     FollowUp: "./src/page-specific/BaltCoGo/FollowUp.js",
     Modal: "./src/components/Modal.js",
-    StepList: "./src/components/StepList.js"
+    StepList: "./src/components/StepList.js",
+    SiteNavigation: "./src/site/SiteNavigation.js"
   },
   output: {
     path: path.join(__dirname, "dist"),
