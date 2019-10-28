@@ -14,13 +14,11 @@ Note: "The modal" is referencing the main container of the markup with the class
 - The modal must have `aria-modal="true""` specified
 - The modal must have `aria-labelledby` specified and match the heading of the modal's `id` attribute
 - The modal must contain a heading with an `id` attribute that matches `aria-labelledby` of the modal.
-- The modal must contain the attribute `data-dismissible` equal to `true` or `false`. When the value is set to `true` the user will be able to select outside the modal to modal to close the modal but should still have the possibility to close the modal through a button within the modal. If set to `false` a button inside of the modal will required to close the modal.
 
 
 ```html
 <div
     class="dg_modal hidden"
-    data-dismissible="true"
     id="my-accessible-dialog"
     role="dialog"
     aria-labelledby="my-accessible-dialog_label"
