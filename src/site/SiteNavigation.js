@@ -1,5 +1,5 @@
 import { GetFirstElementOrDefault } from "../utilities/dom.utils";
-import { SetAttribute } from "../utilities/dom.utilities";
+import { SetAttribute, ToggleClass } from "../utilities/dom.utilities";
 import FocusTrap from "focus-trap";
 
 const attributes = {

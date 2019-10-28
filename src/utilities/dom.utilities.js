@@ -1,4 +1,15 @@
 /**
+ * Get the first element based on a css selector
+ * @param {*} elm
+ * @param {string} querySelector
+ * @returns HTMLElement or null if the query selector does not match any elements.
+ */
+const GetFirstElementOrDefault = (elm, querySelector) => {
+  const elms = elm.querySelectorAll(querySelector);
+  return elms ? elms[0] : null;
+};
+
+/**
  * Set a specific attribute on a group of elements
  * @param {NodeList} elms collection of nodes, usually from document.querySelectorAll
  * @param {string} attributeName name of the attribute
@@ -43,4 +54,10 @@ const ToggleClass = (elms, cssClass) => {
   });
 };
 
-export { AddClass, RemoveClass, SetAttribute, ToggleClass };
+export {
+  AddClass,
+  GetFirstElementOrDefault,
+  RemoveClass,
+  SetAttribute,
+  ToggleClass
+};
