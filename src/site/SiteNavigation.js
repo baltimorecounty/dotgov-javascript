@@ -1,9 +1,15 @@
+import { GetFirstElementOrDefault } from "../utilities/dom.utils";
 import { SetAttribute } from "../utilities/dom.utilities";
 import FocusTrap from "focus-trap";
 
 const attributes = {
   ariaExpanded: "aria-expanded",
   tabIndex: "tabindex"
+};
+
+const icons = {
+  open: "fa-bars",
+  close: "fa-times"
 };
 
 const ids = {
@@ -17,7 +23,8 @@ const cssClasses = {
   hidden: "hidden",
   hiddenInit: "hidden-init",
   isActive: "is-active",
-  isDisabled: "is-disabled"
+  isDisabled: "is-disabled",
+  siteNavToggleButtonText: "bc_site-nav__toggle-button__text"
 };
 
 const invisibleTabIndex = "-1"; /** Allows us to hide an item from tabbing */
@@ -32,10 +39,19 @@ const toggleSiteNav = shouldShow => {
   const siteNavToggleButtonElm = document.getElementById(
     ids.siteNavToggleButton
   );
+  const buttonIconElm = GetFirstElementOrDefault(siteNavToggleButtonElm, "i");
+  const buttonIconTextElm = GetFirstElementOrDefault(
+    siteNavToggleButtonElm,
+    `.${cssClasses.siteNavToggleButtonText}`
+  );
   const pageElm = document.getElementById(ids.page);
 
   // Update toggle button text
-  siteNavToggleButtonElm.textContent = shouldShow ? "Close" : "Menu";
+  buttonIconTextElm.textContent = shouldShow ? "Close" : "Menu";
+
+  // Toggle the toggle button icon
+  buttonIconElm.classList.remove(shouldShow ? icons.open : icons.close);
+  buttonIconElm.classList.add(shouldShow ? icons.close : icons.open);
 
   // Set / Remove aria-expanded attributes
   SetAttribute(
@@ -77,7 +93,7 @@ const handleDocumentClick = clickEvent => {
   const { target } = clickEvent;
   const isSiteNavButtonClick =
     target.id === ids.siteNavToggleButton ||
-    target.closest(`${ids.siteNavToggleButton}`);
+    target.closest(`#${ids.siteNavToggleButton}`);
   const pageElm = target.closest(`#${ids.page}`);
   const isDisabledPageClick =
     pageElm && pageElm.classList.contains(cssClasses.isDisabled);
@@ -114,7 +130,13 @@ const handleDocumentKeyDown = keyDownEvent => {
 
 const handleSiteNavigationButtonClick = clickEvent => {
   const { target } = clickEvent;
-  const buttonAriaExpandedValue = target.getAttribute("aria-expanded");
+  const siteNavToggleButton =
+    target.id === ids.siteNavToggleButton
+      ? target
+      : target.closest(`#${ids.siteNavToggleButton}`);
+  const buttonAriaExpandedValue = siteNavToggleButton.getAttribute(
+    "aria-expanded"
+  );
 
   /** If no aria attribute exists this means the menu is closed and we want to show it. */
   const shouldShowNav =
