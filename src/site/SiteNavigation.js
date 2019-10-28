@@ -135,7 +135,7 @@ const handleSiteNavigationButtonClick = clickEvent => {
       ? target
       : target.closest(`#${ids.siteNavToggleButton}`);
   const buttonAriaExpandedValue = siteNavToggleButton.getAttribute(
-    "aria-expanded"
+    attributes.ariaExpanded
   );
 
   /** If no aria attribute exists this means the menu is closed and we want to show it. */
