@@ -17,11 +17,6 @@
       href="//www.baltimorecountymd.gov/sebin/j/d/dotgov.min.css"
     />
     <style>
-      :focus {
-        background: red;
-        color: white;
-      }
-
       #bc_site-nav {
         position: absolute;
         top: 0;
@@ -87,7 +82,7 @@
         margin: 0;
         padding: 60px 20px;
         list-style-type: none;
-        width: 450px;
+        width: 490px;
         position: fixed;
         left: -490px;
         top: 0;
@@ -131,9 +126,18 @@
         opacity: 0.8;
         visibility: visible;
       }
-
       body.is-disabled {
         overflow: hidden;
+      }
+
+      /* Demo Only */
+      #bc_page {
+        margin: 90px auto;
+      }
+
+      :focus {
+        background: red;
+        color: white;
       }
     </style>
     <script
@@ -164,29 +168,6 @@
       </ul>
     </nav>
     <div id="bc_page">
-      <header class="dg_header dg_site-header">
-        <div class="dg_brand">
-          <div id="fake-menu-button"></div>
-          <a href="/" title="View the Baltimore County Government homepage.">
-            <div class="dg_brand-text">
-              <span>Baltimore County</span><span>Government</span>
-            </div>
-          </a>
-          <p class="dg_status-text">Beta</p>
-        </div>
-        <form class="dg_search-container" id="search-form">
-          <label for="main-search" class="visuallyhidden">Search:</label
-          ><input
-            class="dg_search-input"
-            id="main-search"
-            type="text"
-            placeholder="Search for services and more..."
-            autocomplete="off"
-          /><button class="dg_search-btn" type="submit">
-            <i class="fas fa-search" aria-hidden="true"></i>
-          </button>
-        </form>
-      </header>
       <div
         class="anyipsum-output"
         style="max-width: 1400px;width: 100%; margin: auto;"
