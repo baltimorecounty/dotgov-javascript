@@ -128,6 +128,11 @@ const handleDocumentKeyDown = keyDownEvent => {
   event.preventDefault();
 };
 
+/**
+ * Handle the site navigation button click. Works as a toggle button to show / hide site navigation.
+ * @param {button:click} clickEvent - the observable click event
+ * @listens button:click
+ */
 const handleSiteNavigationButtonClick = clickEvent => {
   const { target } = clickEvent;
   const siteNavToggleButton =
@@ -147,7 +152,7 @@ const handleSiteNavigationButtonClick = clickEvent => {
 };
 
 /**
- *
+ * Do stuff after the dom has loaded
  */
 const onDocumentReady = () => {
   // Allows users to use the menu even if javascript is not enabled
