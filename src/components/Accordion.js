@@ -11,10 +11,10 @@ document.addEventListener(
     const { target } = onDocumentClick;
     const targetClassList = target.classList;
     const isAccordionButtonClick =
-      targetClassList.includes("dg_accordion-btn") ||
-      targetClassList.includes("dg_accordion_buttontext-holder");
+      targetClassList.contains("dg_accordion-btn") ||
+      targetClassList.contains("dg_accordion_buttontext-holder");
 
-    if (targetClassList.includes("dg_allitems")) {
+    if (targetClassList.contains("dg_allitems")) {
       allMenuItemsAction(target);
     } else if (isAccordionButtonClick) {
       toggleAccordionPanel(target);
@@ -83,7 +83,9 @@ const selectElementByClassName = (element, cssNameText) => {
  * @param {HTMLElement} accordionHeaderElm
  */
 const toggleAccordionPanel = accordionHeaderElm => {
-  var mainDivElm = accordionHeaderElm.closest(".dg_accordion");
+  var mainDivElm =
+    accordionHeaderElm.closest(".dg_accordion") ||
+    accordionHeaderElm.closest(".dg_collapse");
   var menuItems = mainDivElm.getElementsByClassName("multi-collapse");
   var totalCollapsedPanels = mainDivElm.getElementsByClassName("show");
   var accordionButtonElm = accordionHeaderElm.closest("button");
@@ -97,7 +99,7 @@ const toggleAccordionPanel = accordionHeaderElm => {
   //If its open then we want to close it and vice versa
   collpasePanelUpdate(!isMenuOpen, accordionContentElm);
 
-  accordionButtonAllElms
+  accordionButtonAllElms.length > 0
     ? updateButtonStatus(
         accordionButtonAllElms[0],
         menuItems.length,
