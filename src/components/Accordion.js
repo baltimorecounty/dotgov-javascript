@@ -9,12 +9,13 @@ document.addEventListener(
   "click",
   onDocumentClick => {
     const { target } = onDocumentClick;
+    const targetClassList = target.classList;
 
-    if (target.className.includes("dg_allitems")) {
+    if (targetClassList.includes("dg_allitems")) {
       allMenuItemsAction(target);
     } else if (
-      target.className.includes("dg_accordion-btn") ||
-      target.className.includes("dg_accordion_buttontext-holder")
+      targetClassList.includes("dg_accordion-btn") ||
+      targetClassList.includes("dg_accordion_buttontext-holder")
     ) {
       menuAction(target);
     } else {
