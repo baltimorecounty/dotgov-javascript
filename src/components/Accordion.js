@@ -97,7 +97,7 @@ const toggleAccordionPanel = accordionHeaderElm => {
   var isMenuOpen = accordionContentElm.className.includes(menuOpen);
 
   //If its open then we want to close it and vice versa
-  collpasePanelUpdate(!isMenuOpen, accordionContentElm);
+  collapsePanelUpdate(!isMenuOpen, accordionContentElm);
 
   accordionButtonAllElms.length > 0
     ? updateButtonStatus(
@@ -119,12 +119,12 @@ const allMenuItemsAction = button => {
   for (let i = 0; i < menuItems.length; i++) {
     var menuItem = menuItems[i];
 
-    collpasePanelUpdate(isMenuOpen, menuItem);
+    collapsePanelUpdate(isMenuOpen, menuItem);
   }
   updateButtonStatus(button, menuItems.length, totalCollapsedPanels.length);
 };
 
-const collpasePanelUpdate = (isMenuOpen, menuItem) => {
+const collapsePanelUpdate = (isMenuOpen, menuItem) => {
   menuItem.className = menuState(isMenuOpen ? "open" : "close");
   menuItem.setAttribute("aria-expanded", isMenuOpen);
   var accordionElm = menuItem.closest(".dg_accordion__collapsible");
