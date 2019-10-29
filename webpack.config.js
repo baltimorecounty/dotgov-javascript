@@ -7,6 +7,7 @@ module.exports = {
     FollowUp: "./src/page-specific/BaltCoGo/FollowUp.js",
     Modal: "./src/components/Modal.js",
     StepList: "./src/components/StepList.js",
+    Site: "./src/site/Site.js",
     SiteNavigation: "./src/site/SiteNavigation.js"
   },
   output: {
