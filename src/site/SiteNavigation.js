@@ -23,7 +23,7 @@ const ids = {
 };
 
 const cssClasses = {
-  hidden: "hidden",
+  hidden: "invisible",
   hiddenInit: "hidden-init",
   isActive: "is-active",
   isDisabled: "is-disabled",
@@ -48,10 +48,19 @@ const toggleSiteNav = shouldShow => {
     siteNavToggleButtonElm,
     `.${cssClasses.siteNavToggleButtonText}`
   );
+  const siteNavContainerElm = GetFirstElementOrDefault(
+    document.getElementById(ids.siteNav),
+    `.${cssClasses.siteNavListContainer}`
+  );
   const pageElm = document.getElementById(ids.page);
 
   // Update toggle button text
   buttonIconTextElm.textContent = shouldShow ? "Close" : "Menu";
+
+  // Toggle the content hidden class
+  siteNavContainerElm.classList[shouldShow ? "remove" : "add"](
+    cssClasses.hidden
+  );
 
   // Toggle the toggle button icon
   buttonIconElm.classList.remove(shouldShow ? icons.open : icons.close);
