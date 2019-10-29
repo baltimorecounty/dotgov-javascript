@@ -24,6 +24,48 @@ const cssClasses = {
 };
 
 /**
+ * Handler for all document focus events
+ * @param {*} focusEvent
+ */
+const onDocumentFocus = focusEvent => {
+  const { target } = focusEvent;
+  const isSteplistButtonElm = target.classList.contains(
+    "dg_step-list__toggle-btn"
+  );
+
+  if (isSteplistButtonElm) {
+    toggleSteplistFocus(focusEvent);
+  }
+};
+
+var ua = window.navigator.userAgent;
+var isIE = /MSIE|Trident|Edge\//.test(ua);
+if (isIE) {
+  document.addEventListener("focusin", onDocumentFocus, false);
+  document.addEventListener("focusout", onDocumentFocus, false);
+}
+
+/**
+ * Toggles class that enables proper focus
+ * This is a workaround for the IE and Edge Browsers that do not support :focus-within
+ * @param {*} focusEvent
+ */
+const toggleSteplistFocus = focusEvent => {
+  const { target, type: focusType } = focusEvent;
+  var steplistHeaderElms = target.getElementsByClassName(
+    "dg_step-list__toggle-btn__title"
+  );
+
+  if (focusType === "focusin") {
+    steplistHeaderElms[0].classList.add("ms-focus-within");
+  }
+
+  if (focusType === "focusout") {
+    steplistHeaderElms[0].classList.remove("ms-focus-within");
+  }
+};
+
+/**
  * Add hover events for each list item for a given step list
  * @param {*} stepListElm
  */
