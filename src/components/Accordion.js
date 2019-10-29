@@ -127,11 +127,9 @@ const allMenuItemsAction = button => {
 const collpasePanelUpdate = (isMenuOpen, menuItem) => {
   menuItem.className = menuState(isMenuOpen ? "open" : "close");
   menuItem.setAttribute("aria-expanded", isMenuOpen);
-  var element = menuItem.closest(".dg_accordion__collapsible");
+  var accordionElm = menuItem.closest(".dg_accordion__collapsible");
 
-  element.className = `dg_accordion__collapsible ${
-    isMenuOpen ? "" : "collapsed"
-  }`.trim();
+  accordionElm.classList[isMenuOpen ? "remove" : "add"]("collapsed");
 };
 
 const menuState = state =>
