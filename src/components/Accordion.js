@@ -9,14 +9,15 @@ document.addEventListener(
   "click",
   onDocumentClick => {
     const { target } = onDocumentClick;
+    const targetClassList = target.classList;
+    const isAccordionButtonClick =
+      targetClassList.contains("dg_accordion-btn") ||
+      targetClassList.contains("dg_accordion_buttontext-holder");
 
-    if (target.className.includes("dg_allitems")) {
+    if (targetClassList.contains("dg_allitems")) {
       allMenuItemsAction(target);
-    } else if (
-      target.className.includes("dg_accordion-btn") ||
-      target.className.includes("dg_accordion_buttontext-holder")
-    ) {
-      menuAction(target);
+    } else if (isAccordionButtonClick) {
+      toggleAccordionPanel(target);
     } else {
       return;
     }
@@ -75,8 +76,16 @@ const selectElementByClassName = (element, cssNameText) => {
   }
 };
 
-const menuAction = accordionHeaderElm => {
-  var mainDivElm = accordionHeaderElm.closest(".dg_accordion");
+/**
+ * Toggles an accordion panel for a given element.
+ * This toggles handle hiding / showing the content as well as handling any
+ * accessability and visual stuff that needs to happen to the corresponding accordion elements.
+ * @param {HTMLElement} accordionHeaderElm
+ */
+const toggleAccordionPanel = accordionHeaderElm => {
+  var mainDivElm =
+    accordionHeaderElm.closest(".dg_accordion") ||
+    accordionHeaderElm.closest(".dg_collapse");
   var menuItems = mainDivElm.getElementsByClassName("multi-collapse");
   var totalCollapsedPanels = mainDivElm.getElementsByClassName("show");
   var accordionButtonElm = accordionHeaderElm.closest("button");
@@ -88,9 +97,9 @@ const menuAction = accordionHeaderElm => {
   var isMenuOpen = accordionContentElm.className.includes(menuOpen);
 
   //If its open then we want to close it and vice versa
-  collpasePanelUpdate(!isMenuOpen, accordionContentElm);
+  collapsePanelUpdate(!isMenuOpen, accordionContentElm);
 
-  accordionButtonAllElms
+  accordionButtonAllElms.length > 0
     ? updateButtonStatus(
         accordionButtonAllElms[0],
         menuItems.length,
@@ -110,19 +119,17 @@ const allMenuItemsAction = button => {
   for (let i = 0; i < menuItems.length; i++) {
     var menuItem = menuItems[i];
 
-    collpasePanelUpdate(isMenuOpen, menuItem);
+    collapsePanelUpdate(isMenuOpen, menuItem);
   }
   updateButtonStatus(button, menuItems.length, totalCollapsedPanels.length);
 };
 
-const collpasePanelUpdate = (isMenuOpen, menuItem) => {
+const collapsePanelUpdate = (isMenuOpen, menuItem) => {
   menuItem.className = menuState(isMenuOpen ? "open" : "close");
   menuItem.setAttribute("aria-expanded", isMenuOpen);
-  var element = menuItem.closest(".dg_accordion__collapsible");
+  var accordionElm = menuItem.closest(".dg_accordion__collapsible");
 
-  element.className = `dg_accordion__collapsible ${
-    isMenuOpen ? "" : "collapsed"
-  }`.trim();
+  accordionElm.classList[isMenuOpen ? "remove" : "add"]("collapsed");
 };
 
 const menuState = state =>
@@ -132,10 +139,10 @@ const menuState = state =>
 
 const updateButtonStatus = (
   button,
-  totalCollapsiblesPanels,
+  totalCollapsiblePanels,
   totalCollapsedPanels
 ) => {
-  totalCollapsiblesPanels === totalCollapsedPanels
+  totalCollapsiblePanels === totalCollapsedPanels
     ? (button.textContent = buttonCloseAll)
     : (button.textContent = buttonOpenAll);
 };
