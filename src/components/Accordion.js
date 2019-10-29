@@ -1,5 +1,11 @@
 import "../polyfills/includes.polyfill";
 import "../polyfills/closest.polyfill";
+import { GetFirstElementOrDefault } from "../utilities/dom.utilities";
+
+const cssClasses = {
+  accordionButton: "dg_accordion-btn",
+  collapseComponent: "dg_collapse"
+};
 
 const menuOpen = "collapse show";
 const buttonOpenAll = "Open All";
@@ -11,7 +17,7 @@ document.addEventListener(
     const { target } = onDocumentClick;
     const targetClassList = target.classList;
     const isAccordionButtonClick =
-      targetClassList.contains("dg_accordion-btn") ||
+      targetClassList.contains(cssClasses.accordionButton) ||
       targetClassList.contains("dg_accordion_buttontext-holder");
 
     if (targetClassList.contains("dg_allitems")) {
@@ -31,11 +37,30 @@ document.addEventListener(
  */
 const onDocumentFocus = focusEvent => {
   const { target } = focusEvent;
-  const isAccordionButtonElm = target.classList.contains("dg_accordion-btn");
+  const isAccordionButtonElm = target.classList.contains(
+    cssClasses.accordionButton
+  );
 
   if (isAccordionButtonElm) {
     toggleAccordionFocus(focusEvent);
   }
+};
+
+/**
+ * Do stuff after the dom has loaded
+ */
+const onDocumentReady = () => {
+  const collapseElms = document.querySelectorAll(
+    `.${cssClasses.collapseComponent}`
+  );
+
+  collapseElms.forEach(collapseElm => {
+    const toggleButton = GetFirstElementOrDefault(
+      collapseElm,
+      `.${cssClasses.accordionButton}`
+    );
+    toggleAccordionPanel(toggleButton);
+  });
 };
 
 var ua = window.navigator.userAgent;
@@ -85,7 +110,7 @@ const selectElementByClassName = (element, cssNameText) => {
 const toggleAccordionPanel = accordionHeaderElm => {
   var mainDivElm =
     accordionHeaderElm.closest(".dg_accordion") ||
-    accordionHeaderElm.closest(".dg_collapse");
+    accordionHeaderElm.closest(`.${cssClasses.collapseComponent}`);
   var menuItems = mainDivElm.getElementsByClassName("multi-collapse");
   var totalCollapsedPanels = mainDivElm.getElementsByClassName("show");
   var accordionButtonElm = accordionHeaderElm.closest("button");
@@ -146,3 +171,6 @@ const updateButtonStatus = (
     ? (button.textContent = buttonCloseAll)
     : (button.textContent = buttonOpenAll);
 };
+
+/** Handler when the DOM is fully loaded */
+document.addEventListener("DOMContentLoaded", onDocumentReady);
