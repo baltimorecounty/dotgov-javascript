@@ -139,10 +139,10 @@ const menuState = state =>
 
 const updateButtonStatus = (
   button,
-  totalCollapsiblesPanels,
+  totalCollapsiblePanels,
   totalCollapsedPanels
 ) => {
-  totalCollapsiblesPanels === totalCollapsedPanels
+  totalCollapsiblePanels === totalCollapsedPanels
     ? (button.textContent = buttonCloseAll)
     : (button.textContent = buttonOpenAll);
 };
