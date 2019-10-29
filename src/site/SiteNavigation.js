@@ -19,16 +19,16 @@ const icons = {
 const ids = {
   siteNav: "bc_site-nav",
   siteNavToggleButton: "bc_site-nav__toggle-button",
-  siteNavLinks: "bc_site-nav__links",
   page: "bc_page"
 };
 
 const cssClasses = {
-  hidden: "hidden",
+  hidden: "invisible",
   hiddenInit: "hidden-init",
   isActive: "is-active",
   isDisabled: "is-disabled",
-  siteNavToggleButtonText: "bc_site-nav__toggle-button__text"
+  siteNavToggleButtonText: "bc_site-nav__toggle-button__text",
+  siteNavListContainer: "bc_site-nav__list-container"
 };
 
 const invisibleTabIndex = "-1"; /** Allows us to hide an item from tabbing */
@@ -48,10 +48,19 @@ const toggleSiteNav = shouldShow => {
     siteNavToggleButtonElm,
     `.${cssClasses.siteNavToggleButtonText}`
   );
+  const siteNavContainerElm = GetFirstElementOrDefault(
+    document.getElementById(ids.siteNav),
+    `.${cssClasses.siteNavListContainer}`
+  );
   const pageElm = document.getElementById(ids.page);
 
   // Update toggle button text
   buttonIconTextElm.textContent = shouldShow ? "Close" : "Menu";
+
+  // Toggle the content hidden class
+  siteNavContainerElm.classList[shouldShow ? "remove" : "add"](
+    cssClasses.hidden
+  );
 
   // Toggle the toggle button icon
   buttonIconElm.classList.remove(shouldShow ? icons.open : icons.close);
@@ -170,7 +179,10 @@ const onDocumentReady = () => {
 
   const siteNav = document.getElementById(ids.siteNav);
 
-  document.getElementById(ids.siteNavLinks).classList.add(cssClasses.hidden);
+  GetFirstElementOrDefault(
+    siteNav,
+    `.${cssClasses.siteNavListContainer}`
+  ).classList.add(cssClasses.hidden);
 
   SetAttributeForElms(
     siteNav.querySelectorAll("a"),
