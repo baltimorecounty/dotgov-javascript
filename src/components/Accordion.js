@@ -76,6 +76,12 @@ const selectElementByClassName = (element, cssNameText) => {
   }
 };
 
+/**
+ * Toggles an accordion panel for a given element.
+ * This toggles handle hiding / showing the content as well as handling any
+ * accessability and visual stuff that needs to happen to the corresponding accordion elements.
+ * @param {HTMLElement} accordionHeaderElm
+ */
 const toggleAccordionPanel = accordionHeaderElm => {
   var mainDivElm = accordionHeaderElm.closest(".dg_accordion");
   var menuItems = mainDivElm.getElementsByClassName("multi-collapse");
