@@ -17,7 +17,7 @@ document.addEventListener(
     if (targetClassList.includes("dg_allitems")) {
       allMenuItemsAction(target);
     } else if (isAccordionButtonClick) {
-      menuAction(target);
+      toggleAccordionPanel(target);
     } else {
       return;
     }
@@ -76,7 +76,7 @@ const selectElementByClassName = (element, cssNameText) => {
   }
 };
 
-const menuAction = accordionHeaderElm => {
+const toggleAccordionPanel = accordionHeaderElm => {
   var mainDivElm = accordionHeaderElm.closest(".dg_accordion");
   var menuItems = mainDivElm.getElementsByClassName("multi-collapse");
   var totalCollapsedPanels = mainDivElm.getElementsByClassName("show");
