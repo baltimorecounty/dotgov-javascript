@@ -1,5 +1,11 @@
 import "../polyfills/includes.polyfill";
 import "../polyfills/closest.polyfill";
+import { HtmlAttributes } from "../utilities/constants.utilities";
+
+const cssClasses = {
+  accordionButton: "dg_accordion-btn",
+  collapseComponent: "dg_collapse"
+};
 
 const menuOpen = "collapse show";
 const buttonOpenAll = "Open All";
@@ -11,7 +17,7 @@ document.addEventListener(
     const { target } = onDocumentClick;
     const targetClassList = target.classList;
     const isAccordionButtonClick =
-      targetClassList.contains("dg_accordion-btn") ||
+      targetClassList.contains(cssClasses.accordionButton) ||
       targetClassList.contains("dg_accordion_buttontext-holder");
 
     if (targetClassList.contains("dg_allitems")) {
@@ -31,11 +37,26 @@ document.addEventListener(
  */
 const onDocumentFocus = focusEvent => {
   const { target } = focusEvent;
-  const isAccordionButtonElm = target.classList.contains("dg_accordion-btn");
+  const isAccordionButtonElm = target.classList.contains(
+    cssClasses.accordionButton
+  );
 
   if (isAccordionButtonElm) {
     toggleAccordionFocus(focusEvent);
   }
+};
+
+/**
+ * Do stuff after the dom has loaded
+ */
+const onDocumentReady = () => {
+  const expandedAccordionToggleButtonElms = document.querySelectorAll(
+    `.${cssClasses.accordionButton}[aria-expanded="true"]`
+  );
+
+  expandedAccordionToggleButtonElms.forEach(toggleButtonElm => {
+    toggleAccordionPanel(toggleButtonElm);
+  });
 };
 
 var ua = window.navigator.userAgent;
@@ -85,7 +106,7 @@ const selectElementByClassName = (element, cssNameText) => {
 const toggleAccordionPanel = accordionHeaderElm => {
   var mainDivElm =
     accordionHeaderElm.closest(".dg_accordion") ||
-    accordionHeaderElm.closest(".dg_collapse");
+    accordionHeaderElm.closest(`.${cssClasses.collapseComponent}`);
   var menuItems = mainDivElm.getElementsByClassName("multi-collapse");
   var totalCollapsedPanels = mainDivElm.getElementsByClassName("show");
   var accordionButtonElm = accordionHeaderElm.closest("button");
@@ -94,10 +115,16 @@ const toggleAccordionPanel = accordionHeaderElm => {
     ".multi-collapse"
   );
   var accordionButtonAllElms = mainDivElm.getElementsByClassName("dg_allitems");
-  var isMenuOpen = accordionContentElm.className.includes(menuOpen);
+  var isAccordionExpanded = accordionContentElm.className.includes(menuOpen);
+
+  // Toggle the accordion's button aria-expanded attribute
+  accordionButtonElm.setAttribute(
+    HtmlAttributes.ariaExpanded,
+    !isAccordionExpanded
+  );
 
   //If its open then we want to close it and vice versa
-  collapsePanelUpdate(!isMenuOpen, accordionContentElm);
+  collapsePanelUpdate(!isAccordionExpanded, accordionContentElm);
 
   accordionButtonAllElms.length > 0
     ? updateButtonStatus(
@@ -124,12 +151,24 @@ const allMenuItemsAction = button => {
   updateButtonStatus(button, menuItems.length, totalCollapsedPanels.length);
 };
 
-const collapsePanelUpdate = (isMenuOpen, menuItem) => {
-  menuItem.className = menuState(isMenuOpen ? "open" : "close");
-  menuItem.setAttribute("aria-expanded", isMenuOpen);
-  var accordionElm = menuItem.closest(".dg_accordion__collapsible");
+/**
+ * Expands or collapse a content panel for a given accordion panel content element
+ * @param {boolean} shouldOpenPanel flag to determine if the accordion content should be expand or collapse
+ * @param {HTMLElement} accordionPanelContentElm accordion panel to expand / collapse
+ */
+const collapsePanelUpdate = (shouldOpenPanel, accordionPanelContentElm) => {
+  accordionPanelContentElm.className = menuState(
+    shouldOpenPanel ? "open" : "close"
+  );
+  accordionPanelContentElm.setAttribute(
+    HtmlAttributes.ariaExpanded,
+    shouldOpenPanel
+  );
+  var accordionElm = accordionPanelContentElm.closest(
+    ".dg_accordion__collapsible"
+  );
 
-  accordionElm.classList[isMenuOpen ? "remove" : "add"]("collapsed");
+  accordionElm.classList[shouldOpenPanel ? "remove" : "add"]("collapsed");
 };
 
 const menuState = state =>
@@ -146,3 +185,6 @@ const updateButtonStatus = (
     ? (button.textContent = buttonCloseAll)
     : (button.textContent = buttonOpenAll);
 };
+
+/** Handler when the DOM is fully loaded */
+document.addEventListener("DOMContentLoaded", onDocumentReady);
