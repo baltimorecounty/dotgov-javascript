@@ -1,6 +1,7 @@
 import { GetFirstElementOrDefault } from "../utilities/dom.utilities";
 import "../polyfills/array-from.polyfill";
 import "../polyfills/closest.polyfill";
+import "../polyfills/nodelist-foreach.polyfill";
 
 const states = {
   collapsed: "collapsed",
