@@ -120,10 +120,16 @@ const toggleAccordionPanel = accordionHeaderElm => {
     ".multi-collapse"
   );
   var accordionButtonAllElms = mainDivElm.getElementsByClassName("dg_allitems");
-  var isMenuOpen = accordionContentElm.className.includes(menuOpen);
+  var isAccordionExpanded = accordionContentElm.className.includes(menuOpen);
+
+  // Toggle the accordion's button aria-expanded attribute
+  accordionButtonElm.setAttribute(
+    HtmlAttributes.ariaExpanded,
+    !isAccordionExpanded
+  );
 
   //If its open then we want to close it and vice versa
-  collapsePanelUpdate(!isMenuOpen, accordionContentElm);
+  collapsePanelUpdate(!isAccordionExpanded, accordionContentElm);
 
   accordionButtonAllElms.length > 0
     ? updateButtonStatus(
@@ -150,12 +156,24 @@ const allMenuItemsAction = button => {
   updateButtonStatus(button, menuItems.length, totalCollapsedPanels.length);
 };
 
-const collapsePanelUpdate = (isMenuOpen, menuItem) => {
-  menuItem.className = menuState(isMenuOpen ? "open" : "close");
-  menuItem.setAttribute(HtmlAttributes.ariaExpanded, isMenuOpen);
-  var accordionElm = menuItem.closest(".dg_accordion__collapsible");
+/**
+ * Expands or collapse a content panel for a given accordion panel content element
+ * @param {boolean} shouldOpenPanel flag to determine if the accordion content should be expand or collapse
+ * @param {HTMLElement} accordionPanelContentElm accordion panel to expand / collapse
+ */
+const collapsePanelUpdate = (shouldOpenPanel, accordionPanelContentElm) => {
+  accordionPanelContentElm.className = menuState(
+    shouldOpenPanel ? "open" : "close"
+  );
+  accordionPanelContentElm.setAttribute(
+    HtmlAttributes.ariaExpanded,
+    shouldOpenPanel
+  );
+  var accordionElm = accordionPanelContentElm.closest(
+    ".dg_accordion__collapsible"
+  );
 
-  accordionElm.classList[isMenuOpen ? "remove" : "add"]("collapsed");
+  accordionElm.classList[shouldOpenPanel ? "remove" : "add"]("collapsed");
 };
 
 const menuState = state =>
