@@ -1,6 +1,7 @@
 import "../polyfills/includes.polyfill";
 import "../polyfills/closest.polyfill";
 import { GetFirstElementOrDefault } from "../utilities/dom.utilities";
+import { HtmlAttributes } from "../utilities/constants.utilities";
 
 const cssClasses = {
   accordionButton: "dg_accordion-btn",
@@ -151,7 +152,7 @@ const allMenuItemsAction = button => {
 
 const collapsePanelUpdate = (isMenuOpen, menuItem) => {
   menuItem.className = menuState(isMenuOpen ? "open" : "close");
-  menuItem.setAttribute("aria-expanded", isMenuOpen);
+  menuItem.setAttribute(HtmlAttributes.ariaExpanded, isMenuOpen);
   var accordionElm = menuItem.closest(".dg_accordion__collapsible");
 
   accordionElm.classList[isMenuOpen ? "remove" : "add"]("collapsed");
