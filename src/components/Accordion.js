@@ -1,6 +1,5 @@
 import "../polyfills/includes.polyfill";
 import "../polyfills/closest.polyfill";
-import { GetFirstElementOrDefault } from "../utilities/dom.utilities";
 import { HtmlAttributes } from "../utilities/constants.utilities";
 
 const cssClasses = {
