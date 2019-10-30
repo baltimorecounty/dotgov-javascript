@@ -51,16 +51,12 @@ const onDocumentFocus = focusEvent => {
  * Do stuff after the dom has loaded
  */
 const onDocumentReady = () => {
-  const collapseElms = document.querySelectorAll(
-    `.${cssClasses.collapseComponent}`
+  const expandedAccordionToggleButtonElms = document.querySelectorAll(
+    `.${cssClasses.accordionButton}[aria-expanded="true"]`
   );
 
-  collapseElms.forEach(collapseElm => {
-    const toggleButton = GetFirstElementOrDefault(
-      collapseElm,
-      `.${cssClasses.accordionButton}`
-    );
-    toggleAccordionPanel(toggleButton);
+  expandedAccordionToggleButtonElms.forEach(toggleButtonElm => {
+    toggleAccordionPanel(toggleButtonElm);
   });
 };
 
