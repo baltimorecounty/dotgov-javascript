@@ -14,6 +14,7 @@ const states = {
 
 const cssClasses = {
   collapsed: "collapsed",
+  static: "static",
   hovered: "is-hovered",
   stepList: "dg_step-list",
   detailsToggleButton: "dg_step-list__toggle-btn",
@@ -123,12 +124,18 @@ const handleDocumentClick = clickEvent => {
     target.parentElement.classList.contains(cssClasses.detailsToggleButton) ||
     target.classList.contains(cssClasses.detailsToggleButton);
 
-  if (isDetailsToggleClick) {
-    handleDetailsToggleButtonClick(clickEvent);
-  } else if (target.classList.contains(cssClasses.showAllStepsButton)) {
-    handleAllStepButtonClick(clickEvent);
-  } else {
-    return;
+  const isStaticList = target
+    .closest(`.${cssClasses.stepList}`)
+    .classList.contains(cssClasses.static);
+
+  if (!isStaticList) {
+    if (isDetailsToggleClick) {
+      handleDetailsToggleButtonClick(clickEvent);
+    } else if (target.classList.contains(cssClasses.showAllStepsButton)) {
+      handleAllStepButtonClick(clickEvent);
+    } else {
+      return;
+    }
   }
 };
 
