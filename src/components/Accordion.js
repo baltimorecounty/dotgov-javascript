@@ -1,5 +1,6 @@
 import "../polyfills/includes.polyfill";
 import "../polyfills/closest.polyfill";
+import "../polyfills/nodelist-foreach.polyfill";
 import { HtmlAttributes } from "../utilities/constants.utilities";
 
 const cssClasses = {
