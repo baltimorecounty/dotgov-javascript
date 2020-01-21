@@ -15,6 +15,20 @@
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       rel="stylesheet"
     />
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        var menu, menuToggle, toggleButton;
+
+        menu = document.getElementById("tabs");
+        menuToggle = document.getElementById("dg_menu-toggle");
+        toggleButton = document.getElementById("dg_menu-trigger-btn");
+
+        toggleButton.addEventListener("click", function(c) {
+          c.preventDefault();
+          menu.classList.toggle("open");
+        });
+      });
+    </script>
     <style>
       /* Style the buttons that are used to open and close the accordion panel */
       .dg_accordion__collapsible {
@@ -58,203 +72,22 @@
   </head>
 
   <body>
-    <h2>Accordion Example 1</h2>
-    <p>Basic example of an accordion.</p>
-    <div class="dg_accordion" id="accordionExample1">
-      <button class="dg_allitems dg_button-link" id="menuActionButton1">
-        Open All
-      </button>
-      <div class="collapsed dg_accordion__collapsible">
-        <button
-          class="fa dg_accordion-btn btn-link"
-          type="button"
-          data-toggle="collapse"
-          data-target="#collapseOne1"
-          aria-expanded="false"
-          aria-controls="collapseOne"
-          style="text-align: left; width:100%;"
-        >
-          <span class="dg_accordion_buttontext-holder">
-            Collapsible Group Item #1
-          </span>
-        </button>
-        <div
-          id="collapseOne1"
-          class="multi-collapse collapse"
-          data-parent="#accordionExample1"
-        >
-          <div class="dg_accordion-item-body">
-            occaecat craft beer farm-to-table, raw denim aesthetic synth
-            nesciunt you probably haven't heard of them accusamus labore
-            sustainable VHS.
-          </div>
-        </div>
-      </div>
-      <div class="collapsed dg_accordion__collapsible">
-        <button
-          class="fa dg_accordion-btn btn-link"
-          type="button"
-          data-toggle="collapse"
-          data-target="#collapseTwo2"
-          aria-expanded="false"
-          aria-controls="collapseTwo"
-          style="text-align: left; width: 100%;"
-        >
-          <span class="dg_accordion_buttontext-holder">
-            Collapsible Group Item #2
-          </span>
-        </button>
-        <div>
-          This is a sub header
-        </div>
-        <div
-          id="collapseTwo2"
-          class="multi-collapse collapse"
-          data-parent="#accordionExample1"
-        >
-          <div class="dg_accordion-item-body">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-          </div>
-        </div>
-      </div>
-      <div class="collapsed dg_accordion__collapsible">
-        <button
-          class="fa dg_accordion-btn btn-link"
-          type="button"
-          data-toggle="collapse"
-          data-target="#collapseThree3"
-          aria-expanded="false"
-          aria-controls="collapseThree"
-          style="text-align: left; width:100%;"
-        >
-          <span class="dg_accordion_buttontext-holder">
-            Collapsible Group Item #3
-          </span>
-        </button>
-        <div
-          id="collapseThree3"
-          class="multi-collapse collapse"
-          data-parent="#accordionExample1"
-        >
-          <div class="dg_accordion-item-body">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-            terry richardson ad squid. 3 wolf moon officia aute, non cupidatat
-            you probably haven't heard of them accusamus labore sustainable VHS.
-          </div>
-        </div>
-      </div>
-    </div>
-    <h2>Accordion Example 2</h2>
-    <p>Proof that more than one accordion can exist on a page.</p>
-    <div class="dg_accordion" id="accordionExample2">
-      <button class="dg_allitems" id="menuActionButton2">
-        Open All
-      </button>
-      <div class="collapsed dg_accordion__collapsible">
-        <button
-          class="fa dg_accordion-btn btn-link"
-          type="button"
-          data-toggle="collapse"
-          data-target="#collapseOne"
-          aria-expanded="false"
-          aria-controls="collapseOne"
-          style="text-align: left; width:100%;"
-        >
-          <span class="dg_accordion_buttontext-holder">
-            New Collapsible Group Item #1
-          </span>
-        </button>
-        <div
-          id="collapseOne"
-          class="multi-collapse collapse"
-          data-parent="#accordionExample2"
-        >
-          <div class="dg_accordion-item-body">
-            occaecat craft beer farm-to-table, raw denim aesthetic synth
-            nesciunt you probably haven't heard of them accusamus labore
-            sustainable VHS.
-          </div>
-        </div>
-      </div>
-      <div class="collapsed dg_accordion__collapsible">
-        <button
-          class="fa dg_accordion-btn btn-link"
-          type="button"
-          data-toggle="collapse"
-          data-target="#collapseTwo"
-          aria-expanded="false"
-          aria-controls="collapseTwo"
-          style="text-align: left; width:100%;"
-        >
-          <span class="dg_accordion_buttontext-holder">
-            New Collapsible Group Item #2
-          </span>
-        </button>
-        <div
-          id="collapseTwo"
-          class="multi-collapse collapse"
-          data-parent="#accordionExample2"
-        >
-          <div class="dg_accordion-item-body">
-            <a href="https://www.w3schools.com">This is a link </a>
-          </div>
-        </div>
-      </div>
-      <div class="collapsed dg_accordion__collapsible">
-        <button
-          class="fa dg_accordion-btn btn-link"
-          type="button"
-          data-toggle="collapse"
-          data-target="#collapseThree"
-          aria-expanded="false"
-          aria-controls="collapseThree"
-          style="text-align: left; width:100%;"
-        >
-          <span class="dg_accordion_buttontext-holder">
-            New Collapsible Group Item #3
-          </span>
-        </button>
-        <div
-          id="collapseThree"
-          class="multi-collapse collapse"
-          data-parent="#accordionExample2"
-        >
-          <div class="dg_accordion-item-body">
-            <img
-              alt="Stuff goes here"
-              src="//baltimorecountymd.gov/sebin/t/t/homepage-county-executive.jpg"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-    <h2>Collapse Example</h2>
-    <p>
-      There are cases in which we only want to show a single accordion panel or
-      "collapse". This provides that example.
-    </p>
-    <div class="dg_collapse collapsed dg_accordion__collapsible">
-      <button
-        class="fa dg_accordion-btn btn-link"
-        type="button"
-        data-toggle="collapse"
-        data-target="#collapseOne"
-        aria-expanded="true"
-        aria-controls="collapseOne"
-        style="text-align: left; width:100%;"
-      >
-        <span class="dg_accordion_buttontext-holder">
-          New Collapsible Group Item #1
-        </span>
-      </button>
-      <div
-        id="collapseOne"
-        class="multi-collapse collapse"
-        data-parent="#accordionExample2"
-      >
-        <div class="dg_accordion-item-body">
-          occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt
-          you probably haven't heard of them accusamus labore sustainable VHS.
+    <div class="dg_subpage-tabs-container">
+      <div class="container">
+        <div class="dg_subpage-tabs" id="dg_tabs">
+          <button
+            class="dg_subpage-tabs-btn"
+            type="button"
+            id="dg_menu-trigger-btn"
+            aria-expanded="true"
+          >
+            <h2 class="dg_accordion_buttontext-holder">In This Section</h2>
+          </button>
+          <ul class="dg_tab-items">
+            <li class="active"><a href="/home">Newsroom</a></li>
+            <li class=""><a href="/home">Social Media Gallery</a></li>
+            <li class=""><a href="/home">Media Contact Information</a></li>
+          </ul>
         </div>
       </div>
     </div>
