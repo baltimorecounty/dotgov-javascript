@@ -8,7 +8,8 @@ module.exports = {
     Modal: "./src/components/Modal.js",
     StepList: "./src/components/StepList.js",
     Site: "./src/site/Site.js",
-    SiteNavigation: "./src/site/SiteNavigation.js"
+    SiteNavigation: "./src/site/SiteNavigation.js",
+    SearchResults: "./src/page-specific/SearchResults.js"
   },
   output: {
     path: path.join(__dirname, "dist"),

@@ -1,14 +1,14 @@
-import axios from "../../lib/axios";
-import {
-  setConfig,
-  getValue as getConfigValue
-} from "@baltimorecounty/javascript-utilities/config";
 import {
   defaultErrorTemplateFn,
   defaultServerErrorTemplateFn,
   errorTemplateFn,
   reportDetailsTemplateFn
 } from "../../templates/BaltCoGo-Templates";
+
+import { Config } from "@baltimorecounty/javascript-utilities";
+import axios from "../../lib/axios";
+
+const { setConfig, getValue: getConfigValue } = Config;
 
 /**
  * Setup the api endpoints for the different environments

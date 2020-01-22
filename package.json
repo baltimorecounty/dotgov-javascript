@@ -32,7 +32,7 @@
     "webpack-dev-server": "^3.8.0"
   },
   "dependencies": {
-    "@baltimorecounty/javascript-utilities": "^1.0.1",
+    "@baltimorecounty/javascript-utilities": "^1.0.6",
     "a11y-dialog": "^5.2.0",
     "axios": "^0.19.0",
     "date-fns": "^2.0.1",
