@@ -1,4 +1,4 @@
-const mobileSearchId = "dg_mobile-search-button";
+const mobileSearchButtonId = "dg_mobile-search-button";
 const searchForm = "search-form";
 
 const cssClasses = {
@@ -41,7 +41,7 @@ const toggleSearchForm = (searchFormElm, shouldCollapseSearch) => {
  */
 const toggleSiteSearch = () => {
   const mobileSearchIcons = document
-    .getElementById(mobileSearchId)
+    .getElementById(mobileSearchButtonId)
     .querySelectorAll("i");
 
   if (mobileSearchIcons.length > 0) {
@@ -55,11 +55,12 @@ const toggleSiteSearch = () => {
     toggleSearchForm(searchFormElm, shouldCollapseSearch);
   } else {
     console.error(
-      `You are missing a button element with the id: ${mobileSearchId}.`
+      `You are missing a button element with the id: ${mobileSearchButtonId}.`
     );
   }
 };
 
+/** Bind click handler to the mobile search button */
 document
-  .getElementById(mobileSearchId)
+  .getElementById(mobileSearchButtonId)
   .addEventListener("click", toggleSiteSearch, false);
