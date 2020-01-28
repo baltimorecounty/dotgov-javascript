@@ -60,7 +60,7 @@ const toggleSiteSearch = () => {
   }
 };
 
-/** Bind click handler to the mobile search button */
+/** Events  */
 document
   .getElementById(mobileSearchButtonId)
   .addEventListener("click", toggleSiteSearch, false);
