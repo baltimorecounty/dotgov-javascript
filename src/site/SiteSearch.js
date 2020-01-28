@@ -7,7 +7,39 @@ const cssClasses = {
   isVisible: "is-visible"
 };
 
-const toggleSiteSearch = clickEvent => {
+/**
+ * Changes the mobile search buttons icon to a close button when shouldCollapseSearch search is set to false.
+ * Otherwise the icon will change to a search icon
+ * @param {*} searchIconElm icon element for the mobile search button
+ * @param {*} shouldCollapseSearch if true, the result of this function will be to hide the search form
+ */
+const updateSearchIcon = (searchIconElm, shouldCollapseSearch) => {
+  // Reset Icon
+  searchIconElm.classList.remove(
+    ...[cssClasses.expandSearchIcon, cssClasses.closeSearchIcon]
+  );
+
+  searchIconElm.classList.add(
+    shouldCollapseSearch
+      ? cssClasses.expandSearchIcon
+      : cssClasses.closeSearchIcon
+  );
+};
+
+/**
+ * Hides / Shows search form based on shouldCollapse search flag
+ * @param {*} searchFormElm icon element for the mobile search button
+ * @param {boolean} shouldCollapseSearch if true, the result of this function will be to hide the search form
+ */
+const toggleSearchForm = (searchFormElm, shouldCollapseSearch) => {
+  searchFormElm.classList.remove(cssClasses.isVisible);
+  searchFormElm.classList.add(shouldCollapseSearch ? "" : cssClasses.isVisible);
+};
+
+/**
+ * Toggle Site Search based on whether the mobile search button is selected or not
+ */
+const toggleSiteSearch = () => {
   const mobileSearchIcons = document
     .getElementById(mobileSearchId)
     .querySelectorAll("i");
@@ -19,21 +51,8 @@ const toggleSiteSearch = clickEvent => {
       cssClasses.closeSearchIcon
     );
 
-    // Reset Icon
-    searchIconElm.classList.remove(
-      ...[cssClasses.expandSearchIcon, cssClasses.closeSearchIcon]
-    );
-
-    searchIconElm.classList.add(
-      shouldCollapseSearch
-        ? cssClasses.expandSearchIcon
-        : cssClasses.closeSearchIcon
-    );
-
-    searchFormElm.classList.remove(cssClasses.isVisible);
-    searchFormElm.classList.add(
-      shouldCollapseSearch ? "" : cssClasses.isVisible
-    );
+    updateSearchIcon(searchIconElm, shouldCollapseSearch);
+    toggleSearchForm(searchFormElm, shouldCollapseSearch);
   } else {
     console.error(
       `You are missing a button element with the id: ${mobileSearchId}.`
