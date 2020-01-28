@@ -1,8 +1,10 @@
 const mobileSearchId = "dg_mobile-search-button";
+const searchForm = "search-form";
 
 const cssClasses = {
   closeSearchIcon: "fa-times",
-  expandSearchIcon: "fa-search"
+  expandSearchIcon: "fa-search",
+  isVisible: "is-visible"
 };
 
 const toggleSiteSearch = clickEvent => {
@@ -11,20 +13,26 @@ const toggleSiteSearch = clickEvent => {
     .querySelectorAll("i");
 
   if (mobileSearchIcons.length > 0) {
-    const searchIcon = mobileSearchIcons[0];
-    const shouldCollapseSearch = searchIcon.classList.contains(
+    const searchIconElm = mobileSearchIcons[0];
+    const searchFormElm = document.getElementById(searchForm);
+    const shouldCollapseSearch = searchIconElm.classList.contains(
       cssClasses.closeSearchIcon
     );
 
     // Reset Icon
-    searchIcon.classList.remove(
+    searchIconElm.classList.remove(
       ...[cssClasses.expandSearchIcon, cssClasses.closeSearchIcon]
     );
 
-    searchIcon.classList.add(
+    searchIconElm.classList.add(
       shouldCollapseSearch
         ? cssClasses.expandSearchIcon
         : cssClasses.closeSearchIcon
+    );
+
+    searchFormElm.classList.remove(cssClasses.isVisible);
+    searchFormElm.classList.add(
+      shouldCollapseSearch ? "" : cssClasses.isVisible
     );
   } else {
     console.error(
