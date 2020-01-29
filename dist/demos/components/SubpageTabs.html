@@ -15,139 +15,36 @@
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       rel="stylesheet"
     />
-    <style>
-      .dg_subpage-tabs-container {
-        background-color: #1b2f46;
-        display: flex;
-      }
-      .dg_subpage-tabs {
-        color: #fff;
-        display: block;
-        font-family: "Montserrat", sans-serif;
-        font-size: 16px;
-        font-weight: 700;
-        text-transform: uppercase;
-        width: 100%;
-      }
-      .dg_subpage-tabs .dg_subpage-tabs-btn {
-        display: none;
-      }
-      .dg_subpage-tabs .dg_subpage-tabs-btn h2 {
-        color: #fff;
-        font-size: 18px;
-      }
-      .dg_subpage-tabs ul {
-        list-style-type: none;
-        margin-top: 20px;
-        padding-left: 20px;
-      }
-      .dg_subpage-tabs ul li {
-        float: left;
-      }
-      .dg_subpage-tabs ul li a {
-        display: block;
-        color: #fff;
-        text-align: center;
-        padding: 20px 16px;
-        margin-right: 30px;
-        text-decoration: none;
-      }
-      .dg_subpage-tabs ul li a:hover {
-        color: #8091c0;
-      }
-      .dg_subpage-tabs ul li.active a {
-        color: #000;
-        background-color: #fff;
-      }
-      @media screen and (max-width: 992px) {
-        .dg_subpage-tabs {
-          border-top: 1px #666 solid;
-          border-bottom: 1px #666 solid;
-          font-weight: normal;
-          margin-bottom: 20px;
-          margin-top: 20px;
-          padding-bottom: 10px;
-          padding-top: 10px;
-        }
-        .dg_subpage-tabs.open h2:after {
-          content: "";
-          font-family: "Font Awesome 5 Pro";
-        }
-        .dg_subpage-tabs.open ul.dg_tab-items {
-          display: block;
-        }
-        .dg_subpage-tabs .dg_subpage-tabs-btn {
-          text-align: left;
-          width: 100%;
-        }
-        .dg_subpage-tabs .dg_subpage-tabs-btn h2 {
-          margin-top: 10px;
-          position: relative;
-        }
-        .dg_subpage-tabs .dg_subpage-tabs-btn h2:after {
-          position: relative;
-          float: right;
-          font-size: 24px;
-          cursor: pointer;
-          content: "";
-          font-family: "Font Awesome 5 Pro";
-        }
-        .dg_subpage-tabs ul {
-          margin-top: 10px;
-          margin-bottom: 0px;
-        }
-        .dg_subpage-tabs ul.dg_tab-items {
-          display: none;
-        }
-        .dg_subpage-tabs ul li {
-          float: none;
-        }
-        .dg_subpage-tabs ul li.active a {
-          color: #fec649;
-          background-color: inherit;
-        }
-        .dg_subpage-tabs ul li a {
-          padding: 10px 0px;
-          text-align: left;
-        }
-        .dg_subpage-tabs ul li a:hover {
-          background-color: #8091c0;
-        }
-        .dg_subpage-tabs .dg_subpage-tabs-btn {
-          background-color: #1b2f46;
-          border: none;
-          display: inherit;
-        }
-      }
-    </style>
+    <link href="SubpageTabs.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <div class="container">
       <div class="row">
         <div class="col-12">
           <h1>Subpage Tabs</h1>
+          <p>A basic example of how subpage tabs function goes here.</p>
+          <p><a href="/">Return to main page.</a></p>
         </div>
       </div>
     </div>
     <div class="dg_subpage-tabs-container">
-      <div class="container">
-        <div class="dg_subpage-tabs open" id="dg_tabs">
-          <button
-            class="dg_subpage-tabs-btn"
-            type="button"
-            id="dg_menu-trigger-btn"
-            aria-expanded="true"
-          >
-            <h2 class="dg_accordion_buttontext-holder">In This Section</h2>
-          </button>
-          <ul class="dg_tab-items">
-            <li class="active"><a href="/home">Newsroom</a></li>
-            <li class=""><a href="/home">Social Media Gallery</a></li>
-            <li class=""><a href="/home">Media Contact Information</a></li>
-          </ul>
-        </div>
+      <div class="dg_subpage-tabs" id="dg_tabs">
+        <button
+          class="dg_subpage-tabs-btn"
+          type="button"
+          id="dg_menu-trigger-btn"
+          aria-expanded="true"
+        >
+          <h2 class="dg_accordion_buttontext-holder">In This Section</h2>
+        </button>
+        <ul class="dg_tab-items">
+          <li class="active"><a href="/home">Newsroom</a></li>
+          <li class=""><a href="/home">Social Media Gallery</a></li>
+          <li class=""><a href="/home">Media Contact Information</a></li>
+        </ul>
       </div>
     </div>
     <script src="/assets/dotgov-subpagetabs.min.js"></script>
+    <script src="//kit.fontawesome.com/2475edd293.js"></script>
   </body>
 </html>
