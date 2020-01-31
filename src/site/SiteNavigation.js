@@ -1,9 +1,10 @@
 import {
   AddClassToElms,
-  RemoveClassFromElms,
   GetFirstElementOrDefault,
+  RemoveClassFromElms,
   SetAttributeForElms
 } from "../utilities/dom.utilities";
+
 import FocusTrap from "focus-trap";
 
 const attributes = {
@@ -131,14 +132,14 @@ const handleDocumentClick = clickEvent => {
  * @param {document:keydown} keyDownEvent - the observable keydown event
  * @listens document:keydown
  */
-const handleDocumentKeyDown = keyDownEvent => {
-  switch (event.key) {
-    case "Escape":
-      // Close the site nav
-      toggleSiteNav(false);
-      break;
-    default:
-      return; // Quit when this doesn't handle the key event.
+const handleDocumentKeyDown = event => {
+  const { key, keyCode } = event;
+
+  /** Ensure ESC key collapses the menu in all browsers */
+  if (key === "Escape" || keyCode === 27) {
+    toggleSiteNav(false);
+  } else {
+    return;
   }
 
   // Cancel the default action to avoid it being handled twice
