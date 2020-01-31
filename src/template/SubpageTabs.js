@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", function() {
   menuToggle = document.getElementById("dg_menu-toggle");
   toggleButton = document.getElementById("dg_menu-trigger-btn");
 
-  toggleButton.addEventListener("click", function(c) {
-    c.preventDefault();
+  toggleButton.addEventListener("click", function(clickEvent) {
+    clickEvent.preventDefault();
     menu.classList.toggle("open");
   });
 });
