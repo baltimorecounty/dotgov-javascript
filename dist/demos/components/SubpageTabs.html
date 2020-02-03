@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Subpage Tabs Demo</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link href="SubpageTabs.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1>Subpage Tabs</h1>
+          <p>A basic example of how subpage tabs function goes here.</p>
+          <p><a href="/">Return to main page.</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="dg_subpage-tabs-container">
+      <div class="dg_subpage-tabs" id="dg_tabs">
+        <button
+          class="dg_subpage-tabs-btn"
+          type="button"
+          id="dg_menu-trigger-btn"
+          aria-expanded="true"
+        >
+          <h2 class="dg_accordion_buttontext-holder">In This Section</h2>
+        </button>
+        <ul class="dg_tab-items">
+          <li class="active"><a href="/home">Newsroom</a></li>
+          <li class=""><a href="/home">Social Media Gallery</a></li>
+          <li class=""><a href="/home">Media Contact Information</a></li>
+        </ul>
+      </div>
+    </div>
+    <script src="/assets/dotgov-subpagetabs.min.js"></script>
+    <script src="//kit.fontawesome.com/2475edd293.js"></script>
+  </body>
+</html>
