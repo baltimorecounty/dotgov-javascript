@@ -7,3 +7,19 @@ document.addEventListener("DOMContentLoaded", function() {
     menu.classList.toggle("open");
   });
 });
+
+window.onscroll = function() {
+  stickyFunction();
+};
+
+const subTabs = document.getElementById("dg_sticky-component");
+
+const sticky = subTabs.offsetTop;
+
+function stickyFunction() {
+  if (window.pageYOffset > sticky) {
+    subTabs.classList.add("dg_sticky-component");
+  } else {
+    subTabs.classList.remove("dg_sticky-component");
+  }
+}

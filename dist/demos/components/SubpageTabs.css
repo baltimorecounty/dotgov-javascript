@@ -6036,9 +6036,18 @@ input[type="checkbox"]:focus + label.visuallyhidden.focusable:before {
   border-color: #fff;
   color: #fff;
 }
+
+.dg_sticky-component {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+}
+
 .dg_subpage-tabs-container {
   background-color: #1b2f46;
   display: flex;
+  margin-bottom: 50px;
 }
 .dg_subpage-tabs {
   color: #fff;
@@ -6089,6 +6098,11 @@ input[type="checkbox"]:focus + label.visuallyhidden.focusable:before {
   }
 }
 @media screen and (max-width: 992px) {
+  .dg_sticky-component {
+    position: relative;
+    z-index: 0;
+  }
+
   .dg_subpage-tabs {
     border-top: 1px #666 solid;
     border-bottom: 1px #666 solid;
