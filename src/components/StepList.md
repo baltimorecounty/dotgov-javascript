@@ -171,6 +171,7 @@ The `id` of the step much match the step detail's `aria-labelledby`. In the exam
 The `aria-controls` attribute of the step toggle button much match the step detail's `id`. In the example below, the id is `registration-panel-1`.
 
 **Button**
+Button content will only need to be modified if using the basic step list.
 
 ```html
 <button
@@ -182,6 +183,7 @@ The `aria-controls` attribute of the step toggle button much match the step deta
 ```
 
 **Content**
+Use the following markup for the basic step list.
 
 ```html
 <div
@@ -189,4 +191,12 @@ The `aria-controls` attribute of the step toggle button much match the step deta
   class="dg_step-list__details"
   aria-labelledby="registration-step-1"
 ></div>
+```
+
+Use the following markup for the static step list.
+
+```html
+<div class="dg_step-list__details">
+  <p>Some really helpful content for step 2 will go here.</p>
+</div>
 ```
