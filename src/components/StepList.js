@@ -1,7 +1,8 @@
-import { GetFirstElementOrDefault } from "../utilities/dom.utilities";
 import "../polyfills/array-from.polyfill";
 import "../polyfills/closest.polyfill";
 import "../polyfills/nodelist-foreach.polyfill";
+
+import { GetFirstElementOrDefault } from "../utilities/dom.utilities";
 
 const states = {
   collapsed: "collapsed",
@@ -99,21 +100,24 @@ const handleAllStepButtonClick = clickEvent => {
  */
 const handleDetailsToggleButtonClick = clickEvent => {
   const { target } = clickEvent;
+
   const buttonElm = target.classList.contains(cssClasses.toggleBtnElm)
     ? target
     : target.parentElement;
-  const buttonState = buttonElm.textContent;
-  const detailElms = buttonElm
-    .closest(`.${cssClasses.section}`)
-    .querySelectorAll(`.${cssClasses.details}`);
+  if (buttonElm.tagName.toLowerCase() === "button") {
+    const buttonState = buttonElm.textContent;
+    const detailElms = buttonElm
+      .closest(`.${cssClasses.section}`)
+      .querySelectorAll(`.${cssClasses.details}`);
 
-  Array.from(detailElms).forEach(detailElm => {
-    displaySectionDetails(detailElm, buttonState);
-  });
+    Array.from(detailElms).forEach(detailElm => {
+      displaySectionDetails(detailElm, buttonState);
+    });
 
-  setAriaExpanded(buttonElm, isButtonStateShow(buttonState));
-  toggleDetailButtonText(buttonElm, buttonState);
-  updateToggleAllButton(detailElms);
+    setAriaExpanded(buttonElm, isButtonStateShow(buttonState));
+    toggleDetailButtonText(buttonElm, buttonState);
+    updateToggleAllButton(detailElms);
+  }
 };
 
 const handleDocumentClick = clickEvent => {
