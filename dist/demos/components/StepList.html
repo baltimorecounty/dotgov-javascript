@@ -236,7 +236,222 @@
           <!-- end of step list-->
         </div>
       </div>
-      <div class="row"><div class="col-xs-12">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>Example 1 - Basic Step List</h2>
+          <p>
+            A list intended to display information that needs to be listed in steps. This presentation will display the list with the ability to toggle content.
+          </p>
+          <!-- start of step list-->
+          <div class="dg_step-list collapsed">
+            <button class="dg_step-list__show-all-btn">Show All</button>
+            <ol class="dg_step-list__list">
+              <li class="dg_step-list__list-section" id="registration-step-1">
+                <button
+                  class="dg_step-list__toggle-btn"
+                  aria-expanded="false"
+                  aria-controls="registration-panel-1"
+                  type="button"
+                >
+                  <span class="dg_step-list__toggle-btn__title"
+                    >Step 1: Know the Registration Fees</span
+                  >
+                  <span class="dg_step-list__toggle-btn__btn-text">Show</span>
+                </button>
+                <div
+                  id="registration-panel-1"
+                  class="dg_step-list__details"
+                  aria-labelledby="registration-step-1"
+                >
+                  <ul>
+                    <li>
+                      Owner-occupied, one or two tenants: $48&nbsp;per unit
+                    </li>
+                    <li>
+                      Owner-occupied, three or more tenants: $60&nbsp;per unit
+                    </li>
+                    <li>Not owner-occupied: $60&nbsp;per unit</li>
+                  </ul>
+                </div>
+              </li>
+              <li class="dg_step-list__list-section" id="registration-step-2">
+                <button
+                  class="dg_step-list__toggle-btn"
+                  aria-expanded="false"
+                  aria-controls="registration-panel-2"
+                  type="button"
+                >
+                  <span class="dg_step-list__toggle-btn__title"
+                    >Step 2: Have Your Property Inspected</span
+                  >
+                  <span class="dg_step-list__toggle-btn__btn-text">Show</span>
+                </button>
+                <div
+                  class="dg_step-list__details"
+                  id="registration-panel-2"
+                  aria-labelledby="registration-step-2"
+                >
+                  <p>
+                    Have an inspection performed by a
+                    <a
+                      title="Find state licensed home inspectors."
+                      href="http://www.dllr.state.md.us/pq/"
+                      >state-licensed home inspector</a
+                    >. The inspector must complete an
+                    <a
+                      target="_blank"
+                      onclick="window.open('http://resources.baltimorecountymd.gov/Documents/Permits/rental_registration/5inspectionsheet.pdf', '_blank', 'toolbar=yes,menubar=yes,location=yes,scrollbars=yes,resizable=yes,status=yes,width=800,height=600'); return false;"
+                      title="Download inspection sheet filled out by an inspector. (opens new window)"
+                      href="http://resources.baltimorecountymd.gov/Documents/Permits/rental_registration/5inspectionsheet.pdf"
+                      >Inspection Sheet</a
+                    >
+                    (PDF) for each unit you intend to rent.
+                  </p>
+                </div>
+              </li>
+              <li class="dg_step-list__list-section" id="registration-step-3">
+                <button
+                  class="dg_step-list__toggle-btn"
+                  aria-expanded="false"
+                  aria-controls="registration-panel-3"
+                  type="button"
+                >
+                  <span class="dg_step-list__toggle-btn__title"
+                    >Step 3: Gather Required Documentation</span
+                  >
+                  <span class="dg_step-list__toggle-btn__btn-text">Show</span>
+                </button>
+                <div
+                  class="dg_step-list__details"
+                  id="registration-panel-3"
+                  aria-labelledby="registration-step-3"
+                >
+                  <p>You must provide the following with your application:</p>
+                  <ul>
+                    <li>
+                      The
+                      <a
+                        target="_blank"
+                        onclick="window.open('http://resources.baltimorecountymd.gov/Documents/Permits/rental_registration/5inspectionsheet.pdf', '_blank', 'toolbar=yes,menubar=yes,location=yes,scrollbars=yes,resizable=yes,status=yes,width=800,height=600'); return false;"
+                        title="Download the inspection sheet to be filled out by inspector. (opens new window)"
+                        href="http://resources.baltimorecountymd.gov/Documents/Permits/rental_registration/5inspectionsheet.pdf"
+                        >Inspection Sheet</a
+                      >
+                      (PDF) completed by a
+                      <a
+                        title="Find state-licensed home inspectors."
+                        href="http://www.dllr.state.md.us/pq/"
+                        >licensed home inspector</a
+                      >
+                      in Step 2 above
+                    </li>
+                    <li>
+                      A
+                      <a
+                        target="_blank"
+                        onclick="window.open('http://resources.baltimorecountymd.gov/Documents/Permits/rental_registration/alarmverificationform.pdf', '_blank', 'toolbar=yes,menubar=yes,location=yes,scrollbars=yes,resizable=yes,status=yes,width=800,height=600'); return false;"
+                        title="Download form to verify carbon monoxide alarm is installed. (opens new window)"
+                        href="http://resources.baltimorecountymd.gov/Documents/Permits/rental_registration/alarmverificationform.pdf"
+                        >Carbon Monoxide Alarm Verification</a
+                      >
+                      (PDF)
+                    </li>
+                    <li>
+                      If the home was built before 1978, a lead inspection
+                      certificate
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li class="dg_step-list__list-section" id="registration-step-4">
+                <button
+                  class="dg_step-list__toggle-btn"
+                  aria-expanded="false"
+                  aria-controls="registration-panel-4"
+                  type="button"
+                >
+                  <span class="dg_step-list__toggle-btn__title"
+                    >Step 4: Read the Non-Discrimination Regulations</span
+                  >
+                  <span class="dg_step-list__toggle-btn__btn-text">Show</span>
+                </button>
+                <div
+                  class="dg_step-list__details"
+                  id="registration-panel-4"
+                  aria-labelledby="registration-step-4"
+                >
+                  <p>
+                    You must comply with federal, State and County
+                    non-discrimination and accessibility regulations, as
+                    applicable. The regulations, exceptions and waiver
+                    conditions are described in the following pamphlets:
+                  </p>
+                  <ul>
+                    <li>
+                      <a
+                        target="_blank"
+                        onclick="window.open('http://resources.baltimorecountymd.gov/Documents/Permits/rental_registration/fairhousingpamphlet.pdf', '_blank', 'toolbar=yes,menubar=yes,location=yes,scrollbars=yes,resizable=yes,status=yes,width=800,height=600'); return false;"
+                        title="Read the Fair Housing Law. (opens new wondow)"
+                        href="http://resources.baltimorecountymd.gov/Documents/Permits/rental_registration/fairhousingpamphlet.pdf"
+                        >Fair Housing Law</a
+                      >
+                      (PDF)
+                    </li>
+                    <li>
+                      <a
+                        target="_blank"
+                        onclick="window.open('http://resources.baltimorecountymd.gov/Documents/Permits/rental_registration/accessibilitypamphlet.pdf', '_blank', 'toolbar=yes,menubar=yes,location=yes,scrollbars=yes,resizable=yes,status=yes,width=800,height=600'); return false;"
+                        title="Review the Maryland Accessibility Act. (opens new window)"
+                        href="http://resources.baltimorecountymd.gov/Documents/Permits/rental_registration/accessibilitypamphlet.pdf"
+                        >Maryland Accessibility Act</a
+                      >
+                      (PDF)
+                    </li>
+                  </ul>
+                  <p>
+                    You will be required to attest that you have reviewed and
+                    understand the regulations before completing your
+                    application.
+                  </p>
+                </div>
+              </li>
+              <li class="dg_step-list__list-section" id="registration-step-5">
+                <button
+                  class="dg_step-list__toggle-btn"
+                  aria-expanded="false"
+                  aria-controls="registration-panel-5"
+                  type="button"
+                >
+                  <span class="dg_step-list__toggle-btn__title"
+                    >Step 5: Decide How You Want to Apply</span
+                  >
+                  <span class="dg_step-list__toggle-btn__btn-text">Show</span>
+                </button>
+                <div
+                  class="dg_step-list__details"
+                  id="registration-panel-4"
+                  aria-labelledby="registration-step-4"
+                >
+                  <p>
+                    <strong>Note:</strong> Please be sure to check that your
+                    rental property complies with all the Baltimore County
+                    Zoning Regulations. To locate your Zoning Designation,
+                    please visit
+                    <a
+                      title="View and search My Neighborhood."
+                      href="https://www.baltimorecountymd.gov/Agencies/infotech/GIS/MyNeighborhood/index.html"
+                      >My Neighborhood</a
+                    >.
+                  </p>
+                </div>
+              </li>
+            </ol>
+          </div>
+          <!-- end of step list-->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
         <div class="dg_step-list static">
           <h2>Example 2 - Basic Static Step List</h2>
           <p>
