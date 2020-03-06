@@ -1,6 +1,7 @@
 import "../polyfills/includes.polyfill";
 import "../polyfills/closest.polyfill";
 import "../polyfills/nodelist-foreach.polyfill";
+
 import { HtmlAttributes } from "../utilities/constants.utilities";
 
 const cssClasses = {
@@ -55,8 +56,10 @@ const onDocumentReady = () => {
     `.${cssClasses.accordionButton}[aria-expanded="true"]`
   );
 
+  console.log("test testse", expandedAccordionToggleButtonElms);
+
   expandedAccordionToggleButtonElms.forEach(toggleButtonElm => {
-    toggleAccordionPanel(toggleButtonElm);
+    toggleAccordionPanel(toggleButtonElm, true);
   });
 };
 
@@ -104,7 +107,7 @@ const selectElementByClassName = (element, cssNameText) => {
  * accessability and visual stuff that needs to happen to the corresponding accordion elements.
  * @param {HTMLElement} accordionHeaderElm
  */
-const toggleAccordionPanel = accordionHeaderElm => {
+const toggleAccordionPanel = (accordionHeaderElm, shouldForceOpen) => {
   var mainDivElm =
     accordionHeaderElm.closest(".dg_accordion") ||
     accordionHeaderElm.closest(`.${cssClasses.collapseComponent}`);
@@ -118,14 +121,19 @@ const toggleAccordionPanel = accordionHeaderElm => {
   var accordionButtonAllElms = mainDivElm.getElementsByClassName("dg_allitems");
   var isAccordionExpanded = accordionContentElm.className.includes(menuOpen);
 
+  console.log(shouldForceOpen);
+
   // Toggle the accordion's button aria-expanded attribute
   accordionButtonElm.setAttribute(
     HtmlAttributes.ariaExpanded,
-    !isAccordionExpanded
+    shouldForceOpen || !isAccordionExpanded
   );
 
   //If its open then we want to close it and vice versa
-  collapsePanelUpdate(!isAccordionExpanded, accordionContentElm);
+  collapsePanelUpdate(
+    shouldForceOpen || !isAccordionExpanded,
+    accordionContentElm
+  );
 
   accordionButtonAllElms.length > 0
     ? updateButtonStatus(
@@ -189,3 +197,5 @@ const updateButtonStatus = (
 
 /** Handler when the DOM is fully loaded */
 document.addEventListener("DOMContentLoaded", onDocumentReady);
+
+console.log("got here");
