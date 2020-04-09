@@ -17,6 +17,7 @@ const cssClasses = {
   collapsed: "collapsed",
   hovered: "is-hovered",
   stepList: "dg_step-list",
+  stepListSection: "dg_step-list__list-section",
   detailsToggleButton: "dg_step-list__toggle-btn",
   details: "dg_step-list__details",
   showAllStepsButton: "dg_step-list__show-all-btn",
@@ -101,7 +102,7 @@ const handleAllStepButtonClick = clickEvent => {
 const handleDetailsToggleButtonClick = clickEvent => {
   const { target } = clickEvent;
 
-  const buttonElm = target.classList.contains(cssClasses.toggleBtnElm)
+  const buttonElm = target.classList.contains(cssClasses.detailsToggleButton)
     ? target
     : target.parentElement;
   if (buttonElm.tagName.toLowerCase() === "button") {
@@ -121,13 +122,22 @@ const handleDetailsToggleButtonClick = clickEvent => {
 };
 
 const handleDocumentClick = clickEvent => {
-  const { target } = clickEvent;
+  let { target } = clickEvent;
   // If the clicked element doesn't have the right selector, bail
   const isDetailsToggleClick =
     target.parentElement.classList.contains(cssClasses.detailsToggleButton) ||
     target.classList.contains(cssClasses.detailsToggleButton);
+  const isDetailsSectionClick = target.classList.contains(
+    cssClasses.stepListSection
+  );
 
-  if (isDetailsToggleClick) {
+  if (!isDetailsToggleClick && isDetailsSectionClick) {
+    clickEvent = {
+      target: target.querySelectorAll(`.${cssClasses.detailsToggleButton}`)[0]
+    };
+  }
+
+  if (isDetailsToggleClick || isDetailsSectionClick) {
     handleDetailsToggleButtonClick(clickEvent);
   } else if (target.classList.contains(cssClasses.showAllStepsButton)) {
     handleAllStepButtonClick(clickEvent);
