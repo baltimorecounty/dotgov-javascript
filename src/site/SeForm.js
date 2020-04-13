@@ -15,3 +15,9 @@ document.addEventListener("DOMContentLoaded", () => {
   GenerateCheckboxes();
   GenerateRadioButtons();
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+  var foo = document.getElementById('checkbox-container');
+  document.getElementById('accepterms-label').innerHTML = foo.innerHTML;
+  foo.parentNode.removeChild(foo);
+});
