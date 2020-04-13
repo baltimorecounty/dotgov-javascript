@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const checkboxContainer = document.getElementById("seFieldCell seFieldCellHorizontal");
-    const checkboxLabel = document.getElementsByClassName("dg_label dg_checkbox-label");
+    const checkboxContainer = document.getElementsByClassName("seFieldCell seFieldCellHorizontal dg_checkbox");
+    const checkboxLabel = document.getElementById("accepterms-label");
     checkboxContainer.appendChild(checkboxLabel);
-});
-  
+  });
