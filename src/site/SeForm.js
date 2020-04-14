@@ -25,14 +25,13 @@ const MoveCheckboxes = () => {
       elm,
       ".seFieldCellHorizontal"
     );
-    const labelContainerElm = GetFirstElementOrDefault(
-      elm,
-      ".seLabelCellHorizontal"
-    );
-    const shouldBeMoved = fieldContainerElm && labelContainerElm;
+    const nextSiblingElm = fieldContainerElm.nextElementSibling;
+    const shouldBeMoved =
+      fieldContainerElm &&
+      nextSiblingElm.classList.contains("seLabelCellHorizontal");
 
     if (shouldBeMoved) {
-      const labelElm = GetFirstElementOrDefault(labelContainerElm, "label");
+      const labelElm = GetFirstElementOrDefault(nextSiblingElm, "label");
 
       labelElm.classList.add("seCheckboxLabel");
 
