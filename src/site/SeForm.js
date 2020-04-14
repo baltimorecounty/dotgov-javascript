@@ -32,7 +32,6 @@ const MoveCheckboxes = () => {
     const shouldBeMoved = fieldContainerElm && labelContainerElm;
 
     if (shouldBeMoved) {
-      //   fieldContainerElm.closest("div").classList.add("dg_checkbox");
       const labelElm = GetFirstElementOrDefault(labelContainerElm, "label");
 
       labelElm.classList.add("seCheckboxLabel");
