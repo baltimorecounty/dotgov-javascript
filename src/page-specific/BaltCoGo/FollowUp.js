@@ -165,7 +165,7 @@ const reportTypes = [
     testRegex: RegExp(/^\d+$/i),
     action: (trackingNumber) =>
       axios
-        .get(`${getConfigValue("targetEndpoint")}/${trackingNumber}`)
+        .get(`${getConfigValue("apiRoot")}/${trackingNumber}`)
         .then((response) => response.data)
         .then(displayServiceRequest)
         .catch(displayServerError),
