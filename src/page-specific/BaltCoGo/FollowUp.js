@@ -1,42 +1,54 @@
 import axios from "../../lib/axios";
 import {
   setConfig,
-  getValue as getConfigValue
+  getValue as getConfigValue,
 } from "@baltimorecounty/javascript-utilities/config";
 import {
   defaultErrorTemplateFn,
   defaultServerErrorTemplateFn,
   errorTemplateFn,
-  reportDetailsTemplateFn
+  reportDetailsTemplateFn,
 } from "../../templates/BaltCoGo-Templates";
 
 /**
  * Setup the api endpoints for the different environments
  */
-setConfig({
+
+const initialEndpoint = "platform.citysourced.net/servicerequests";
+
+const testApiRoot = `https://testservices.baltimorecountymd.gov/${initialEndpoint}`;
+const prodApiRoot = `https://services.baltimorecountymd.gov/${initialEndpoint}`;
+
+// HACK - the Config utiltiy does not account for beta.
+// TODO: This will need to be addressed when we get closer to launch
+const localApiRoot =
+  window.location.hostname.indexOf("beta") > -1
+    ? testApiRoot
+    : `//localhost:54727/${initialEndpoint}`;
+
+const configValues = {
   local: {
-    targetEndpoint: "//localhost:54727/platform.citysourced.net/servicerequests"
+    apiRoot: localApiRoot,
   },
   development: {
-    targetEndpoint:
-      "//testservices.baltimorecountymd.gov/platform.citysourced.net/servicerequests"
+    apiRoot: testApiRoot,
   },
   staging: {
-    targetEndpoint:
-      "//testservices.baltimorecountymd.gov/platform.citysourced.net/servicerequests"
+    apiRoot: testApiRoot,
   },
   production: {
-    targetEndpoint:
-      "//services.baltimorecountymd.gov/platform.citysourced.net/servicerequests"
-  }
-});
+    apiRoot: prodApiRoot,
+  },
+};
+
+setConfig(configValues);
 
 const appDocumentIds = {
   form: "service-request-form",
   loadingIndicator: "sr-loading-indicator",
   reportDetails: "report-details",
   resetForm: "sr-reset-form",
-  submit: "get-report"
+  submit: "get-report",
 };
 
 /**
@@ -50,7 +62,7 @@ const clearResults = () => {
  * Displays any Result Success or Failure
  * @param {*} html
  */
-const displayResults = html => {
+const displayResults = (html) => {
   const resultsElm = document.getElementById(appDocumentIds.reportDetails);
   resultsElm.innerHTML = "";
   if (html) {
@@ -62,7 +74,7 @@ const displayResults = html => {
  * Displays a service request based on the report details template
  * @param {object} serviceRequest
  */
-const displayServiceRequest = serviceRequest => {
+const displayServiceRequest = (serviceRequest) => {
   const { report = {}, comments = [] } = serviceRequest;
 
   if (report.ErrorsCount === 0) {
@@ -96,15 +108,15 @@ const displayServerError = () => {
  * Display an error showing the report tracking info is stored in another system
  * @param {*} url
  */
-const displayWrongTrackingSystem = url => {
+const displayWrongTrackingSystem = (url) => {
   const errorHtml = errorTemplateFn({
-    url
+    url,
   });
   displayResults(errorHtml);
 };
 
 /** Shortcut function for document */
-const getElmById = id => document.getElementById(id);
+const getElmById = (id) => document.getElementById(id);
 
 /** Toggle the visibility of an element  */
 const toggleElm = (elm, status = "show") => {
@@ -121,7 +133,7 @@ const toggleElm = (elm, status = "show") => {
  * @param {*} status
  */
 const toggleElms = (elms = [], status = "show") => {
-  elms.forEach(elm => {
+  elms.forEach((elm) => {
     toggleElm(elm, status);
   });
 };
@@ -137,7 +149,7 @@ const reportTypes = [
       displayWrongTrackingSystem(
         "https://citizenaccess.baltimorecountymd.gov/CitizenAccess/Cap/CapHome.aspx?&Module=Enforce"
       );
-    }
+    },
   },
   {
     name: "VendorServiceRequest",
@@ -146,29 +158,29 @@ const reportTypes = [
       displayWrongTrackingSystem(
         "https://citizenaccess.baltimorecountymd.gov/CitizenAccess/Cap/CapHome.aspx?&Module=Enforcement"
       );
-    }
+    },
   },
   {
     name: "StandardServiceRequest",
     testRegex: RegExp(/^\d+$/i),
-    action: trackingNumber =>
+    action: (trackingNumber) =>
       axios
         .get(`${getConfigValue("targetEndpoint")}/${trackingNumber}`)
-        .then(response => response.data)
+        .then((response) => response.data)
         .then(displayServiceRequest)
-        .catch(displayServerError)
+        .catch(displayServerError),
   },
   {
     name: "default",
-    action: displayDefaultError
-  }
+    action: displayDefaultError,
+  },
 ];
 
 /**
  * Get follow up information based on a given service request number
  * @param {*} submitEvent
  */
-const GetReport = async submitEvent => {
+const GetReport = async (submitEvent) => {
   submitEvent.preventDefault();
   const trackingNumber = document.getElementById("TrackingNumber").value.trim();
   for (let i = 0, len = reportTypes.length; i < len; i++) {
