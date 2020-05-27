@@ -4,9 +4,9 @@ import {
   getValue as getConfigValue,
 } from "@baltimorecounty/javascript-utilities/config";
 import {
-  defaultErrorTemplateFn,
+  defaultWarningTemplateFn,
   defaultServerErrorTemplateFn,
-  errorTemplateFn,
+  infoTemplateFn,
   reportDetailsTemplateFn,
 } from "../../templates/BaltCoGo-Templates";
 
@@ -84,7 +84,7 @@ const displayServiceRequest = (serviceRequest) => {
     );
     displayResults(reportDetails);
   } else {
-    displayDefaultError();
+    displayDefaultWarning();
   }
 
   return serviceRequest;
@@ -93,8 +93,8 @@ const displayServiceRequest = (serviceRequest) => {
 /**
  * Displays a default error for the application
  */
-const displayDefaultError = () => {
-  displayResults(defaultErrorTemplateFn());
+const displayDefaultWarning = () => {
+  displayResults(defaultWarningTemplateFn());
 };
 
 /**
@@ -109,7 +109,7 @@ const displayServerError = () => {
  * @param {*} url
  */
 const displayWrongTrackingSystem = (url) => {
-  const errorHtml = errorTemplateFn({
+  const errorHtml = infoTemplateFn({
     url,
   });
   displayResults(errorHtml);
@@ -172,7 +172,7 @@ const reportTypes = [
   },
   {
     name: "default",
-    action: displayDefaultError,
+    action: displayDefaultWarning,
   },
 ];
 

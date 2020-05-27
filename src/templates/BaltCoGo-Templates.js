@@ -61,41 +61,50 @@ const reportDetailsTemplateFn = (report, comments) => {
   );
 };
 
-const error = (text) =>
+const defaultWarningTemplateFn = () =>
   compileTemplate(
-    `<div class="dg_alert status error">
-        <span class="dg_alert__status">
-          <i
-            class="dg_alert__icon fas fa-exclamation-circle"
-          ></i>
-          error
-        </span>
-        <p>${text}</p>
-      </div>`
-  );
-
-const defaultErrorTemplateFn = () =>
-  error(
-    "We couldn’t find any records that match the ID number you entered. Please double check the number and try again."
+    `<div class="dg_alert status warning">
+      <span class="dg_alert__status">
+        <i class="dg_alert__icon far fa-exclamation-triangle"></i>
+        warning
+      </span>
+      <p>
+        We couldn’t find any records that match the ID number you entered.
+        Please double check the number and try again.
+      </p>
+    </div>`
   );
 
 const defaultServerErrorTemplateFn = () =>
-  error(
-    "We’re having trouble connecting to our servers right now. Please try again in a few minutes."
+  compileTemplate(
+    `<div class="dg_alert status error">
+      <span class="dg_alert__status">
+        <i class="dg_alert__icon fas fa-exclamation-circle"></i>
+        error
+      </span>
+      <p>
+        We’re having trouble connecting to our servers right now. Please try
+        again in a few minutes.
+      </p>
+    </div>`
   );
 
-const errorTemplateFn = (error) =>
+const infoTemplateFn = (error) =>
   compileTemplate(
-    `<div class="alert-information" id="citizen-access-info">
-        <p>The record you’re looking for is available in a different tracking system. Please visit <a id="RedirectURLParameter" href="${error.url}">Baltimore County Online Services</a> and enter the tracking number again.</p>
-        <p>We’re working to better integrate these systems in the future. Until then, we apologize for any inconvenience this may cause.</p>
+    `<div class="dg_alert status info">
+      <span class="dg_alert__status">
+        <i class="dg_alert__icon far fa-info-circle"></i>
+        information
+      </span>
+      <p>The record you’re looking for is available in a different tracking system. Please visit <a id="RedirectURLParameter" href="${error.url}">Baltimore County Online Services</a> and enter the tracking number again.</p>
+      <p>We’re working to better integrate these systems in the future. Until then, we apologize for any inconvenience this may cause.</p>
     </div>`
   );
 
 export {
-  defaultErrorTemplateFn,
+  defaultWarningTemplateFn,
   defaultServerErrorTemplateFn,
   commentsTemplateFn,
-  errorTemplateFn,
+  infoTemplateFn,
   reportDetailsTemplateFn,
 };
