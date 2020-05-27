@@ -2,19 +2,20 @@ import { compileTemplate } from "./TemplateHelpers";
 import { parseISO, format } from "date-fns";
 
 const dateFormat = "MM/dd/yyyy hh:mm a";
-const formatDate = dateString => format(parseISO(dateString), dateFormat);
+const formatDate = (dateString) => format(parseISO(dateString), dateFormat);
 
-const commentsTemplateFn = comments =>
-  `<h3>Comments</h3>
+const commentsTemplateFn = (comments) =>
+  `<h4>Comments</h4>
     <ul id="comments">${comments
       .map(
-        comment =>
-          `<li>${comment.Text}
-                <div class="attribution">
-                    <span class="author-name">${comment.AuthorName}</span>
-                    <span class="author-date">${comment.DateCreatedFormatted}</span>
-                </div>
-            </li>`
+        (comment) =>
+          `<div class="dg_card text-left">
+          ${comment.Text}
+          <div class="dg_card__content">
+            <span class="author-name">${comment.AuthorName}</span>
+            <span class="author-date">${comment.DateCreatedFormatted}</span>
+          </div>
+        </div>`
       )
       .join("")}
     </ul>`;
@@ -23,38 +24,45 @@ const reportDetailsTemplateFn = (report, comments) => {
   const sortedComments = [...comments].reverse();
 
   return compileTemplate(
-    `<div class="bc-citysourced-reporter">
-        <div id="citysourced-viewer">
-            <h2>
-                Report Status: <span>${report.StatusTypeReadable}</span>
-            </h2>
-            <dl id="meta">
-                <dt>Request ID</dt>
-                <dd>${report.Id}</dd>
-                <dt>Issue Type</dt>
-                <dd>${report.RequestType}</dd>
-                <dt>Date Created</dt>
-                <dd>
-                    ${formatDate(report.DateCreated)}
-                </dd>
-                <dt>Last Updated</dt>
-                <dd>
-                    ${formatDate(report.DateUpdated)}
-                </dd>
-                <dt>Location</dt>
-                <dd id="location">${report.FormattedAddress}</dd>
-            </dl>
-            ${
-              comments && comments.length > 0
-                ? commentsTemplateFn(sortedComments)
-                : ""
-            }
-        </div>
+    `<div class="table-responsive">
+      <h2>Track Status</h2>
+      <h3>
+        Report Status: <span>${report.StatusTypeReadable}</span>
+      </h3>
+      <table class="table">
+        <tbody>
+          <tr>
+            <th>Request ID</th>
+            <td>${report.Id}</td>
+          </tr>
+          <tr>
+            <th>Issue Type</th>
+            <td>${report.RequestType}</td>
+          </tr>
+          <tr>
+            <th>Date Created</th>
+            <td>${formatDate(report.DateCreated)}</td>
+          </tr>
+          <tr>
+            <th>Last Updated</th>
+            <td>${formatDate(report.DateUpdated)}</td>
+          </tr>
+          <tr>
+            <th>Location</th>
+            <td id="location">${report.FormattedAddress}</td>
+          </tr>
+        </tbody>
+      </table>
+      ${
+        comments && comments.length > 0
+          ? commentsTemplateFn(sortedComments)
+          : ""
+      }
     </div>`
   );
 };
 
-const error = text =>
+const error = (text) =>
   compileTemplate(
     `<div role="alert" class="alert-information bc_alert">
         <i class="fa fa-icon fa-2x fa-info-circle"></i>
@@ -72,7 +80,7 @@ const defaultServerErrorTemplateFn = () =>
     "We’re having trouble connecting to our servers right now. Please try again in a few minutes."
   );
 
-const errorTemplateFn = error =>
+const errorTemplateFn = (error) =>
   compileTemplate(
     `<div class="alert-information" id="citizen-access-info">
         <p>The record you’re looking for is available in a different tracking system. Please visit <a id="RedirectURLParameter" href="${error.url}">Baltimore County Online Services</a> and enter the tracking number again.</p>
@@ -85,5 +93,5 @@ export {
   defaultServerErrorTemplateFn,
   commentsTemplateFn,
   errorTemplateFn,
-  reportDetailsTemplateFn
+  reportDetailsTemplateFn,
 };
