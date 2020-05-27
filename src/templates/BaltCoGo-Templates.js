@@ -12,8 +12,8 @@ const commentsTemplateFn = (comments) =>
           `<div class="dg_card text-left">
           ${comment.Text}
           <div class="dg_card__content">
-            <span class="author-name">${comment.AuthorName}</span>
-            <span class="author-date">${comment.DateCreatedFormatted}</span>
+            <span style="font-weight: bold">${comment.AuthorName}</span>
+            <span style="font-style: italic">${comment.DateCreatedFormatted}</span>
           </div>
         </div>`
       )
@@ -25,7 +25,6 @@ const reportDetailsTemplateFn = (report, comments) => {
 
   return compileTemplate(
     `<div class="table-responsive">
-      <h2>Track Status</h2>
       <h3>
         Report Status: <span>${report.StatusTypeReadable}</span>
       </h3>
@@ -64,10 +63,15 @@ const reportDetailsTemplateFn = (report, comments) => {
 
 const error = (text) =>
   compileTemplate(
-    `<div role="alert" class="alert-information bc_alert">
-        <i class="fa fa-icon fa-2x fa-info-circle"></i>
+    `<div class="dg_alert status error">
+        <span class="dg_alert__status">
+          <i
+            class="dg_alert__icon fas fa-exclamation-circle"
+          ></i>
+          error
+        </span>
         <p>${text}</p>
-    </div>`
+      </div>`
   );
 
 const defaultErrorTemplateFn = () =>

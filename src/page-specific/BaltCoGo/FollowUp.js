@@ -162,7 +162,7 @@ const reportTypes = [
   },
   {
     name: "StandardServiceRequest",
-    testRegex: RegExp(/^\d+$/i),
+    testRegex: RegExp(/^\d{1,10}$/i),
     action: (trackingNumber) =>
       axios
         .get(`${getConfigValue("apiRoot")}/${trackingNumber}`)
