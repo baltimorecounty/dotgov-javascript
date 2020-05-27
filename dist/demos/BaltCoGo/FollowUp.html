@@ -34,44 +34,41 @@
           <!-- start copying for html snippet here -->
           <div>
             <form id="service-request-form" name="service-request-form">
-              <div>
-                <label for="TrackingNumber">Tracking Number </label>
-              </div>
-              <strong>
+              <div class="dg_form-field">
+                <label class="dg_label" for="TrackingNumber"
+                  ><span class="dg_label-text">Tracking Number</span></label
+                >
                 <input
-                  class="seInput seRequiredElement"
                   id="TrackingNumber"
-                  name="TrackingNumber"
+                  class="dg_form-field_input--text"
+                  label="Tracking Number"
+                  placeholder="Enter your service id"
                   type="text"
-                  value=""
                 />
-                <br /><br />
-              </strong>
-              <strong></strong>
+              </div>
+              <div>
                 <button
                   class="dg_button"
                   id="get-report"
-                  style="float:left;"
+                  style="float: left;"
                   type="submit"
                 >
-                  <strong>Track Now</strong>
+                  Track Now
                 </button>
-              </strong>
+              </div>
             </form>
           </div>
           <div class="hidden" id="sr-loading-indicator">
             <p>
-              <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i> Loading your
-              service request.
+              Loading Service Request...
             </p>
-            <span class="sr-only">Loading Service Request...</span>
           </div>
           <!-- App Container -->
           <div id="report-details"></div>
           <button
             class="dg_button hidden"
             id="sr-reset-form"
-            style="float:left;"
+            style="float: left;"
             type="button"
           >
             Look Up Another Report
