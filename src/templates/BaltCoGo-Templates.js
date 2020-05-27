@@ -91,7 +91,7 @@ const defaultServerErrorTemplateFn = () =>
 
 const infoTemplateFn = (error) =>
   compileTemplate(
-    `<div class="dg_alert status info">
+    `<div class="dg_alert status information">
       <span class="dg_alert__status">
         <i class="dg_alert__icon far fa-info-circle"></i>
         information
