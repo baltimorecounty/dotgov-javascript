@@ -61,7 +61,7 @@ const onDocumentReady = () => {
   );
 
   nonReactAccordionElms.forEach((toggleButtonElm) => {
-    toggleAccordionPanel(toggleButtonElm);
+    toggleAccordionPanel(toggleButtonElm, true);
   });
 };
 
@@ -109,7 +109,7 @@ const selectElementByClassName = (element, cssNameText) => {
  * accessability and visual stuff that needs to happen to the corresponding accordion elements.
  * @param {HTMLElement} accordionHeaderElm
  */
-const toggleAccordionPanel = (accordionHeaderElm) => {
+const toggleAccordionPanel = (accordionHeaderElm, shouldForceOpen) => {
   var mainDivElm =
     accordionHeaderElm.closest(".dg_accordion") ||
     accordionHeaderElm.closest(`.${cssClasses.collapseComponent}`);
@@ -122,15 +122,13 @@ const toggleAccordionPanel = (accordionHeaderElm) => {
   );
   var accordionButtonAllElms = mainDivElm.getElementsByClassName("dg_allitems");
   var isAccordionExpanded = accordionContentElm.className.includes(menuOpen);
+  var shouldOpenPanel = shouldForceOpen || !isAccordionExpanded;
 
   // Toggle the accordion's button aria-expanded attribute
-  accordionButtonElm.setAttribute(
-    HtmlAttributes.ariaExpanded,
-    !isAccordionExpanded
-  );
+  accordionButtonElm.setAttribute(HtmlAttributes.ariaExpanded, shouldOpenPanel);
 
   //If its open then we want to close it and vice versa
-  collapsePanelUpdate(!isAccordionExpanded, accordionContentElm);
+  collapsePanelUpdate(shouldOpenPanel, accordionContentElm);
 
   accordionButtonAllElms.length > 0
     ? updateButtonStatus(
