@@ -123,8 +123,6 @@ const toggleAccordionPanel = (accordionHeaderElm, shouldForceOpen) => {
   var accordionButtonAllElms = mainDivElm.getElementsByClassName("dg_allitems");
   var isAccordionExpanded = accordionContentElm.className.includes(menuOpen);
 
-  console.log(shouldForceOpen);
-
   // Toggle the accordion's button aria-expanded attribute
   accordionButtonElm.setAttribute(
     HtmlAttributes.ariaExpanded,
@@ -199,5 +197,3 @@ const updateButtonStatus = (
 
 /** Handler when the DOM is fully loaded */
 document.addEventListener("DOMContentLoaded", onDocumentReady);
-
-console.log("got here");
