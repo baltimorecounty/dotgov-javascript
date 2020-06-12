@@ -122,18 +122,13 @@ const toggleAccordionPanel = (accordionHeaderElm, shouldForceOpen) => {
   );
   var accordionButtonAllElms = mainDivElm.getElementsByClassName("dg_allitems");
   var isAccordionExpanded = accordionContentElm.className.includes(menuOpen);
+  var shouldOpenPanel = shouldForceOpen || !isAccordionExpanded;
 
   // Toggle the accordion's button aria-expanded attribute
-  accordionButtonElm.setAttribute(
-    HtmlAttributes.ariaExpanded,
-    shouldForceOpen || !isAccordionExpanded
-  );
+  accordionButtonElm.setAttribute(HtmlAttributes.ariaExpanded, shouldOpenPanel);
 
   //If its open then we want to close it and vice versa
-  collapsePanelUpdate(
-    shouldForceOpen || !isAccordionExpanded,
-    accordionContentElm
-  );
+  collapsePanelUpdate(shouldOpenPanel, accordionContentElm);
 
   accordionButtonAllElms.length > 0
     ? updateButtonStatus(
