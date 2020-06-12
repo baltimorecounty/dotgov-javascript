@@ -6,7 +6,7 @@ import { HtmlAttributes } from "../utilities/constants.utilities";
 
 const cssClasses = {
   accordionButton: "dg_accordion-btn",
-  collapseComponent: "dg_collapse"
+  collapseComponent: "dg_collapse",
 };
 
 const menuOpen = "collapse show";
@@ -15,7 +15,7 @@ const buttonCloseAll = "Close All";
 
 document.addEventListener(
   "click",
-  onDocumentClick => {
+  (onDocumentClick) => {
     const { target } = onDocumentClick;
     const targetClassList = target.classList;
     const isAccordionButtonClick =
@@ -37,7 +37,7 @@ document.addEventListener(
  * Handler for all document focus events
  * @param {*} focusEvent
  */
-const onDocumentFocus = focusEvent => {
+const onDocumentFocus = (focusEvent) => {
   const { target } = focusEvent;
   const isAccordionButtonElm = target.classList.contains(
     cssClasses.accordionButton
@@ -53,12 +53,14 @@ const onDocumentFocus = focusEvent => {
  */
 const onDocumentReady = () => {
   const expandedAccordionToggleButtonElms = document.querySelectorAll(
-    `.${cssClasses.accordionButton}[aria-expanded="true"]`
+    `:not(#root) .${cssClasses.accordionButton}[aria-expanded="true"]`
   );
 
-  console.log("test testse", expandedAccordionToggleButtonElms);
+  const nonReactAccordionElms = [...expandedAccordionToggleButtonElms].filter(
+    (x) => !x.closest("#root")
+  );
 
-  expandedAccordionToggleButtonElms.forEach(toggleButtonElm => {
+  nonReactAccordionElms.forEach((toggleButtonElm) => {
     toggleAccordionPanel(toggleButtonElm, true);
   });
 };
@@ -75,7 +77,7 @@ if (isIE) {
  * This is a workaround for the IE and Edge Browsers that do not support :focus-within
  * @param {*} focusEvent
  */
-const toggleAccordionFocus = focusEvent => {
+const toggleAccordionFocus = (focusEvent) => {
   const { target, type: focusType } = focusEvent;
   var accordionHeaderElms = target.getElementsByClassName(
     "dg_accordion_buttontext-holder"
@@ -144,7 +146,7 @@ const toggleAccordionPanel = (accordionHeaderElm, shouldForceOpen) => {
     : null;
 };
 
-const allMenuItemsAction = button => {
+const allMenuItemsAction = (button) => {
   const isMenuOpen =
     button.textContent.toLowerCase().trim() === "open all" ? true : false;
 
@@ -180,7 +182,7 @@ const collapsePanelUpdate = (shouldOpenPanel, accordionPanelContentElm) => {
   accordionElm.classList[shouldOpenPanel ? "remove" : "add"]("collapsed");
 };
 
-const menuState = state =>
+const menuState = (state) =>
   `multi-collapse collapse ${
     state.toLowerCase() === "open" ? "show" : ""
   }`.trim();

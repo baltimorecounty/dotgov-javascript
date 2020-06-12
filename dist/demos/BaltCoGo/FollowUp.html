@@ -11,10 +11,13 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <script src="//baltimorecountymd.gov/sebin/z/l/dotgov-site.min.js"></script>
     <link
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       rel="stylesheet"
+      type="text/css"
+      href="https://beta.baltimorecountymd.gov/sebin/j/e/dotgov.min.css"
     />
+    <script src="https://kit.fontawesome.com/2475edd293.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -31,44 +34,41 @@
           <!-- start copying for html snippet here -->
           <div>
             <form id="service-request-form" name="service-request-form">
-              <div>
-                <label for="TrackingNumber">Tracking Number </label>
-              </div>
-              <strong>
+              <div class="dg_form-field">
+                <label class="dg_label" for="TrackingNumber">
+                  <span class="dg_label-text">Tracking Number</span>
+                </label>
                 <input
-                  class="seInput seRequiredElement"
                   id="TrackingNumber"
-                  name="TrackingNumber"
+                  class="dg_form-field_input--text"
+                  label="Tracking Number"
+                  placeholder="Enter your tracking number"
                   type="text"
-                  value=""
                 />
-                <br /><br />
-              </strong>
-              <strong></strong>
+              </div>
+              <div>
                 <button
-                  class="seButton"
+                  class="dg_button"
                   id="get-report"
-                  style="float:left;"
+                  style="float: left;"
                   type="submit"
                 >
-                  <strong>Track Now</strong>
+                  Track Now
                 </button>
-              </strong>
+              </div>
             </form>
           </div>
           <div class="hidden" id="sr-loading-indicator">
             <p>
-              <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i> Loading your
-              service request.
+              Loading Service Request...
             </p>
-            <span class="sr-only">Loading Service Request...</span>
           </div>
           <!-- App Container -->
           <div id="report-details"></div>
           <button
-            class="seButton hidden"
+            class="dg_button hidden"
             id="sr-reset-form"
-            style="float:left;"
+            style="float: left;"
             type="button"
           >
             Look Up Another Report
