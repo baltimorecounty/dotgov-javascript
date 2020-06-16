@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Accordion Demo</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Style the buttons that are used to open and close the accordion panel */
+      .dg_accordion__collapsible {
+        background-color: #eee;
+        color: #444;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        text-align: left;
+        border: none;
+        outline: none;
+        transition: 0.4s;
+        position: relative;
+      }
+
+      button:focus {
+        color: #444;
+      }
+
+      /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+      .dg_accordion__collapsible:hover {
+        background-color: #ccc;
+      }
+      .dg_accordion-btn {
+        position: relative;
+      }
+
+      .dg_accordion-btn::after {
+        position: absolute;
+        cursor: pointer;
+        content: "\f107"; /*Font awesome right arrow*/
+        top: 0;
+        right: 0;
+      }
+      .collapsed .dg_accordion-btn::after {
+        position: absolute;
+        cursor: pointer;
+        content: "\f105"; /*Font awesome down arrow*/
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>Event Filter Example</h2>
+    <p>
+      Specific to the Events Module, this allows us to show a list of items by
+      default, and hide the rest. The user will be able to show more items using
+      a button.
+    </p>
+    <div class="dg_collapse dg_accordion__collapsible">
+      <button
+        class="fa dg_accordion-btn btn-link"
+        type="button"
+        data-toggle="collapse"
+        data-target="#collapseOne"
+        aria-expanded="true"
+        aria-controls="collapseOne"
+        style="text-align: left; width: 100%;"
+      >
+        <span class="dg_accordion_buttontext-holder">
+          New Collapsible Group Item #1
+        </span>
+      </button>
+      <div
+        id="collapseOne"
+        class="multi-collapse collapse"
+        data-parent="#accordionExample2"
+      >
+        <div class="dg_accordion-item-body">
+          <ul class="dg_filter-links dg_filter-collapse" data-items-to-show="3">
+            <li>
+              <a
+                href="https://www.baltimorecountymd.gov/MeetingsandEvents/Aging"
+                title="View the Department of Aging Calendar."
+                >Aging</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.baltimorecountymd.gov/MeetingsandEvents/Appeals"
+                title="Browse the Board of Appeals calendar."
+                >Board of Appeals</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.baltimorecountymd.gov/MeetingsandEvents/pdmevents"
+                title="Browse development and zoning hearings."
+                >Development and Zoning Hearings</a
+              >
+              <ul class="sub">
+                <li>
+                  <a
+                    href="https://www.baltimorecountymd.gov/MeetingsandEvents/PDM_d1"
+                    title="Browse development and zoning hearings for district 1."
+                    >District 1</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.baltimorecountymd.gov/MeetingsandEvents/PDM_d2"
+                    title="Browse development and zoning hearings for district 2."
+                    >District 2</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.baltimorecountymd.gov/MeetingsandEvents/PDM_d3"
+                    title="Browse development and zoning hearings for district 3."
+                    >District 3</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.baltimorecountymd.gov/MeetingsandEvents/PDM_d4"
+                    title="Browse development and zoning hearings for district 4."
+                    >District 4</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.baltimorecountymd.gov/MeetingsandEvents/PDM_d5"
+                    title="Browse development and zoning hearings for district 5."
+                    >District 5</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.baltimorecountymd.gov/MeetingsandEvents/PDM_d6"
+                    title="Browse development and zoning hearings for district 6."
+                    >District 6</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.baltimorecountymd.gov/MeetingsandEvents/PDM_d7"
+                    title="Browse development and zoning hearings for district 7."
+                    >District 7</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a
+                href="https://www.baltimorecountymd.gov/MeetingsandEvents/Economic%20and%20Workforce%20Development"
+                title="View Economic and Workforce Development events."
+                >Economic and Workforce Development</a
+              >
+              <ul class="sub">
+                <li>
+                  <a
+                    href="https://www.baltimorecountymd.gov/MeetingsandEvents/Business%20Events"
+                    title="View Economic Development events."
+                    >Business Events</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.baltimorecountymd.gov/MeetingsandEvents/Job%20Seeker%20Events"
+                    title="View job seeker events."
+                    >Job Seeker Events</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a
+                href="https://www.baltimorecountymd.gov/MeetingsandEvents/Environmental%20Protection%20and%20Resource"
+                title="View the Environmental Protection calendar."
+                >Environmental Protection</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.baltimorecountymd.gov/MeetingsandEvents/Ethics%20Commission"
+                title="View the Ethics Calendar of Events."
+                >Ethics Commission</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.baltimorecountymd.gov/MeetingsandEvents/Fire%20Events"
+                title="View Fire Department events."
+                >Fire Department</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.baltimorecountymd.gov/MeetingsandEvents/Health"
+                title="View the Health calendar events."
+                >Health Department</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.baltimorecountymd.gov/News/holidays/index.html"
+                title="View the County's holiday closing schedule."
+                >Holiday Closings</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.baltimorecountymd.gov/MeetingsandEvents/Human%20Relations%20Commission"
+                title="View the Human Relations Commission Calendar."
+                >Human Relations Commission</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.baltimorecountymd.gov/MeetingsandEvents/liquorboardevents"
+                >Liquor Board</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.baltimorecountymd.gov/MeetingsandEvents/localmanagementboard"
+                title="View the Local Management Board calendar."
+                >Local Management Board</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.baltimorecountymd.gov/MeetingsandEvents/Planning"
+                title="View the Department of Planning calendar."
+                >Planning</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.baltimorecountymd.gov/MeetingsandEvents/Personnel%20and%20Salary%20Advisory%20Board"
+                title="View the Personnel and Salary Advisory Calendar."
+                >Personnel and Salary Advisory Board</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.baltimorecountymd.gov/MeetingsandEvents/Police"
+                title="View the Police Department calendar."
+                >Police</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.baltimorecountymd.gov/MeetingsandEvents/Procurement"
+                title="View the Procurement calendar."
+                >Procurement</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.baltimorecountymd.gov/MeetingsandEvents/DPW%20PSSC"
+                title="View the Professional Services Selection Committee calendar."
+                >Professional Service Selection Committee</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.baltimorecountymd.gov/MeetingsandEvents/Recreation%20and%20Parks"
+                title="View Recreation and Parks events."
+                >Recreation - Special Events</a
+              >
+              <ul class="sub">
+                <li>
+                  <a
+                    href="https://www.baltimorecountymd.gov/MeetingsandEvents/RecreationRegion1"
+                    title="recreation region 1"
+                    >Region 1</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.baltimorecountymd.gov/MeetingsandEvents/RecreationRegion2"
+                    title="recreation region 2"
+                    >Region 2</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.baltimorecountymd.gov/MeetingsandEvents/RecreationRegion3"
+                    title="recreation region 3"
+                    >Region 3</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.baltimorecountymd.gov/MeetingsandEvents/RecreationRegion4"
+                    title="recreation region 4"
+                    >Region 4</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.baltimorecountymd.gov/MeetingsandEvents/RecreationParksNaturearea"
+                    >Nature</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.baltimorecountymd.gov/MeetingsandEvents/recreationtherapeuticarea"
+                    >Therapeutic</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a
+                href="https://www.baltimorecountymd.gov/MeetingsandEvents/Tower%20Review%20Commitee"
+                title="View the Tower Review Calendar."
+                >Tower Review Committee</a
+              >
+            </li>
+          </ul>
+          <button
+            type="button"
+            class="dg_filter-collapse__toggle-btn dg_button dg_button-link plus-text-icon"
+            style="padding-left: 0px; padding-right: 0px;"
+          >
+            Show More
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="/assets/dotgov-accordion.min.js"></script>
+    <script src="/assets/dotgov-eventFilter.min.js"></script>
+  </body>
+</html>
