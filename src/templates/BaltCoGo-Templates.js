@@ -10,10 +10,12 @@ const commentsTemplateFn = (comments) =>
       .map(
         (comment) =>
           `<div class="dg_card text-left">
-          ${comment.Text}
+          ${comment.RichText ? comment.RichText : comment.Text}
           <div class="dg_card__content">
             <span style="font-weight: bold">${comment.AuthorName}</span>
-            <span style="font-style: italic">${comment.DateCreatedFormatted}</span>
+            <span style="font-style: italic">${
+              comment.DateCreatedFormatted
+            }</span>
           </div>
         </div>`
       )
