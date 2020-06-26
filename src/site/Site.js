@@ -6,6 +6,7 @@ import "../lib/modernizers-css-grid";
 import "../components/Accordion";
 import "../components/Modal";
 import "../components/StepList";
+import "../components/EventFilter";
 import "./SiteNavigation";
 import "./SeForm";
 import "./SiteSearch";
