@@ -2,25 +2,25 @@ import {
   AddClassToElms,
   GetFirstElementOrDefault,
   RemoveClassFromElms,
-  SetAttributeForElms
+  SetAttributeForElms,
 } from "../utilities/dom.utilities";
 
 import FocusTrap from "focus-trap";
 
 const attributes = {
   ariaExpanded: "aria-expanded",
-  tabIndex: "tabindex"
+  tabIndex: "tabindex",
 };
 
 const icons = {
   open: "fa-bars",
-  close: "fa-times"
+  close: "fa-times",
 };
 
 const ids = {
   siteNav: "bc_site-nav",
   siteNavToggleButton: "bc_site-nav__toggle-button",
-  page: "bc_page"
+  page: "bc_page",
 };
 
 const cssClasses = {
@@ -29,7 +29,7 @@ const cssClasses = {
   isActive: "is-active",
   isDisabled: "is-disabled",
   siteNavToggleButtonText: "bc_site-nav__toggle-button__text",
-  siteNavListContainer: "bc_site-nav__list-container"
+  siteNavListContainer: "bc_site-nav__list-container",
 };
 
 const invisibleTabIndex = "-1"; /** Allows us to hide an item from tabbing */
@@ -39,7 +39,7 @@ let siteNavFocusTrap;
  * * Hide/Show the site navigation based on the given shouldShow param
  * @param {boolean} shouldShow if set to true the site navigation will be shown
  */
-const toggleSiteNav = shouldShow => {
+const toggleSiteNav = (shouldShow) => {
   const classListAction = shouldShow ? "add" : "remove";
   const siteNavToggleButtonElm = document.getElementById(
     ids.siteNavToggleButton
@@ -107,7 +107,7 @@ const toggleSiteNav = shouldShow => {
  * @param {document:click} clickEvent - the observable click event
  * @listens document:click
  */
-const handleDocumentClick = clickEvent => {
+const handleDocumentClick = (clickEvent) => {
   const { target } = clickEvent;
   const isSiteNavButtonClick =
     target.id === ids.siteNavToggleButton ||
@@ -132,7 +132,7 @@ const handleDocumentClick = clickEvent => {
  * @param {document:keydown} keyDownEvent - the observable keydown event
  * @listens document:keydown
  */
-const handleDocumentKeyDown = event => {
+const handleDocumentKeyDown = (event) => {
   const { key, keyCode } = event;
 
   /** Ensure ESC key collapses the menu in all browsers */
@@ -151,7 +151,7 @@ const handleDocumentKeyDown = event => {
  * @param {button:click} clickEvent - the observable click event
  * @listens button:click
  */
-const handleSiteNavigationButtonClick = clickEvent => {
+const handleSiteNavigationButtonClick = (clickEvent) => {
   const { target } = clickEvent;
   const siteNavToggleButton =
     target.id === ids.siteNavToggleButton
@@ -197,7 +197,7 @@ const onDocumentReady = () => {
    */
 
   siteNavFocusTrap = FocusTrap(document.getElementById(ids.siteNav), {
-    clickOutsideDeactivates: true
+    clickOutsideDeactivates: true,
   });
 };
 
@@ -205,11 +205,11 @@ const onDocumentReady = () => {
  * Remove site nav items from the tab index if the site nav is hidden
  * @param {boolean} shouldShow flag that denotes if the site nav should be shown
  */
-const updateSiteNavTabIndex = shouldShow => {
+const updateSiteNavTabIndex = (shouldShow) => {
   const siteNavLinkElms = document
     .getElementById(ids.siteNav)
     .querySelectorAll("a");
-  siteNavLinkElms.forEach(siteNavLinkElm => {
+  siteNavLinkElms.forEach((siteNavLinkElm) => {
     if (shouldShow) {
       siteNavLinkElm.removeAttribute(attributes.tabIndex);
     } else {
@@ -226,3 +226,36 @@ document.addEventListener("DOMContentLoaded", onDocumentReady);
  * https://gomakethings.com/listening-for-click-events-with-vanilla-javascript/
  */
 document.addEventListener("click", handleDocumentClick, false);
+
+/**
+ * This handles the twitter social media button event
+ * Generates an href for the current page
+ */
+window.twttr = (function (d, s, id) {
+  var js,
+    fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+  t._e = [];
+  t.ready = function (f) {
+    t._e.push(f);
+  };
+  return t;
+})(document, "script", "twitter-wjs");
+twttr.ready(function (twttr) {
+  // bind events here
+  var twitterHref = document
+    .getElementById("twitterButton")
+    .getAttribute("href");
+  document.getElementById("twitterButton").href =
+    twitterHref + "&url=" + window.location.href;
+  var facebookHref = document
+    .getElementById("facebookButton")
+    .getAttribute("href");
+  document.getElementById("facebookButton").href =
+    facebookHref + "?u=" + window.location.href;
+});
