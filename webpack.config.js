@@ -8,7 +8,6 @@ module.exports = {
     Modal: "./src/components/Modal.js",
     StepList: "./src/components/StepList.js",
     Site: "./src/site/Site.js",
-    SocialMedia: "./src/site/SocialMedia.js",
     SiteNavigation: "./src/site/SiteNavigation.js",
     SubpageTabs: "./src/template/SubpageTabs.js",
     EventFilter: "./src/components/EventFilter.js",
