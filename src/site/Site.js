@@ -10,3 +10,4 @@ import "../components/EventFilter";
 import "./SiteNavigation";
 import "./SeForm";
 import "./SiteSearch";
+import "./SocialMedia";
