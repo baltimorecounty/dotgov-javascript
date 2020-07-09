@@ -3,21 +3,28 @@ const path = require("path");
 module.exports = {
   mode: "development",
   entry: {
-    FollowUp: "./src/page-specific/BaltCoGo/FollowUp.js"
+    Accordion: "./src/components/Accordion.js",
+    FollowUp: "./src/page-specific/BaltCoGo/FollowUp.js",
+    Modal: "./src/components/Modal.js",
+    StepList: "./src/components/StepList.js",
+    Site: "./src/site/Site.js",
+    SiteNavigation: "./src/site/SiteNavigation.js",
+    SubpageTabs: "./src/template/SubpageTabs.js",
+    EventFilter: "./src/components/EventFilter.js",
   },
   output: {
     path: path.join(__dirname, "dist"),
-    filename: chunkData => {
+    filename: (chunkData) => {
       const {
-        chunk: { name }
+        chunk: { name },
       } = chunkData;
       return `assets/dotgov-${name.toLowerCase()}.min.js`;
     },
-    library: "Bc[name]"
+    library: "Bc[name]",
   },
   devServer: {
     contentBase: "./dist",
-    publicPath: "/assets/"
+    publicPath: "/assets/",
   },
   module: {
     rules: [
@@ -27,10 +34,10 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["@babel/preset-env"]
-          }
-        }
-      }
-    ]
-  }
+            presets: ["@babel/preset-env"],
+          },
+        },
+      },
+    ],
+  },
 };

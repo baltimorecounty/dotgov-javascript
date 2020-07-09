@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Title Page</title>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link
+      rel="stylesheet"
+      href="//www.baltimorecountymd.gov/sebin/j/d/dotgov.min.css"
+    />
+    <style>
+      #bc_site-nav {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .bc_site-nav__toggle-button,
+      #bc_page {
+        position: relative;
+      }
+
+      .bc_site-nav__toggle-button {
+        background: gold;
+        color: black;
+        padding: 10px 5px;
+      }
+
+      .bc_site-nav {
+        z-index: 9999;
+      }
+
+      #fake-menu-button {
+        visibility: hidden;
+        /*actually fake a button */
+        -webkit-appearance: button;
+        -webkit-writing-mode: horizontal-tb !important;
+        text-rendering: auto;
+        color: buttontext;
+        letter-spacing: normal;
+        word-spacing: normal;
+        text-transform: none;
+        text-indent: 0px;
+        text-shadow: none;
+        display: inline-block;
+        text-align: center;
+        align-items: flex-start;
+        cursor: default;
+        background-color: buttonface;
+        box-sizing: border-box;
+        margin: 0em;
+        font: 400 13.3333px Arial;
+        padding: 1px 6px;
+        border-width: 2px;
+        border-style: outset;
+        border-color: buttonface;
+        border-image: initial;
+      }
+
+      #bc_page {
+        margin: auto;
+        left: 0;
+        transition: left 0.2s ease;
+      }
+
+      .bc_site-nav__toggle-button {
+        left: 0;
+        z-index: 9999999;
+        transition: left 0.2s ease;
+      }
+
+      .bc_site-nav__list-container {
+        background: #e0e0e0;
+        margin: 0;
+        padding: 60px 20px;
+        list-style-type: none;
+        width: 490px;
+        position: fixed;
+        left: -490px;
+        top: 0;
+        bottom: 0;
+        transition: left 0.2s ease;
+        transition: opacity 0.2s ease;
+        opacity: 1;
+      }
+
+      .bc_site-nav__list-container.hidden {
+        opacity: 0;
+      }
+      .bc_site-nav__list-container li {
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid gray;
+      }
+
+      .is-active .bc_site-nav__toggle-button {
+        left: 490px;
+      }
+      .is-active .bc_site-nav__list-container {
+        left: 0;
+        overflow-y: auto;
+      }
+
+      #bc_page:after {
+        content: "";
+        opacity: 0;
+        background: #000000;
+        transition: opacity 0.2s;
+        pointer-events: none;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        visibility: hidden;
+        width: 100%;
+        z-index: 999;
+      }
+
+      #bc_page.is-disabled {
+        cursor: pointer;
+        overflow: hidden;
+        left: 490px;
+      }
+      #bc_page.is-disabled:after {
+        opacity: 0.8;
+        visibility: visible;
+      }
+      body.is-disabled {
+        overflow: hidden;
+      }
+
+      /* Demo Only */
+      #bc_page {
+        margin: 90px auto;
+      }
+
+      :focus {
+        background: red;
+        color: white;
+      }
+    </style>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="//kit.fontawesome.com/2475edd293.js"></script>
+  </head>
+  <body>
+    <nav id="bc_site-nav" class="site-nav" role="navigation">
+      <button
+        class="bc_site-nav__toggle-button"
+        id="bc_site-nav__toggle-button"
+        type="button"
+        aria-expanded="false"
+        aria-controls="site-navigation"
+      >
+        <i class="far fa-bars"></i>
+        <span class="bc_site-nav__toggle-button__text">Menu</span>
+      </button>
+      <div class="bc_site-nav__list-container">
+        <ul id="bc_site-nav__links" class="bc_site-nav__list">
+          <li><a href="/test-page">Link 1</a></li>
+          <li><a href="/test-page">Link 2</a></li>
+          <li><a href="/test-page">Link 3</a></li>
+          <li><a href="/test-page">Link 4</a></li>
+          <li><a href="/test-page">Link 5</a></li>
+          <li><a href="/test-page">Link 1</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div id="bc_page">
+      <div
+        class="anyipsum-output"
+        style="max-width: 1400px;width: 100%; margin: auto;"
+      >
+        <p>
+          Bacon ipsum dolor amet shoulder sirloin pork swine biltong, jerky
+          boudin rump landjaeger cupim tongue. Chuck sausage beef meatball,
+          porchetta cow shank biltong pork chop capicola meatloaf ball tip
+          fatback hamburger. Andouille chuck jerky, landjaeger brisket pancetta
+          shoulder shank ham pork chop strip steak kevin tri-tip ham hock
+          biltong. Pork chop short ribs fatback shoulder.
+        </p>
+        <p>
+          Brisket short loin frankfurter tenderloin kevin jerky pork chop
+          sausage ball tip flank pig buffalo pork burgdoggen pastrami. Filet
+          mignon landjaeger t-bone strip steak, venison pork loin beef ribeye
+          brisket tail pig frankfurter swine cow beef ribs. Burgdoggen tongue
+          ball tip, swine leberkas pastrami spare ribs ham hock drumstick doner
+          bacon hamburger. Shoulder short loin shankle landjaeger. Shank short
+          loin ham hock bacon buffalo, pastrami sausage frankfurter kevin
+          sirloin brisket.
+        </p>
+        <p>
+          Frankfurter turkey cupim shoulder ham hock swine ground round. Jowl
+          jerky tail picanha turkey kevin. Prosciutto short ribs ball tip tongue
+          biltong pig. Pastrami ribeye tenderloin ham.
+        </p>
+        <p>
+          Tongue short loin frankfurter, filet mignon meatball ribeye t-bone
+          sausage sirloin cupim pork belly shoulder. Pork belly frankfurter
+          shoulder sausage beef ribs short loin. Hamburger landjaeger pork loin
+          meatball tenderloin, kevin jerky frankfurter shank ham hock. Cupim
+          drumstick boudin flank hamburger pork loin ham capicola jowl spare
+          ribs filet mignon pancetta venison.
+        </p>
+        <p>
+          Kielbasa boudin doner bacon shank spare ribs. Salami doner
+          frankfurter, leberkas pork belly shankle pork loin beef ribs alcatra
+          bacon capicola corned beef boudin short ribs. Beef tenderloin beef
+          ribs, bresaola ham hock pork flank landjaeger shankle porchetta
+          tri-tip alcatra. Brisket ham meatball, bacon t-bone pork loin doner
+          cow. Strip steak ham hock leberkas tenderloin frankfurter sausage
+          sirloin corned beef bresaola burgdoggen jowl hamburger short loin
+          salami shank. Swine t-bone kielbasa, shankle alcatra filet mignon
+          salami pastrami doner.
+        </p>
+      </div>
+    </div>
+    <script src="/assets/dotgov-siteNavigation.min.js"></script>
+  </body>
+</html>
