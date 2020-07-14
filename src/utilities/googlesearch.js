@@ -28,7 +28,10 @@
           if (searchInput && searchInput[0]) {
             clearInterval(getElmInterval);
             searchInput[0].style.background = removeBackGround(searchInput[0]);
-            searchInput[0].classList = "dg_search-input";
+            if (searchInput[0].classList.contains("gsc-input")) {
+              searchInput[0].classList.remove("gsc-input");
+            }
+            searchInput[0].classList.add("dg_search-input");
             searchInput[0].placeholder =
               "Search for agencies, services and more...";
           }
