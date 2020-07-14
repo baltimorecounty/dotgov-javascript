@@ -28,10 +28,6 @@
           if (searchInput && searchInput[0]) {
             clearInterval(getElmInterval);
             searchInput[0].style.background = removeBackGround(searchInput[0]);
-            // searchInput[0].addEventListener(
-            //   "focusout",
-            //   removeBackGround(searchInput[0])
-            // );
             searchInput[0].classList = "dg_search-input";
             searchInput[0].placeholder =
               "Search for agencies, services and more...";
@@ -70,6 +66,20 @@
     if (isMobile(windowWidth)) {
       repositionSearchBox(windowWidth);
     }
+    document.addEventListener(
+      "blur",
+      function (e) {
+        var searchbarElements = document.getElementsByClassName(
+          "dg_search-input"
+        );
+        var searchbar =
+          searchbarElements.length > 0 ? searchbarElements[0] : null;
+        if (e.target == searchbar) {
+          e.stopPropagation();
+        }
+      },
+      true
+    );
   }
 
   function onWindowResize() {
