@@ -16,7 +16,7 @@
     (function () {
       // Dev cx = "007558505509255245046:qayakxzcib0"
       // Prod cx = "007558505509255245046:qqwcx9uroqk"
-      var cx = "007558505509255245046:qayakxzcib0";
+      var cx = "007558505509255245046:qqwcx9uroqk";
       var gcse = document.createElement("script");
       gcse.type = "text/javascript";
       gcse.async = true;
