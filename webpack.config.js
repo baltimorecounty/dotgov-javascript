@@ -11,7 +11,6 @@ module.exports = {
     SiteNavigation: "./src/site/SiteNavigation.js",
     SubpageTabs: "./src/template/SubpageTabs.js",
     EventFilter: "./src/components/EventFilter.js",
-    GoogleSearch: "./src/utilities/googlesearch.js",
   },
   output: {
     path: path.join(__dirname, "dist"),
