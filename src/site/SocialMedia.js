@@ -19,14 +19,14 @@ window.twttr = (function (d, s, id) {
 })(document, "script", "twitter-wjs");
 twttr.ready(function (twttr) {
   // bind events here
-  var twitterHref = document
-    .getElementById("twitterButton")
-    .getAttribute("href");
-  document.getElementById("twitterButton").href =
-    twitterHref + "&url=" + window.location.href;
-  var facebookHref = document
-    .getElementById("facebookButton")
-    .getAttribute("href");
-  document.getElementById("facebookButton").href =
-    facebookHref + "?u=" + window.location.href;
+  var twitterButton = document.getElementById("twitterButton");
+  if (twitterButton) {
+    document.getElementById("twitterButton").href =
+      twitterHref + "&url=" + window.location.href;
+  }
+  var facebookButton = document.getElementById("facebookButton");
+  if (facebookButton) {
+    document.getElementById("facebookButton").href =
+      facebookHref + "?u=" + window.location.href;
+  }
 });
