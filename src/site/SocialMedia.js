@@ -21,10 +21,10 @@ twttr.ready(function (twttr) {
   // bind events here
   var twitterButton = document.getElementById("twitterButton");
   if (twitterButton) {
-    twitterButton.href = twitterHref + "&url=" + window.location.href;
+    twitterButton.href += "&url=" + window.location.href;
   }
   var facebookButton = document.getElementById("facebookButton");
   if (facebookButton) {
-    facebookButton.href = facebookHref + "?u=" + window.location.href;
+    facebookButton.href += "?u=" + window.location.href;
   }
 });
