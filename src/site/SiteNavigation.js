@@ -174,22 +174,26 @@ const handleSiteNavigationButtonClick = (clickEvent) => {
  */
 const onDocumentReady = () => {
   // Allows users to use the menu even if javascript is not enabled
-  document
-    .getElementById(ids.siteNavToggleButton)
-    .classList.remove(cssClasses.hiddenInit); //TODO: do we still need this?
+  var siteNavToggleButton = document.getElementById(ids.siteNavToggleButton);
+
+  if (siteNavToggleButton) {
+    siteNavToggleButton.classList.remove(cssClasses.hiddenInit); //TODO: do we still need this?
+  }
 
   const siteNav = document.getElementById(ids.siteNav);
 
-  GetFirstElementOrDefault(
-    siteNav,
-    `.${cssClasses.siteNavListContainer}`
-  ).classList.add(cssClasses.hidden);
+  if (siteNav) {
+    GetFirstElementOrDefault(
+      siteNav,
+      `.${cssClasses.siteNavListContainer}`
+    ).classList.add(cssClasses.hidden);
 
-  SetAttributeForElms(
-    siteNav.querySelectorAll("a"),
-    attributes.tabIndex,
-    invisibleTabIndex
-  );
+    SetAttributeForElms(
+      siteNav.querySelectorAll("a"),
+      attributes.tabIndex,
+      invisibleTabIndex
+    );
+  }
 
   /**
    * Initialize a focus trap for use when the site navigation is active / visible
