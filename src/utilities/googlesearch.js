@@ -29,6 +29,7 @@
 
           if (searchInput && searchInput[0]) {
             clearInterval(getElmInterval);
+            searchInput[0].removeAttribute("style");
             searchInput[0].style.background = removeBackGround(searchInput[0]);
             if (searchInput[0].classList.contains("gsc-input")) {
               searchInput[0].classList.remove("gsc-input");
