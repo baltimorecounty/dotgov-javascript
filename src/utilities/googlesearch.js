@@ -2,10 +2,8 @@
   var resizeTimer;
   var windowWidth;
 
-  function $getSearchContainer(width) {
-    return isMobile(width)
-      ? $("#search-container")
-      : $("#internal-search-container");
+  function $getSearchContainer() {
+    return $("#___gcse_0");
   }
 
   function removeBackGround(oElem) {
@@ -23,23 +21,43 @@
       gcse.src = "https://cse.google.com/cse.js?cx=" + cx;
       gcse.onload = function () {
         var getElmInterval = setInterval(function () {
-          var searchInput = document.querySelectorAll(
-            ".gsib_a input.gsc-input"
-          );
+          var searchContainer = $getSearchContainer();
+          if (searchContainer) {
+            // Remove Google styles
+            searchContainer.find("[class]").removeAttr("class");
 
-          if (searchInput && searchInput[0]) {
-            clearInterval(getElmInterval);
-            searchInput[0].style.background = removeBackGround(searchInput[0]);
-            if (searchInput[0].classList.contains("gsc-input")) {
-              searchInput[0].classList.remove("gsc-input");
+            var searchButton = searchContainer.find("button");
+            if (searchButton) {
+              searchButton.parent().remove();
             }
-            searchInput[0].classList.add("dg_search-input");
-            searchInput[0].placeholder =
-              "Search for agencies, services and more...";
-          }
+            var clearButton = searchContainer.find("[title='clear results']");
+            if (clearButton) {
+              clearButton.parent().remove();
+            }
+            $("#gs_st50").parent().remove();
 
-          var searchButton = $(".gsc-search-button");
-          searchButton.remove();
+            // Add DG styles
+            var searchForm = searchContainer.find("form");
+            if (searchForm && searchForm[0]) {
+              searchForm[0].classList.add("dg_search-container");
+              var outerTable = searchForm.children();
+              if (outerTable) {
+                outerTable.attr("style", "width:100%");
+              }
+            }
+
+            var searchInput = searchContainer.find("input");
+            if (searchInput && searchInput[0]) {
+              clearInterval(getElmInterval);
+              searchInput[0].removeAttribute("style");
+              searchInput[0].style.background = removeBackGround(
+                searchInput[0]
+              );
+              searchInput[0].classList.add("dg_search-input");
+              searchInput[0].placeholder =
+                "Search for agencies, services and more...";
+            }
+          }
         }, 100);
       };
       var s = document.getElementsByTagName("script")[0];
@@ -100,7 +118,7 @@
   }
 
   function repositionSearchBox(currentWindowWidth) {
-    var $targetContainer = $getSearchContainer(currentWindowWidth);
+    var $targetContainer = $getSearchContainer();
     var intervalCheck = setInterval(function () {
       if (
         $getSearchContainer.length &&
