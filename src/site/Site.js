@@ -11,3 +11,5 @@ import "./SiteNavigation";
 import "./SeForm";
 import "./SiteSearch";
 import "./SocialMedia";
+import "../utilities/googlesearch";
+import "../utilities/hideShowButton";
