@@ -1,4 +1,5 @@
 (function ($) {
+  alert("before we find the button");
   if ($("#dg_back-to-top").length) {
     var scrollTrigger = 200, // px
       backToTop = function () {
