@@ -1,5 +1,9 @@
+//*******************************/
+//This needs to be addd directly onto a SE template in order for the race condition to be avoided
+//<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+//That script needs to be added as well for jquery to work.
+//*******************************/
 (function ($) {
-  alert("before we find the button");
   if ($("#dg_back-to-top").length) {
     var scrollTrigger = 200, // px
       backToTop = function () {
