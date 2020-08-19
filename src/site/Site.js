@@ -14,3 +14,4 @@ import "./SocialMedia";
 import "../utilities/googlesearch";
 import "../utilities/hideShowButton";
 import "../components/ScrollToTop";
+import "../components/AddImageAltText";
