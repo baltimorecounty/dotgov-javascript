@@ -4,12 +4,15 @@ window.addEventListener(
     var headerElement = document.getElementsByClassName(
       "dg_page-header__title"
     );
-    var headerTitle = headerElement[0].innerHTML;
 
-    var parkHeaderImage = $("#parkHeaderImage");
-    var parkImage = $("#parkImage");
+    if (headerElement[0]) {
+      var headerTitle = headerElement[0].innerHTML;
 
-    parkHeaderImage.prop("alt", headerTitle);
-    parkImage.prop("alt", headerTitle);
+      var parkHeaderImage = $("#parkHeaderImage");
+      var parkImage = $("#parkImage");
+
+      parkHeaderImage.prop("alt", headerTitle);
+      parkImage.prop("alt", headerTitle);
+    }
   })(jQuery)
 );
