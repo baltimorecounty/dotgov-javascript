@@ -9,9 +9,11 @@ window.addEventListener(
       var headerTitle = headerElement[0].innerHTML;
 
       var parkHeaderImage = $("#parkHeaderImage");
+      var parkHeaderImageSmall = $("#parkHeaderImageSmall");
       var parkImage = $("#parkImage");
 
       parkHeaderImage.prop("alt", headerTitle);
+      parkHeaderImageSmall.prop("alt", headerTitle);
       parkImage.prop("alt", headerTitle);
     }
   })(jQuery)
