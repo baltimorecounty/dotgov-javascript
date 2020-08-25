@@ -4,7 +4,7 @@ const searchForm = "search-form";
 const cssClasses = {
   closeSearchIcon: "fa-times",
   expandSearchIcon: "fa-search",
-  isVisible: "is-visible",
+  isVisible: "is-visible"
 };
 
 /**
@@ -34,6 +34,12 @@ const updateSearchIcon = (searchIconElm, shouldCollapseSearch) => {
 const toggleSearchForm = (searchFormElm, shouldCollapseSearch) => {
   searchFormElm.classList.remove(cssClasses.isVisible);
   searchFormElm.classList.add(shouldCollapseSearch ? "" : cssClasses.isVisible);
+  var element = document.getElementsByClassName("gsc-completion-container");
+  if (shouldCollapseSearch) {
+    element.style.display = "none";
+  } else {
+    element.style.display = "show";
+  }
 };
 
 /**
