@@ -7,6 +7,7 @@ const cssClasses = {
   isVisible: "is-visible",
 };
 
+
 /**
  * Changes the mobile search buttons icon to a close button when shouldCollapseSearch search is set to false.
  * Otherwise the icon will change to a search icon
