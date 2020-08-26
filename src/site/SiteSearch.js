@@ -4,7 +4,7 @@ const searchForm = "search-form";
 const cssClasses = {
   closeSearchIcon: "fa-times",
   expandSearchIcon: "fa-search",
-  isVisible: "is-visible"
+  isVisible: "is-visible",
 };
 
 /**
@@ -70,6 +70,7 @@ const toggleSiteSearch = () => {
 
 /** Events  */
 if (document.getElementById(mobileSearchButtonId)) {
+  alert("Hello");
   document
     .getElementById(mobileSearchButtonId)
     .addEventListener("click", toggleSiteSearch, false);

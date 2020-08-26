@@ -1,8 +1,5 @@
 import axios from "../../lib/axios";
-import {
-  setConfig,
-  getValue as getConfigValue,
-} from "@baltimorecounty/javascript-utilities/config";
+import { Config } from "@baltimorecounty/javascript-utilities";
 import {
   defaultWarningTemplateFn,
   defaultServerErrorTemplateFn,
@@ -13,6 +10,7 @@ import {
 /**
  * Setup the api endpoints for the different environments
  */
+const { setConfig, getValue } = Config;
 
 const initialEndpoint = "platform.citysourced.net/servicerequests";
 
