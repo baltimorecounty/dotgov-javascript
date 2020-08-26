@@ -70,7 +70,6 @@ const toggleSiteSearch = () => {
 
 /** Events  */
 if (document.getElementById(mobileSearchButtonId)) {
-  alert("Hello");
   document
     .getElementById(mobileSearchButtonId)
     .addEventListener("click", toggleSiteSearch, false);
