@@ -11,7 +11,7 @@
   }
 
   function initGoogleSearch() {
-    (function () {
+    (function() {
       // Dev cx = "007558505509255245046:qayakxzcib0"
       // Prod cx = "007558505509255245046:qqwcx9uroqk"
       var cx = "007558505509255245046:qqwcx9uroqk";
@@ -19,8 +19,8 @@
       gcse.type = "text/javascript";
       gcse.async = true;
       gcse.src = "https://cse.google.com/cse.js?cx=" + cx;
-      gcse.onload = function () {
-        var getElmInterval = setInterval(function () {
+      gcse.onload = function() {
+        var getElmInterval = setInterval(function() {
           var searchContainer = $getSearchContainer();
           if (searchContainer) {
             // Remove Google styles
@@ -34,7 +34,9 @@
             if (clearButton) {
               clearButton.parent().remove();
             }
-            $("#gs_st50").parent().remove();
+            $("#gs_st50")
+              .parent()
+              .remove();
 
             // Add DG styles
             var searchForm = searchContainer.find("form");
@@ -89,9 +91,10 @@
     if (isMobile(windowWidth)) {
       repositionSearchBox(windowWidth);
     }
+
     document.addEventListener(
       "blur",
-      function (e) {
+      function(e) {
         var searchbarElements = document.getElementsByClassName(
           "dg_search-input"
         );
@@ -118,8 +121,23 @@
   }
 
   function repositionSearchBox(currentWindowWidth) {
+    var element = document.getElementsByClassName("gsc-completion-container");
+    if (currentWindowWidth <= 900) {
+      if (element) {
+        for (var i = 0; i < element.length; i += 1) {
+          element[i].style.display = "none";
+        }
+      }
+    } else {
+      if (element) {
+        for (var i = 0; i < element.length; i += 1) {
+          element[i].style.display = "";
+        }
+      }
+    }
+
     var $targetContainer = $getSearchContainer();
-    var intervalCheck = setInterval(function () {
+    var intervalCheck = setInterval(function() {
       if (
         $getSearchContainer.length &&
         $(".gsc-control-searchbox-only").length
@@ -132,7 +150,57 @@
       }
     }, 100);
   }
+  const handlefocusout = clickEvent => {
+    var compareElement = $.trim(clickEvent.target.classList);
+    var gscElement = document.getElementsByClassName("gsc-completion-container");
+    if (
+      compareElement == "no-cssgridlegacy cssgrid" ||
+      compareElement == "dg_search-container"
+    ) {
+  
+      if (gscElement) {
+        for (var i = 0; i < gscElement.length; i += 1) {
+          gscElement[i].style.display = "none";
+        }
+      }
+      return;
+    } else if (compareElement == "dg_search-input") {
+      if (gscElement) {
+        for (var i = 0; i < gscElement.length; i += 1) {
+          gscElement[i].style.display = "";
+        }
+      }
+      return;
+    } else {
+      const flyoutElement = document.getElementById("div-search-form");
+      if (flyoutElement) {
+        let targetElement = clickEvent.target; // clicked element
+        do {
+          if (targetElement == flyoutElement) {
 
+            if (gscElement) {
+              for (var i = 0; i < gscElement.length; i += 1) {
+                gscElement[i].style.display = "none";
+              }
+            }
+            return;
+          }
+          // Go up the DOM
+          targetElement = targetElement.parentNode;
+        } while (targetElement);
+        if (targetElement == null) {
+          return;
+        } else {
+
+          if (gscElement) {
+            for (var i = 0; i < gscElement.length; i += 1) {
+              gscElement[i].style.display = "none";
+            }
+          }
+        }
+      }
+    }
+  };
   initGoogleSearch();
 
   $(document).ready(onSearchReady);
@@ -141,4 +209,5 @@
   $(document).on("submit", "#RateThisPageForm", onPageRating);
 
   $(window).on("resize", onWindowResize);
+  document.addEventListener("click", handlefocusout, true);
 })(jQuery);

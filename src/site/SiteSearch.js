@@ -36,11 +36,12 @@ const toggleSearchForm = (searchFormElm, shouldCollapseSearch) => {
   searchFormElm.classList.remove(cssClasses.isVisible);
   searchFormElm.classList.add(shouldCollapseSearch ? "" : cssClasses.isVisible);
   var element = document.getElementsByClassName("gsc-completion-container");
+ 
   if (element) {
     if (shouldCollapseSearch) {
       element.style.display = "none";
     } else {
-      element.style.display = "show";
+      element.style.display = "";
     }
   }
 };
