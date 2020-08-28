@@ -57,7 +57,6 @@
               searchInput[0].placeholder =
                 "Search for agencies, services and more...";
             }
-            
           }
         }, 100);
       };
@@ -80,7 +79,7 @@
     if (urlElm) {
       urlElm.value = window.location.href;
     }
-    6;
+
     if ($("input#website").val().length) {
       return false;
     }
@@ -153,44 +152,6 @@
     }
   };
 
-  const handleClick = (clickEvent) => {
-    var compareElement = $.trim(clickEvent.target.classList);
-    var gscElement = document.getElementsByClassName(
-      "gsc-completion-container"
-    );
-    if (
-      compareElement == "no-cssgridlegacy cssgrid" ||
-      compareElement == "dg_search-container"
-    ) {
-      gscElementShowHide(gscElement, "none");
-      document.getElementById("gsc-i-id1").value = "";
-      return;
-    } else if (compareElement == "dg_search-input") {
-      gscElementShowHide(gscElement, "");
-      return;
-    } else {
-      const flyoutElement = document.getElementById("div-search-form");
-      if (flyoutElement) {
-        let targetElement = clickEvent.target; // clicked element
-        do {
-          if (targetElement == flyoutElement) {
-            gscElementShowHide(gscElement, "none");
-            document.getElementById("gsc-i-id1").value = "";
-            return;
-          }
-          // Go up the DOM
-          targetElement = targetElement.parentNode;
-        } while (targetElement);
-        if (targetElement == null) {
-          return;
-        } else {
-          gscElementShowHide(gscElement, "none");
-          document.getElementById("gsc-i-id1").value = "";
-        }
-      }
-    }
-  };
-
   initGoogleSearch();
 
   $(document).ready(onSearchReady);
@@ -198,5 +159,4 @@
   /* Submit url to rate form */
   $(document).on("submit", "#RateThisPageForm", onPageRating);
   $(window).on("resize", onWindowResize);
-  document.addEventListener("click", handleClick, false);
 })(jQuery);
