@@ -60,6 +60,7 @@
           }
         }, 100);
       };
+
       var s = document.getElementsByTagName("script")[0];
       s.parentNode.insertBefore(gcse, s);
     })();
@@ -89,6 +90,7 @@
     if (isMobile(windowWidth)) {
       repositionSearchBox(windowWidth);
     }
+
     document.addEventListener(
       "blur",
       function (e) {
@@ -97,6 +99,15 @@
         );
         var searchbar =
           searchbarElements.length > 0 ? searchbarElements[0] : null;
+
+        var gscElement = document.getElementsByClassName(
+          "gsc-completion-container"
+        );
+
+        if (gscElement[0]) {
+          gscElementShowHide(gscElement[0], "none");
+        }
+
         if (e.target == searchbar) {
           e.stopPropagation();
         }
@@ -133,12 +144,58 @@
     }, 100);
   }
 
+  const gscElementShowHide = (gscElement, displayValue) => {
+    if (gscElement) {
+      for (var i = 0; i < gscElement.length; i += 1) {
+        gscElement[i].style.display = displayValue;
+      }
+    }
+  };
+
+  const handleClick = (clickEvent) => {
+    var compareElement = $.trim(clickEvent.target.classList);
+    var gscElement = document.getElementsByClassName(
+      "gsc-completion-container"
+    );
+    if (
+      compareElement == "no-cssgridlegacy cssgrid" ||
+      compareElement == "dg_search-container"
+    ) {
+      gscElementShowHide(gscElement, "none");
+      document.getElementById("gsc-i-id1").value = "";
+      return;
+    } else if (compareElement == "dg_search-input") {
+      gscElementShowHide(gscElement, "");
+      return;
+    } else {
+      const flyoutElement = document.getElementById("div-search-form");
+      if (flyoutElement) {
+        let targetElement = clickEvent.target; // clicked element
+        do {
+          if (targetElement == flyoutElement) {
+            gscElementShowHide(gscElement, "none");
+            document.getElementById("gsc-i-id1").value = "";
+            return;
+          }
+          // Go up the DOM
+          targetElement = targetElement.parentNode;
+        } while (targetElement);
+        if (targetElement == null) {
+          return;
+        } else {
+          gscElementShowHide(gscElement, "none");
+          document.getElementById("gsc-i-id1").value = "";
+        }
+      }
+    }
+  };
+
   initGoogleSearch();
 
   $(document).ready(onSearchReady);
 
   /* Submit url to rate form */
   $(document).on("submit", "#RateThisPageForm", onPageRating);
-
   $(window).on("resize", onWindowResize);
+  document.addEventListener("click", handleClick, false);
 })(jQuery);

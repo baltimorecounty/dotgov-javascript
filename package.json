@@ -19,25 +19,25 @@
   },
   "homepage": "https://github.com/baltimorecounty/dotgov-javascript#readme",
   "devDependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
-    "@testing-library/dom": "^6.1.0",
-    "@testing-library/jest-dom": "^4.1.2",
+    "@babel/core": "^7.11.4",
+    "@babel/preset-env": "^7.11.0",
+    "@testing-library/dom": "^6.16.0",
+    "@testing-library/jest-dom": "^4.2.4",
     "babel-jest": "^24.9.0",
-    "babel-loader": "^8.0.6",
+    "babel-loader": "^8.1.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "jest": "^24.9.0",
-    "webpack": "^4.39.3",
-    "webpack-cli": "^3.3.7",
-    "webpack-dev-server": "^3.8.0"
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "@baltimorecounty/javascript-utilities": "^1.0.1",
-    "a11y-dialog": "^5.2.0",
-    "axios": "^0.19.0",
-    "date-fns": "^2.0.1",
+    "@baltimorecounty/javascript-utilities": "^1.0.7",
+    "a11y-dialog": "^5.3.2",
+    "axios": "^0.19.2",
+    "date-fns": "^2.15.0",
     "es6-promise": "^4.2.8",
-    "focus-trap": "^5.0.2",
-    "regenerator": "^0.14.2"
+    "focus-trap": "^5.1.0",
+    "regenerator": "^0.14.7"
   }
 }
