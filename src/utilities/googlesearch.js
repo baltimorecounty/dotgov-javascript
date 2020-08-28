@@ -209,5 +209,5 @@
   $(document).on("submit", "#RateThisPageForm", onPageRating);
 
   $(window).on("resize", onWindowResize);
-  document.addEventListener("click", handlefocusout, true);
+  document.addEventListener("click", handlefocusout, false);
 })(jQuery);
