@@ -11,7 +11,7 @@
   }
 
   function initGoogleSearch() {
-    (function() {
+    (function () {
       // Dev cx = "007558505509255245046:qayakxzcib0"
       // Prod cx = "007558505509255245046:qqwcx9uroqk"
       var cx = "007558505509255245046:qqwcx9uroqk";
@@ -19,8 +19,8 @@
       gcse.type = "text/javascript";
       gcse.async = true;
       gcse.src = "https://cse.google.com/cse.js?cx=" + cx;
-      gcse.onload = function() {
-        var getElmInterval = setInterval(function() {
+      gcse.onload = function () {
+        var getElmInterval = setInterval(function () {
           var searchContainer = $getSearchContainer();
           if (searchContainer) {
             // Remove Google styles
@@ -34,9 +34,7 @@
             if (clearButton) {
               clearButton.parent().remove();
             }
-            $("#gs_st50")
-              .parent()
-              .remove();
+            $("#gs_st50").parent().remove();
 
             // Add DG styles
             var searchForm = searchContainer.find("form");
@@ -59,9 +57,11 @@
               searchInput[0].placeholder =
                 "Search for agencies, services and more...";
             }
+            
           }
         }, 100);
       };
+
       var s = document.getElementsByTagName("script")[0];
       s.parentNode.insertBefore(gcse, s);
     })();
@@ -80,7 +80,7 @@
     if (urlElm) {
       urlElm.value = window.location.href;
     }
-
+    6;
     if ($("input#website").val().length) {
       return false;
     }
@@ -94,12 +94,21 @@
 
     document.addEventListener(
       "blur",
-      function(e) {
+      function (e) {
         var searchbarElements = document.getElementsByClassName(
           "dg_search-input"
         );
         var searchbar =
           searchbarElements.length > 0 ? searchbarElements[0] : null;
+
+        var gscElement = document.getElementsByClassName(
+          "gsc-completion-container"
+        );
+
+        if (gscElement[0]) {
+          gscElementShowHide(gscElement[0], "none");
+        }
+
         if (e.target == searchbar) {
           e.stopPropagation();
         }
@@ -121,15 +130,8 @@
   }
 
   function repositionSearchBox(currentWindowWidth) {
-    var element = document.getElementsByClassName("gsc-completion-container");
-    if (currentWindowWidth <= 900) {
-      gscElementShowHide(element, "none");
-    } else {
-      gscElementShowHide(element, "");
-    }
-
     var $targetContainer = $getSearchContainer();
-    var intervalCheck = setInterval(function() {
+    var intervalCheck = setInterval(function () {
       if (
         $getSearchContainer.length &&
         $(".gsc-control-searchbox-only").length
@@ -142,6 +144,7 @@
       }
     }, 100);
   }
+
   const gscElementShowHide = (gscElement, displayValue) => {
     if (gscElement) {
       for (var i = 0; i < gscElement.length; i += 1) {
@@ -150,7 +153,7 @@
     }
   };
 
-  const handleClick = clickEvent => {
+  const handleClick = (clickEvent) => {
     var compareElement = $.trim(clickEvent.target.classList);
     var gscElement = document.getElementsByClassName(
       "gsc-completion-container"

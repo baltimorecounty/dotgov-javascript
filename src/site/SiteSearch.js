@@ -7,7 +7,6 @@ const cssClasses = {
   isVisible: "is-visible",
 };
 
-
 /**
  * Changes the mobile search buttons icon to a close button when shouldCollapseSearch search is set to false.
  * Otherwise the icon will change to a search icon
@@ -35,14 +34,13 @@ const updateSearchIcon = (searchIconElm, shouldCollapseSearch) => {
 const toggleSearchForm = (searchFormElm, shouldCollapseSearch) => {
   searchFormElm.classList.remove(cssClasses.isVisible);
   searchFormElm.classList.add(shouldCollapseSearch ? "" : cssClasses.isVisible);
-  var element = document.getElementsByClassName("gsc-completion-container");
- 
-  if (element) {
-    if (shouldCollapseSearch) {
-      element.style.display = "none";
-    } else {
-      element.style.display = "";
-    }
+
+  var gscElement = document.getElementsByClassName("gsc-completion-container");
+
+  if (gscElement[0]) {
+    searchFormElm.classList.contains(cssClasses.isVisible)
+      ? (gscElement[0].style.display = "none")
+      : (gscElement[0].style.display = "");
   }
 };
 
