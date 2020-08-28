@@ -123,17 +123,9 @@
   function repositionSearchBox(currentWindowWidth) {
     var element = document.getElementsByClassName("gsc-completion-container");
     if (currentWindowWidth <= 900) {
-      if (element) {
-        for (var i = 0; i < element.length; i += 1) {
-          element[i].style.display = "none";
-        }
-      }
+      gscElementShowHide(element, "none");
     } else {
-      if (element) {
-        for (var i = 0; i < element.length; i += 1) {
-          element[i].style.display = "";
-        }
-      }
+      gscElementShowHide(element, "");
     }
 
     var $targetContainer = $getSearchContainer();
@@ -150,26 +142,27 @@
       }
     }, 100);
   }
+  const gscElementShowHide = (gscElement, displayValue) => {
+    if (gscElement) {
+      for (var i = 0; i < gscElement.length; i += 1) {
+        gscElement[i].style.display = displayValue;
+      }
+    }
+  };
+
   const handleClick = clickEvent => {
     var compareElement = $.trim(clickEvent.target.classList);
-    var gscElement = document.getElementsByClassName("gsc-completion-container");
+    var gscElement = document.getElementsByClassName(
+      "gsc-completion-container"
+    );
     if (
       compareElement == "no-cssgridlegacy cssgrid" ||
       compareElement == "dg_search-container"
     ) {
-
-      if (gscElement) {
-        for (var i = 0; i < gscElement.length; i += 1) {
-          gscElement[i].style.display = "none";
-        }
-      }
+      gscElementShowHide(gscElement, "none");
       return;
     } else if (compareElement == "dg_search-input") {
-      if (gscElement) {
-        for (var i = 0; i < gscElement.length; i += 1) {
-          gscElement[i].style.display = "";
-        }
-      }
+      gscElementShowHide(gscElement, "");
       return;
     } else {
       const flyoutElement = document.getElementById("div-search-form");
@@ -177,12 +170,7 @@
         let targetElement = clickEvent.target; // clicked element
         do {
           if (targetElement == flyoutElement) {
-
-            if (gscElement) {
-              for (var i = 0; i < gscElement.length; i += 1) {
-                gscElement[i].style.display = "none";
-              }
-            }
+            gscElementShowHide(gscElement, "none");
             return;
           }
           // Go up the DOM
@@ -191,12 +179,7 @@
         if (targetElement == null) {
           return;
         } else {
-
-          if (gscElement) {
-            for (var i = 0; i < gscElement.length; i += 1) {
-              gscElement[i].style.display = "none";
-            }
-          }
+          gscElementShowHide(gscElement, "none");
         }
       }
     }
@@ -208,8 +191,6 @@
 
   /* Submit url to rate form */
   $(document).on("submit", "#RateThisPageForm", onPageRating);
-
   $(window).on("resize", onWindowResize);
   document.addEventListener("click", handleClick, false);
- 
 })(jQuery);
