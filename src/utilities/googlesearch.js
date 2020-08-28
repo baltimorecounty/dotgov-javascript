@@ -160,6 +160,7 @@
       compareElement == "dg_search-container"
     ) {
       gscElementShowHide(gscElement, "none");
+      document.getElementById("gsc-i-id1").value = "";
       return;
     } else if (compareElement == "dg_search-input") {
       gscElementShowHide(gscElement, "");
@@ -171,6 +172,7 @@
         do {
           if (targetElement == flyoutElement) {
             gscElementShowHide(gscElement, "none");
+            document.getElementById("gsc-i-id1").value = "";
             return;
           }
           // Go up the DOM
@@ -180,6 +182,7 @@
           return;
         } else {
           gscElementShowHide(gscElement, "none");
+          document.getElementById("gsc-i-id1").value = "";
         }
       }
     }
