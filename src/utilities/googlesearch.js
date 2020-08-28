@@ -150,14 +150,14 @@
       }
     }, 100);
   }
-  const handlefocusout = clickEvent => {
+  const handleClick = clickEvent => {
     var compareElement = $.trim(clickEvent.target.classList);
     var gscElement = document.getElementsByClassName("gsc-completion-container");
     if (
       compareElement == "no-cssgridlegacy cssgrid" ||
       compareElement == "dg_search-container"
     ) {
-  
+
       if (gscElement) {
         for (var i = 0; i < gscElement.length; i += 1) {
           gscElement[i].style.display = "none";
@@ -201,6 +201,7 @@
       }
     }
   };
+
   initGoogleSearch();
 
   $(document).ready(onSearchReady);
@@ -209,5 +210,6 @@
   $(document).on("submit", "#RateThisPageForm", onPageRating);
 
   $(window).on("resize", onWindowResize);
-  document.addEventListener("click", handlefocusout, false);
+  document.addEventListener("click", handleClick, false);
+ 
 })(jQuery);
