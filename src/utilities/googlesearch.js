@@ -109,6 +109,7 @@
   }
 
   function onWindowResize() {
+
     var $window = $(window);
     var newWindowWidth = $window.width();
     clearTimeout(resizeTimer);
@@ -197,3 +198,5 @@
   $(window).on("resize", onWindowResize);
   document.addEventListener("click", handleClick, false);
 })(jQuery);
+
+
