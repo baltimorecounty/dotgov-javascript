@@ -120,6 +120,16 @@
 
     var $window = $(window);
     var newWindowWidth = $window.width();
+    var gscElement = document.getElementsByClassName(
+      "gsc-completion-container"
+    );
+    if (newWindowWidth <=900){
+      gscElementShowHide(gscElement, "none");
+   
+    }
+    else{
+      gscElementShowHide(gscElement, "");
+    }
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function waitForResizeToFinish() {
       if (newWindowWidth !== windowWidth) {
