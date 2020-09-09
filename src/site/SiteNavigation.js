@@ -44,12 +44,12 @@ const toggleSiteNav = (shouldShow) => {
   if (gscElement) {
     if (shouldShow) {
       for (var i = 0; i < gscElement.length; i += 1) {
-        gscElement[i].style.right = "-400px";
+        gscElement[i].style.display = "none";
         gscElement[i].style.position = "relative";
       }
     } else {
       for (var i = 0; i < gscElement.length; i += 1) {
-        gscElement[i].style.right = "";
+        gscElement[i].style.display = "";
         gscElement[i].style.position = "";
       }
     }
