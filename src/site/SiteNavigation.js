@@ -40,6 +40,20 @@ let siteNavFocusTrap;
  * @param {boolean} shouldShow if set to true the site navigation will be shown
  */
 const toggleSiteNav = (shouldShow) => {
+  var gscElement = document.getElementsByClassName("gsc-completion-container");
+  if (gscElement) {
+    if (shouldShow) {
+      for (var i = 0; i < gscElement.length; i += 1) {
+        gscElement[i].style.display = "none";
+        gscElement[i].style.position = "relative";
+      }
+    } else {
+      for (var i = 0; i < gscElement.length; i += 1) {
+        gscElement[i].style.display = "";
+        gscElement[i].style.position = "";
+      }
+    }
+  }
   const classListAction = shouldShow ? "add" : "remove";
   const siteNavToggleButtonElm = document.getElementById(
     ids.siteNavToggleButton
