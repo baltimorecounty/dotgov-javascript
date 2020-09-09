@@ -1,0 +1,56 @@
+{{#each youtubeItemInfo}}
+<div class="dg_card youtube-playlist-item {{#if isHidden}}hidden{{/if}}">
+    <figure>
+     <a
+       
+        title="Video: {{videoTitle}}"
+         href="https://www.youtube.com/embed/{{videoId}}"
+        data-fancybox data-type="iframe"
+         data-fancybox-href="https://www.youtube.com/embed/{{videoId}}"
+        class="fancybox"
+        toolbar = false
+        data-caption="{{videoTitle}}"
+  smallBtn : true
+        data-iframe='{"preload":false}'
+        >
+       <i class="fa fa-play-circle-o fas fa-play-circle" aria-hidden="true"></i>
+       <img src="{{thumbnailUrl}}" alt="{{videoTitle}}"/></a>
+       <figcaption>
+       <p>
+         <a
+           
+            title="Video: {{videoTitle}}"
+            href="https://www.youtube.com/embed/{{videoId}}"
+            data-fancybox data-type="iframe"
+            class="fancybox"
+            data-iframe='{"preload":false}'
+            >{{videoTitle}}</a>
+       </p>
+     </figcaption>
+  
+   </figure>
+ </div>
+ {{/each}}
+<div style="clear:both"></div>
+</script>     
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js"></script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.css"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css"></script>
+
+<script>
+       $(document).ready(function() { 
+          baltimoreCounty.youtubePlaylistGallery.init({
+                    target: '.bc-youtube-playlist-gallery',
+                  templateSelector: '#youtube-playlist-item-template',
+                     playlistId: 'PLOXtFrX7cQ83yMtsT6TkFgsIjrtFJUjam'
+         });
+
+ window.addEventListener("DOMContentLoaded", $(".fancybox").fancybox);
+  
+       });
+</script>
