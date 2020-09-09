@@ -117,17 +117,14 @@
   }
 
   function onWindowResize() {
-
     var $window = $(window);
     var newWindowWidth = $window.width();
     var gscElement = document.getElementsByClassName(
       "gsc-completion-container"
     );
-    if (newWindowWidth <=900){
+    if (newWindowWidth <= 900) {
       gscElementShowHide(gscElement, "none");
-   
-    }
-    else{
+    } else {
       gscElementShowHide(gscElement, "");
     }
     clearTimeout(resizeTimer);
@@ -210,5 +207,3 @@
   $(window).on("resize", onWindowResize);
   document.addEventListener("click", handleClick, false);
 })(jQuery);
-
-
