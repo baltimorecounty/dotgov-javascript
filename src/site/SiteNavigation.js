@@ -30,6 +30,7 @@ const cssClasses = {
   isDisabled: "is-disabled",
   siteNavToggleButtonText: "bc_site-nav__toggle-button__text",
   siteNavListContainer: "bc_site-nav__list-container",
+  isVisible: "is-visible"
 };
 
 const invisibleTabIndex = "-1"; /** Allows us to hide an item from tabbing */
@@ -51,6 +52,10 @@ const toggleSiteNav = (shouldShow) => {
       for (var i = 0; i < gscElement.length; i += 1) {
         gscElement[i].style.display = "";
         gscElement[i].style.position = "";
+      }
+      const searchFormElm = document.getElementById(searchForm);
+      if (!searchFormElm.classList.contains(cssClasses.isVisible)) {
+        searchFormElm.classList.add(cssClasses.isVisible);
       }
     }
   }
