@@ -53,10 +53,14 @@ const toggleSiteNav = (shouldShow) => {
         gscElement[i].style.display = "";
         gscElement[i].style.position = "";
       }
-      const searchFormElm = document.getElementById(searchForm);
-      if (!searchFormElm.classList.contains(cssClasses.isVisible)) {
-        searchFormElm.classList.add(cssClasses.isVisible);
-      }
+      const searchFormElm = document.getElementById("search-form");
+      if (searchFormElm)
+      {
+        if (!searchFormElm.classList.contains(cssClasses.isVisible)) {
+          searchFormElm.classList.add(cssClasses.isVisible);
+        }
+     }
+   
     }
   }
   const classListAction = shouldShow ? "add" : "remove";
