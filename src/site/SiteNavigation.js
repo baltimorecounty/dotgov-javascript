@@ -45,16 +45,19 @@ const toggleSiteNav = (shouldShow) => {
   if (gscElement) {
     if (shouldShow) {
       for (var i = 0; i < gscElement.length; i += 1) {
-        gscElement[i].style.display = "";
-        gscElement[i].style.position = "";
-      }
-
-    } else {
-      for (var i = 0; i < gscElement.length; i += 1) {
         gscElement[i].style.display = "none";
         gscElement[i].style.position = "relative";
       }
-   
+
+    } else {
+      var gscElementVisible = document.getElementsByClassName("dg_search-container is-visible");
+      if (gscElementVisible)
+      {
+        for (var i = 0; i < gscElement.length; i += 1) {
+          gscElement[i].style.display = "";
+          gscElement[i].style.position = "";
+        }
+      }
     }
   }
   const classListAction = shouldShow ? "add" : "remove";
