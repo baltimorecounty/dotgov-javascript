@@ -50,8 +50,8 @@ const toggleSiteNav = (shouldShow) => {
       }
 
     } else {
-      var gscElementVisible = document.getElementsByClassName("dg_search-container is-visible");
-      if (gscElementVisible)
+      var gscElementSearch = document.getElementsByClassName("fas fa-times");
+      if (gscElementSearch)
       {
         for (var i = 0; i < gscElement.length; i += 1) {
           gscElement[i].style.display = "";
