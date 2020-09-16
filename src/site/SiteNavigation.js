@@ -42,7 +42,6 @@ let siteNavFocusTrap;
  */
 const toggleSiteNav = shouldShow => {
   
-  var T1 = document.getElementsByClassName("site-nav is-active");
   var gscElement = document.getElementsByClassName("gsc-completion-container");
  
   if (gscElement) {
