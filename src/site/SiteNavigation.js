@@ -41,9 +41,8 @@ let siteNavFocusTrap;
  * @param {boolean} shouldShow if set to true the site navigation will be shown
  */
 const toggleSiteNav = shouldShow => {
-  
   var gscElement = document.getElementsByClassName("gsc-completion-container");
- 
+
   if (gscElement) {
     if (shouldShow) {
       for (var i = 0; i < gscElement.length; i += 1) {
@@ -51,7 +50,6 @@ const toggleSiteNav = shouldShow => {
         gscElement[i].style.position = "relative";
       }
     } else {
-
       var gscElementSearch = document.getElementsByClassName("fas fa-times");
       if (gscElementSearch[0]) {
         for (var i = 0; i < gscElement.length; i += 1) {
