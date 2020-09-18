@@ -44,6 +44,14 @@ const toggleSearchForm = (searchFormElm, shouldCollapseSearch) => {
     searchFormElm.classList.contains(cssClasses.isVisible)
       ? (gscElement[0].style.display = "")
       : (gscElement[0].style.display = "none");
+
+      if (searchFormElm.classList.contains(cssClasses.isVisible)){
+        var gscElement50 = document.getElementsByClassName("gstl_50 gssb_c");
+        if(gscElement50[0]){
+          gscElement50[0].style.left="14px";
+          gscElement50[0].style.top="145px";
+        }
+      }
   }
 };
 
