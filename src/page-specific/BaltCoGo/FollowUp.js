@@ -163,7 +163,7 @@ const reportTypes = [
     testRegex: RegExp(/^\d{1,10}$/i),
     action: (trackingNumber) =>
       axios
-        .get(`${getConfigValue("apiRoot")}/${trackingNumber}`)
+        .get(`${getValue("apiRoot")}/${trackingNumber}`)
         .then((response) => response.data)
         .then(displayServiceRequest)
         .catch(displayServerError),
@@ -189,7 +189,6 @@ const GetReport = async (submitEvent) => {
     ) {
       toggleElms([getElmById(appDocumentIds.form)], "hide");
       toggleElms([getElmById(appDocumentIds.loadingIndicator)], "show");
-
       try {
         await reportType.action(trackingNumber);
       } catch (ex) {
