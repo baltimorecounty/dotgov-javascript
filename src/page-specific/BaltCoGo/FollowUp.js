@@ -209,7 +209,7 @@ const ResetForm = () => {
   const formElm = getElmById(appDocumentIds.form);
   toggleElms([formElm], "show");
   toggleElms([getElmById(appDocumentIds.resetForm)], "hide");
-  getElmById("mainContent").scrollIntoView();
+  getElmById("dg_main-content").scrollIntoView();
 };
 
 /** Events */
