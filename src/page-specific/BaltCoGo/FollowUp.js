@@ -192,6 +192,8 @@ const GetReport = async (submitEvent) => {
       try {
         await reportType.action(trackingNumber);
       } catch (ex) {
+        console.log(ex);
+        displayServerError();
       } finally {
         toggleElms([getElmById(appDocumentIds.loadingIndicator)], "hide");
         toggleElms([getElmById(appDocumentIds.resetForm)], "show");
