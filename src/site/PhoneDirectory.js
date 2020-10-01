@@ -1,6 +1,3 @@
-// This is the javascript that must be included on the Contact=>AnEmployee=>index.html file in order for phone directory to work.
-// This is currently house in the phonedirectoty2.js file in SE and references inside of the header on index.html
-
 var jQuery = $.noConflict(true);
 var pageCount = 0;
 
@@ -30,11 +27,19 @@ function setNextPrevious(offset) {
 function validateForm() {
   var firstName = jQuery("#txtFirst").val().trim();
   var lastName = jQuery("#txtLast").val().trim();
-  if (firstName == "" && lastName == "") {
-    alert(
-      "If Searching all Agencies, You must enter at least one letter of the last name or one letter of the first name"
+  var department = jQuery("#ddlAgency").val();
+
+  var alert = jQuery("#dg_Alert-Holder");
+  var alerMessage = jQuery("#dg_Alert-Message");
+
+  if (firstName == "" && lastName == "" && department == "0") {
+    alert.show();
+    alerMessage.html(
+      "When searching All Departments, you must enter at least one letter of the last name or one letter of the first name"
     );
     return false;
+  } else {
+    alert.hide();
   }
   return true;
 }
@@ -57,6 +62,8 @@ jQuery(document).ready(function () {
       jQuery.ajax({
         url:
           "https://testservices.baltimorecountymd.gov/api/hub/phoneDirectory/ProcessPhoneDirSearchForm",
+        //url:
+        //"https://services.baltimorecountymd.gov/api/hub/phoneDirectory/ProcessPhoneDirSearchForm", When copying out to prod this must be uncommented and the test services entry removed
         data: dataString,
         type: "GET",
         dataType: "jsonp",
@@ -67,6 +74,8 @@ jQuery(document).ready(function () {
 
   jQuery("#btnClear").click(function (clearEvent) {
     clearEvent.preventDefault();
+    jQuery("#dg_Alert-Holder").hide();
+    jQuery("#Next,#Previous").hide();
     jQuery("#BACO_table,#prevNext,#output center").hide();
     jQuery("#txtLast,#txtFirst").val("");
     jQuery("#ddlAgency").val("0");
