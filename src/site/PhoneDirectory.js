@@ -35,7 +35,7 @@ function validateForm() {
   if (firstName == "" && lastName == "" && department == "0") {
     alert.show();
     alerMessage.html(
-      "When searching All Departments, you must enter at least one letter of the last name or one letter of the first name"
+      "When searching All Departments, you must enter at least one letter of the last name or one letter of the first name."
     );
     return false;
   } else {
@@ -84,6 +84,10 @@ jQuery(document).ready(function () {
 
 function formatJsonpResult(jsonpResult) {
   if (jsonpResult.ResponseError.length > 0 && jsonpResult.ResponseStatus == 0) {
+    jsonpResult.ResponseError = jsonpResult.ResponseError.replace(
+      "Agency",
+      "Department"
+    );
     jQuery("#output").append(jsonpResult.ResponseError);
 
     //this element is actually being returned as part of the JSON Result
@@ -99,7 +103,7 @@ function formatJsonpResult(jsonpResult) {
     jsonpResult.ResponseStatus == 0
   ) {
     jQuery("#output").append(
-      "<font color='red'><center>No records found matching your search criteria</center></font>"
+      "<div><div class='list-header'><p>No records found matching your search criteria</p></div><div class='list'></div></div>"
     );
   } else if (
     jsonpResult.ResponseError.length > 0 &&
