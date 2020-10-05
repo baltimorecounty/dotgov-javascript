@@ -1,3 +1,5 @@
+// This is the javascript that must be included on the Contact=>AnEmployee=>index.html file in order for phone directory to work.
+// This is currently house in the phonedirectoty2.js file in SE and references inside of the header on index.html
 var jQuery = $.noConflict(true);
 var pageCount = 0;
 
