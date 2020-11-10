@@ -76,10 +76,8 @@ const handleDocumentClick = clickEvent => {
  * @param {*} clickEvent
  */
 const handleModalCloseButtonClick = clickEvent => {
-  var fakeSiteButton = document.getElementById("fake-site-nav-button");
-  for (var i = 0; i < fakeSiteButton.length; i += 1) {
-    fakeSiteButton[i].style.zIndex = "2147483647";
-  }
+  var fakeSiteButton = document.getElementById("bc_site-nav__toggle-button");
+  fakeSiteButton.style.zIndex = "2147483647";
   window.closeDialog(clickEvent.target);
 };
 
@@ -90,7 +88,15 @@ const handleModalCloseButtonClick = clickEvent => {
 const handleModalOpenButtonClick = clickEvent => {
   const modalButtonElm = clickEvent.target;
   const targetModalId = modalButtonElm.getAttribute("data-target");
+  var windowWidth = $(window).width();
+
   window.openDialog(targetModalId, modalButtonElm);
+  var fakeSiteButton = document.getElementById("bc_site-nav__toggle-button");
+  if (windowWidth <= 900) {
+    fakeSiteButton.style.zIndex = "0";
+  } else {
+    fakeSiteButton.style.zIndex = "2147483647";
+  }
 };
 
 document.addEventListener("click", handleDocumentClick, false);

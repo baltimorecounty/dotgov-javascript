@@ -89,8 +89,15 @@
 
   function onSearchReady() {
     windowWidth = $(window).width();
+
     if (isMobile(windowWidth)) {
       repositionSearchBox(windowWidth);
+    }
+    var hasDialog = document.getElementsByClassName("dialog-backdrop active");
+    if (windowWidth <= 900) {
+      fakeSiteButtonShowHide(hasDialog, "0");
+    } else {
+      fakeSiteButtonShowHide(hasDialog, "2147483647");
     }
 
     document.addEventListener(
@@ -124,7 +131,7 @@
     var gscElement = document.getElementsByClassName(
       "gsc-completion-container"
     );
-    var hasDialog = document.getElementsByClassName("has-dialog");
+    var hasDialog = document.getElementsByClassName("dialog-backdrop active");
     if (newWindowWidth <= 900) {
       gscElementShowHide(gscElement, "none");
       fakeSiteButtonShowHide(hasDialog, "0");
@@ -166,11 +173,9 @@
   };
 
   const fakeSiteButtonShowHide = (hasDialog, displayValue) => {
-    var fakeSiteButton = document.getElementById("fake-site-nav-button");
-    if (hasDialog) {
-      for (var i = 0; i < fakeSiteButton.length; i += 1) {
-        fakeSiteButton[i].style.zIndex = displayValue;
-      }
+    var fakeSiteButton = document.getElementById("bc_site-nav__toggle-button");
+    if (hasDialog.length > 0) {
+      fakeSiteButton.style.zIndex = displayValue;
     }
   };
 
