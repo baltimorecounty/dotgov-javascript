@@ -10,7 +10,7 @@ const states = {
   hideAll: "Hide All",
   show: "Show",
   showAll: "Show All",
-  static: "static"
+  static: "static",
 };
 
 const cssClasses = {
@@ -23,28 +23,28 @@ const cssClasses = {
   showAllStepsButton: "dg_step-list__show-all-btn",
   toggleButtonHeading: "dg_step-list__toggle-btn__title",
   toggleButtonText: "dg_step-list__toggle-btn__btn-text",
-  section: "dg_step-list__list-section"
+  section: "dg_step-list__list-section",
 };
 
 /**
  * Add hover events for each list item for a given step list
  * @param {*} stepListElm
  */
-const addStepListHoverEvents = stepListElm => {
+const addStepListHoverEvents = (stepListElm) => {
   const stepListItemElms = stepListElm.querySelectorAll(
     `.${cssClasses.section}`
   );
 
   /** Add hover events for individual step list items, to make styling the step circles easier. */
-  stepListItemElms.forEach(stepListItemElm => {
+  stepListItemElms.forEach((stepListItemElm) => {
     const itemButtonElm = GetFirstElementOrDefault(
       stepListItemElm,
       `.${cssClasses.detailsToggleButton}`
     );
-    itemButtonElm.addEventListener("mouseenter", mouseenterEvent => {
+    itemButtonElm.addEventListener("mouseenter", (mouseenterEvent) => {
       toggleItemHoverStatus(mouseenterEvent, true);
     });
-    itemButtonElm.addEventListener("mouseleave", mouseleaveEvent => {
+    itemButtonElm.addEventListener("mouseleave", (mouseleaveEvent) => {
       toggleItemHoverStatus(mouseleaveEvent, false);
     });
   });
@@ -66,19 +66,20 @@ const displaySectionDetails = (detailsSectionElm, buttonState) => {
  * @param {string} buttonText  buttonElm.textContent, will be "Show" or "Hide"
  * @returns {string} "Show" if the button text is equal to "Hide" or vice-versa
  */
-const getOppositeDetailsToggleButtonState = buttonText =>
-  isButtonStateShow(buttonText) ? states.hide : states.show;
+const getOppositeDetailsToggleButtonState = (buttonText) =>
+  isButtonStateShow(buttonText) ? states.hide : `${states.show} More`;
 
 /**
  * Determine if a step list has at least one section open
  * @param {HTMLElement} stepListElm
  * @returns {boolean} true if the given step list has at least one section open
  */
-const hasAtLeastOneDetailSectionVisible = stepListElm =>
+const hasAtLeastOneDetailSectionVisible = (stepListElm) =>
   Array.from(
     stepListElm.querySelectorAll(`.${cssClasses.detailsToggleButton}`)
   ).filter(
-    elm => elm.textContent.toLowerCase().indexOf(states.show.toLowerCase()) > -1
+    (elm) =>
+      elm.textContent.toLowerCase().indexOf(states.show.toLowerCase()) > -1
   ).length > 0;
 
 /**
@@ -86,7 +87,7 @@ const hasAtLeastOneDetailSectionVisible = stepListElm =>
  * @param {Object} clickEvent
  * @return {void}
  */
-const handleAllStepButtonClick = clickEvent => {
+const handleAllStepButtonClick = (clickEvent) => {
   const buttonElm = clickEvent.target;
   const sectionElm = buttonElm.closest(`.${cssClasses.stepList}`);
   const buttonState = buttonElm.textContent;
@@ -99,7 +100,7 @@ const handleAllStepButtonClick = clickEvent => {
  * Handle the details button toggle click for a given step list section detail button
  * @param {object} clickEvent
  */
-const handleDetailsToggleButtonClick = clickEvent => {
+const handleDetailsToggleButtonClick = (clickEvent) => {
   const { target } = clickEvent;
 
   const buttonElm = target.classList.contains(cssClasses.detailsToggleButton)
@@ -111,7 +112,7 @@ const handleDetailsToggleButtonClick = clickEvent => {
       .closest(`.${cssClasses.section}`)
       .querySelectorAll(`.${cssClasses.details}`);
 
-    Array.from(detailElms).forEach(detailElm => {
+    Array.from(detailElms).forEach((detailElm) => {
       displaySectionDetails(detailElm, buttonState);
     });
 
@@ -121,7 +122,7 @@ const handleDetailsToggleButtonClick = clickEvent => {
   }
 };
 
-const handleDocumentClick = clickEvent => {
+const handleDocumentClick = (clickEvent) => {
   let { target } = clickEvent;
   // If the clicked element doesn't have the right selector, bail
   const isDetailsToggleClick =
@@ -133,7 +134,7 @@ const handleDocumentClick = clickEvent => {
 
   if (!isDetailsToggleClick && isDetailsSectionClick) {
     clickEvent = {
-      target: target.querySelectorAll(`.${cssClasses.detailsToggleButton}`)[0]
+      target: target.querySelectorAll(`.${cssClasses.detailsToggleButton}`)[0],
     };
   }
 
@@ -151,7 +152,7 @@ const handleDocumentClick = clickEvent => {
  * @param {string} buttonText buttonElm.textContent, will be "Show" or "Hide"
  * @returns {boolean} true if the button text is "Show" (case insensitive)
  */
-const isButtonStateShow = buttonText =>
+const isButtonStateShow = (buttonText) =>
   buttonText.toLowerCase().indexOf(states.show.toLowerCase()) > -1;
 
 /**
@@ -159,7 +160,7 @@ const isButtonStateShow = buttonText =>
  * @param {HTMLElement} showAllButtonElm
  * @returns {boolean} true if the show all button's text is set to "hide all"
  */
-const isHideAllVisible = showAllButtonElm =>
+const isHideAllVisible = (showAllButtonElm) =>
   showAllButtonElm &&
   showAllButtonElm.textContent.toLowerCase() === states.hideAll.toLowerCase();
 
@@ -215,7 +216,7 @@ const toggleDetailButtonText = (buttonElm, buttonState) => {
 
   setElementText(
     elmToUpdate,
-    isButtonStateShow(buttonState) ? states.hide : states.show
+    isButtonStateShow(buttonState) ? states.hide : `${states.show} More`
   );
 };
 
@@ -237,7 +238,7 @@ const updateSections = (stepListElm, newButtonState) => {
   const stepListSections = stepListElm.querySelectorAll(
     `.${cssClasses.section}`
   );
-  Array.from(stepListSections).forEach(sectionElm => {
+  Array.from(stepListSections).forEach((sectionElm) => {
     const toggleBtnElm = GetFirstElementOrDefault(
       sectionElm,
       `.${cssClasses.detailsToggleButton}`
@@ -250,7 +251,7 @@ const updateSections = (stepListElm, newButtonState) => {
     const buttonState = newButtonState || toggleBtnElm.textContent;
     setAriaExpanded(toggleBtnElm, !isButtonStateShow(buttonState));
 
-    Array.from(detailElms).forEach(elm => {
+    Array.from(detailElms).forEach((elm) => {
       displaySectionDetails(
         elm,
         getOppositeDetailsToggleButtonState(buttonState)
@@ -265,7 +266,7 @@ const updateSections = (stepListElm, newButtonState) => {
  * Manages the visible state of the toggle button based on a given details section
  * @param {NodeList} detailElms
  */
-const updateToggleAllButton = detailElms => {
+const updateToggleAllButton = (detailElms) => {
   if (!detailElms) {
     console.error(
       "There must be a least one details section per step list item."
@@ -300,7 +301,7 @@ const onDocumentReady = () => {
   const stepListElms = document.querySelectorAll(`.${cssClasses.stepList}`);
 
   // Check the state of each accordion
-  Array.from(stepListElms).forEach(stepListElm => {
+  Array.from(stepListElms).forEach((stepListElm) => {
     const isDefaultStateStatic = stepListElm.classList.contains(states.static);
 
     if (isDefaultStateStatic) {
@@ -329,7 +330,7 @@ const onDocumentReady = () => {
 
     updateSections(
       stepListElm,
-      isDefaultStateCollapsed ? states.show : states.hide
+      isDefaultStateCollapsed ? `${states.show} More` : states.hide
     );
   });
 };

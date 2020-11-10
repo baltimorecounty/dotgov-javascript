@@ -31,9 +31,28 @@ const updateSearchIcon = (searchIconElm, shouldCollapseSearch) => {
  * @param {*} searchFormElm icon element for the mobile search button
  * @param {boolean} shouldCollapseSearch if true, the result of this function will be to hide the search form
  */
+
 const toggleSearchForm = (searchFormElm, shouldCollapseSearch) => {
   searchFormElm.classList.remove(cssClasses.isVisible);
-  searchFormElm.classList.add(shouldCollapseSearch ? "" : cssClasses.isVisible);
+  shouldCollapseSearch
+    ? null
+    : searchFormElm.classList.add(cssClasses.isVisible);
+
+  var gscElement = document.getElementsByClassName("gsc-completion-container");
+
+  if (gscElement[0]) {
+    searchFormElm.classList.contains(cssClasses.isVisible)
+      ? (gscElement[0].style.display = "")
+      : (gscElement[0].style.display = "none");
+
+      if (searchFormElm.classList.contains(cssClasses.isVisible)){
+        var gscElement50 = document.getElementsByClassName("gstl_50 gssb_c");
+        if(gscElement50[0]){
+          gscElement50[0].style.left="14px";
+          gscElement50[0].style.top="145px";
+        }
+      }
+  }
 };
 
 /**

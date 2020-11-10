@@ -11,6 +11,8 @@ module.exports = {
     SiteNavigation: "./src/site/SiteNavigation.js",
     SubpageTabs: "./src/template/SubpageTabs.js",
     EventFilter: "./src/components/EventFilter.js",
+    ScrollToTop: "./src/components/ScrollToTop.js",
+    PhoneDirectory: "./src/site/PhoneDirectory.js",
   },
   output: {
     path: path.join(__dirname, "dist"),
