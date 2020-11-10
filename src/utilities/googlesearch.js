@@ -11,7 +11,7 @@
   }
 
   function initGoogleSearch() {
-    (function () {
+    (function() {
       // Dev cx = "007558505509255245046:qayakxzcib0"
       // Prod cx = "007558505509255245046:qqwcx9uroqk"
       var cx = "007558505509255245046:qqwcx9uroqk";
@@ -19,8 +19,8 @@
       gcse.type = "text/javascript";
       gcse.async = true;
       gcse.src = "https://cse.google.com/cse.js?cx=" + cx;
-      gcse.onload = function () {
-        var getElmInterval = setInterval(function () {
+      gcse.onload = function() {
+        var getElmInterval = setInterval(function() {
           var searchContainer = $getSearchContainer();
           if (searchContainer) {
             // Remove Google styles
@@ -34,7 +34,9 @@
             if (clearButton) {
               clearButton.parent().remove();
             }
-            $("#gs_st50").parent().remove();
+            $("#gs_st50")
+              .parent()
+              .remove();
 
             // Add DG styles
             var searchForm = searchContainer.find("form");
@@ -93,7 +95,7 @@
 
     document.addEventListener(
       "blur",
-      function (e) {
+      function(e) {
         var searchbarElements = document.getElementsByClassName(
           "dg_search-input"
         );
@@ -122,10 +124,13 @@
     var gscElement = document.getElementsByClassName(
       "gsc-completion-container"
     );
+    var hasDialog = document.getElementsByClassName("has-dialog");
     if (newWindowWidth <= 900) {
       gscElementShowHide(gscElement, "none");
+      fakeSiteButtonShowHide(hasDialog, "0");
     } else {
       gscElementShowHide(gscElement, "");
+      fakeSiteButtonShowHide(hasDialog, "2147483647");
     }
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function waitForResizeToFinish() {
@@ -138,7 +143,7 @@
 
   function repositionSearchBox(currentWindowWidth) {
     var $targetContainer = $getSearchContainer();
-    var intervalCheck = setInterval(function () {
+    var intervalCheck = setInterval(function() {
       if (
         $getSearchContainer.length &&
         $(".gsc-control-searchbox-only").length
@@ -160,7 +165,16 @@
     }
   };
 
-  const handleClick = (clickEvent) => {
+  const fakeSiteButtonShowHide = (hasDialog, displayValue) => {
+    var fakeSiteButton = document.getElementById("fake-site-nav-button");
+    if (hasDialog) {
+      for (var i = 0; i < fakeSiteButton.length; i += 1) {
+        fakeSiteButton[i].style.zIndex = displayValue;
+      }
+    }
+  };
+
+  const handleClick = clickEvent => {
     var compareElement = $.trim(clickEvent.target.classList);
     var gscElement = document.getElementsByClassName(
       "gsc-completion-container"

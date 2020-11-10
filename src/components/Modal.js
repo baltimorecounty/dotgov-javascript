@@ -76,6 +76,10 @@ const handleDocumentClick = clickEvent => {
  * @param {*} clickEvent
  */
 const handleModalCloseButtonClick = clickEvent => {
+  var fakeSiteButton = document.getElementById("fake-site-nav-button");
+  for (var i = 0; i < fakeSiteButton.length; i += 1) {
+    fakeSiteButton[i].style.zIndex = "2147483647";
+  }
   window.closeDialog(clickEvent.target);
 };
 
