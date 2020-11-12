@@ -26,10 +26,16 @@
             // Remove Google styles
             searchContainer.find("[class]").removeAttr("class");
 
+            // Replace search button contents
             var searchButton = searchContainer.find("button");
             if (searchButton) {
-              searchButton.parent().remove();
+              searchButton.empty();
+              searchButton.addClass("dg_search-btn");
+              searchButton.append(
+                '<i class="fas fa-search" aria-hidden="true"></i>'
+              );
             }
+
             var clearButton = searchContainer.find("[title='clear results']");
             if (clearButton) {
               clearButton.parent().remove();
