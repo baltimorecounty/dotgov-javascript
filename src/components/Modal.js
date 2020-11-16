@@ -8,11 +8,38 @@ const cssClasses = {
   modalOpenButton: "dg_modal__open-button",
   modalOverlay: "dialog-backdrop",
   /** overlay is transparent gray section around the modal */
-  canCloseOnOverlayClick: "can-dismiss"
+  canCloseOnOverlayClick: "can-dismiss",
 };
 
 const selectors = {
-  activeDismissibleModal: ".dg_modal[data-dismissible]"
+  activeDismissibleModal: ".dg_modal[data-dismissible]",
+};
+
+/**
+ * Hide the main site navigation button by reducing its z-index value when opening the
+ * modal so the button doesn't appear on top of it.
+ */
+const hideNavButton = () => {
+  var windowWidth = $(window).width();
+  var fakeSiteButton = document.getElementById("bc_site-nav__toggle-button");
+  if (fakeSiteButton) {
+    if (windowWidth <= 900) {
+      fakeSiteButton.style.zIndex = "0";
+    } else {
+      fakeSiteButton.style.zIndex = "2147483647";
+    }
+  }
+};
+
+/**
+ * Restore the main site navigation button to its original z-index so it reappears when
+ * the modal is closed.
+ */
+const showNavButton = () => {
+  var fakeSiteButton = document.getElementById("bc_site-nav__toggle-button");
+  if (fakeSiteButton) {
+    fakeSiteButton.style.zIndex = "2147483647";
+  }
 };
 
 /**
@@ -22,7 +49,7 @@ const selectors = {
  * @param {element:click} clickEvent - the observable overlay click event
  * @listens element:click
  */
-const handleActiveOverlayClick = clickEvent => {
+const handleActiveOverlayClick = (clickEvent) => {
   const activeDismissibleModalElm = GetFirstElementOrDefault(
     document,
     selectors.activeDismissibleModal
@@ -37,7 +64,7 @@ const handleActiveOverlayClick = clickEvent => {
       activeDismissibleModalElm,
       `.${cssClasses.modalCloseButton}`
     );
-
+    showNavButton();
     window.closeDialog(closeButton);
   }
 };
@@ -47,7 +74,7 @@ const handleActiveOverlayClick = clickEvent => {
  * @param {document:click} clickEvent - the observable click event
  * @listens document:click
  */
-const handleDocumentClick = clickEvent => {
+const handleDocumentClick = (clickEvent) => {
   const { classList: targetClassList } = clickEvent.target;
   // If the clicked element doesn't have the right selector, bail
   const isModalOpenButtonClick = targetClassList.contains(
@@ -75,9 +102,8 @@ const handleDocumentClick = clickEvent => {
  * Closes the closest modal
  * @param {*} clickEvent
  */
-const handleModalCloseButtonClick = clickEvent => {
-  var fakeSiteButton = document.getElementById("bc_site-nav__toggle-button");
-  fakeSiteButton.style.zIndex = "2147483647";
+const handleModalCloseButtonClick = (clickEvent) => {
+  showNavButton();
   window.closeDialog(clickEvent.target);
 };
 
@@ -85,18 +111,12 @@ const handleModalCloseButtonClick = clickEvent => {
  * Opens the modal that matches it's id to data-target attribute of the open button
  * @param {*} clickEvent
  */
-const handleModalOpenButtonClick = clickEvent => {
+const handleModalOpenButtonClick = (clickEvent) => {
   const modalButtonElm = clickEvent.target;
   const targetModalId = modalButtonElm.getAttribute("data-target");
-  var windowWidth = $(window).width();
 
   window.openDialog(targetModalId, modalButtonElm);
-  var fakeSiteButton = document.getElementById("bc_site-nav__toggle-button");
-  if (windowWidth <= 900) {
-    fakeSiteButton.style.zIndex = "0";
-  } else {
-    fakeSiteButton.style.zIndex = "2147483647";
-  }
+  hideNavButton();
 };
 
 document.addEventListener("click", handleDocumentClick, false);
