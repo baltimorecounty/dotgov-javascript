@@ -2,6 +2,7 @@ const mobileSearchButtonId = "dg_mobile-search-button";
 const searchForm = "search-form";
 
 const cssClasses = {
+  fontAwesome: "fa",
   closeSearchIcon: "fa-times",
   expandSearchIcon: "fa-search",
   isVisible: "is-visible",
@@ -15,9 +16,9 @@ const cssClasses = {
  */
 const updateSearchIcon = (searchIconElm, shouldCollapseSearch) => {
   // Reset Icon
-  searchIconElm.classList.remove(
-    ...[cssClasses.expandSearchIcon, cssClasses.closeSearchIcon]
-  );
+  searchIconElm.className = "";
+
+  searchIconElm.classList.add(cssClasses.fontAwesome);
 
   searchIconElm.classList.add(
     shouldCollapseSearch
@@ -45,13 +46,13 @@ const toggleSearchForm = (searchFormElm, shouldCollapseSearch) => {
       ? (gscElement[0].style.display = "")
       : (gscElement[0].style.display = "none");
 
-      if (searchFormElm.classList.contains(cssClasses.isVisible)){
-        var gscElement50 = document.getElementsByClassName("gstl_50 gssb_c");
-        if(gscElement50[0]){
-          gscElement50[0].style.left="14px";
-          gscElement50[0].style.top="145px";
-        }
+    if (searchFormElm.classList.contains(cssClasses.isVisible)) {
+      var gscElement50 = document.getElementsByClassName("gstl_50 gssb_c");
+      if (gscElement50[0]) {
+        gscElement50[0].style.left = "14px";
+        gscElement50[0].style.top = "145px";
       }
+    }
   }
 };
 
