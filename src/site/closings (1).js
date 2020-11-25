@@ -1,7 +1,3 @@
-//*********************************************************************************
-//This is the js file added to the News/Weather page that builds the closing table
-//*********************************************************************************
-
 var icon = (function () {
     var classes = {
         icon: {
@@ -20,9 +16,6 @@ var icon = (function () {
             medium: "fa-3x icon-medium",
             large: "fa-4x icon-large",
             extraLarge: "fa-5x icon-extra-large"
-        },
-        cssClass:{
-            tableCell: ""
         }
     };
 
@@ -54,9 +47,9 @@ var getTodaysDate = function () {
     //$closings consist of 
     var addTableRow = function (data) {
         var $tableBody = $('#county-closings tbody'),
-            tableRow = "<tr><td>" + data.icon + "</td>" +
+            tableRow = "<tr><td class='icon'>" + data.icon + "</td>" +
                 "<td>" + data.status + "</td><td>" + data.link +
-                '</td><td>' + data.message + "</td></tr>";
+                "</td><td>" + data.message + "</td></tr>";
 
         $tableBody.append(tableRow);
     },
@@ -146,9 +139,9 @@ var getTodaysDate = function () {
 
                                 if (header[0].innerHTML) {
                                     return '<li data-dtr-index="' + idx.column + '">' +
-                                        '<span>' + title +
+                                        '<span class="dtr-title">' + title +
                                         '</span> ' +
-                                        '<span>' + cellData +
+                                        '<span class="dtr-data">' + cellData +
                                         '</span>' +
                                         '</li>';
                                 }
@@ -184,6 +177,9 @@ var getTodaysDate = function () {
                     }).data().each(function (group, i) {
                         $(rows).eq(i).addClass(group.toLowerCase().replace(" ", "-"));
                         if (last !== group) {
+                            //$(rows).eq(i).before(
+                                //'<tr class="group"><td colspan="5">' + group + '</td></tr>');
+
                             last = group;
                         }
                     });
