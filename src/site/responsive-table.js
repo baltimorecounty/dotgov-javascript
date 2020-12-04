@@ -82,7 +82,7 @@ var getTodaysDate = function () {
 
   //$closings consist of
   var addTableRow = function (data) {
-      var $tableBody = $("#county-closings tbody"),
+      var $tableBody = $("#responsive-table tbody"),
         tableRow =
           "<tr><td>" +
           data.icon +
@@ -150,7 +150,7 @@ var getTodaysDate = function () {
     //Update the hero unit that contains the county status
     updateCountyStatus();
 
-    var $closingsTable = $("#county-closings");
+    var $closingsTable = $("#responsive-table");
 
     $closingsTable.hide();
 
@@ -258,5 +258,4 @@ var getTodaysDate = function () {
   });
 })(jQuery);
 
-
-onpageshow="if (event.persisted) onPageShow();"
+onpageshow = "if (event.persisted) onPageShow();";
