@@ -9,6 +9,14 @@ function addToBodyTag() {
 
 document.addEventListener("DOMContentLoaded", addToBodyTag);
 
-function onPageShow() {
-  window.location.reload();
+function reloadPage(event){
+    if (event.persisted) {
+        window.location.reload();
+      }
 }
+
+window.addEventListener("pageshow", function (event) {
+  if (event.persisted) {
+    window.location.reload();
+  }
+});
