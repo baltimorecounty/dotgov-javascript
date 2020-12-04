@@ -117,6 +117,17 @@ const handleModalOpenButtonClick = (clickEvent) => {
 
   window.openDialog(targetModalId, modalButtonElm);
   hideNavButton();
+
+  let isIOS =
+    (/iPad|iPhone|iPod/.test(navigator.platform) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)) &&
+    !window.MSStream;
+  if (isIOS) {
+    var modalBackdrops = document.getElementsByClassName("dialog-backdrop");
+    if (modalBackdrops[0]) {
+      modalBackdrops[0].style.top = $(window).scrollTop() + "px";
+    }
+  }
 };
 
 document.addEventListener("click", handleDocumentClick, false);
