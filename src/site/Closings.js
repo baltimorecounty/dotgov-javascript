@@ -152,7 +152,7 @@ var getTodaysDate = function () {
     //Update the hero unit that contains the county status
   //  updateCountyStatus();
 
-    var $responsiveTable  = $("#responseive-main-table");
+    var $responsiveTable  = $("#responsive-main-table");
 
     $responsiveTable.hide();
 
