@@ -157,7 +157,7 @@ var getTodaysDate = function () {
     $responsiveTable.hide();
 
     //Add Inclusion Data to our HTML Table
-    addDataToResponsiveTable($(".responseive-data-snippet"));
+    addDataToResponsiveTable($(".responsive-data-snippet"));
 
     /*Intialize the DataTable Plugin*/
     if ($responsiveTable.DataTable)
