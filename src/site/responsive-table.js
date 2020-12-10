@@ -260,184 +260,184 @@ var getTodaysDate = function () {
 })(jQuery);
 
 //=========================================================
-(function ($) {
-  /*Number of Columns that Contain Data*/
-  var numOfTableCells = 3;
+// (function ($) {
+//   /*Number of Columns that Contain Data*/
+//   var numOfTableCells = 3;
 
-  //$closings consist of
-  var addTableRow = function (data) {
-      var $tableBody = $("#county-closings tbody"),
-        tableRow =
-          "<tr><td>" +
-          data.icon +
-          "</td>" +
-          "<td>" +
-          data.status +
-          "</td><td>" +
-          data.link +
-          "</td><td>" +
-          data.message +
-          "</td></tr>";
+//   //$closings consist of
+//   var addTableRow = function (data) {
+//       var $tableBody = $("#county-closings tbody"),
+//         tableRow =
+//           "<tr><td>" +
+//           data.icon +
+//           "</td>" +
+//           "<td>" +
+//           data.status +
+//           "</td><td>" +
+//           data.link +
+//           "</td><td>" +
+//           data.message +
+//           "</td></tr>";
 
-      $tableBody.append(tableRow);
-    },
-    addDataToTable = function ($closingsData) {
-      $closingsData.each(function () {
-        var $this = $(this),
-          data = {};
+//       $tableBody.append(tableRow);
+//     },
+//     addDataToTable = function ($closingsData) {
+//       $closingsData.each(function () {
+//         var $this = $(this),
+//           data = {};
 
-        $this.remove();
+//         $this.remove();
 
-        data.link = $this.find("a")[0].outerHTML;
+//         data.link = $this.find("a")[0].outerHTML;
 
-        var dataArr = $this.html().split(data.link);
-        data.status = cleanData(dataArr[0]);
-        data.message = cleanData(dataArr[1]);
-        data.icon = icon(data.status, "small");
+//         var dataArr = $this.html().split(data.link);
+//         data.status = cleanData(dataArr[0]);
+//         data.message = cleanData(dataArr[1]);
+//         data.icon = icon(data.status, "small");
 
-        addTableRow(data);
-      });
-    },
-    cleanData = function (data) {
-      //remove br|p|h1|h2|h3|strong tags along with html comments
-      return $.trim(
-        data
-          .replace(/(<(br|p|h1|h2|h3|strong)>|<\/(br|p|h1|h2|h3|strong)>)/g, "")
-          .replace(/<!--[^>]*-->/g, "")
-      );
-    },
-    isStatusColumn = function (recordNumber, numberOfCells) {
-      return recordNumber % numberOfCells === 1 ? true : false;
-    },
-    updateCountyStatus = function () {
-      updateTodaysDate();
-      updateCountyStatusImage();
-    },
-    //Update the status icon for Baltiomre County Government in the hero Unit
-    updateCountyStatusImage = function () {
-      var $statusImage = $(".status-image"),
-        $statusContainerData = $(".county-closings-status-container p"),
-        status = $statusContainerData.length
-          ? $statusContainerData[0].innerHTML.toLowerCase()
-          : "";
+//         addTableRow(data);
+//       });
+//     },
+//     cleanData = function (data) {
+//       //remove br|p|h1|h2|h3|strong tags along with html comments
+//       return $.trim(
+//         data
+//           .replace(/(<(br|p|h1|h2|h3|strong)>|<\/(br|p|h1|h2|h3|strong)>)/g, "")
+//           .replace(/<!--[^>]*-->/g, "")
+//       );
+//     },
+//     isStatusColumn = function (recordNumber, numberOfCells) {
+//       return recordNumber % numberOfCells === 1 ? true : false;
+//     },
+//     updateCountyStatus = function () {
+//       updateTodaysDate();
+//       updateCountyStatusImage();
+//     },
+//     //Update the status icon for Baltiomre County Government in the hero Unit
+//     updateCountyStatusImage = function () {
+//       var $statusImage = $(".status-image"),
+//         $statusContainerData = $(".county-closings-status-container p"),
+//         status = $statusContainerData.length
+//           ? $statusContainerData[0].innerHTML.toLowerCase()
+//           : "";
 
-      $statusContainerData.eq(0).prepend("<strong>Status: </strong>");
+//       $statusContainerData.eq(0).prepend("<strong>Status: </strong>");
 
-      $statusImage.replaceWith(icon(status, "extraLarge"));
-    },
-    updateTodaysDate = function () {
-      //Update Today's Date
-      $(".todays-date").html("<p>" + getTodaysDate() + "</p>");
-    };
+//       $statusImage.replaceWith(icon(status, "extraLarge"));
+//     },
+//     updateTodaysDate = function () {
+//       //Update Today's Date
+//       $(".todays-date").html("<p>" + getTodaysDate() + "</p>");
+//     };
 
-  $(document).ready(function () {
-    //Update the hero unit that contains the county status
-    updateCountyStatus();
+//   $(document).ready(function () {
+//     //Update the hero unit that contains the county status
+//     updateCountyStatus();
 
-    var $$responsiveTable = $("#county-closings");
+//     var $$responsiveTable = $("#county-closings");
 
-    $$responsiveTable.hide();
+//     $$responsiveTable.hide();
 
-    //Add Inclusion Data to our HTML Table
-    addDataToTable($(".closings-data-snippet"));
+//     //Add Inclusion Data to our HTML Table
+//     addDataToTable($(".closings-data-snippet"));
 
-    /*Intialize the DataTable Plugin*/
-    if ($closingsTable.DataTable)
-      $closingsTable.DataTable({
-        info: false,
-        paging: false,
-        bFilter: false,
-        processing: true,
-        responsive: {
-          details: {
-            renderer: function (api, rowIdx) {
-              // Select hidden columns for the given row
-              var data = api
-                .cells(rowIdx, ":hidden")
-                .eq(0)
-                .map(function (cell) {
-                  var header = $(api.column(cell.column).header());
-                  var idx = api.cell(cell).index();
+//     /*Intialize the DataTable Plugin*/
+//     if ($closingsTable.DataTable)
+//       $closingsTable.DataTable({
+//         info: false,
+//         paging: false,
+//         bFilter: false,
+//         processing: true,
+//         responsive: {
+//           details: {
+//             renderer: function (api, rowIdx) {
+//               // Select hidden columns for the given row
+//               var data = api
+//                 .cells(rowIdx, ":hidden")
+//                 .eq(0)
+//                 .map(function (cell) {
+//                   var header = $(api.column(cell.column).header());
+//                   var idx = api.cell(cell).index();
 
-                  if (header.hasClass("control") || header.hasClass("never")) {
-                    return "";
-                  }
+//                   if (header.hasClass("control") || header.hasClass("never")) {
+//                     return "";
+//                   }
 
-                  // Use a non-public DT API method to render the data for display
-                  // This needs to be updated when DT adds a suitable method for
-                  // this type of data retrieval
-                  var dtPrivate = api.settings()[0];
-                  var cellData = dtPrivate.oApi._fnGetCellData(
-                    dtPrivate,
-                    idx.row,
-                    idx.column,
-                    "display"
-                  );
-                  var title = header.text();
-                  if (title) {
-                    title = title + ":";
-                  }
+//                   // Use a non-public DT API method to render the data for display
+//                   // This needs to be updated when DT adds a suitable method for
+//                   // this type of data retrieval
+//                   var dtPrivate = api.settings()[0];
+//                   var cellData = dtPrivate.oApi._fnGetCellData(
+//                     dtPrivate,
+//                     idx.row,
+//                     idx.column,
+//                     "display"
+//                   );
+//                   var title = header.text();
+//                   if (title) {
+//                     title = title + ":";
+//                   }
 
-                  if (header[0].innerHTML) {
-                    return (
-                      '<li data-dtr-index="' +
-                      idx.column +
-                      '">' +
-                      "<span>" +
-                      title +
-                      "</span> " +
-                      "<span>" +
-                      cellData +
-                      "</span>" +
-                      "</li>"
-                    );
-                  }
-                })
-                .toArray()
-                .join("");
+//                   if (header[0].innerHTML) {
+//                     return (
+//                       '<li data-dtr-index="' +
+//                       idx.column +
+//                       '">' +
+//                       "<span>" +
+//                       title +
+//                       "</span> " +
+//                       "<span>" +
+//                       cellData +
+//                       "</span>" +
+//                       "</li>"
+//                     );
+//                   }
+//                 })
+//                 .toArray()
+//                 .join("");
 
-              return data
-                ? $('<ul data-dtr-index="' + rowIdx + '"/>').append(data)
-                : false;
-            },
-          },
-        },
-        autoWidth: false,
-        order: [[1, "asc"]],
-        /*Order by Agency/Program Name*/
-        columnDefs: [
-          {
-            targets: 0,
-            orderable: false,
-          },
-          {
-            targets: 3,
-            orderable: false,
-          },
-        ],
-        drawCallback: function (settings) {
-          var api = this.api();
-          var rows = api
-            .rows({
-              page: "current",
-            })
-            .nodes();
-          var last = null;
+//               return data
+//                 ? $('<ul data-dtr-index="' + rowIdx + '"/>').append(data)
+//                 : false;
+//             },
+//           },
+//         },
+//         autoWidth: false,
+//         order: [[1, "asc"]],
+//         /*Order by Agency/Program Name*/
+//         columnDefs: [
+//           {
+//             targets: 0,
+//             orderable: false,
+//           },
+//           {
+//             targets: 3,
+//             orderable: false,
+//           },
+//         ],
+//         drawCallback: function (settings) {
+//           var api = this.api();
+//           var rows = api
+//             .rows({
+//               page: "current",
+//             })
+//             .nodes();
+//           var last = null;
 
-          api
-            .column(1, {
-              page: "current",
-            })
-            .data()
-            .each(function (group, i) {
-              $(rows).eq(i).addClass(group.toLowerCase().replace(" ", "-"));
-              if (last !== group) {
-                last = group;
-              }
-            });
-        },
-      });
+//           api
+//             .column(1, {
+//               page: "current",
+//             })
+//             .data()
+//             .each(function (group, i) {
+//               $(rows).eq(i).addClass(group.toLowerCase().replace(" ", "-"));
+//               if (last !== group) {
+//                 last = group;
+//               }
+//             });
+//         },
+//       });
 
-    $closingsTable.show();
-  });
-})(jQuery);
+//     $closingsTable.show();
+//   });
+// })(jQuery);
