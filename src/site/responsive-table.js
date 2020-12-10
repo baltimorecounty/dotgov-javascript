@@ -78,7 +78,7 @@ var getTodaysDate = function () {
 
 (function ($) {
   /*Number of Columns that Contain Data*/
- // var numOfTableCells = 3;
+  // var numOfTableCells = 3;
 
   //$closings consist of
   var addResponsiveTableRow = function (data) {
@@ -103,17 +103,16 @@ var getTodaysDate = function () {
           data = {};
 
         $this.remove();
-  
 
         data.link = $this.find("a")[0].outerHTML;
 
-       var dataArr = $this.html().split(data.link);
-       data.firstCol = cleanData(dataArr[0]);
-       data.secondCol = cleanData(dataArr[1]);
-       data.thirdCol = cleanData(dataArr[2]);
-       data.fourthCol = cleanData(dataArr[3]);
+        var dataArr = $this.html().split(data.link);
+        data.firstCol = cleanData(dataArr[0]);
+        data.secondCol = cleanData(dataArr[1]);
+        data.thirdCol = cleanData(dataArr[2]);
+        data.fourthCol = cleanData(dataArr[3]);
 
-      addResponsiveTableRow(data);
+        addResponsiveTableRow(data);
       });
     },
     cleanData = function (data) {
@@ -124,35 +123,35 @@ var getTodaysDate = function () {
           .replace(/<!--[^>]*-->/g, "")
       );
     };
-    // isStatusColumn = function (recordNumber, numberOfCells) {
-    //   return recordNumber % numberOfCells === 1 ? true : false;
-    // },
-    // updateCountyStatus = function () {
-    //   updateTodaysDate();
-    //   updateCountyStatusImage();
-    // },
-    // //Update the status icon for Baltiomre County Government in the hero Unit
-    // updateCountyStatusImage = function () {
-    //   var $statusImage = $(".status-image"),
-    //     $statusContainerData = $(".county-closings-status-container p"),
-    //     status = $statusContainerData.length
-    //       ? $statusContainerData[0].innerHTML.toLowerCase()
-    //       : "";
+  // isStatusColumn = function (recordNumber, numberOfCells) {
+  //   return recordNumber % numberOfCells === 1 ? true : false;
+  // },
+  // updateCountyStatus = function () {
+  //   updateTodaysDate();
+  //   updateCountyStatusImage();
+  // },
+  // //Update the status icon for Baltiomre County Government in the hero Unit
+  // updateCountyStatusImage = function () {
+  //   var $statusImage = $(".status-image"),
+  //     $statusContainerData = $(".county-closings-status-container p"),
+  //     status = $statusContainerData.length
+  //       ? $statusContainerData[0].innerHTML.toLowerCase()
+  //       : "";
 
-    //   $statusContainerData.eq(0).prepend("<strong>Status: </strong>");
+  //   $statusContainerData.eq(0).prepend("<strong>Status: </strong>");
 
-    //   $statusImage.replaceWith(icon(status, "extraLarge"));
-    // },
-    // updateTodaysDate = function () {
-    //   //Update Today's Date
-    //   $(".todays-date").html("<p>" + getTodaysDate() + "</p>");
-    // };
+  //   $statusImage.replaceWith(icon(status, "extraLarge"));
+  // },
+  // updateTodaysDate = function () {
+  //   //Update Today's Date
+  //   $(".todays-date").html("<p>" + getTodaysDate() + "</p>");
+  // };
 
   $(document).ready(function () {
     //Update the hero unit that contains the county status
-  //  updateCountyStatus();
+    //  updateCountyStatus();
 
-    var $responsiveTable  = $("#responsive-main-table");
+    var $responsiveTable = $("#responsive-main-table");
 
     $responsiveTable.hide();
 
@@ -335,7 +334,7 @@ var getTodaysDate = function () {
     //Update the hero unit that contains the county status
     updateCountyStatus();
 
-    var $$responsiveTable  = $("#county-closings");
+    var $$responsiveTable = $("#county-closings");
 
     $$responsiveTable.hide();
 
@@ -442,5 +441,3 @@ var getTodaysDate = function () {
     $closingsTable.show();
   });
 })(jQuery);
-
-onpageshow="if (event.persisted) onPageShow();"
