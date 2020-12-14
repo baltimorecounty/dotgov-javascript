@@ -16,3 +16,4 @@ import "../utilities/hideShowButton";
 import "../utilities/hideParksAbout";
 import "../components/ScrollToTop";
 import "../components/AddImageAltText";
+import "./responsive-table";
