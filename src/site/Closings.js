@@ -2,7 +2,7 @@
 //This is the js file added to the News/Weather page that builds the closing table
 //*********************************************************************************
 
-var icon = (function () {
+var icon = (function() {
   var classes = {
     icon: {
       canceled: "fa-times",
@@ -12,21 +12,21 @@ var icon = (function () {
       seewebsite: "fa-external-link",
       modified: "fa-exclamation-triangle",
       open: "fa-check",
-      operating: "fa-check",
+      operating: "fa-check"
     },
     size: {
       extraSmall: "fa-1x icon-extra-small",
       small: "fa-2x icon-small",
       medium: "fa-3x icon-medium",
       large: "fa-4x icon-large",
-      extraLarge: "fa-5x icon-extra-large",
+      extraLarge: "fa-5x icon-extra-large"
     },
     cssClass: {
-      tableCell: "",
-    },
+      tableCell: ""
+    }
   };
 
-  return function (type, size) {
+  return function(type, size) {
     type = type.toLowerCase().replace(" ", "");
     //If the type does not match up wtih an icon, use modified icon as default
     type = classes.icon[type] ? type : "modified";
@@ -42,7 +42,7 @@ var icon = (function () {
   };
 })();
 
-var getTodaysDate = function () {
+var getTodaysDate = function() {
   var monthNames = [
       "January",
       "February",
@@ -55,7 +55,7 @@ var getTodaysDate = function () {
       "September",
       "October",
       "November",
-      "December",
+      "December"
     ],
     days = [
       "Sunday",
@@ -64,7 +64,7 @@ var getTodaysDate = function () {
       "Wednesday",
       "Thursday",
       "Friday",
-      "Saturday",
+      "Saturday"
     ];
 
   var today = new Date(),
@@ -76,197 +76,12 @@ var getTodaysDate = function () {
   return day + ", " + month + " " + date + ", " + year;
 };
 
-(function ($) {
-  /*Number of Columns that Contain Data*/
- // var numOfTableCells = 3;
-
-  //$closings consist of
-  var addResponsiveTableRow = function (data) {
-      var $tableBody = $("#responsive-main tbody"),
-        tableRow =
-          "<tr><td>" +
-          data.firstCol +
-          "</td>" +
-          "<td>" +
-          data.secondCol +
-          "</td><td>" +
-          data.thirdCol +
-          "</td><td>" +
-          data.fourthCol +
-          "</td></tr>";
-
-      $tableBody.append(tableRow);
-    },
-    addDataToResponsiveTable = function ($responseData) {
-      $responseData.each(function () {
-        var $this = $(this),
-          data = {};
-
-        $this.remove();
-  
-
-        data.link = $this.find("a")[0].outerHTML;
-
-       var dataArr = $this.html().split(data.link);
-       data.firstCol = cleanData(dataArr[0]);
-       data.secondCol = cleanData(dataArr[1]);
-       data.thirdCol = cleanData(dataArr[2]);
-       data.fourthCol = cleanData(dataArr[3]);
-
-      addResponsiveTableRow(data);
-      });
-    },
-    cleanData = function (data) {
-      //remove br|p|h1|h2|h3|strong tags along with html comments
-      return $.trim(
-        data
-          .replace(/(<(br|p|h1|h2|h3|strong)>|<\/(br|p|h1|h2|h3|strong)>)/g, "")
-          .replace(/<!--[^>]*-->/g, "")
-      );
-    };
-    // isStatusColumn = function (recordNumber, numberOfCells) {
-    //   return recordNumber % numberOfCells === 1 ? true : false;
-    // },
-    // updateCountyStatus = function () {
-    //   updateTodaysDate();
-    //   updateCountyStatusImage();
-    // },
-    // //Update the status icon for Baltiomre County Government in the hero Unit
-    // updateCountyStatusImage = function () {
-    //   var $statusImage = $(".status-image"),
-    //     $statusContainerData = $(".county-closings-status-container p"),
-    //     status = $statusContainerData.length
-    //       ? $statusContainerData[0].innerHTML.toLowerCase()
-    //       : "";
-
-    //   $statusContainerData.eq(0).prepend("<strong>Status: </strong>");
-
-    //   $statusImage.replaceWith(icon(status, "extraLarge"));
-    // },
-    // updateTodaysDate = function () {
-    //   //Update Today's Date
-    //   $(".todays-date").html("<p>" + getTodaysDate() + "</p>");
-    // };
-
-  $(document).ready(function () {
-    //Update the hero unit that contains the county status
-  //  updateCountyStatus();
-
-    var $responsiveTable  = $("#responsive-main-table");
-
-    $responsiveTable.hide();
-
-    //Add Inclusion Data to our HTML Table
-    addDataToResponsiveTable($(".responsive-data-snippet"));
-
-    /*Intialize the DataTable Plugin*/
-    if ($responsiveTable.DataTable)
-      $responsiveTable.DataTable({
-        info: false,
-        paging: false,
-        bFilter: false,
-        processing: true,
-        responsive: {
-          details: {
-            renderer: function (api, rowIdx) {
-              // Select hidden columns for the given row
-              var data = api
-                .cells(rowIdx, ":hidden")
-                .eq(0)
-                .map(function (cell) {
-                  var header = $(api.column(cell.column).header());
-                  var idx = api.cell(cell).index();
-
-                  if (header.hasClass("control") || header.hasClass("never")) {
-                    return "";
-                  }
-
-                  // Use a non-public DT API method to render the data for display
-                  // This needs to be updated when DT adds a suitable method for
-                  // this type of data retrieval
-                  var dtPrivate = api.settings()[0];
-                  var cellData = dtPrivate.oApi._fnGetCellData(
-                    dtPrivate,
-                    idx.row,
-                    idx.column,
-                    "display"
-                  );
-                  var title = header.text();
-                  if (title) {
-                    title = title + ":";
-                  }
-
-                  if (header[0].innerHTML) {
-                    return (
-                      '<li data-dtr-index="' +
-                      idx.column +
-                      '">' +
-                      "<span>" +
-                      title +
-                      "</span> " +
-                      "<span>" +
-                      cellData +
-                      "</span>" +
-                      "</li>"
-                    );
-                  }
-                })
-                .toArray()
-                .join("");
-
-              return data
-                ? $('<ul data-dtr-index="' + rowIdx + '"/>').append(data)
-                : false;
-            },
-          },
-        },
-        autoWidth: false,
-        order: [[1, "asc"]],
-        /*Order by Agency/Program Name*/
-        columnDefs: [
-          // {
-          //   targets: 0,
-          //   orderable: false,
-          // },
-          {
-            targets: 3,
-            orderable: false,
-          },
-        ],
-        drawCallback: function (settings) {
-          var api = this.api();
-          var rows = api
-            .rows({
-              page: "current",
-            })
-            .nodes();
-          var last = null;
-
-          api
-            .column(1, {
-              page: "current",
-            })
-            .data()
-            .each(function (group, i) {
-              $(rows).eq(i).addClass(group.toLowerCase().replace(" ", "-"));
-              if (last !== group) {
-                last = group;
-              }
-            });
-        },
-      });
-
-    $responsiveTable.show();
-  });
-})(jQuery);
-
-//=========================================================
-(function ($) {
+(function($) {
   /*Number of Columns that Contain Data*/
   var numOfTableCells = 3;
 
   //$closings consist of
-  var addTableRow = function (data) {
+  var addTableRow = function(data) {
       var $tableBody = $("#county-closings tbody"),
         tableRow =
           "<tr><td>" +
@@ -282,8 +97,8 @@ var getTodaysDate = function () {
 
       $tableBody.append(tableRow);
     },
-    addDataToTable = function ($closingsData) {
-      $closingsData.each(function () {
+    addDataToTable = function($closingsData) {
+      $closingsData.each(function() {
         var $this = $(this),
           data = {};
 
@@ -299,7 +114,7 @@ var getTodaysDate = function () {
         addTableRow(data);
       });
     },
-    cleanData = function (data) {
+    cleanData = function(data) {
       //remove br|p|h1|h2|h3|strong tags along with html comments
       return $.trim(
         data
@@ -307,15 +122,15 @@ var getTodaysDate = function () {
           .replace(/<!--[^>]*-->/g, "")
       );
     },
-    isStatusColumn = function (recordNumber, numberOfCells) {
+    isStatusColumn = function(recordNumber, numberOfCells) {
       return recordNumber % numberOfCells === 1 ? true : false;
     },
-    updateCountyStatus = function () {
+    updateCountyStatus = function() {
       updateTodaysDate();
       updateCountyStatusImage();
     },
     //Update the status icon for Baltiomre County Government in the hero Unit
-    updateCountyStatusImage = function () {
+    updateCountyStatusImage = function() {
       var $statusImage = $(".status-image"),
         $statusContainerData = $(".county-closings-status-container p"),
         status = $statusContainerData.length
@@ -326,18 +141,42 @@ var getTodaysDate = function () {
 
       $statusImage.replaceWith(icon(status, "extraLarge"));
     },
-    updateTodaysDate = function () {
+    updateTodaysDate = function() {
       //Update Today's Date
       $(".todays-date").html("<p>" + getTodaysDate() + "</p>");
     };
+  // For responsivetable
+  {
+    /* 
+    We have to reference these includes in header section of the index page 
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript"  src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" async src ="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"></link>
+<link rel="stylesheet"  href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.dataTables.min.css"></link>
+<script src="https://kit.fontawesome.com/2475edd293.js"></script> */
+  }
+  $(document).ready(function() {
+    var $responsiveTable = $("#responsive-main-table");
 
-  $(document).ready(function () {
+    /*Intialize the DataTable Plugin*/
+    if ($responsiveTable.DataTable)
+      $responsiveTable.DataTable({
+        info: false,
+        paging: false,
+        bFilter: false,
+        processing: true,
+        responsive: true
+      });
+  })(jQuery);
+
+  $(document).ready(function() {
     //Update the hero unit that contains the county status
     updateCountyStatus();
 
-    var $$responsiveTable  = $("#county-closings");
+    var $closingsTable = $("#county-closings");
 
-    $$responsiveTable.hide();
+    $closingsTable.hide();
 
     //Add Inclusion Data to our HTML Table
     addDataToTable($(".closings-data-snippet"));
@@ -351,12 +190,12 @@ var getTodaysDate = function () {
         processing: true,
         responsive: {
           details: {
-            renderer: function (api, rowIdx) {
+            renderer: function(api, rowIdx) {
               // Select hidden columns for the given row
               var data = api
                 .cells(rowIdx, ":hidden")
                 .eq(0)
-                .map(function (cell) {
+                .map(function(cell) {
                   var header = $(api.column(cell.column).header());
                   var idx = api.cell(cell).index();
 
@@ -400,8 +239,8 @@ var getTodaysDate = function () {
               return data
                 ? $('<ul data-dtr-index="' + rowIdx + '"/>').append(data)
                 : false;
-            },
-          },
+            }
+          }
         },
         autoWidth: false,
         order: [[1, "asc"]],
@@ -409,38 +248,40 @@ var getTodaysDate = function () {
         columnDefs: [
           {
             targets: 0,
-            orderable: false,
+            orderable: false
           },
           {
             targets: 3,
-            orderable: false,
-          },
+            orderable: false
+          }
         ],
-        drawCallback: function (settings) {
+        drawCallback: function(settings) {
           var api = this.api();
           var rows = api
             .rows({
-              page: "current",
+              page: "current"
             })
             .nodes();
           var last = null;
 
           api
             .column(1, {
-              page: "current",
+              page: "current"
             })
             .data()
-            .each(function (group, i) {
-              $(rows).eq(i).addClass(group.toLowerCase().replace(" ", "-"));
+            .each(function(group, i) {
+              $(rows)
+                .eq(i)
+                .addClass(group.toLowerCase().replace(" ", "-"));
               if (last !== group) {
                 last = group;
               }
             });
-        },
+        }
       });
 
     $closingsTable.show();
   });
 })(jQuery);
 
-onpageshow="if (event.persisted) onPageShow();"
+onpageshow = "if (event.persisted) onPageShow();";
