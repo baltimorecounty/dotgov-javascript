@@ -25,6 +25,15 @@
         bFilter: false,
         processing: true,
         responsive:true,
+        autoWidth: false,
+        bJQueryUI: true,
+          order: [[1, "asc"]],
+          columnDefs: [
+            {
+              targets: 0,
+              orderable: false,
+            },
+          ],
        
   });
 });
