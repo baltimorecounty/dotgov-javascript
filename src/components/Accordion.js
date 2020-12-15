@@ -37,14 +37,16 @@ const onMediumWindowSizeChangeCollapse = (onDocumentResize) => {
   const isAccordionCollapse = document.getElementsByClassName(
     "dg_collapse dg_accordion__collapsible"
   );
-  if (window.outerWidth < 769) {
-    for (let i = 0; i < isAccordionCollapse.length; i++) {
-      isAccordionCollapse[i].classList.add("collapsed");
+  if (isAccordionCollapse) {
+    if (window.outerWidth < 769) {
+      for (let i = 0; i < isAccordionCollapse.length; i++) {
+        isAccordionCollapse[i].classList.add("collapsed");
 
-      var collapseButton = isAccordionCollapse[i].getElementsByClassName(
-        "multi-collapse collapse show"
-      );
-      collapseButton[0].classList.remove("show");
+        var collapseButton = isAccordionCollapse[i].getElementsByClassName(
+          "multi-collapse collapse show"
+        );
+        collapseButton[0] ? collapseButton[0].classList.remove("show") : null;
+      }
     }
   }
 };

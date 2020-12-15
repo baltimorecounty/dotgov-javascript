@@ -24,12 +24,12 @@ const HideHeaders = () => {
   var responsiveTable = $("#responsive-main-table").DataTable();
   var columns = responsiveTable.columns().count();
   var w = window.innerWidth;
-
+  console.log(w);
+  console.log("Hi Travis");
   for (i = 0; i < columns; i++) {
     var header = responsiveTable.column(i).header();
     if (header.innerHTML === "") {
-      console.log("i:" + i + "innerHTML==NONE");
-      responsiveTable.column(i).visible(w > 768);
+      responsiveTable.column(i).visible(w > 767);
     }
   }
 };
