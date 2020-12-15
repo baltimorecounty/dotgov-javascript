@@ -1,380 +1,100 @@
-<div class="closings">
-  <span>&nbsp;</span><span>&nbsp;</span>
-  <div id="county-closings_wrapper" class="dataTables_wrapper no-footer">
-    <div
-      id="county-closings_processing"
-      class="dataTables_processing"
-      style="display: none"
-    >
-      Processing...
-    </div>
-    <table
-      id="county-closings"
-      class="display dataTable no-footer dtr-inline"
-      cellspacing="0"
-      width="100%"
-      style="display: table"
-      role="grid"
-    >
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>React App</title>
+
+    <script  src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://kit.fontawesome.com/2475edd293.js"></script>
+    <script type="text/javascript"  src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" async src ="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"></link>
+    <link rel="stylesheet"  href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.dataTables.min.css"></link>
+
+    <script type="text/javascript">
+      $(document).ready(function () {
+        console.log("inside document ready");
+        var $responsiveTable = $("#responsive-main-table");
+        $responsiveTable.DataTable({
+          info: false,
+          paging: false,
+          bFilter: false,
+          processing: true,
+          ordering: true,
+          responsive: true,
+          autoWidth: false,
+          order: [[1, "asc"]],
+          columnDefs: [
+            {
+              targets: 0,
+              orderable: false,
+            },
+          ],
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <table id="responsive-main-table" class="display" style="width: 100%">
       <thead>
-        <tr role="row">
-          <th
-            class="not-mobile sorting_disabled"
-            rowspan="1"
-            colspan="1"
-            aria-label=""
-          ></th>
-          <th
-            class="all sorting_asc"
-            tabindex="0"
-            aria-controls="county-closings"
-            rowspan="1"
-            colspan="1"
-            aria-sort="ascending"
-            aria-label="Status: activate to sort column descending"
-          >
-            Status
-          </th>
-          <th
-            class="all sorting"
-            tabindex="0"
-            aria-controls="county-closings"
-            rowspan="1"
-            colspan="1"
-            aria-label="Agency/Program: activate to sort column ascending"
-          >
-            Agency/Program
-          </th>
-          <th
-            class="not-mobile sorting_disabled"
-            rowspan="1"
-            colspan="1"
-            aria-label="Information"
-          >
-            Information
-          </th>
+        <tr>
+          <th>Icon</th>
+          <th>Name</th>
+          <th>Position</th>
+          <th>Office</th>
+          <th>Age</th>
+          <th>Start date</th>
+          <th>Salary</th>
         </tr>
       </thead>
       <tbody>
-        <tr role="row" class="odd closed">
-          <td class="icon">
-            <i
-              class="fa fa-times fa-2x icon-small icon-inline icon-closed"
-              aria-hidden="true"
-            ></i>
-          </td>
-          <td class="sorting_1">Closed</td>
+        <tr>
           <td>
-            <a
-              title="Get the latest closing information."
-              href="https://www.baltimorecountymd.gov/departments/aging/weather.html"
-              >Senior Centers</a
-            >
-          </td>
-          <td>
-            Out of an abundance of caution, activities at Baltimore County
-            Senior Centers will be suspended. Based on state guidance, all
-            Baltimore County senior centers will be closed to the public
-            beginning on Monday, March 16, until further notice. County
-            officials encourage individuals to coordinate with senior center
-            staff to ensure they are prepared for the closure, and we encourage
-            those individuals to call the Maryland Access Point hotline at
-            410-887-2594.
-          </td>
-        </tr>
-        <tr role="row" class="even modified">
-          <td class="icon">
             <i
               class="fa fa-exclamation-triangle fa-2x icon-small icon-inline icon-modified"
               aria-hidden="true"
             ></i>
           </td>
-          <td class="sorting_1">Modified</td>
+          <td>Tiger Nixon</td>
           <td>
-            <a
-              title="Get the latest closing information."
-              href="https://www.baltimorecountymd.gov/departments/aging/weather.html"
-              >County Ride</a
-            >
-          </td>
-          <td>
-            <span class="Normal">CountyRide&nbsp;is</span>
-            <span
-              >limited to medical appointments, grocery shopping and
-              pharmacy.</span
-            >
-          </td>
-        </tr>
-        <tr role="row" class="odd modified&amp;nbsp;">
-          <td class="icon">
-            <i
-              class="fa fa-exclamation-triangle fa-2x icon-small icon-inline icon-modified"
-              aria-hidden="true"
-            ></i>
-          </td>
-          <td class="sorting_1">Modified&nbsp;</td>
-          <td>
-            <a
-              title="Get the latest closing information."
-              href="http://www.baltimorecountymd.gov/Agencies/recreation/programdivision/weather.html"
-              >Recreation Centers</a
-            >
-          </td>
-          <td>
-            <span
-              >To assist in keeping staff, volunteers, participants and
-              residents safe and minimize the spread of the COVID-19 virus, the
-              Department of Recreation and Parks will be following all State
-              Executive Orders related to youth sports activities. All
-              Department of Recreation and Parks
-              <span
-                >buildings are closed to the public until further notice</span
-              >.</span
-            >&nbsp;Open to the Public
-            <ul>
-              <li>Basketball courts</li>
-              <li>
-                Beaches
-                <ul>
-                  <li>
-                    <em>Note:&nbsp;</em
-                    ><em
-                      >Park capacity is still limited. Groups should be 10 or
-                      less, and everyone should practice social distancing.
-                      Masks are required for bathroom use with limited
-                      occupancy. Showers are still closed at this
-                      time.&nbsp;</em
-                    >
-                  </li>
-                </ul>
-              </li>
-              <li>Boating</li>
-              <li><span style="font-size: 0.96em">Comfort stations</span></li>
-              <li>
-                Community gardens
-                <ul>
-                  <li>
-                    <em
-                      >Note:&nbsp;Some community gardens may not have water or
-                      be prepped at this time.</em
-                    >
-                  </li>
-                </ul>
-              </li>
-              <li><span style="font-size: 0.96em">County parks</span></li>
-              <li><span style="font-size: 0.96em">Disc golf courses</span></li>
-              <li><span style="font-size: 0.96em">Dog Parks</span></li>
-              <li>
-                <span style="font-size: 0.96em">Fields and diamonds</span>
-              </li>
-              <li><span style="font-size: 0.96em">Golf courses</span></li>
-              <li><span style="font-size: 0.96em">Horseshoe pits</span></li>
-              <li>Open space</li>
-              <li><span style="font-size: 0.96em">Pavilions</span></li>
-              <li>Picnic areas</li>
-              <li>Playgrounds</li>
-              <li><span style="font-size: 0.96em">Pickleball courts</span></li>
-              <li>
-                <span style="font-size: 0.96em">Recreational fishing</span>
-              </li>
-              <li>
-                <span style="font-size: 0.96em">Restrooms&nbsp;</span>
-                <ul>
-                  <li>
-                    <span style="font-size: 0.96em"
-                      ><em>Note:&nbsp;</em
-                      ><em
-                        >Outdoor accessible restroom facilities will be opened
-                        in conjunction with scheduled permitted activities and
-                        as regular need demands.</em
-                      ></span
-                    ><span style="font-size: 0.96em">&nbsp;</span>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <span style="font-size: 0.96em">Skate Parks</span>
-                <ul>
-                  <li>
-                    <em
-                      >Note:&nbsp;<span style="font-size: 0.96em"
-                        >In an effort to keep our members safe, we ask that
-                        skaters&nbsp;wear masks,</span
-                      >&nbsp;practice social distancing
-                      <span style="font-size: 0.96em"
-                        >and that there are less than&nbsp;10 skaters at a
-                        time&nbsp;in the park.</span
-                      ></em
-                    >
-                  </li>
-                </ul>
-              </li>
-              <li>Tennis courts <em>(indoor and outdoor)</em></li>
-              <li><span style="font-size: 0.96em">Trails</span></li>
-              <li><span style="font-size: 0.96em">Turf fields</span></li>
-            </ul>
-            <h4><span style="font-size: 0.96em">Closed to the Public</span></h4>
-            <ul>
-              <li><span style="font-size: 0.96em">Buildings</span></li>
-              <li><span style="font-size: 0.96em">Portable toilets</span></li>
-              <li><span style="font-size: 0.96em">Stages</span></li>
-              <li><span style="font-size: 0.96em">Water fountains</span></li>
-            </ul>
-            <span style="font-size: 0.96em"
-              ><span style="font-size: 0.96em"
-                >The Baltimore County Department of Recreation and Parks, with
-                support from the&nbsp;Maryland Food Bank and Healthy Food Access
-                St. Vincent de Paul of Baltimore,</span
+            <p>
+              <a
+                href="http://www.baltimorecountymd.gov/Agencies/recreation/programdivision/weather.html"
+                title="Get the latest closing information."
+                >Recreation Centers</a
               >
-              is offering limited food distribution for families<span
-                style="font-size: 0.96em"
-                >. Find more information.&nbsp;</span
-              ></span
-            >
+            </p>
           </td>
+          <td>Edinburgh</td>
+          <td>61</td>
+          <td>2011/04/25</td>
+          <td>$320,800</td>
         </tr>
-        <tr role="row" class="even modified&amp;nbsp;">
-          <td class="icon">
+        <tr>
+          <td>
             <i
               class="fa fa-exclamation-triangle fa-2x icon-small icon-inline icon-modified"
               aria-hidden="true"
             ></i>
           </td>
-          <td class="sorting_1">Modified&nbsp;</td>
+          <td>Garrett Winters</td>
           <td>
-            <a
-              title="Get the latest closing information."
-              href="https://www.baltimorecountymd.gov/Agencies/circuit/weather.html"
-              >Circuit Court</a
-            >
+            <p>
+              <a
+                href="http://www.baltimorecountymd.gov/Agencies/recreation/programdivision/weather.html"
+                title="Get the latest closing information."
+                >Recreation Centers</a
+              >
+            </p>
           </td>
-          <td>
-            Baltimore County Circuit Court—<a
-              href="https://www.baltimorecountymd.gov/departments/circuit/index.html"
-              >COVID-19 Status Update</a
-            >
-          </td>
-        </tr>
-        <tr role="row" class="odd open">
-          <td class="icon">
-            <i
-              class="fa fa-check fa-2x icon-small icon-inline icon-open"
-              aria-hidden="true"
-            ></i>
-          </td>
-          <td class="sorting_1">Open</td>
-          <td>
-            <a
-              title="Get the latest closing information."
-              href="https://www.baltimorecountymd.gov/departments/publicworks/solid_waste/snow.html"
-              >Trash and Recycling Drop-Off Centers</a
-            >
-          </td>
-          <td>
-            All three drop-off centers are currently in service with normal
-            operating hours (including the usual
-            <a
-              title="View the County's holiday schedule."
-              href="https://www.baltimorecountymd.gov/News/holidays/index.html"
-              >holiday schedule</a
-            >). However, visitors and employees are now required to wear masks
-            onsite and adhere to all social distancing guidelines. These
-            requirements will be strictly enforced. Driver's licenses will still
-            be scanned to confirm residency.
-          </td>
-        </tr>
-        <tr role="row" class="even open">
-          <td class="icon">
-            <i
-              class="fa fa-check fa-2x icon-small icon-inline icon-open"
-              aria-hidden="true"
-            ></i>
-          </td>
-          <td class="sorting_1">Open</td>
-          <td>
-            <a
-              title="Get the latest closing information."
-              href="https://www.baltimorecountymd.gov/departments/animalservices/"
-              >Animal Services</a
-            >
-          </td>
-          <td>
-            &nbsp;<span
-              >All Baltimore&nbsp;County Animal Services facilities are open and
-              operating normally.</span
-            >
-          </td>
-        </tr>
-        <tr role="row" class="odd operating">
-          <td class="icon">
-            <i
-              class="fa fa-check fa-2x icon-small icon-inline icon-operating"
-              aria-hidden="true"
-            ></i>
-          </td>
-          <td class="sorting_1">Operating</td>
-          <td>
-            <a
-              title="Get the latest closing information."
-              href="https://www.baltimorecountymd.gov/departments/publicworks/solid_waste/snow.html"
-              >Trash and Recycling Collection</a
-            >
-          </td>
-          <td>
-            Trash, recycling and yard material collections are running normally;
-            please follow your regularly-scheduled collection days for all
-            materials (including the usual
-            <a
-              title="View the County's holiday schedule."
-              href="https://www.baltimorecountymd.gov/News/holidays/index.html"
-              >holiday schedule</a
-            >). However, there are still high volumes of material being
-            collected, and collectors may not be able to take all bags of yard
-            material on a single collection day. If this happens, please leave
-            your yard material out until collection occurs.
-          </td>
-        </tr>
-        <tr role="row" class="even see-website">
-          <td class="icon">
-            <i
-              class="fa fa-external-link fa-2x icon-small icon-inline icon-seewebsite"
-              aria-hidden="true"
-            ></i>
-          </td>
-          <td class="sorting_1">See Website</td>
-          <td>
-            <a
-              title="Get the latest library closing information."
-              href="http://www.bcpl.info"
-              >Public Library</a
-            >
-          </td>
-          <td>
-            Visit the Baltimore County Public Library website for all branch
-            closing information.
-          </td>
-        </tr>
-        <tr role="row" class="odd see-website">
-          <td class="icon">
-            <i
-              class="fa fa-external-link fa-2x icon-small icon-inline icon-seewebsite"
-              aria-hidden="true"
-            ></i>
-          </td>
-          <td class="sorting_1">See Website</td>
-          <td>
-            <a
-              title="Get the latest school closing information."
-              href="http://www.bcps.org"
-              >Public Schools</a
-            >
-          </td>
-          <td>
-            Visit the Baltimore County Public Schools website for all school
-            closing information.
-          </td>
+          <td>Tokyo</td>
+          <td>63</td>
+          <td>2011/07/25</td>
+          <td>$170,750</td>
         </tr>
       </tbody>
     </table>
-  </div>
-</div>
+  </body>
+</html>
