@@ -32,6 +32,22 @@ const HideHeaders = () => {
       responsiveTable.column(i).visible(w > 768);
     }
   }
+  $responsiveTable.DataTable({
+    info: false,
+    paging: false,
+    bFilter: false,
+    processing: true,
+    ordering: true,
+    responsive: true,
+    autoWidth: false,
+    order: [[1, "asc"]],
+    columnDefs: [
+      {
+        targets: 0,
+        orderable: false,
+      },
+    ],
+  });
 };
 
 //trigger upon pageload
