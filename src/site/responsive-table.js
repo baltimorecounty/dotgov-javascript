@@ -21,17 +21,7 @@ const applyDataTable = () => {
 
 //Hides any columns without header text. These headers are typically image or icon headers and not needed for the responsive table.
 const HideHeaders = () => {
-  var responsiveTable = $("#responsive-main-table").DataTable();
-  var columns = responsiveTable.columns().count();
-  var w = window.innerWidth;
-
-  for (i = 0; i < columns; i++) {
-    var header = responsiveTable.column(i).header();
-    if (header.innerHTML === "") {
-      responsiveTable.column(i).visible(w > 767);
-    }
-  }
-  $responsiveTable.DataTable({
+  var $responsiveTable = $("#responsive-main-table").DataTable({
     info: false,
     paging: false,
     bFilter: false,
@@ -47,6 +37,15 @@ const HideHeaders = () => {
       },
     ],
   });
+  var columns = $responsiveTable.columns().count();
+  var w = window.innerWidth;
+
+  for (i = 0; i < columns; i++) {
+    var header = $responsiveTable.column(i).header();
+    if (header.innerHTML === "") {
+      $responsiveTable.column(i).visible(w > 767);
+    }
+  }
 };
 
 document.addEventListener("DOMContentLoaded", applyDataTable);
