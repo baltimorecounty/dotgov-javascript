@@ -1,7 +1,6 @@
 //Any table with an ID of responsive-main-table will have this run against it to create the responsive data table
 const applyDataTable = () => {
-  var $responsiveTable = $("#responsive-main-table");
-  $responsiveTable.DataTable({
+  $("#responsive-main-table").DataTable({
     info: false,
     paging: false,
     bFilter: false,
@@ -44,6 +43,7 @@ const HideHeaders = () => {
     var header = $responsiveTable.column(i).header();
     if (header.innerHTML === "") {
       $responsiveTable.column(i).visible(w > 767);
+      Vas;
     }
   }
 };
@@ -51,7 +51,7 @@ const HideHeaders = () => {
 document.addEventListener("DOMContentLoaded", applyDataTable);
 
 //trigger upon pageload
-document.addEventListener("DOMContentLoaded", HideHeaders);
+//document.addEventListener("DOMContentLoaded", HideHeaders);
 
 //trigger upon screen resize
-window.addEventListener("resize", HideHeaders);
+//window.addEventListener("resize", HideHeaders);
