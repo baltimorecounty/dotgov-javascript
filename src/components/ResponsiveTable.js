@@ -1,5 +1,7 @@
 //Any table with an ID of responsive-main-table will have this run against it to create the responsive data table
 const applyDataTable = () => {
+  $("#responsive-main-table").removeClass("table");
+  
   $("#responsive-main-table").DataTable({
     info: false,
     paging: false,
@@ -16,6 +18,8 @@ const applyDataTable = () => {
       },
     ],
   });
+
+  $("#responsive-main-table").addClass("table");
 };
 
 //Hides any columns without header text. These headers are typically image or icon headers and not needed for the responsive table.
@@ -48,7 +52,7 @@ const HideHeaders = () => {
   }
 };
 
-document.addEventListener("DOMContentLoaded", applyDataTable);
+window.addEventListener("load", applyDataTable);
 
 //trigger upon pageload
 //document.addEventListener("DOMContentLoaded", HideHeaders);
