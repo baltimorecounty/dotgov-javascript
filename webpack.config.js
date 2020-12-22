@@ -13,6 +13,7 @@ module.exports = {
     EventFilter: "./src/components/EventFilter.js",
     ScrollToTop: "./src/components/ScrollToTop.js",
     PhoneDirectory: "./src/site/PhoneDirectory.js",
+    ResponsiveTable: "./src/components/ResponsiveTable.js"
   },
   output: {
     path: path.join(__dirname, "dist"),
