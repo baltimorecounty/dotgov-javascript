@@ -105,6 +105,9 @@ const handleDocumentClick = (clickEvent) => {
 const handleModalCloseButtonClick = (clickEvent) => {
   showNavButton();
   window.closeDialog(clickEvent.target);
+  if (isIos()) {
+    scrollWithinPage();
+  }
 };
 
 /**
@@ -118,16 +121,60 @@ const handleModalOpenButtonClick = (clickEvent) => {
   window.openDialog(targetModalId, modalButtonElm);
   hideNavButton();
 
-  let isIOS =
-    (/iPad|iPhone|iPod/.test(navigator.platform) ||
-      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)) &&
-    !window.MSStream;
-  if (isIOS) {
-    var modalBackdrops = document.getElementsByClassName("dialog-backdrop");
-    if (modalBackdrops[0]) {
-      modalBackdrops[0].style.top = $(window).scrollTop() + "px";
-    }
+  if (isIos()) {
+    handleIosWindowResize();
+    scrollWithinModal();
   }
 };
+
+function isIos() {
+  return (
+    (/iPad|iPhone|iPod/.test(navigator.platform) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)) &&
+    !window.MSStream
+  );
+}
+
+function handleIosWindowResize() {
+  var backdrop = document.getElementsByClassName("dialog-backdrop")[0];
+  //Update top of modal to current scroll location in order to match display height
+  backdrop.style.top = $(window).scrollTop() + "px";
+  $(window).resize(function () {
+    //Update top of modal again on window resize i.e. the lower Safari menu appearing
+    backdrop.style.top = $(window).scrollTop() + "px";
+  });
+}
+
+function scrollWithinModal() {
+  //Remove existing event listeners https://stackoverflow.com/a/34245613
+  var button = document.querySelector("#dg_back-to-top");
+  button.parentNode.replaceChild(button.cloneNode(1), button);
+  $("#dg_back-to-top").on("click", function (e) {
+    e.preventDefault();
+    //Scroll to the top of the dialog instead of the page to prevent scrolling past the dialog
+    $(".dialog-backdrop").animate(
+      {
+        scrollTop: 0,
+      },
+      700
+    );
+  });
+}
+
+function scrollWithinPage() {
+  //Remove existing event listeners https://stackoverflow.com/a/34245613
+  var button = document.querySelector("#dg_back-to-top");
+  button.parentNode.replaceChild(button.cloneNode(1), button);
+  $("#dg_back-to-top").on("click", function (e) {
+    e.preventDefault();
+    //Put the original behavior of "scrolling to the top of the page" back
+    $("html,body").animate(
+      {
+        scrollTop: 0,
+      },
+      700
+    );
+  });
+}
 
 document.addEventListener("click", handleDocumentClick, false);
