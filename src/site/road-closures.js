@@ -4,14 +4,14 @@ require(["BcGisQuery", "jquery", "footable", "mustache"], function (
   a,
   r
 ) {
-  var d = '<table data-filter="#filter" class="footable table">';
+  var d = '<table id="responsive-main-table" class="table">';
   (d +=
-    '<thead><tr><th class="footable-first-column" data-toggle="true">Road</th><th data-toggle="true">Community</th><th data-hide="phone,tablet" data-sort-initial="true" data-name="Closed">Closed Date</th><th data-hide="phone,tablet" data-name="Between">Between</th><th data-hide="phone">Reason</th></tr></thead>'),
+    "<thead><tr><th>Road</th><th>Community</th><th>Closed Date</th><th>Between</th><th>Reason</th></tr></thead>"),
     (d += "<tbody>"),
     (d += "{{#.}}"),
     (d += "{{#attributes}}"),
     (d +=
-      '<tr class="{{CLOSURE_ID}}"><td>{{#FIRST_STLABEL}}{{FIRST_STLABEL}}{{/FIRST_STLABEL}}</td><td>{{#FIRST_COMMUNITY}}{{FIRST_COMMUNITY}}{{/FIRST_COMMUNITY}}</td><td data-type="numeric" data-value="{{#date}}{{FIRST_ROAD_CLOSURE_DATE}}{{/date}}" class="date">{{FIRST_ROAD_CLOSURE_DATE}}</td><td>{{FIRST_INTERSECTIONLIST}}</td><td>{{FIRST_CLOSURE_TYPE}}</td></tr>'),
+      "<tr><td>{{#FIRST_STLABEL}}{{FIRST_STLABEL}}{{/FIRST_STLABEL}}</td><td>{{#FIRST_COMMUNITY}}{{FIRST_COMMUNITY}}{{/FIRST_COMMUNITY}}</td><td>{{FIRST_ROAD_CLOSURE_DATE}}</td><td>{{FIRST_INTERSECTIONLIST}}</td><td>{{FIRST_CLOSURE_TYPE}}</td></tr>"),
     (d += "{{/attributes}}"),
     (d += "{{/.}}"),
     (d += "</tbody>"),
@@ -37,7 +37,7 @@ require(["BcGisQuery", "jquery", "footable", "mustache"], function (
       var a = "{{#.}}";
       (a += "{{#attributes}}"),
         (a +=
-          '<tr class="{{CLOSURE_ID}}"><td>{{#CLOSED_ROAD_NAME}}{{CLOSED_ROAD_NAME}}{{/CLOSED_ROAD_NAME}}</td><td>{{#COMMUNITY}}{{COMMUNITY}}{{/COMMUNITY}}</td><td data-type="numeric" data-value="{{#date}}{{ROAD_CLOSURE_DATE}}{{/date}}" class="date">{{ROAD_CLOSURE_DATE}}</td><td>{{CROSS_ST_1}} {{#CROSS_ST_2}}& {{CROSS_ST_2}}{{/CROSS_ST_2}}</td><td>{{CLOSURE_TYPE}}</td></tr>'),
+          "<tr><td>{{#CLOSED_ROAD_NAME}}{{CLOSED_ROAD_NAME}}{{/CLOSED_ROAD_NAME}}</td><td>{{#COMMUNITY}}{{COMMUNITY}}{{/COMMUNITY}}</td><td>{{ROAD_CLOSURE_DATE}}</td><td>{{CROSS_ST_1}} {{#CROSS_ST_2}}& {{CROSS_ST_2}}{{/CROSS_ST_2}}</td><td>{{CLOSURE_TYPE}}</td></tr>"),
         (a += "{{/attributes}}"),
         (a += "{{/.}}"),
         new t({
