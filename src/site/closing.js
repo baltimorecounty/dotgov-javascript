@@ -129,7 +129,7 @@ var getTodaysDate = function () {
       updateTodaysDate();
       updateCountyStatusImage();
     },
-    //Update the status icon for Baltiomre County Government in the hero Unit
+    //Update the status icon for Baltimore County Government in the hero Unit
     updateCountyStatusImage = function () {
       var $statusImage = $(".status-image"),
         $statusContainerData = $(".county-closings-status-container p"),
@@ -139,7 +139,7 @@ var getTodaysDate = function () {
 
       $statusContainerData.eq(0).prepend("<strong>Status: </strong>");
 
-      $statusImage.replaceWith(icon(status, "extraLarge"));
+      $statusImage.replaceWith(icon(status, "large"));
     },
     updateTodaysDate = function () {
       //Update Today's Date
@@ -258,5 +258,3 @@ var getTodaysDate = function () {
   });
 })(jQuery);
 
-
-onpageshow="if (event.persisted) onPageShow();"
