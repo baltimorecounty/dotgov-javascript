@@ -10,40 +10,18 @@ const CreateDataTable = () => {
       responsive: true,
       autoWidth: false,
       order: [[1, "asc"]],
-      columnDefs: [
-        {
-          targets: 0,
-          orderable: false,
-        },
-      ],
     });
   }
+  CheckForBlankHeader();
 };
 
-// function dynamicallyLoadScript(callback) {
-//   // Adding the script tag to the head as suggested before
-//   var head = document.head;
-//   var script1 = document.createElement("script"); // create a script DOM node
-//   script1.src =
-//     "https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"; // set its src to the provided URL
-
-//   var script2 = document.createElement("script"); // create a script DOM node
-//   script2.src =
-//     "https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"; // set its src to the provided URL
-
-//   // Then bind the event to the callback function.
-//   // There are several events for cross browser compatibility.
-//   script1.onreadystatechange = callback;
-//   script1.onload = callback;
-
-//   script2.onreadystatechange = callback;
-//   script2.onload = callback;
-
-//   // Fire the loading
-//   head.appendChild(script1);
-//   head.appendChild(script2);
-// }
-
-// //loadScript(CreateDataTable());
+const CheckForBlankHeader = () => {
+  $("#responsive-main-table th").each(function (index) {
+    var Header = $(this);
+    if (!Header.text()) {
+      Header.removeClass("sorting").addClass("sorting_disabled");
+    }
+  });
+};
 
 window.addEventListener("load", CreateDataTable);
