@@ -10,14 +10,18 @@ const CreateDataTable = () => {
       responsive: true,
       autoWidth: false,
       order: [[1, "asc"]],
-      columnDefs: [
-        {
-          targets: 0,
-          orderable: false,
-        },
-      ],
     });
   }
+  CheckForBlankHeader();
+};
+
+const CheckForBlankHeader = () => {
+  $("#responsive-main-table th").each(function (index) {
+    var Header = $(this);
+    if (!Header.text()) {
+      Header.removeClass("sorting").addClass("sorting_disabled");
+    }
+  });
 };
 
 window.addEventListener("load", CreateDataTable);
