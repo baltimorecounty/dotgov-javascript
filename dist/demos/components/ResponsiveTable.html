@@ -177,16 +177,13 @@
         script5.src =
           "https://cdn.datatables.net/plug-ins/1.10.22/sorting/datetime-moment.js";
       
-        var scripts = [script1, script2, script4];
+        var scripts = [script1, script2, script3, script4, script5];
       
         $("head").append(function () {
           $.each(scripts, function (key, value) {
             $("head").append(value);
           });
         });
-
-        $("body").append(script3);
-        $("body").append(script5);
       }
       dynamicallyLoadScriptJqueryIncludes();
     </script>
