@@ -20,7 +20,7 @@
       <thead>
         <tr>
           <th class="no-sort"></th>
-          <th>Name</th>
+          <th class="order-by">Name</th>
           <th>Position</th>
           <th>Office</th>
           <th>Age</th>
@@ -159,7 +159,7 @@
         </tr>
       </tbody>
     </table> -->
-    <!-- <script>
+    <script>
       function dynamicallyLoadScriptJqueryIncludes() {
         var script1 = document.createElement("script"); // create a script DOM node
         var script2 = document.createElement("script"); // create a script DOM node
@@ -171,8 +171,7 @@
           "https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"; // set its src to the provided URL
         script2.src =
           "https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js";
-        script3.src =
-          "https://dev.baltimorecountymd.gov/sebin/l/s/dotgov-responsivetable.min.js";
+        script3.src="/assets/dotgov-responsivetable.min.js"
         script4.src =
           "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js";
         script5.src =
@@ -189,7 +188,21 @@
         $("body").append(script3);
         $("body").append(script5);
       }
-    </script> -->
+      dynamicallyLoadScriptJqueryIncludes();
+    </script>
+     <!-- Comment this out when running locally but must be copied back out to SE for it all to work-->
+    <!-- <script>
+      function dynamicallyLoadScriptMoment() {
+        var head = document.head;
+        var script = document.createElement("script"); // create a script DOM node
+        script.src =
+          "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"; // set its src to the provided URL
+    
+        head.appendChild(script);
+      }
+    
+      dynamicallyLoadScriptMoment();
+    </script>
    
      <script>
       function dynamicallyLoadScriptJqueryIncludes() {
@@ -217,44 +230,22 @@
       dynamicallyLoadScriptDataTablesResponsive();
     </script>
 
-<script>
-  function dynamicallyLoadScriptMoment() {
-    var head = document.head;
-    var script = document.createElement("script"); // create a script DOM node
-    script.src =
-      "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"; // set its src to the provided URL
-
-    head.appendChild(script);
-  }
-
-  //dynamicallyLoadScriptMoment();
-</script>
-
     <script>
-     function dynamicallyLoadScriptDateTimeMoment() {
-  var tid = setInterval(LoadMoment, 2000);
+          function dynamicallyLoadScriptDateTimeMoment() {
+        
+          var head = document.head;
+          var script = document.createElement("script");
+          script.src =
+            "https://cdn.datatables.net/plug-ins/1.10.22/sorting/datetime-moment.js";
 
-  function abortTimer() {
-   
-    clearInterval(tid);
-  }
-  console.log(window);
-  if (window.moment) {
-    function LoadMoment() {
-      var head = document.head;
-      var script = document.createElement("script"); 
-      script.src =
-        "https://cdn.datatables.net/plug-ins/1.10.22/sorting/datetime-moment.js"; 
+          head.appendChild(script);
+        }
 
-      head.appendChild(script);
-      abortTimer();
-    }
-  }
-}
-dynamicallyLoadScriptDateTimeMoment();
+        dynamicallyLoadScriptDateTimeMoment();
+
     </script>
-    <!-- Comment this out when running locally but must be copied back out to SE for it all to work-->
-   <!-- <script>
+   
+   <script>
       function dynamicallyLoadScriptDotgovResponsivetable() {
         var head = document.head;
         var script = document.createElement("script"); // create a script DOM node
@@ -266,7 +257,5 @@ dynamicallyLoadScriptDateTimeMoment();
 
       dynamicallyLoadScriptDotgovResponsivetable();
     </script> -->
-   
-    <script src="/assets/dotgov-responsivetable.min.js"></script>
   </body>
 </html>
