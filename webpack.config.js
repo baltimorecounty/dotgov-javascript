@@ -14,7 +14,6 @@ module.exports = {
     ScrollToTop: "./src/components/ScrollToTop.js",
     PhoneDirectory: "./src/site/PhoneDirectory.js",
     ResponsiveTable: "./src/components/ResponsiveTable.js",
-    RoadClosure: "./src/page-specific/Road Closure/RoadClosureTable.js",
   },
   output: {
     path: path.join(__dirname, "dist"),
