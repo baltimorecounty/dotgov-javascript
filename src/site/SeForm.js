@@ -20,24 +20,27 @@ const MoveCheckboxes = () => {
     ".SEAFGroupHorizontal"
   );
 
-  [...horizontalCheckBoxElms].forEach((elm) => {
-    const fieldContainerElm = GetFirstElementOrDefault(
-      elm,
-      ".seFieldCellHorizontal"
-    );
-    const nextSiblingElm = fieldContainerElm.nextElementSibling;
-    const shouldBeMoved =
-      fieldContainerElm &&
-      nextSiblingElm.classList.contains("seLabelCellHorizontal");
+  if(horizontalCheckBoxElms && horizontalCheckBoxElms.length > 0){
+    [...horizontalCheckBoxElms].forEach((elm) => {
+      const fieldContainerElm = GetFirstElementOrDefault(
+        elm,
+        ".seFieldCellHorizontal"
+      );
+      const nextSiblingElm = fieldContainerElm.nextElementSibling;
+      const shouldBeMoved =
+        fieldContainerElm &&
+        nextSiblingElm.classList.contains("seLabelCellHorizontal");
+  
+      if (shouldBeMoved) {
+        const labelElm = GetFirstElementOrDefault(nextSiblingElm, "label");
+  
+        labelElm.classList.add("seCheckboxLabel");
+  
+        fieldContainerElm.appendChild(labelElm);
+      }
+    });
+  }
 
-    if (shouldBeMoved) {
-      const labelElm = GetFirstElementOrDefault(nextSiblingElm, "label");
-
-      labelElm.classList.add("seCheckboxLabel");
-
-      fieldContainerElm.appendChild(labelElm);
-    }
-  });
 };
 
 /** Handler when the DOM is fully loaded */
