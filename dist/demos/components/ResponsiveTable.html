@@ -113,6 +113,16 @@
 
       dynamicallyLoadScriptDotgovResponsivetablePlugins();
     </script>
-    <script src="/assets/dotgov-responsivetable.min.js"></script>
+    <script>
+      function dynamicallyLoadScriptDotgovResponsivetable() {
+        var head = document.head;
+        var script = document.createElement("script"); // create a script DOM node
+        script.src = "/assets/dotgov-responsivetable.min.js"; // set its src to the provided URL
+
+        head.appendChild(script);
+      }
+
+      dynamicallyLoadScriptDotgovResponsivetable();
+    </script>
   </body>
 </html>
