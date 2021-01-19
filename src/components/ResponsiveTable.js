@@ -1,9 +1,11 @@
 //Any table with a class of responsive-main-table will have this run against it to create the responsive data table
-const CreateDataTable = ({
-  isSearchable = false,
-  searchText = "",
-  placeHolderText = "",
-}) => {
+const CreateDataTable = () => {
+  const {
+    isSearchable = false,
+    searchText = "",
+    placeHolderText = "",
+  } = window.responsivetable;
+
   $.fn.dataTable.moment("MMMM D, YYYY"); //format of the date we want to recognize for sorting https://datatables.net/blog/2014-12-18
 
   if (!$.fn.DataTable.isDataTable(".responsive-main-table")) {

@@ -100,7 +100,14 @@
         </tr>
       </tbody>
     </table>
-
+    <script>
+      window.responsivetable = {
+        isSearchable: true,
+        searchText:
+          "<b>Filter:</b> Enter a community or street name to filter this list.",
+        placeHolderText: "Community or street name",
+      };
+    </script>
     <script>
       function dynamicallyLoadScriptDotgovResponsivetablePlugins() {
         var head = document.head;
