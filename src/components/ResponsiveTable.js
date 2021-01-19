@@ -1,5 +1,6 @@
 //Any table with a class of responsive-main-table will have this run against it to create the responsive data table
 const CreateDataTable = () => {
+  //Windows variables that change the appearance of the datatable. If this doesn't exist then we default the values.
   const tableOptions = window.responsivetable
     ? ({
         isSearchable = false,
