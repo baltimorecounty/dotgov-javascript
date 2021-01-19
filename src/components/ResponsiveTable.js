@@ -8,6 +8,12 @@ const CreateDataTable = () => {
       paging: false,
       bFilter: false,
       processing: true,
+      searching: true,
+      language: {
+        searchPlaceholder: "Community or street name",
+        search:
+          "<b>Filter:</b> Enter a community or street name to filter this list.",
+      },
       ordering: true,
       responsive: true,
       autoWidth: false,

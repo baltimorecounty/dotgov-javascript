@@ -101,7 +101,18 @@
       </tbody>
     </table>
 
-    <script src="/src/plugins/responsivetable-plugins.js"></script>
+    <script>
+      function dynamicallyLoadScriptDotgovResponsivetablePlugins() {
+        var head = document.head;
+        var script = document.createElement("script"); // create a script DOM node
+        script.src =
+          "https:dev.baltimorecountymd.gov/sebin/j/v/dotgov-responsivetable-plugins.min.js"; // set its src to the provided URL
+
+        head.appendChild(script);
+      }
+
+      dynamicallyLoadScriptDotgovResponsivetablePlugins();
+    </script>
     <script src="/assets/dotgov-responsivetable.min.js"></script>
   </body>
 </html>
