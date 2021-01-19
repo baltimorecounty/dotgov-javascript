@@ -81,14 +81,18 @@ const onDocumentReady = () => {
   const expandedAccordionToggleButtonElms = document.querySelectorAll(
     `:not(#root) .${cssClasses.accordionButton}[aria-expanded="true"]`
   );
+  if (
+    expandedAccordionToggleButtonElms &&
+    expandedAccordionToggleButtonElms.length > 0
+  ) {
+    const nonReactAccordionElms = [...expandedAccordionToggleButtonElms].filter(
+      (x) => !x.closest("#root")
+    );
 
-  const nonReactAccordionElms = [...expandedAccordionToggleButtonElms].filter(
-    (x) => !x.closest("#root")
-  );
-
-  nonReactAccordionElms.forEach((toggleButtonElm) => {
-    toggleAccordionPanel(toggleButtonElm, true);
-  });
+    nonReactAccordionElms.forEach((toggleButtonElm) => {
+      toggleAccordionPanel(toggleButtonElm, true);
+    });
+  }
 };
 
 var ua = window.navigator.userAgent;

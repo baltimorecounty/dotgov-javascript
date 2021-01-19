@@ -6,16 +6,18 @@ const cssClasses = {
 };
 
 const toggleFilterElms = (filterCollapseElms, shouldShow) => {
-  [...filterCollapseElms].forEach((elm) => {
-    const { itemsToShow = "5" } = elm.dataset;
+  if (filterCollapseElms && filterCollapseElms.length > 0) {
+    [...filterCollapseElms].forEach((elm) => {
+      const { itemsToShow = "5" } = elm.dataset;
 
-    const childElms = elm.children;
-    [...childElms].forEach((childElm, index) => {
-      if (index > parseInt(itemsToShow) - 1) {
-        childElm.style.display = shouldShow ? "inherit" : "none";
-      }
+      const childElms = elm.children;
+      [...childElms].forEach((childElm, index) => {
+        if (index > parseInt(itemsToShow) - 1) {
+          childElm.style.display = shouldShow ? "inherit" : "none";
+        }
+      });
     });
-  });
+  }
 };
 
 const onDocumentReady = () => {
