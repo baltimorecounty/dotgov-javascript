@@ -20,17 +20,16 @@ load("https://code.jquery.com/jquery-3.5.1.js", function () {
 //Any table with a class of responsive-main-table will have this run against it to create the responsive data table
 const CreateDataTable = () => {
   //Windows variables that change the appearance of the datatable. If this doesn't exist then we default the values.
-  const tableOptions = window.responsivetable
-    ? ({
-        isSearchable = false,
-        searchText = "",
-        placeHolderText = "",
-      } = window.responsivetable)
-    : {
-        isSearchable: false,
-        searchText: "",
-        placeHolderText: "",
-      };
+
+  const isSearchable = window.responsivetable
+    ? window.responsivetable.isSearchable
+    : false;
+  const searchText = window.responsivetable
+    ? window.responsivetable.searchText
+    : "";
+  const placeHolderText = window.responsivetable
+    ? window.responsivetable.placeHolderText
+    : "";
 
   $.fn.dataTable.moment("MMMM D, YYYY"); //format of the date we want to recognize for sorting https://datatables.net/blog/2014-12-18
 
@@ -40,10 +39,10 @@ const CreateDataTable = () => {
       paging: false,
       bFilter: false,
       processing: true,
-      searching: tableOptions.isSearchable,
+      searching: isSearchable,
       language: {
-        searchPlaceholder: tableOptions.placeHolderText,
-        search: tableOptions.searchText,
+        searchPlaceholder: placeHolderText,
+        search: searchText,
       },
       ordering: true,
       responsive: true,
