@@ -14,6 +14,7 @@ module.exports = {
     ScrollToTop: "./src/components/ScrollToTop.js",
     PhoneDirectory: "./src/site/PhoneDirectory.js",
     ResponsiveTable: "./src/components/ResponsiveTable.js",
+    ResponsiveTablePlugins: "./src/plugin/ResponsiveTable-Plugins.js",
   },
   output: {
     path: path.join(__dirname, "dist"),
