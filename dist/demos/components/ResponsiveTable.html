@@ -14,6 +14,14 @@
       type="text/css"
       href="https://dev.baltimorecountymd.gov/sebin/j/f/dotgov.min.css"
     />
+    <script>
+      window.responsivetable = {
+        isSearchable: true,
+        searchText:
+          "<b>Filter:</b> Enter a community or street name to filter this list.",
+        placeHolderText: "Community or street name",
+      };
+    </script>
   </head>
   <body>
     <table class="table responsive-main-table">
@@ -100,14 +108,7 @@
         </tr>
       </tbody>
     </table>
-    <script>
-      window.responsivetable = {
-        isSearchable: true,
-        searchText:
-          "<b>Filter:</b> Enter a community or street name to filter this list.",
-        placeHolderText: "Community or street name",
-      };
-    </script>
+
     <script>
       function dynamicallyLoadScriptDotgovResponsivetablePlugins() {
         var head = document.head;
