@@ -1,8 +1,27 @@
-document.addEventListener("readystatechange", function () {
-  if (document.readyState === "complete") {
-    CreateTable();
-  } else {
-  }
+import load from "little-loader";
+
+var scriptDatetimeMoment =
+  "https://cdn.datatables.net/plug-ins/1.10.22/sorting/datetime-moment.js";
+var scriptDatatables =
+  "https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js";
+var scriptMoment =
+  "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js";
+var scriptJqueryDataTables =
+  "https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js";
+
+load(scriptJqueryDataTables, function () {
+  load(scriptDatatables, function () {
+    load(scriptMoment, function () {
+      load(scriptDatetimeMoment, function () {
+        document.addEventListener("readystatechange", function () {
+          if (document.readyState === "complete") {
+            CreateTable();
+          } else {
+          }
+        });
+      });
+    });
+  });
 });
 
 //Any table with a class of responsive-main-table will have this run against it to create the responsive data table

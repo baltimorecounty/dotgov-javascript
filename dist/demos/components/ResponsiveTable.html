@@ -6,28 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Responsive Table Demo</title>
 
-     <script src="https://code.jquery.com/jquery-3.5.1.js"></script> 
-     <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
-     <script src="https://momentjs.com/downloads/moment.min.js"></script>
-      <!-- <sript src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></sript> -->
-      <script src="https://cdn.datatables.net/plug-ins/1.10.22/sorting/datetime-moment.js"></script>
-     
-     <script src="https://kit.fontawesome.com/2475edd293.js"></script> 
-     
-     <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+    <cript src="https://code.jquery.com/jquery-3.5.1.js"></cript>
+
+    <cript src="https://kit.fontawesome.com/2475edd293.js"></cript>
     <link
       rel="stylesheet"
       type="text/css"
       href="https://dev.baltimorecountymd.gov/sebin/j/f/dotgov.min.css"
     />
-    <script>
-      window.responsivetable = {
-        isSearchable: true,
-        searchText:
-          "<b>Filter:</b> Enter a community or street name to filter this list.",
-        placeHolderText: "Community or street name",
-      };
-    </script>
+    <cript>
+      window.responsivetable = { isSearchable: true, searchText: "<b>Filter:</b>
+      Enter a community or street name to filter this list.", placeHolderText:
+      "Community or street name", };
+    </cript>
   </head>
   <body>
     <table class="table responsive-main-table">
@@ -198,18 +189,7 @@
         </tr>
       </tbody>
     </table>
-    <script>
-      function dynamicallyLoadScriptDotgovResponsivetablePlugins() {
-        var head = document.head;
-        var script = document.createElement("script"); // create a script DOM node
-        script.src =
-          "https:dev.baltimorecountymd.gov/sebin/j/v/dotgov-responsivetable-plugins.min.js"; // set its src to the provided URL
 
-        head.appendChild(script);
-      }
-
-      //dynamicallyLoadScriptDotgovResponsivetablePlugins();
-    </script>
     <script>
       function dynamicallyLoadScriptDotgovResponsivetable() {
         var head = document.head;
