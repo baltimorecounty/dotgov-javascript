@@ -1,5 +1,4 @@
 document.addEventListener("readystatechange", function () {
-  console.log("inside addeventListener-readystatechange");
   if (document.readyState === "complete") {
     CreateTable();
   } else {
