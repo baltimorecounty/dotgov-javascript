@@ -18,7 +18,7 @@ load("https://code.jquery.com/jquery-3.5.1.js", function () {
 });
 
 //Any table with a class of responsive-main-table will have this run against it to create the responsive data table
-window.onload = new (function CreateDataTable() {
+const CreateDataTable = () => {
   //Windows variables that change the appearance of the datatable. If this doesn't exist then we default the values.
 
   const isSearchable = window.responsivetable
@@ -56,4 +56,4 @@ window.onload = new (function CreateDataTable() {
       ],
     });
   }
-})();
+};
