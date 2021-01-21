@@ -1,19 +1,15 @@
-import load from "little-loader";
-
-document.addEventListener("readystatechange", function() {
+document.addEventListener("readystatechange", function () {
   console.log("inside addeventListener-readystatechange");
   if (document.readyState === "complete") {
-    x();
+    CreateTable();
   } else {
-    console.log("------not ready-----");
   }
 });
 
 //Any table with a class of responsive-main-table will have this run against it to create the responsive data table
 //window.onload = new (function CreateDataTable() {
-function x() {
+function CreateTable() {
   //Windows variables that change the appearance of the datatable. If this doesn't exist then we default the values.
-  console.log("In--window.onload()--------");
   const isSearchable = window.responsivetable
     ? window.responsivetable.isSearchable
     : false;
@@ -24,7 +20,7 @@ function x() {
     ? window.responsivetable.placeHolderText
     : "";
 
-    $.fn.dataTable.moment("MMMM D, YYYY"); //format of the date we want to recognize for sorting https://datatables.net/blog/2014-12-18
+  $.fn.dataTable.moment("MMMM D, YYYY"); //format of the date we want to recognize for sorting https://datatables.net/blog/2014-12-18
 
   if (!$.fn.DataTable.isDataTable(".responsive-main-table")) {
     $(".responsive-main-table").DataTable({
@@ -35,7 +31,7 @@ function x() {
       searching: isSearchable,
       language: {
         searchPlaceholder: placeHolderText,
-        search: searchText
+        search: searchText,
       },
       ordering: true,
       responsive: true,
@@ -45,9 +41,8 @@ function x() {
       //If no class is set then it defaults to 0 so first column
       columnDefs: [
         { targets: "no-sort", orderable: false }, //this class added to a <th> prevents sorting
-        { targets: "hide-onload", visible: false } //this class added to a <th> hides that column of data
-      ]
+        { targets: "hide-onload", visible: false }, //this class added to a <th> hides that column of data
+      ],
     });
   }
 }
-//})();
