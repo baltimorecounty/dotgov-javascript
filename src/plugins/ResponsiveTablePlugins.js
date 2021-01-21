@@ -19951,64 +19951,108 @@ $jscomp.polyfill(
   };
 });
 
-// import load from "little-loader";
+// ************************************************
+//THIS IS WHERE THE Responsive.MIN content goes
+//**************************************************
 
-// load("https://code.jquery.com/jquery-3.5.1.js", function () {
-//   load(
-//     "https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js",
-//     function () {
-//       load(
-//         "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js",
-//         function () {
-//           load(
-//             "https://cdn.datatables.net/plug-ins/1.10.22/sorting/datetime-moment.js",
-//             window.addEventListener("load", CreateDataTable)
-//           );
-//         }
-//       );
-//     }
-//   );
-// });
+var BcResponsiveTable =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/components/ResponsiveTable.js");
+/******/ })
+/************************************************************************/
+/******/ ({
 
-//Any table with a class of responsive-main-table will have this run against it to create the responsive data table
-const CreateDataTable = () => {
-  //Windows variables that change the appearance of the datatable. If this doesn't exist then we default the values.
+/***/ "./src/components/ResponsiveTable.js":
+/*!*******************************************!*\
+  !*** ./src/components/ResponsiveTable.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-  const isSearchable = window.responsivetable
-    ? window.responsivetable.isSearchable
-    : false;
-  const searchText = window.responsivetable
-    ? window.responsivetable.searchText
-    : "";
-  const placeHolderText = window.responsivetable
-    ? window.responsivetable.placeHolderText
-    : "";
+eval("// import load from \"little-loader\";\n// load(\"https://code.jquery.com/jquery-3.5.1.js\", function () {\n//   load(\n//     \"https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js\",\n//     function () {\n//       load(\n//         \"https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js\",\n//         function () {\n//           load(\n//             \"https://cdn.datatables.net/plug-ins/1.10.22/sorting/datetime-moment.js\",\n//             window.addEventListener(\"load\", CreateDataTable)\n//           );\n//         }\n//       );\n//     }\n//   );\n// });\n//Any table with a class of responsive-main-table will have this run against it to create the responsive data table\nwindow.onload = new function CreateDataTable() {\n  //Windows variables that change the appearance of the datatable. If this doesn't exist then we default the values.\n  var isSearchable = window.responsivetable ? window.responsivetable.isSearchable : false;\n  var searchText = window.responsivetable ? window.responsivetable.searchText : \"\";\n  var placeHolderText = window.responsivetable ? window.responsivetable.placeHolderText : \"\";\n  $.fn.dataTable.moment(\"MMMM D, YYYY\"); //format of the date we want to recognize for sorting https://datatables.net/blog/2014-12-18\n\n  if (!$.fn.DataTable.isDataTable(\".responsive-main-table\")) {\n    $(\".responsive-main-table\").DataTable({\n      info: false,\n      paging: false,\n      bFilter: false,\n      processing: true,\n      searching: isSearchable,\n      language: {\n        searchPlaceholder: placeHolderText,\n        search: searchText\n      },\n      ordering: true,\n      responsive: true,\n      autoWidth: false,\n      order: [[$(\".order-by\").index(), \"asc\"]],\n      //this class is added to a <th> for the column we want to pre order.\n      //This needs an index integer so we are finding the index of the matching column.\n      //If no class is set then it defaults to 0 so first column\n      columnDefs: [{\n        targets: \"no-sort\",\n        orderable: false\n      }, //this class added to a <th> prevents sorting\n      {\n        targets: \"hide-onload\",\n        visible: false\n      } //this class added to a <th> hides that column of data\n      ]\n    });\n  }\n}(); //window.addEventListener(\"load\", CreateDataTable);\n\n//# sourceURL=webpack://Bc%5Bname%5D/./src/components/ResponsiveTable.js?");
 
-  $.fn.dataTable.moment("MMMM D, YYYY"); //format of the date we want to recognize for sorting https://datatables.net/blog/2014-12-18
+/***/ })
 
-  if (!$.fn.DataTable.isDataTable(".responsive-main-table")) {
-    $(".responsive-main-table").DataTable({
-      info: false,
-      paging: false,
-      bFilter: false,
-      processing: true,
-      searching: isSearchable,
-      language: {
-        searchPlaceholder: placeHolderText,
-        search: searchText,
-      },
-      ordering: true,
-      responsive: true,
-      autoWidth: false,
-      order: [[$(".order-by").index(), "asc"]], //this class is added to a <th> for the column we want to pre order.
-      //This needs an index integer so we are finding the index of the matching column.
-      //If no class is set then it defaults to 0 so first column
-      columnDefs: [
-        { targets: "no-sort", orderable: false }, //this class added to a <th> prevents sorting
-        { targets: "hide-onload", visible: false }, //this class added to a <th> hides that column of data
-      ],
-    });
-  }
-};
-
-window.addEventListener("load", CreateDataTable);
+/******/ });
