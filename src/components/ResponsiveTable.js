@@ -1,17 +1,35 @@
+import load from "little-loader";
+
+load("https://code.jquery.com/jquery-3.5.1.js", function () {
+  load(
+    "https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js",
+    function () {
+      load(
+        "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js",
+        function () {
+          load(
+            "https://cdn.datatables.net/plug-ins/1.10.22/sorting/datetime-moment.js",
+            window.addEventListener("load", CreateDataTable)
+          );
+        }
+      );
+    }
+  );
+});
+
 //Any table with a class of responsive-main-table will have this run against it to create the responsive data table
 const CreateDataTable = () => {
   //Windows variables that change the appearance of the datatable. If this doesn't exist then we default the values.
-  const tableOptions = window.responsivetable
-    ? ({
-        isSearchable = false,
-        searchText = "",
-        placeHolderText = "",
-      } = window.responsivetable)
-    : {
-        isSearchable: false,
-        searchText: "",
-        placeHolderText: "",
-      };
+
+  const isSearchable = window.responsivetable
+    ? window.responsivetable.isSearchable
+    : false;
+  const searchText = window.responsivetable
+    ? window.responsivetable.searchText
+    : "";
+  const placeHolderText = window.responsivetable
+    ? window.responsivetable.placeHolderText
+    : "";
 
   $.fn.dataTable.moment("MMMM D, YYYY"); //format of the date we want to recognize for sorting https://datatables.net/blog/2014-12-18
 
@@ -21,10 +39,10 @@ const CreateDataTable = () => {
       paging: false,
       bFilter: false,
       processing: true,
-      searching: tableOptions.isSearchable,
+      searching: isSearchable,
       language: {
-        searchPlaceholder: tableOptions.placeHolderText,
-        search: tableOptions.searchText,
+        searchPlaceholder: placeHolderText,
+        search: searchText,
       },
       ordering: true,
       responsive: true,
@@ -39,5 +57,3 @@ const CreateDataTable = () => {
     });
   }
 };
-
-window.addEventListener("load", CreateDataTable);
