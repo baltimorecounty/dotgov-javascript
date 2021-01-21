@@ -24,7 +24,7 @@ function x() {
     ? window.responsivetable.placeHolderText
     : "";
 
-  $.fn.dataTable.moment("MMMM D, YYYY"); //format of the date we want to recognize for sorting https://datatables.net/blog/2014-12-18
+    $.fn.dataTable.moment("MMMM D, YYYY"); //format of the date we want to recognize for sorting https://datatables.net/blog/2014-12-18
 
   if (!$.fn.DataTable.isDataTable(".responsive-main-table")) {
     $(".responsive-main-table").DataTable({
