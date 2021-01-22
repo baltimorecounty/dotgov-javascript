@@ -4,8 +4,7 @@ var scriptDatetimeMoment =
   "https://cdn.datatables.net/plug-ins/1.10.22/sorting/datetime-moment.js";
 var scriptDatatables =
   "https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js";
-var scriptMoment =
-  "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js";
+var scriptMoment = "https://momentjs.com/downloads/moment.min.js";
 var scriptJqueryDataTables =
   "https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js";
 
