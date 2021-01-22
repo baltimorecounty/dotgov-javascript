@@ -1,26 +1,32 @@
 import load from "little-loader";
 
-load("https://code.jquery.com/jquery-3.5.1.js", function () {
-  load(
-    "https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js",
-    function () {
-      load(
-        "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js",
-        function () {
-          load(
-            "https://cdn.datatables.net/plug-ins/1.10.22/sorting/datetime-moment.js",
-            window.addEventListener("load", CreateDataTable)
-          );
-        }
-      );
-    }
-  );
+var scriptDatetimeMoment =
+  "https://cdn.datatables.net/plug-ins/1.10.22/sorting/datetime-moment.js";
+var scriptDatatables =
+  "https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js";
+var scriptMoment = "https://momentjs.com/downloads/moment.min.js";
+var scriptJqueryDataTables =
+  "https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js";
+
+load(scriptJqueryDataTables, function () {
+  load(scriptDatatables, function () {
+    load(scriptMoment, function () {
+      load(scriptDatetimeMoment, function () {
+        document.addEventListener("readystatechange", function () {
+          if (document.readyState === "complete") {
+            CreateTable();
+          } else {
+          }
+        });
+      });
+    });
+  });
 });
 
 //Any table with a class of responsive-main-table will have this run against it to create the responsive data table
-const CreateDataTable = () => {
+//window.onload = new (function CreateDataTable() {
+function CreateTable() {
   //Windows variables that change the appearance of the datatable. If this doesn't exist then we default the values.
-
   const isSearchable = window.responsivetable
     ? window.responsivetable.isSearchable
     : false;
@@ -56,4 +62,4 @@ const CreateDataTable = () => {
       ],
     });
   }
-};
+}
