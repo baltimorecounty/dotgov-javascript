@@ -27,8 +27,12 @@ function setNextPrevious(offset) {
 }
 
 function validateForm() {
-  var firstName = jQuery("#txtFirst").val().trim();
-  var lastName = jQuery("#txtLast").val().trim();
+  var firstName = jQuery("#txtFirst")
+    .val()
+    .trim();
+  var lastName = jQuery("#txtLast")
+    .val()
+    .trim();
   var department = jQuery("#ddlAgency").val();
 
   var alert = jQuery("#dg_Alert-Holder");
@@ -46,35 +50,49 @@ function validateForm() {
   return true;
 }
 
-jQuery(document).ready(function () {
+jQuery(document).ready(function() {
   jQuery.support.cors = true; // force cross-site scripting (as of jQuery 1.5)
 
-  jQuery("#btnSubmit").click(function (submitEvent) {
+  jQuery("#btnSubmit").click(function(submitEvent) {
+    console.log("inside submit click ");
     submitEvent.preventDefault();
 
     //Hide next previous button incase they were visible from a previous search
     jQuery("#Next,#Previous").hide();
     if (validateForm()) {
+      console.log("validation complete");
       jQuery("#output").text("");
       dataString =
-        jQuery(this).closest("form").serialize() +
+        jQuery(this)
+          .closest("form")
+          .serialize() +
         "&formId=" +
-        jQuery(this).closest("form").attr("id");
-
-      jQuery.ajax({
-        url:
-          "https://testservices.baltimorecountymd.gov/api/hub/phoneDirectory/ProcessPhoneDirSearchForm",
-        //url:
-        //"https://services.baltimorecountymd.gov/api/hub/phoneDirectory/ProcessPhoneDirSearchForm", When copying out to prod this must be uncommented and the test services entry removed
-        data: dataString,
-        type: "GET",
-        dataType: "jsonp",
-        jsonpCallback: "formatJsonpResult",
-      });
+        jQuery(this)
+          .closest("form")
+          .attr("id");
+          $('#BACO_table1').DataTable( {
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "url": "https://testservices.baltimorecountymd.gov/api/hub/phoneDirectory/ProcessPhoneDirSearchForm",
+                "dataType": "jsonp"
+            }
+        } );
+      // jQuery.ajax({
+      //   url:
+      //     "https://testservices.baltimorecountymd.gov/api/hub/phoneDirectory/ProcessPhoneDirSearchForm",
+      //   //url:
+      //   //"https://services.baltimorecountymd.gov/api/hub/phoneDirectory/ProcessPhoneDirSearchForm", When copying out to prod this must be uncommented and the test services entry removed
+      //   data: dataString,
+      //   type: "GET",
+      //   dataType: "jsonp",
+      //   jsonpCallback: "formatJsonpResult"
+      // });
+      console.log("After -- jqueryajax ---call()");
     } //end of if ValidForm
   });
 
-  jQuery("#btnClear").click(function (clearEvent) {
+  jQuery("#btnClear").click(function(clearEvent) {
     clearEvent.preventDefault();
     jQuery("#dg_Alert-Holder").hide();
     jQuery("#Next,#Previous").hide();
@@ -84,7 +102,8 @@ jQuery(document).ready(function () {
   });
 });
 
-function formatJsonpResult(jsonpResult) {
+window.formatJsonpResult= function(jsonpResult) {
+  console.log("inside --formatJsonpResult");
   if (jsonpResult.ResponseError.length > 0 && jsonpResult.ResponseStatus == 0) {
     jsonpResult.ResponseError = jsonpResult.ResponseError.replace(
       "Agency",
