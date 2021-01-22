@@ -70,14 +70,17 @@ jQuery(document).ready(function() {
         jQuery(this)
           .closest("form")
           .attr("id");
-          $('#BACO_table1').DataTable( {
-            "processing": true,
-            "serverSide": true,
-            "ajax": {
-                "url": "https://testservices.baltimorecountymd.gov/api/hub/phoneDirectory/ProcessPhoneDirSearchForm",
-                "dataType": "jsonp"
-            }
-        } );
+      if (!$.fn.DataTable.isDataTable("#BACO_table1")) {
+        jQuery("#BACO_table1").DataTable({
+          processing: true,
+          serverSide: true,
+          ajax: {
+            url:
+              "https://testservices.baltimorecountymd.gov/api/hub/phoneDirectory/ProcessPhoneDirSearchForm",
+            dataType: "jsonp"
+          }
+        });
+      }
       // jQuery.ajax({
       //   url:
       //     "https://testservices.baltimorecountymd.gov/api/hub/phoneDirectory/ProcessPhoneDirSearchForm",
@@ -102,7 +105,7 @@ jQuery(document).ready(function() {
   });
 });
 
-window.formatJsonpResult= function(jsonpResult) {
+window.formatJsonpResult = function(jsonpResult) {
   console.log("inside --formatJsonpResult");
   if (jsonpResult.ResponseError.length > 0 && jsonpResult.ResponseStatus == 0) {
     jsonpResult.ResponseError = jsonpResult.ResponseError.replace(
@@ -137,4 +140,4 @@ window.formatJsonpResult= function(jsonpResult) {
     );
   }
   jQuery("#BACO_table,#prevNext").show();
-}
+};
