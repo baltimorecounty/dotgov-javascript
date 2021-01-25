@@ -19,16 +19,16 @@
   <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/latest/css/pro.min.css" media="all">
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script> 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://momentjs.com/downloads/moment.min.js"></script> 
+  <sript async src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></sript> 
+  <!-- <script src="https://momentjs.com/downloads/moment.min.js"></script>  -->
   <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
    
-   <!-- <sript async src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></sript>  -->
     <script src="https://cdn.datatables.net/plug-ins/1.10.22/sorting/datetime-moment.js"></script>
   
   <script src="https://kit.fontawesome.com/2475edd293.js"></script> 
   
   <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
-  <script src="https:dev.baltimorecountymd.gov/sebin/j/v/dotgov-responsivetable-plugins.min.js"></script>
+  <!-- <script src="https:dev.baltimorecountymd.gov/sebin/j/v/dotgov-responsivetable-plugins.min.js"></script> -->
   <link
     rel="stylesheet"
     type="text/css"
@@ -113,18 +113,18 @@
           </div>
         </fieldset>
       </form>
-      <div class="results table-responsive mb--large">
+      <!-- <div class="results table-responsive mb--large"> -->
         <div id="output">
-          <div id="Page1" class="table-responsive" style="display: none;">
-            <table id="BACO_table1" class="table">
+          <div id="Page1" class="table-responsive" style="display: none;"> 
+            <table id="BACO_table1" class="table responsive-main-table dataTable">
               <thead>
                 <tr class="BACOTableHeader">
                   <th>
                     Name
                   </th>
-                  <th style="display: none;">
+                  <!-- <th style="display: none;">
                     Mail Stop
-                  </th>
+                  </th> -->
                   <th>
                     Telephone
                   </th>
@@ -132,7 +132,7 @@
                     Agency
                   </th>
                 </tr>
-                <tr>
+                <!-- <tr>
                   <td>&nbsp;</td>
                   <td style="display: none;">&nbsp;</td>
                   <td>&nbsp;</td>
@@ -149,12 +149,12 @@
                   <td style="display: none;">&nbsp;</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
-                </tr>
+                </tr> -->
               </thead>
             </table>
-          </div>
+           </div>
         </div>
-      </div>
+      <!-- </div> -->
       <div id="prevNext" class="d-flex align-items-center justify-content-between" style="display: none;">
         <a id="Previous" href="javascript:__onPrevPage();" style="display: none;">Previous Page</a>
         <a id="Next" href="javascript:__onNextPage();" style="display: none;">Next Page</a>s

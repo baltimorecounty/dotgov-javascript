@@ -61,7 +61,7 @@ jQuery(document).ready(function() {
     jQuery("#Next,#Previous").hide();
     if (validateForm()) {
       console.log("validation complete");
-      jQuery("#output").text("");
+      //  jQuery("#output").text("");
       dataString =
         jQuery(this)
           .closest("form")
@@ -70,17 +70,50 @@ jQuery(document).ready(function() {
         jQuery(this)
           .closest("form")
           .attr("id");
-      if (!$.fn.DataTable.isDataTable("#BACO_table1")) {
-        jQuery("#BACO_table1").DataTable({
-          processing: true,
-          serverSide: true,
-          ajax: {
-            url:
-              "https://testservices.baltimorecountymd.gov/api/hub/phoneDirectory/ProcessPhoneDirSearchForm",
-            dataType: "jsonp"
-          }
-        });
-      }
+
+      jQuery.ajax({
+        url:
+          "https://testservices.baltimorecountymd.gov/api/hub/phoneDirectory/ProcessPhoneDirSearchForm",
+        data: dataString,
+        type: "GET",
+        dataType: "jsonp",
+        jsonpCallback: "formatJsonpResult",
+        success: function(result, status, xhr) {
+          result =  [{ "Name":"Smith, Scott","Telephone":"410-887-4399","Department":"Information Technology" },
+          {"Name":"Smith, Kristy","Telephone":"410-887-2410","Department":"Budget and Finance"} ,
+          {"Name":"Smith, Bob","Telephone":"410-887-3804","Department":"Recreation and Parks"} ,
+          {"Name":"Smith, Tonya","Telephone":"410-887-3603","Department":"Health"}] ;
+        
+        },
+        error: function(xhr, status, error) {
+          console.log(
+            "Result: " +
+              status +
+              " " +
+              error +
+              " " +
+              xhr.status +
+              " " +
+              xhr.statusText
+          );
+        }
+      });
+
+      //==============================================
+      // if (!jQuery.fn.DataTable.isDataTable("#BACO_table1")) {
+      //   console.log('---true----');
+      //   jQuery("#BACO_table1").DataTable({
+      //     processing: true,
+      //     serverSide: true,
+      //     ajax: {
+      //       url:
+      //         "https://testservices.baltimorecountymd.gov/api/hub/phoneDirectory/ProcessPhoneDirSearchForm",
+      //       dataType: "jsonp",
+      //       jsonpCallback: "formatJsonpResult"
+      //     }
+      //   });
+      // }
+      //============================================================
       // jQuery.ajax({
       //   url:
       //     "https://testservices.baltimorecountymd.gov/api/hub/phoneDirectory/ProcessPhoneDirSearchForm",
@@ -106,38 +139,54 @@ jQuery(document).ready(function() {
 });
 
 window.formatJsonpResult = function(jsonpResult) {
-  console.log("inside --formatJsonpResult");
-  if (jsonpResult.ResponseError.length > 0 && jsonpResult.ResponseStatus == 0) {
-    jsonpResult.ResponseError = jsonpResult.ResponseError.replace(
-      "Agency",
-      "Department"
-    );
-    jQuery("#output").append(jsonpResult.ResponseError);
+  jsonpResult =[{ "Name":"Smith, Scott","Telephone":"410-887-4399","Department":"Information Technology" },
+                {"Name":"Smith, Kristy","Telephone":"410-887-2410","Department":"Budget and Finance"} ,
+                {"Name":"Smith, Bob","Telephone":"410-887-3804","Department":"Recreation and Parks"} ,
+                {"Name":"Smith, Tonya","Telephone":"410-887-3603","Department":"Health"}] ;
+//};
+  // if (jsonpResult.ResponseError.length > 0 && jsonpResult.ResponseStatus == 0) {
+  //   console.log("jsonpResult.ResponseError.length > 0");
+  //   console.log("result.length:" + JSON.stringify(jsonpResult));
+  //   jsonpResult.ResponseError = jsonpResult.ResponseError.replace(
+  //     "Agency",
+  //     "Department"
+  //   );
+  //  jQuery("#output").append(jsonpResult.ResponseError);
 
     //this element is actually being returned as part of the JSON Result
-    if (document.getElementById("page_count")) {
-      pageCount = document.getElementById("page_count").value;
-    }
+    // if (document.getElementById("page_count")) {
+    //   pageCount = document.getElementById("page_count").value;
+    // }
 
-    if (pageCount > 1) {
-      jQuery("#Next").show();
-    }
-  } else if (
-    jsonpResult.ResponseError.length == 0 &&
-    jsonpResult.ResponseStatus == 0
-  ) {
-    jQuery("#output").append(
-      "<div><div class='list-header'><p>No records found matching your search criteria</p></div><div class='list'></div></div>"
-    );
-  } else if (
-    jsonpResult.ResponseError.length > 0 &&
-    jsonpResult.ResponseStatus < 0
-  ) {
-    jQuery("#output").append(
-      "<font color='red'><center>Error: " +
-        jsonpResult.ResponseError +
-        "</center></font>"
-    );
-  }
+  //   if (pageCount > 1) {
+  //     jQuery("#Next").show();
+  //   }
+  // } else if (
+  //   jsonpResult.ResponseError.length == 0 &&
+  //   jsonpResult.ResponseStatus == 0
+  // ) {
+  //   jQuery("#output").append(
+  //     "<div><div class='list-header'><p>No records found matching your search criteria</p></div><div class='list'></div></div>"
+  //   );
+  // } else 
+ // if (jsonpResult.ResponseError.length > 0 && jsonpResult.ResponseStatus < 0)
+ //  {
+   // jQuery("#output").append("<font color='red'><center>Error: " + jsonpResult.ResponseError + "</center></font>");
+  // }
+
+   jQuery("#BACO_table1").DataTable({
+    searching: false,
+    paging: false,
+    data: jsonpResult,
+    columns: [
+      { data: "Name" },
+      { data: "Telephone" },
+      { data: "Department" }
+    ],
+    pageLength: 3
+  });
+//}
+ // jQuery("#output").append(jsonpResult.ResponseError);
   jQuery("#BACO_table,#prevNext").show();
+  //}
 };
