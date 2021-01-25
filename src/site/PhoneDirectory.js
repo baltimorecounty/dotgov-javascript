@@ -3,29 +3,6 @@
 var jQuery = $.noConflict(true);
 var pageCount = 0;
 
-function __onPrevPage() {
-  setNextPrevious(-1);
-}
-
-function __onNextPage() {
-  setNextPrevious(1);
-}
-
-function setNextPrevious(offset) {
-  var currentPageNum = 0;
-  for (var i = 1; i <= pageCount; i++) {
-    if (document.getElementById("Page" + i).style.display == "block") {
-      currentPageNum = i;
-    }
-  }
-  var newPageNum = currentPageNum + offset;
-  document.getElementById("Page" + currentPageNum).style.display = "none";
-  document.getElementById("Page" + newPageNum).style.display = "block";
-
-  jQuery("#Next").toggle(newPageNum < pageCount);
-  jQuery("#Previous").toggle(newPageNum > 1);
-}
-
 function validateForm() {
   var firstName = jQuery("#txtFirst")
     .val()
@@ -48,6 +25,20 @@ function validateForm() {
     alert.hide();
   }
   return true;
+}
+
+function createTable(result){
+  jQuery("#BACO_table1").DataTable({
+    searching: false,
+    paging: false,
+    data: result,
+    columns: [
+      { data: "Name" },
+      { data: "Telephone" },
+      { data: "Department" }
+    ]
+    // pageLength: 3
+  });
 }
 
 jQuery(document).ready(function() {
@@ -79,11 +70,42 @@ jQuery(document).ready(function() {
         dataType: "jsonp",
         jsonpCallback: "formatJsonpResult",
         success: function(result, status, xhr) {
-          result =  [{ "Name":"Smith, Scott","Telephone":"410-887-4399","Department":"Information Technology" },
-          {"Name":"Smith, Kristy","Telephone":"410-887-2410","Department":"Budget and Finance"} ,
-          {"Name":"Smith, Bob","Telephone":"410-887-3804","Department":"Recreation and Parks"} ,
-          {"Name":"Smith, Tonya","Telephone":"410-887-3603","Department":"Health"}] ;
-        
+          result = [
+            {
+              Name: "Smith, Scott",
+              Telephone: "410-887-4399",
+              Department: "Information Technology"
+            },
+            {
+              Name: "Smith, Kristy",
+              Telephone: "410-887-2410",
+              Department: "Budget and Finance"
+            },
+            {
+              Name: "Smith, Bob",
+              Telephone: "410-887-3804",
+              Department: "Recreation and Parks"
+            },
+            {
+              Name: "Smith, Tonya",
+              Telephone: "410-887-3603",
+              Department: "Health"
+            }
+          ];
+           if (!jQuery.fn.DataTable.isDataTable("#BACO_table1")) {
+            createTable(result);
+            document.getElementById("Page1").style.display = "";
+            jQuery("#BACO_table,#BACO_table1_info").show();
+            document.getElementById("BACO_table1").removeAttribute("style");
+           } else {
+
+            jQuery("#BACO_table1").DataTable().destroy();
+            createTable(result);
+          //   console.log("table--#BACO_table1-- already exists");
+          //   // jQuery("#BACO_table1").DataTable().clear().draw();
+          //   // jQuery("#BACO_table1").DataTable().rows.add(result);
+          //   // jQuery("#BACO_table1").DataTable().columns.adjust().draw();
+           }
         },
         error: function(xhr, status, error) {
           console.log(
@@ -98,33 +120,6 @@ jQuery(document).ready(function() {
           );
         }
       });
-
-      //==============================================
-      // if (!jQuery.fn.DataTable.isDataTable("#BACO_table1")) {
-      //   console.log('---true----');
-      //   jQuery("#BACO_table1").DataTable({
-      //     processing: true,
-      //     serverSide: true,
-      //     ajax: {
-      //       url:
-      //         "https://testservices.baltimorecountymd.gov/api/hub/phoneDirectory/ProcessPhoneDirSearchForm",
-      //       dataType: "jsonp",
-      //       jsonpCallback: "formatJsonpResult"
-      //     }
-      //   });
-      // }
-      //============================================================
-      // jQuery.ajax({
-      //   url:
-      //     "https://testservices.baltimorecountymd.gov/api/hub/phoneDirectory/ProcessPhoneDirSearchForm",
-      //   //url:
-      //   //"https://services.baltimorecountymd.gov/api/hub/phoneDirectory/ProcessPhoneDirSearchForm", When copying out to prod this must be uncommented and the test services entry removed
-      //   data: dataString,
-      //   type: "GET",
-      //   dataType: "jsonp",
-      //   jsonpCallback: "formatJsonpResult"
-      // });
-      console.log("After -- jqueryajax ---call()");
     } //end of if ValidForm
   });
 
@@ -132,18 +127,34 @@ jQuery(document).ready(function() {
     clearEvent.preventDefault();
     jQuery("#dg_Alert-Holder").hide();
     jQuery("#Next,#Previous").hide();
-    jQuery("#BACO_table,#prevNext,#output center").hide();
+    jQuery("#BACO_table1,#prevNext,#output center,#BACO_table1_info").hide();
     jQuery("#txtLast,#txtFirst").val("");
     jQuery("#ddlAgency").val("0");
+    jQuery("#BACO_table1").DataTable().destroy();
+  
   });
 });
 
 window.formatJsonpResult = function(jsonpResult) {
-  jsonpResult =[{ "Name":"Smith, Scott","Telephone":"410-887-4399","Department":"Information Technology" },
-                {"Name":"Smith, Kristy","Telephone":"410-887-2410","Department":"Budget and Finance"} ,
-                {"Name":"Smith, Bob","Telephone":"410-887-3804","Department":"Recreation and Parks"} ,
-                {"Name":"Smith, Tonya","Telephone":"410-887-3603","Department":"Health"}] ;
-//};
+  jsonpResult = [
+    {
+      Name: "Smith, Scott",
+      Telephone: "410-887-4399",
+      Department: "Information Technology"
+    },
+    {
+      Name: "Smith, Kristy",
+      Telephone: "410-887-2410",
+      Department: "Budget and Finance"
+    },
+    {
+      Name: "Smith, Bob",
+      Telephone: "410-887-3804",
+      Department: "Recreation and Parks"
+    },
+    { Name: "Smith, Tonya", Telephone: "410-887-3603", Department: "Health" }
+  ];
+  //};
   // if (jsonpResult.ResponseError.length > 0 && jsonpResult.ResponseStatus == 0) {
   //   console.log("jsonpResult.ResponseError.length > 0");
   //   console.log("result.length:" + JSON.stringify(jsonpResult));
@@ -153,10 +164,10 @@ window.formatJsonpResult = function(jsonpResult) {
   //   );
   //  jQuery("#output").append(jsonpResult.ResponseError);
 
-    //this element is actually being returned as part of the JSON Result
-    // if (document.getElementById("page_count")) {
-    //   pageCount = document.getElementById("page_count").value;
-    // }
+  //this element is actually being returned as part of the JSON Result
+  // if (document.getElementById("page_count")) {
+  //   pageCount = document.getElementById("page_count").value;
+  // }
 
   //   if (pageCount > 1) {
   //     jQuery("#Next").show();
@@ -168,25 +179,9 @@ window.formatJsonpResult = function(jsonpResult) {
   //   jQuery("#output").append(
   //     "<div><div class='list-header'><p>No records found matching your search criteria</p></div><div class='list'></div></div>"
   //   );
-  // } else 
- // if (jsonpResult.ResponseError.length > 0 && jsonpResult.ResponseStatus < 0)
- //  {
-   // jQuery("#output").append("<font color='red'><center>Error: " + jsonpResult.ResponseError + "</center></font>");
+  // } else
+  // if (jsonpResult.ResponseError.length > 0 && jsonpResult.ResponseStatus < 0)
+  //  {
+  // jQuery("#output").append("<font color='red'><center>Error: " + jsonpResult.ResponseError + "</center></font>");
   // }
-
-   jQuery("#BACO_table1").DataTable({
-    searching: false,
-    paging: false,
-    data: jsonpResult,
-    columns: [
-      { data: "Name" },
-      { data: "Telephone" },
-      { data: "Department" }
-    ],
-    pageLength: 3
-  });
-//}
- // jQuery("#output").append(jsonpResult.ResponseError);
-  jQuery("#BACO_table,#prevNext").show();
-  //}
 };
