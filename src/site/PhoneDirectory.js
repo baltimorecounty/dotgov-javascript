@@ -61,11 +61,21 @@ jQuery(document).ready(function () {
         "&formId=" +
         jQuery(this).closest("form").attr("id");
 
+      let url = "";
+
+      if (
+        window.location.hostname.indexOf("dev") ||
+        window.location.hostname.indexOf("staging ") > -1
+      ) {
+        url =
+          "https://testservices.baltimorecountymd.gov/api/hub/phoneDirectory/ProcessPhoneDirSearchForm";
+      } else {
+        url =
+          "https://services.baltimorecountymd.gov/api/hub/phoneDirectory/ProcessPhoneDirSearchForm";
+      }
+
       jQuery.ajax({
-        url:
-          "https://testservices.baltimorecountymd.gov/api/hub/phoneDirectory/ProcessPhoneDirSearchForm",
-        //url:
-        //"https://services.baltimorecountymd.gov/api/hub/phoneDirectory/ProcessPhoneDirSearchForm", When copying out to prod this must be uncommented and the test services entry removed
+        url: url,
         data: dataString,
         type: "GET",
         dataType: "jsonp",
