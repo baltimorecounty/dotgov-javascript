@@ -63,12 +63,15 @@ jQuery(document).ready(function () {
 
       let url = "";
 
-      if (window.location.hostname.indexOf("www") > -1) {
-        url =
-          "https://services.baltimorecountymd.gov/api/hub/phoneDirectory/ProcessPhoneDirSearchForm";
-      } else {
+      if (
+        window.location.hostname.indexOf("dev") ||
+        window.location.hostname.indexOf("staging ") > -1
+      ) {
         url =
           "https://testservices.baltimorecountymd.gov/api/hub/phoneDirectory/ProcessPhoneDirSearchForm";
+      } else {
+        url =
+          "https://services.baltimorecountymd.gov/api/hub/phoneDirectory/ProcessPhoneDirSearchForm";
       }
 
       jQuery.ajax({
