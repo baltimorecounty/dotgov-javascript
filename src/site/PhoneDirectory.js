@@ -68,10 +68,10 @@ jQuery(document).ready(function () {
         window.location.hostname.indexOf("staging ") > -1
       ) {
         url =
-          "https://testservices.baltimorecountymd.gov/api/hub/phoneDirectory/ProcessPhoneDirSearchForm";
+          "https://services.baltimorecountymd.gov/api/hub/phoneDirectory/ProcessPhoneDirSearchForm";
       } else {
         url =
-          "https://services.baltimorecountymd.gov/api/hub/phoneDirectory/ProcessPhoneDirSearchForm";
+          "https://testservices.baltimorecountymd.gov/api/hub/phoneDirectory/ProcessPhoneDirSearchForm";
       }
 
       jQuery.ajax({
