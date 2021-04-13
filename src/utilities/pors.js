@@ -1,3 +1,7 @@
+//*****************************************************************//
+//COP LOGIC SCRIPT - this is not compiled in this app. Free standing
+//*****************************************************************//
+
 var i = 0, //used for loop to find number of questions
   j = 0, //used to count, when a question is answered
   // xmlLoc = "tru.xml"; //path to xml file local
