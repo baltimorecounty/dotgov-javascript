@@ -1,3 +1,7 @@
+//********************************************************************************************************************************
+//This script changes the related links alt list items css if the current url matches the href of a list item.
+//********************************************************************************************************************************
+
 const findCurrentRelatedLink = () => {
   var list = document.getElementsByClassName("dg_alt-list");
   var url = window.location.href;
