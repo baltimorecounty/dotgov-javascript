@@ -7,6 +7,7 @@ import "../components/Accordion";
 import "../components/Modal";
 import "../components/StepList";
 import "../components/EventFilter";
+import "../components/AltList";
 import "./SiteNavigation";
 import "./SeForm";
 import "./SiteSearch";
