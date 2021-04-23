@@ -3,7 +3,7 @@
 //********************************************************************************************************************************
 
 const findCurrentRelatedLink = () => {
-  var list = document.getElementsByClassName("dg_alt-list");
+  var list = document.getElementsByClassName("dg_sidebar-alt-list");
   var url = window.location.href;
   var index = url.indexOf("?");
   //We use google translate which adds a google extension at the end of the url if in a different language. This makes sure that the correct
@@ -15,7 +15,7 @@ const findCurrentRelatedLink = () => {
     var listItem = item.getElementsByTagName("a");
     Array.prototype.forEach.call(listItem, (x) => {
       if (x.href === urlNoTranslate || x.href === url) {
-        x.parentNode.className = "dg_alt-list-current";
+        x.parentNode.className = "dg_sidebar-alt-list-current";
       }
     });
   });
