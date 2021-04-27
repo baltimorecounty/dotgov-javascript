@@ -5,11 +5,17 @@
 const findCurrentRelatedLink = () => {
   var list = document.getElementsByClassName("dg_sidebar-alt-list");
   var url = window.location.href;
+  url = url.replace(
+    "https://baltimorecountymd.gov/",
+    "https://www.baltimorecountymd.gov/"
+  );
   var index = url.indexOf("?");
+
   //We use google translate which adds a google extension at the end of the url if in a different language. This makes sure that the correct
   //alt list item is still highlighted if google is translating and also ensures the footer is updated as well.
   var urlTranslate = url.substring(index);
   var urlNoTranslate = url.replace(urlTranslate, "");
+  var urlNoHost = url.substring(host);
 
   Array.prototype.forEach.call(list, (item) => {
     var listItem = item.getElementsByTagName("a");
