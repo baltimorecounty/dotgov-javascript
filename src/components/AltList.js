@@ -5,7 +5,7 @@
 const findCurrentRelatedLink = () => {
   var list = document.getElementsByClassName("dg_sidebar-alt-list");
   var url = window.location.href;
-  url = url.replace(
+  var newUrl = url.replace(
     "https://baltimorecountymd.gov/",
     "https://www.baltimorecountymd.gov/"
   );
@@ -20,7 +20,7 @@ const findCurrentRelatedLink = () => {
   Array.prototype.forEach.call(list, (item) => {
     var listItem = item.getElementsByTagName("a");
     Array.prototype.forEach.call(listItem, (x) => {
-      if (x.href === urlNoTranslate || x.href === url) {
+      if (x.href === urlNoTranslate || x.href === url || x.href === newUrl) {
         x.parentNode.className = "dg_sidebar-alt-list-current";
       }
     });
