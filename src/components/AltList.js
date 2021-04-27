@@ -15,7 +15,6 @@ const findCurrentRelatedLink = () => {
   //alt list item is still highlighted if google is translating and also ensures the footer is updated as well.
   var urlTranslate = url.substring(index);
   var urlNoTranslate = url.replace(urlTranslate, "");
-  var urlNoHost = url.substring(host);
 
   Array.prototype.forEach.call(list, (item) => {
     var listItem = item.getElementsByTagName("a");
