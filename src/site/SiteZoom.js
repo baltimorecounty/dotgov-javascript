@@ -1,6 +1,5 @@
 //This script lives in the _inclusions > template > scripts > scripts-site-js file in SE.
 
-
 //https://stackoverflow.com/questions/1055336/changing-the-browser-zoom-level
 //Firefox is excluded from this list along with IE and all mobile devices
 
@@ -11,10 +10,14 @@ function windowZoom() {
   var ua = window.navigator.userAgent;
   var msie = ua.indexOf("MSIE ");
 
+  var orientation = window.matchMedia("(orientation:landscape)").matches;
+
+  console.log(orientation);
+
   let check = false;
 
   window.mobileCheck = function () {
-    (function (a) {
+    (function (a, b) {
       if (
         /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(
           a
@@ -23,8 +26,11 @@ function windowZoom() {
           a.substr(0, 4)
         )
       )
-        check = true;
-    })(navigator.userAgent || navigator.vendor || window.opera);
+        window.location = b;
+    })(
+      navigator.userAgent || navigator.vendor || window.opera,
+      "http://detectmobilebrowser.com/mobile"
+    );
     return check;
   };
 
@@ -33,7 +39,8 @@ function windowZoom() {
     } else {
       if (
         document.documentElement.clientWidth <= 1400 &&
-        document.documentElement.clientWidth >= 768
+        document.documentElement.clientWidth >= 768 &&
+        !orientation
       ) {
         document.body.style.zoom = newZoom;
       } else {
