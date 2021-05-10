@@ -257,4 +257,3 @@ var getTodaysDate = function () {
     $closingsTable.show();
   });
 })(jQuery);
-
