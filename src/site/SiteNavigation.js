@@ -216,7 +216,7 @@ const onDocumentReady = () => {
 
   /**
    * Initialize a focus trap for use when the site navigation is active / visible
-   * See https://github.com/focus-trap/focus-trap for more details.
+   * See http://davidtheclark.github.io/focus-trap/ for more details.
    */
 
   siteNavFocusTrap = FocusTrap(document.getElementById(ids.siteNav), {
