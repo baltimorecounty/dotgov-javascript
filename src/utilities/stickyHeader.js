@@ -1,3 +1,14 @@
+
+
+//This is to be removed after the A/B test is complete.
+
+// window.onload = function () {
+//   var BCPage = $("#bc_page");
+//   var header = $(".dg_header ");
+
+//   $(header[0]).insertBefore(BCPage);
+// };
+
 window.onscroll = function () {
   var elementHeader = document.getElementsByClassName("dg_header");
   var elementMenu = document.getElementsByClassName(
