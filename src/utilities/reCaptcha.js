@@ -1,3 +1,5 @@
+//****************************************************************** */
+//Add to Header File
 function addGoogleAttributes() {
   var buttons = document.getElementsByClassName("g-recaptcha");
   var head = document.head;
@@ -18,8 +20,19 @@ function addGoogleAttributes() {
   }
 }
 
-function onSubmit(token) {
-  document.getElementById("root").submit();
-}
-
 addGoogleAttributes();
+//*************************************************************** */
+
+
+//*************************************************************** */
+//Custom submit for the Rate this module. Each module will need a custom JS
+//to reference the form name (i.e. RateThisPageForm160406) and add any form validations they need since google hijacks
+//the form and blocks built in SE validations.
+function onSubmit(token) {
+  if (!$("input[name='_PageRating_radiobox1_']:checked").val()) {
+    alert("Please select a page rating.");
+  } else {
+    document.getElementById("RateThisPageForm160406").submit();
+  }
+}
+//******************************************************************* */
