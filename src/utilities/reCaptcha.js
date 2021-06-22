@@ -39,24 +39,13 @@ function onSubmit(token) {
 
 
 //********************************************************************* */
-//Honey Pot
+//Honey Pot - requires a hidden field with that ID to catch bots
 //********************************************************************* */
 
-(function($) {
-  $('form').submit(function(){    
-
-          if ($('#website').val().length != 0) {
-
-              return false;
-          } 
+(function ($) {
+  $("form").submit(function () {
+    if ($("#BCGSubField").val().length > 0) {
+      return false;
+    }
   });
-  })(jQuery);
-  (function($) {
-  $('form').submit(function(){ 
-console.log("Test " +  $('input#testSubField').val().length);
-  if ($('input#testSubField').val().length != 0) { 
-console.log("Test " +  $('input#testSubField').val().length);
-  return false; 
-  } 
-  });
-})
+})(jQuery);
