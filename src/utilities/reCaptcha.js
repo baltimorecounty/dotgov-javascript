@@ -36,3 +36,27 @@ function onSubmit(token) {
   }
 }
 //******************************************************************* */
+
+
+//********************************************************************* */
+//Honey Pot
+//********************************************************************* */
+
+(function($) {
+  $('form').submit(function(){    
+
+          if ($('#website').val().length != 0) {
+
+              return false;
+          } 
+  });
+  })(jQuery);
+  (function($) {
+  $('form').submit(function(){ 
+console.log("Test " +  $('input#testSubField').val().length);
+  if ($('input#testSubField').val().length != 0) { 
+console.log("Test " +  $('input#testSubField').val().length);
+  return false; 
+  } 
+  });
+})
