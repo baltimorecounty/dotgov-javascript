@@ -2,9 +2,13 @@
 //Add to Header File
 function addGoogleAttributes() {
   var buttons = document.getElementsByClassName("g-recaptcha");
+
   var head = document.head;
   var script = document.createElement("script");
   script.src = "https://www.google.com/recaptcha/api.js";
+
+  var legalHTML =
+    "<small>This site is protected by reCAPTCHA and the Google <a href='https://policies.google.com/privacy'>Privacy Policy</a> and <a href='https://policies.google.com/terms'>Terms of Service</a> apply </small>";
 
   for (var i = 0; i < buttons.length; i++) {
     buttons[i].setAttribute(
@@ -13,6 +17,14 @@ function addGoogleAttributes() {
     );
     buttons[i].setAttribute("data-callback", "onSubmit");
     buttons[i].setAttribute("data-action", "submit");
+
+    var element = document.createElement("div");
+    element.classList.add("grecaptcha-legaltext");
+    element.innerHTML = legalHTML;
+
+    console.log(element.outerHTML);
+
+    buttons[i].parentNode.appendChild(element);
   }
 
   if (buttons.length > 0) {
@@ -22,7 +34,6 @@ function addGoogleAttributes() {
 
 addGoogleAttributes();
 //*************************************************************** */
-
 
 //*************************************************************** */
 //Custom submit for the Rate this module. Each module will need a custom JS
@@ -36,7 +47,6 @@ function onSubmit(token) {
   }
 }
 //******************************************************************* */
-
 
 //********************************************************************* */
 //Honey Pot - requires a hidden field with that ID to catch bots
