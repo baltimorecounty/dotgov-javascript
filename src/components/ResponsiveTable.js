@@ -56,7 +56,12 @@ function CreateTable() {
       responsive: true,
       autoWidth: false,
       order: [
-        [$(".order-by").index() === -1 ? 0 : $(".order-by").index(), "desc"],
+        $(".order-by-asc").index() !== -1
+          ? [$(".order-by-asc").index(), "asc"]
+          : [
+              $(".order-by").index() === -1 ? 0 : $(".order-by").index(),
+              "desc",
+            ],
       ], //this class is added to a <th> for the column we want to pre order.
       //This needs an index integer so we are finding the index of the matching column.
       //If no class is set then it defaults to 0 so first column

@@ -2,25 +2,25 @@ import {
   AddClassToElms,
   GetFirstElementOrDefault,
   RemoveClassFromElms,
-  SetAttributeForElms
+  SetAttributeForElms,
 } from "../utilities/dom.utilities";
 
 import FocusTrap from "focus-trap";
 
 const attributes = {
   ariaExpanded: "aria-expanded",
-  tabIndex: "tabindex"
+  tabIndex: "tabindex",
 };
 
 const icons = {
   open: "fa-bars",
-  close: "fa-times"
+  close: "fa-times",
 };
 
 const ids = {
   siteNav: "bc_site-nav",
   siteNavToggleButton: "bc_site-nav__toggle-button",
-  page: "bc_page"
+  page: "bc_page",
 };
 
 const cssClasses = {
@@ -30,7 +30,7 @@ const cssClasses = {
   isDisabled: "is-disabled",
   siteNavToggleButtonText: "bc_site-nav__toggle-button__text",
   siteNavListContainer: "bc_site-nav__list-container",
-  isVisible: "is-visible"
+  isVisible: "is-visible",
 };
 
 const invisibleTabIndex = "-1"; /** Allows us to hide an item from tabbing */
@@ -40,7 +40,7 @@ let siteNavFocusTrap;
  * * Hide/Show the site navigation based on the given shouldShow param
  * @param {boolean} shouldShow if set to true the site navigation will be shown
  */
-const toggleSiteNav = shouldShow => {
+const toggleSiteNav = (shouldShow) => {
   var gscElement = document.getElementsByClassName("gsc-completion-container");
 
   if (gscElement) {
@@ -126,7 +126,7 @@ const toggleSiteNav = shouldShow => {
  * @param {document:click} clickEvent - the observable click event
  * @listens document:click
  */
-const handleDocumentClick = clickEvent => {
+const handleDocumentClick = (clickEvent) => {
   const { target } = clickEvent;
   const isSiteNavButtonClick =
     target.id === ids.siteNavToggleButton ||
@@ -151,7 +151,7 @@ const handleDocumentClick = clickEvent => {
  * @param {document:keydown} keyDownEvent - the observable keydown event
  * @listens document:keydown
  */
-const handleDocumentKeyDown = event => {
+const handleDocumentKeyDown = (event) => {
   const { key, keyCode } = event;
 
   /** Ensure ESC key collapses the menu in all browsers */
@@ -170,7 +170,7 @@ const handleDocumentKeyDown = event => {
  * @param {button:click} clickEvent - the observable click event
  * @listens button:click
  */
-const handleSiteNavigationButtonClick = clickEvent => {
+const handleSiteNavigationButtonClick = (clickEvent) => {
   const { target } = clickEvent;
   const siteNavToggleButton =
     target.id === ids.siteNavToggleButton
@@ -220,7 +220,7 @@ const onDocumentReady = () => {
    */
 
   siteNavFocusTrap = FocusTrap(document.getElementById(ids.siteNav), {
-    clickOutsideDeactivates: true
+    clickOutsideDeactivates: true,
   });
 };
 
@@ -228,11 +228,11 @@ const onDocumentReady = () => {
  * Remove site nav items from the tab index if the site nav is hidden
  * @param {boolean} shouldShow flag that denotes if the site nav should be shown
  */
-const updateSiteNavTabIndex = shouldShow => {
+const updateSiteNavTabIndex = (shouldShow) => {
   const siteNavLinkElms = document
     .getElementById(ids.siteNav)
     .querySelectorAll("a");
-  siteNavLinkElms.forEach(siteNavLinkElm => {
+  siteNavLinkElms.forEach((siteNavLinkElm) => {
     if (shouldShow) {
       siteNavLinkElm.removeAttribute(attributes.tabIndex);
     } else {
