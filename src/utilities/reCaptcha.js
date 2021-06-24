@@ -22,8 +22,6 @@ function addGoogleAttributes() {
     element.classList.add("grecaptcha-legaltext");
     element.innerHTML = legalHTML;
 
-    console.log(element.outerHTML);
-
     buttons[i].parentNode.appendChild(element);
   }
 
