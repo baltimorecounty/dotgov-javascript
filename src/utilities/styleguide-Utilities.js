@@ -2,7 +2,6 @@
 //Style Guide Filter search box
 function filterStyleGuide(input) {
   var parentDiv = document.getElementsByClassName("styleguide-left-navigation");
-  var accordion = parentDiv[0].getElementsByClassName("dg_accordion");
   var lists = parentDiv[0].getElementsByTagName("ul");
 
   let itemCount = 0;
