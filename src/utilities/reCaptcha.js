@@ -8,7 +8,7 @@ function addGoogleAttributes() {
   script.src = "https://www.google.com/recaptcha/api.js";
 
   var legalHTML =
-    "<small>This site is protected by reCAPTCHA and the Google <a href='https://policies.google.com/privacy'>Privacy Policy</a> and <a href='https://policies.google.com/terms'>Terms of Service</a> apply </small>";
+    "<small>This site is protected by reCAPTCHA and the Google <a href='https://policies.google.com/privacy'>Privacy Policy</a> and <a href='https://policies.google.com/terms'>Terms of Service</a> apply. </small>";
 
   for (var i = 0; i < buttons.length; i++) {
     buttons[i].setAttribute(
