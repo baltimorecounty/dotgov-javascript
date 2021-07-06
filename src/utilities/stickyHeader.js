@@ -12,24 +12,15 @@ var msie = ua.indexOf("MSIE ");
 var isIE = msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./);
 
 var elementHeader = document.getElementsByClassName("dg_header");
-var elementMenu = document.getElementsByClassName("bc_site-nav__toggle-button");
 var header = elementHeader[0];
-var menu = elementMenu[0];
-var sticky = header.offsetTop;
 
-var headerCSS = "dg_site-header-sticky";
-var menuCSS = "bc_site-nav__toggle-button-sticky";
+var sticky = header.offsetTop;
+var headerCSS = "dg_site-header-sticky-IE";
 
 window.onscroll = function () {
-  if (window.pageYOffset > sticky) {
-    isIE
-      ? header.classList.add(headerCSS + "-IE")
-      : header.classList.add(headerCSS);
-    menu.classList.add(menuCSS);
+  if (window.pageYOffset > sticky && isIE) {
+    header.classList.add(headerCSS);
   } else {
-    isIE
-      ? header.classList.remove(headerCSS + "-IE")
-      : header.classList.remove(headerCSS);
-    menu.classList.remove(menuCSS);
+    header.classList.remove(headerCSS);
   }
 };
