@@ -1,6 +1,7 @@
 function AddIconToPdf() {
   var anchors = [].slice.call(document.getElementsByTagName("a"));
   var footer = document.getElementsByTagName("footer");
+  var sideSection = document.getElementsByClassName("dg_sidebar__section");
 
   var footerAnchors = [];
   footerAnchors = [].slice.call(footer[0].getElementsByTagName("a"));
@@ -11,7 +12,21 @@ function AddIconToPdf() {
     items.forEach((x) => footerAnchors.push(x));
   }
 
-  let neededElements = anchors.filter((item) => !footerAnchors.includes(item));
+  var sideBarSectionAnchors = [];
+  var sideBarAnchors = [];
+
+  for (var i = 0; i < sideSection.length; i++) {
+    sideBarSectionAnchors = [].slice.call(
+      sideSection[i].getElementsByTagName("a")
+    );
+    for (var j = 0; j < sideBarSectionAnchors.length; j++) {
+      sideBarAnchors.push(sideBarSectionAnchors[j]);
+    }
+  }
+
+  let neededElements = anchors
+    .filter((item) => !footerAnchors.includes(item))
+    .filter((item) => !sideBarAnchors.includes(item));
 
   for (var i = 0; i < neededElements.length; i++) {
     var imgPDF = new Image();
