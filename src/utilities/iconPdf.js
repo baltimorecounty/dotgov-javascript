@@ -15,6 +15,8 @@ function AddIconToPdf() {
   var sideBarSectionAnchors = [];
   var sideBarAnchors = [];
 
+  var iconLinks = [].slice.call(document.getElementsByClassName("dg_icon-link"));
+
   for (var i = 0; i < sideSection.length; i++) {
     sideBarSectionAnchors = [].slice.call(
       sideSection[i].getElementsByTagName("a")
@@ -26,7 +28,8 @@ function AddIconToPdf() {
 
   let neededElements = anchors
     .filter((item) => !footerAnchors.includes(item))
-    .filter((item) => !sideBarAnchors.includes(item));
+    .filter((item) => !sideBarAnchors.includes(item))
+    .filter((item) => !iconLinks.includes(item));
 
   for (var i = 0; i < neededElements.length; i++) {
     var imgPDF = new Image();
@@ -46,7 +49,7 @@ function AddIconToPdf() {
     if (neededElements[i].href != "") {
       if (neededElements[i].href.indexOf(".pdf") > -1) {
         anchor.href = neededElements[i].href;
-        anchor.appendChild(imagePDF);
+        anchor.appendChild(imgPDF);
         neededElements[i].after(anchor);
       } else if (neededElements[i].href.indexOf("baltimorecountymd") === -1) {
         anchor.href = neededElements[i].href;
