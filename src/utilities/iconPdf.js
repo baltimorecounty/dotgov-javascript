@@ -30,6 +30,8 @@ function AddIconToPdf() {
 
   for (var i = 0; i < neededElements.length; i++) {
     var imgPDF = new Image();
+    var anchor = document.createElement("a");
+
     imgPDF.classList.add("dg_external-link-image");
     imgPDF.alt = "pdf";
     imgPDF.src =
@@ -43,11 +45,17 @@ function AddIconToPdf() {
 
     if (neededElements[i].href != "") {
       if (neededElements[i].href.indexOf(".pdf") > -1) {
-        neededElements[i].after(imgPDF);
+        anchor.href = neededElements[i].href;
+        anchor.appendChild(imagePDF);
+        neededElements[i].after(anchor);
       } else if (neededElements[i].href.indexOf("baltimorecountymd") === -1) {
-        neededElements[i].after(imgExternal);
+        anchor.href = neededElements[i].href;
+        anchor.appendChild(imgExternal);
+        neededElements[i].after(anchor);
       } else if (neededElements[i].href.indexOf("webex") > -1) {
-        neededElements[i].after(imgExternal);
+        anchor.href = neededElements[i].href;
+        anchor.appendChild(imgExternal);
+        neededElements[i].after(anchor);
       }
     }
   }
