@@ -31,6 +31,7 @@ const cssClasses = {
   siteNavToggleButtonText: "bc_site-nav__toggle-button__text",
   siteNavListContainer: "bc_site-nav__list-container",
   isVisible: "is-visible",
+  isHeader: "dg_site-header",
 };
 
 const invisibleTabIndex = "-1"; /** Allows us to hide an item from tabbing */
@@ -73,6 +74,7 @@ const toggleSiteNav = (shouldShow) => {
     `.${cssClasses.siteNavListContainer}`
   );
   const pageElm = document.getElementById(ids.page);
+  const pageHeader = document.getElementsByClassName(cssClasses.isHeader);
 
   // Update toggle button text
   buttonIconTextElm.textContent = shouldShow ? "Close" : "Menu";
@@ -112,7 +114,7 @@ const toggleSiteNav = (shouldShow) => {
     .classList[classListAction](cssClasses.isActive);
 
   // Enable / Disabled page and body
-  const disabledElms = [pageElm, document.body];
+  const disabledElms = [pageElm, document.body, pageHeader[0]];
   if (shouldShow) {
     AddClassToElms(disabledElms, cssClasses.isDisabled);
   } else {
@@ -128,12 +130,24 @@ const toggleSiteNav = (shouldShow) => {
  */
 const handleDocumentClick = (clickEvent) => {
   const { target } = clickEvent;
+
   const isSiteNavButtonClick =
     target.id === ids.siteNavToggleButton ||
     target.closest(`#${ids.siteNavToggleButton}`);
+
   const pageElm = target.closest(`#${ids.page}`);
-  const isDisabledPageClick =
-    pageElm && pageElm.classList.contains(cssClasses.isDisabled);
+  const header = target.closest(`.${cssClasses.isHeader}`);
+
+  const pageElmIsDisabled = pageElm
+    ? pageElm.classList.contains(cssClasses.isDisabled)
+    : false;
+
+  //Since the header is no longer part of the bc-page body we have to do a separate check if the user is clicking the header.
+  const headerIsDisabled = header
+    ? header.classList.contains(cssClasses.isDisabled)
+    : false;
+
+  const isDisabledPageClick = pageElmIsDisabled || headerIsDisabled;
 
   if (isSiteNavButtonClick) {
     handleSiteNavigationButtonClick(clickEvent);
