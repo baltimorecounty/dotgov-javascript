@@ -1,5 +1,3 @@
-
-
 //This is to be removed after the A/B test is complete.
 
 // window.onload = function () {
@@ -9,20 +7,20 @@
 //   $(header[0]).insertBefore(BCPage);
 // };
 
-window.onscroll = function () {
-  var elementHeader = document.getElementsByClassName("dg_header");
-  var elementMenu = document.getElementsByClassName(
-    "bc_site-nav__toggle-button"
-  );
-  var header = elementHeader[0];
-  var menu = elementMenu[0];
-  var sticky = header.offsetTop;
+var ua = window.navigator.userAgent;
+var msie = ua.indexOf("MSIE ");
+var isIE = msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./);
 
-  if (window.pageYOffset > sticky) {
-    header.classList.add("dg_site-header-sticky");
-    menu.classList.add("bc_site-nav__toggle-button-sticky");
+var elementHeader = document.getElementsByClassName("dg_header");
+var header = elementHeader[0];
+
+var sticky = header.offsetTop;
+var headerCSS = "dg_site-header-sticky-IE";
+
+window.onscroll = function () {
+  if (window.pageYOffset > sticky && isIE) {
+    header.classList.add(headerCSS);
   } else {
-    header.classList.remove("dg_site-header-sticky");
-    menu.classList.remove("bc_site-nav__toggle-button-sticky");
+    header.classList.remove(headerCSS);
   }
 };
