@@ -17,10 +17,12 @@ var header = elementHeader[0];
 var sticky = header.offsetTop;
 var headerCSS = "dg_site-header-sticky-IE";
 
-window.onscroll = function () {
-  if (window.pageYOffset > sticky && isIE) {
-    header.classList.add(headerCSS);
-  } else {
-    header.classList.remove(headerCSS);
-  }
-};
+if (isIE) {
+  window.onscroll = function () {
+    if (window.pageYOffset > sticky && isIE) {
+      header.classList.add(headerCSS);
+    } else {
+      header.classList.remove(headerCSS);
+    }
+  };
+}
