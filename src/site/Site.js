@@ -15,6 +15,7 @@ import "./SocialMedia";
 import "../utilities/googlesearch";
 import "../utilities/hideShowButton";
 import "../utilities/stickyHeader";
+import "../utilities/iconPdf";
 import "../utilities/hideParksAbout";
 import "../components/ScrollToTop";
 import "../components/AddImageAltText";
