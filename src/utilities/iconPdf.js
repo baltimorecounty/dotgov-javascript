@@ -1,3 +1,5 @@
+import "../polyfills/after.polyfill";
+
 function AddIconToPdf() {
   var anchors = [].slice.call(document.getElementsByTagName("a"));
   var footer = document.getElementsByTagName("footer");
