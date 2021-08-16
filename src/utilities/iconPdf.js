@@ -17,7 +17,11 @@ function AddIconToPdf() {
   var sideBarSectionAnchors = [];
   var sideBarAnchors = [];
 
-  var iconLinks = [].slice.call(document.getElementsByClassName("dg_icon-link"));
+  var iconLinks = [].slice.call(
+    document.getElementsByClassName("dg_icon-link")
+  );
+
+  var buttonLinks = [].slice.call(document.getElementsByClassName("dg_button"));
 
   for (var i = 0; i < sideSection.length; i++) {
     sideBarSectionAnchors = [].slice.call(
@@ -31,12 +35,15 @@ function AddIconToPdf() {
   let neededElements = anchors
     .filter((item) => !footerAnchors.includes(item))
     .filter((item) => !sideBarAnchors.includes(item))
-    .filter((item) => !iconLinks.includes(item));
+    .filter((item) => !iconLinks.includes(item))
+    .filter((item) => !buttonLinks.includes(item))
+    .filter((item) => item.href != "")
+    .filter((item) => item.href.indexOf("mailto:") != 0)
+    .filter((item) => item.href.indexOf("tel:") != 0);
 
   for (var i = 0; i < neededElements.length; i++) {
     var imgPDF = new Image();
     var anchor = document.createElement("a");
-
     imgPDF.classList.add("dg_external-link-image");
     imgPDF.alt = "pdf";
     imgPDF.src =
@@ -48,20 +55,20 @@ function AddIconToPdf() {
       "https://www.baltimorecountymd.gov/sebin/j/r/icon-link-image.png";
     imgExternal.classList.add("dg_external-link-image");
 
-    if (neededElements[i].href != "") {
-      if (neededElements[i].href.indexOf(".pdf") > -1) {
-        anchor.href = neededElements[i].href;
-        anchor.appendChild(imgPDF);
-        neededElements[i].after(anchor);
-      } else if (neededElements[i].href.indexOf("baltimorecountymd") === -1) {
-        anchor.href = neededElements[i].href;
-        anchor.appendChild(imgExternal);
-        neededElements[i].after(anchor);
-      } else if (neededElements[i].href.indexOf("webex") > -1) {
-        anchor.href = neededElements[i].href;
-        anchor.appendChild(imgExternal);
-        neededElements[i].after(anchor);
-      }
+    if (neededElements[i].href.indexOf(".pdf") > -1) {
+      anchor.href = neededElements[i].href;
+      anchor.appendChild(imgPDF);
+      neededElements[i].after(anchor);
+    } else if (neededElements[i].href.indexOf("baltimorecountymd.gov") === -1) {
+      anchor.href = neededElements[i].href;
+      anchor.appendChild(imgExternal);
+      neededElements[i].after(anchor);
+    } else if (
+      neededElements[i].href.indexOf("baltimorecountymd.webex.com") > -1
+    ) {
+      anchor.href = neededElements[i].href;
+      anchor.appendChild(imgExternal);
+      neededElements[i].after(anchor);
     }
   }
 }
