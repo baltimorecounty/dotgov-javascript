@@ -1,3 +1,6 @@
+//*********************************************************************************
+//To be added to the baltimorecountymd.gov/the-loop/index.html homepage HTML Snippet
+//*********************************************************************************
 function generateDate() {
   var options = {
     weekday: "long",

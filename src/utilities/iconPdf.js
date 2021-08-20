@@ -37,6 +37,8 @@ function AddIconToPdf() {
     .filter((item) => !sideBarAnchors.includes(item))
     .filter((item) => !iconLinks.includes(item))
     .filter((item) => !buttonLinks.includes(item))
+    .filter((item) => item.id != "twitterButton")
+    .filter((item) => item.id != "facebookButton")
     .filter((item) => item.href != "")
     .filter((item) => item.href.indexOf("mailto:") != 0)
     .filter((item) => item.href.indexOf("tel:") != 0);
