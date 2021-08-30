@@ -1,22 +1,22 @@
 // **************************
-// Found in the advanced forms ADA folder.
+// Found in the advanced forms Executive folder.
 // ****************************
 
 function onSubmit(token) {
-    var requiredElements = document.getElementsByClassName("seRequiredElement");
-    var alertMessage = "";
-  
-    for (var i = 0; i < requiredElements.length; i++) {
-      if (!requiredElements[i].value.trim()) {
-        var fieldText = $("label[for='" + requiredElements[i].id + "']").text();
-  
-        alertMessage += "Please enter a value for " + fieldText + "\n";
-      }
-    }
-  
-    if (alertMessage === "") {
-      document.getElementById("transition_ideas").submit();
-    } else {
-      alert(alertMessage);
+  var requiredElements = document.getElementsByClassName("seRequiredElement");
+  var alertMessage = "";
+
+  for (var i = 0; i < requiredElements.length; i++) {
+    if (!requiredElements[i].value.trim()) {
+      var fieldText = $("label[for='" + requiredElements[i].id + "']").text();
+
+      alertMessage += "Please enter a value for " + fieldText + "\n";
     }
   }
+
+  if (alertMessage === "") {
+    document.getElementById("transition_ideas").submit();
+  } else {
+    alert(alertMessage);
+  }
+}
