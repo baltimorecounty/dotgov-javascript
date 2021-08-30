@@ -40,18 +40,18 @@ document.addEventListener(
       var padding = elemStyle.paddingRight;
       var paddingValue = parseInt(padding.split("px")[0]); //returns a string and we want the integer value so removing the px
 
-      //gets a card for us to grab its offsetWidth. Cards are all the same size so we just need the value of the first one.
+      //gets a card for us to grab its Width. Cards are all the same size so we just need the value of the first one.
       const routeContanier = document.getElementById("route-info-container");
       const routeCards = routeContanier.getElementsByClassName(
         "loop-route-information-card"
       )[0];
-      const elemoffsetWidth = routeCards.clientWidth;
+      const elemWidth = routeCards.clientWidth;
       const cardContainer = document.getElementsByClassName(
         "container-loop-card"
       )[0];
 
       var scrollDuration = 1000;
-      var scrollValue = elemoffsetWidth + paddingValue;
+      var scrollValue = elemWidth + paddingValue;
       var containerPosition = $(cardContainer).scrollLeft();
 
       //Switched to jquery here for the animation. The scroll was instant before and looked broken. This adds a 1sec transition which seems more natural
