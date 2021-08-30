@@ -1,3 +1,6 @@
+// **************************
+// Found in the advanced forms ADA folder.
+// ****************************
 function onSubmit(token) {
   var requiredElements = document.getElementsByClassName("seRequiredElement");
   var alertMessage = "";

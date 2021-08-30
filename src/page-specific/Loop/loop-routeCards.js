@@ -1,3 +1,6 @@
+// ******************************************************************************
+// Determines if there are more then 2 cards and unhides the buttons if so
+// ******************************************************************************
 function addScrollToRouteCards() {
   var routeContanier = document.getElementById("route-info-container");
   var routeCards = routeContanier.getElementsByClassName(
@@ -10,49 +13,54 @@ function addScrollToRouteCards() {
   var rightArrow =
     buttonContainer[0].getElementsByClassName("loop-nav-right")[0];
 
-  console.log(leftArrow);
-  console.log(rightArrow);
-  console.log(routeCards.length);
-
-  if (routeCards.length <= 2) {
-    leftArrow[0].classList.add("invisible");
-    rightArrow[0].classList.add("invisible");
-  } else {
-    leftArrow[0].classList.remove("visible");
-    rightArrow[0].classList.remove("visible");
+  if (routeCards.length > 2) {
+    leftArrow[0].classList.remove("invisible");
+    rightArrow[0].classList.remove("invisible");
   }
-
 }
 
 window.addEventListener("load", addScrollToRouteCards);
+
+// ************************************************************************************
+// Scrolls the container div right or left the width of the card and the padding between
+// ************************************************************************************
 
 document.addEventListener(
   "click",
   (onDocumentClick) => {
     const { target } = onDocumentClick;
-    const parentDiv = target.closest("div");
-    const targetClassList = parentDiv.classList;
-    const isNavButton =
-      targetClassList.contains("loop-nav-left") ||
-      targetClassList.contains("loop-nav-right");
+    const buttonRight = target.classList.contains("fa-arrow-circle-right");
+    const buttonLeft = target.classList.contains("fa-arrow-circle-left");
 
-    if (isNavButton) {
-      console.log("Hello World " + targetClassList);
-    } else {
-      return;
+    if (buttonRight || buttonLeft) {
+      //We need to find the padding value between the cards to add to the max offset in order to scroll a full card over or back
+      var elem = document.querySelector(".p-4");
+      var elemStyle = getComputedStyle(elem);
+      var padding = elemStyle.paddingRight;
+      var paddingValue = padding.split("px")[0]; //returns a string and we want the integer value so removing the px
+
+      //gets a card for us to grab its offsetWidth. Cards are all the same size so we just need the value of the first one.
+      const routeContanier = document.getElementById("route-info-container");
+      const routeCards = routeContanier.getElementsByClassName(
+        "loop-route-information-card"
+      )[0];
+      const cardContainer = document.getElementsByClassName(
+        "container-loop-card"
+      )[0];
+
+      var scrollDuration = 1000;
+
+      //Switched to jquery here for the animation. The scroll was instant before and looked broken. This adds a 1.5sec transition which seems more natural
+      buttonRight
+        ? $(cardContainer).animate(
+            { scrollLeft: routeCards.offsetWidth + paddingValue },
+            scrollDuration
+          )
+        : $(cardContainer).animate(
+            { scrollLeft: -(routeCards.offsetWidth + paddingValue) },
+            scrollDuration
+          );
     }
   },
   false
 );
-
-function scrollTo (el) {
-  const elLeft = el.offsetLeft + el.offsetWidth;
-  const elParentLeft = el.parentNode.offsetLeft + el.parentNode.offsetWidth;
-
-  // check if element not in view
-  if (elLeft >= elParentLeft + el.parentNode.scrollLeft) {
-    el.parentNode.scrollLeft = elLeft - elParentLeft;
-  } else if (elLeft <= el.parentNode.offsetLeft + el.parentNode.scrollLeft) {
-    el.parentNode.scrollLeft = el.offsetLeft - el.parentNode.offsetLeft;
-  }
-}
