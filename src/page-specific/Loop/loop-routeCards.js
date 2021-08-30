@@ -50,7 +50,7 @@ document.addEventListener(
 
       var scrollDuration = 1000;
 
-      //Switched to jquery here for the animation. The scroll was instant before and looked broken. This adds a 1.5sec transition which seems more natural
+      //Switched to jquery here for the animation. The scroll was instant before and looked broken. This adds a 1sec transition which seems more natural
       buttonRight
         ? $(cardContainer).animate(
             { scrollLeft: routeCards.offsetWidth + paddingValue },
