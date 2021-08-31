@@ -1,6 +1,7 @@
 // **************************
-// Found in the advanced forms ADA folder.
+// Found in the advanced forms Executive folder.
 // ****************************
+
 function onSubmit(token) {
   var requiredElements = document.getElementsByClassName("seRequiredElement");
   var alertMessage = "";
@@ -14,7 +15,7 @@ function onSubmit(token) {
   }
 
   if (alertMessage === "") {
-    document.getElementById("disabilitiesnomination").submit();
+    document.getElementById("transition_ideas").submit();
   } else {
     alert(alertMessage);
   }
