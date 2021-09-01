@@ -32,6 +32,12 @@ document.addEventListener(
     const buttonRight = target.classList.contains("fa-arrow-circle-right");
     const buttonLeft = target.classList.contains("fa-arrow-circle-left");
 
+    function isInt(value) {
+      var er = /^-?[0-9]+$/;
+
+      return er.test(value);
+    }
+
     if (buttonRight || buttonLeft) {
       //We need to find the padding value between the cards to add to the max offset in order to scroll a full card over or back
       var elem = document.querySelector(".p-4");
@@ -51,17 +57,41 @@ document.addEventListener(
       )[0];
 
       var scrollDuration = 1000;
-      var scrollValue = elemWidth + paddingValue;
+      var cardWidth = elemWidth + paddingValue;
       var containerPosition = $(cardContainer).scrollLeft();
+
+      //This is calculated because there is a manual scroll as well. If the manual scroll centers the cards in the middle then we figure out
+      //the new starting location and calculate the difference needed to move over. We have to do separate calculations for right and left
+      function rightCalculation() {
+        if (!isInt(containerPosition / cardWidth)) {
+          var X = Math.ceil(containerPosition / cardWidth);
+          var Y = cardWidth * X;
+          var Z = Y - containerPosition;
+
+          cardWidth = Z;
+        }
+        return cardWidth;
+      }
+
+      function leftCalculation() {
+        if (!isInt(containerPosition / cardWidth)) {
+          var X = Math.ceil(containerPosition / cardWidth);
+          var Y = cardWidth * X;
+          var Z = Y - containerPosition;
+          var Q = cardWidth - Z;
+          cardWidth = Q;
+        }
+        return cardWidth;
+      }
 
       //Switched to jquery here for the animation. The scroll was instant before and looked broken. This adds a 1sec transition which seems more natural
       buttonRight
         ? $(cardContainer).animate(
-            { scrollLeft: containerPosition + scrollValue },
+            { scrollLeft: containerPosition + rightCalculation() },
             scrollDuration
           )
         : $(cardContainer).animate(
-            { scrollLeft: containerPosition - scrollValue },
+            { scrollLeft: containerPosition - leftCalculation() },
             scrollDuration
           );
     }
