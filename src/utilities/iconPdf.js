@@ -49,12 +49,12 @@ function AddIconToPdf() {
     imgPDF.classList.add("dg_external-link-image");
     imgPDF.alt = "pdf";
     imgPDF.src =
-      "https://dev.baltimorecountymd.gov/sebin/n/n/icon-pdf-solid.png";
+      "https://www.baltimorecountymd.gov/sebin/n/n/icon-pdf-solid.png";
 
     var imgExternal = new Image();
     imgExternal.alt = "external link";
     imgExternal.src =
-      "https://www.baltimorecountymd.gov/sebin/j/r/icon-link-image.png";
+      "https://www.baltimorecountymd.gov/sebin/j/s/icon-link-image.png";
     imgExternal.classList.add("dg_external-link-image");
 
     if (neededElements[i].href.indexOf(".pdf") > -1) {

@@ -56,8 +56,7 @@ var link = {
 
 //definitions for the qtips, for the keywords
 var definition = {
-  bias:
-    "A reported act which appears to be motivated, or perceived by the victim to be motivated, all or in part, by <strong><em>Disability, Ethnic, Gender, Homeless, Racial, Religious, or Sexual Orientation</em></strong>. To be considered a bias incident, the act is not required to be a crime under any federal, state or local statute. The key criterion for determining whether a crime or incident is of a bias nature is the motivation behind the act.",
+  bias: "A reported act which appears to be motivated, or perceived by the victim to be motivated, all or in part, by <strong><em>Disability, Ethnic, Gender, Homeless, Racial, Religious, or Sexual Orientation</em></strong>. To be considered a bias incident, the act is not required to be a crime under any federal, state or local statute. The key criterion for determining whether a crime or incident is of a bias nature is the motivation behind the act.",
   graffiti:
     "A permanent or non-permanent drawing, painting, mark, inscription, or writing that destroys, injures, molests, or defaces the real or personal property of another without the permission of the owner of the property.",
   serial:
@@ -118,21 +117,27 @@ function questionStringBuilder(counter, type) {
     var array = window[type + "Array"];
     var question = array[counter + "1"];
     var answer = array[counter + "2"].toLowerCase();
-    var isAnswerYes = answer === "yes";
-    var isAnswerNo = answer === "no";
-    var correctAnswerClassStr = "class='correct' ";
-    var noAnswerYesClassStr = "class='noanswer motor' ";
-    var noAnswerNoClassStr =
-      type === "abandonedvehicle"
-        ? "class='nomotor'"
-        : "class='noanswer nomotor'";
+
+    var isAnswerYes = answer === "yes"; //Is the correct answer YES
+    var isAnswerNo = answer === "no"; //Is the correct Answer NO
+    var isNoAnswer = answer === "noanswer"; //Is the correct answer NOANSWER
+
+    var isNoAnswerYes = "class='noanswer motor'"; //Add these classes if the answer is NOANSWER and its related to a vehicle
+    var isNoAnswerNo = "class='noanswer nomotor'"; //Add these classes if the answer is NOANSWER and its not related to a vehicle
+
+    var correctAnswerClass = "class='correct'"; //Add this class if question is correct answer
+    var incorrectAnswerClass = "class='incorrect'"; //Add this class if question is incorrect answer
 
     liString += [
       "<li class='question-container " + type + "'>",
       "<p>" + question + "</p>",
       "<div class='form-group form-group--inline'>",
       "<input type='radio' " +
-        (isAnswerYes ? correctAnswerClassStr : noAnswerYesClassStr) +
+        (isNoAnswer //First check if its "no answer" as this is handled special, then determine if the YES choice is the correct or incorrect answer
+          ? isNoAnswerYes
+          : isAnswerYes
+          ? correctAnswerClass
+          : incorrectAnswerClass) +
         "name='q" +
         rank +
         "' id='q-yes-" +
@@ -142,7 +147,11 @@ function questionStringBuilder(counter, type) {
       "</div>",
       "<div class='form-group form-group--inline'>",
       "<input type='radio' " +
-        (isAnswerNo ? correctAnswerClassStr : noAnswerNoClassStr) +
+        (isNoAnswer //First check if its no answer as this is handled special, then determine if the NO choice is the correct or incorrect answer
+          ? isNoAnswerNo
+          : isAnswerNo
+          ? correctAnswerClass
+          : incorrectAnswerClass) +
         "name='q" +
         rank +
         "' id='q-no-" +
@@ -336,6 +345,7 @@ $(document).ready(function () {
               )
               .css("color", "green");
           }
+
           if ($("div.questions").hasClass("destructionofproperty")) {
             /*if (questionType == "destructionofproperty") {*/
             if ($(this).hasClass("nomotor")) {
@@ -358,7 +368,7 @@ $(document).ready(function () {
           }
         }
 
-        //question has been answered correctly
+        //question has been answered correctly if it has the correct CSS class.
         if ($(this).hasClass("correct")) {
           var $this = $(this);
           var $questionContainer = $this.closest(".question-container");
@@ -401,7 +411,7 @@ $(document).ready(function () {
           }
         }
 
-        //wrong answer
+        //wrong answer if it has the incorrect CSS class
         else {
           var $this = $(this);
           var $questionContainer = $this.closest(".question-container");
@@ -425,11 +435,12 @@ $(document).ready(function () {
               .css("color", "red");
           } else {
             if ($(this).hasClass("noanswer")) {
+              //noanswers are considered correct so although it will be missing the correct class we display a green file report alert. This is handled up above.
               $("div.noreport").hide();
             } else {
               $("div.noreport")
                 .html(
-                  "<p>Sorry, your report does not qualify to file online. You need to  file by calling the non-emergency number at 410-887-2222 or visiting your <a href='" +
+                  "<p>Sorry, your report does not qualify to file online. You need to file by calling the non-emergency number at 410-887-2222 or visiting your <a href='" +
                     link.precincts +
                     "'>local precinct.</a>"
                 )
