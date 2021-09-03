@@ -9,6 +9,7 @@ module.exports = {
     StepList: "./src/components/StepList.js",
     Site: "./src/site/Site.js",
     SiteNavigation: "./src/site/SiteNavigation.js",
+    LoopNavigation: "./src/page-specific/Loop/loop-menu.js",
     SubpageTabs: "./src/template/SubpageTabs.js",
     EventFilter: "./src/components/EventFilter.js",
     ScrollToTop: "./src/components/ScrollToTop.js",
@@ -33,7 +34,8 @@ module.exports = {
     rules: [
       {
         test: /\.m?js$/,
-        exclude: /node_modules\/(?!(@baltimorecounty\/javascript-utilities)\/).*/,
+        exclude:
+          /node_modules\/(?!(@baltimorecounty\/javascript-utilities)\/).*/,
         use: {
           loader: "babel-loader",
           options: {
