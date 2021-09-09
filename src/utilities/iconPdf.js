@@ -41,7 +41,8 @@ function AddIconToPdf() {
     .filter((item) => item.id != "facebookButton")
     .filter((item) => item.href != "")
     .filter((item) => item.href.indexOf("mailto:") != 0)
-    .filter((item) => item.href.indexOf("tel:") != 0);
+    .filter((item) => item.href.indexOf("tel:") != 0)
+    .filter((item) => item.href.indexOf("javascript:") != 0);
 
   for (var i = 0; i < neededElements.length; i++) {
     var imgPDF = new Image();
