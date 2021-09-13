@@ -12,17 +12,20 @@ var msie = ua.indexOf("MSIE ");
 var isIE = msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./);
 
 var elementHeader = document.getElementsByClassName("dg_header");
-var header = elementHeader[0];
 
-var sticky = header.offsetTop;
-var headerCSS = "dg_site-header-sticky-IE";
+if (elementHeader.length > 0) {
+  var header = elementHeader[0];
 
-if (isIE) {
-  window.onscroll = function () {
-    if (window.pageYOffset > sticky && isIE) {
-      header.classList.add(headerCSS);
-    } else {
-      header.classList.remove(headerCSS);
-    }
-  };
+  var sticky = header.offsetTop;
+  var headerCSS = "dg_site-header-sticky-IE";
+
+  if (isIE) {
+    window.onscroll = function () {
+      if (window.pageYOffset > sticky && isIE) {
+        header.classList.add(headerCSS);
+      } else {
+        header.classList.remove(headerCSS);
+      }
+    };
+  }
 }
