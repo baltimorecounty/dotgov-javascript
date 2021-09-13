@@ -13,7 +13,7 @@ var isIE = msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./);
 
 var elementHeader = document.getElementsByClassName("dg_header");
 
-if (elementHeader) {
+if (elementHeader.length > 0) {
   var header = elementHeader[0];
 
   var sticky = header.offsetTop;

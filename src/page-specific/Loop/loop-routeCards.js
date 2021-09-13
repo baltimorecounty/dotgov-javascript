@@ -3,19 +3,23 @@
 // ******************************************************************************
 function addScrollToRouteCards() {
   var routeContanier = document.getElementById("route-info-container");
-  var routeCards = routeContanier.getElementsByClassName(
-    "loop-route-information-card"
-  );
 
-  var buttonContainer = document.getElementsByClassName("loop-btn-container");
+  if (routeContanier) {
+    var routeCards = routeContanier.getElementsByClassName(
+      "loop-route-information-card"
+    );
 
-  var leftArrow = buttonContainer[0].getElementsByClassName("loop-nav-left")[0];
-  var rightArrow =
-    buttonContainer[0].getElementsByClassName("loop-nav-right")[0];
+    var buttonContainer = document.getElementsByClassName("loop-btn-container");
 
-  if (routeCards.length > 2) {
-    leftArrow[0].classList.remove("invisible");
-    rightArrow[0].classList.remove("invisible");
+    var leftArrow =
+      buttonContainer[0].getElementsByClassName("loop-nav-left")[0];
+    var rightArrow =
+      buttonContainer[0].getElementsByClassName("loop-nav-right")[0];
+
+    if (routeCards.length > 2) {
+      leftArrow.classList.remove("invisible");
+      rightArrow.classList.remove("invisible");
+    }
   }
 }
 
