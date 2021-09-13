@@ -1,3 +1,20 @@
+const placeHolderText = {
+  dotgov: "Search for agencies, services and more...",
+  loop: "Search for maps, schedules and more...",
+};
+
+const searchCSS = {
+  dotgov_container: "dg_search-container",
+  dotgov_button: "dg_search-btn",
+  dotgov_input: "dg_search-input",
+  loop_container: "loop_search-container",
+  loop_button: "loop_search-btn",
+  loop_input: "loop_search-input",
+};
+
+const url = window.location.href;
+const isLoopApp = url.indexOf("the-loop") > -1;
+
 (function onTemplateEventsInit($) {
   var resizeTimer;
   var windowWidth;
@@ -11,7 +28,7 @@
   }
 
   function initGoogleSearch() {
-    (function() {
+    (function () {
       // Dev cx = "007558505509255245046:qayakxzcib0"
       // Prod cx = "007558505509255245046:qqwcx9uroqk"
       var cx = "007558505509255245046:qqwcx9uroqk";
@@ -19,8 +36,8 @@
       gcse.type = "text/javascript";
       gcse.async = true;
       gcse.src = "https://cse.google.com/cse.js?cx=" + cx;
-      gcse.onload = function() {
-        var getElmInterval = setInterval(function() {
+      gcse.onload = function () {
+        var getElmInterval = setInterval(function () {
           var searchContainer = $getSearchContainer();
           if (searchContainer) {
             // Remove Google styles
@@ -30,7 +47,9 @@
             var searchButton = searchContainer.find("button");
             if (searchButton) {
               searchButton.empty();
-              searchButton.addClass("dg_search-btn");
+              isLoopApp
+                ? searchButton.addClass(searchCSS.loop_button)
+                : searchButton.addClass(searchCSS.dotgov_button);
               searchButton.append(
                 '<i class="fas fa-search" aria-hidden="true"></i>'
               );
@@ -40,14 +59,14 @@
             if (clearButton) {
               clearButton.parent().remove();
             }
-            $("#gs_st50")
-              .parent()
-              .remove();
+            $("#gs_st50").parent().remove();
 
             // Add DG styles
             var searchForm = searchContainer.find("form");
             if (searchForm && searchForm[0]) {
-              searchForm[0].classList.add("dg_search-container");
+              isLoopApp
+                ? searchForm[0].classList.add(searchCSS.loop_container)
+                : searchForm[0].classList.add(searchCSS.dotgov_container);
               var outerTable = searchForm.children();
               if (outerTable) {
                 outerTable.attr("style", "width:100%");
@@ -61,9 +80,14 @@
               searchInput[0].style.background = removeBackGround(
                 searchInput[0]
               );
-              searchInput[0].classList.add("dg_search-input");
-              searchInput[0].placeholder =
-                "Search for agencies, services and more...";
+
+              isLoopApp
+                ? searchInput[0].classList.add(searchCSS.loop_input)
+                : searchInput[0].classList.add(searchCSS.dotgov_input);
+
+              isLoopApp
+                ? (searchInput[0].placeholder = placeHolderText.loop)
+                : (searchInput[0].placeholder = placeHolderText.dotgov);
             }
           }
         }, 100);
@@ -108,10 +132,10 @@
 
     document.addEventListener(
       "blur",
-      function(e) {
-        var searchbarElements = document.getElementsByClassName(
-          "dg_search-input"
-        );
+      function (e) {
+        var searchbarElements = isLoopApp
+          ? document.getElementsByClassName(searchCSS.loop_input)
+          : document.getElementsByClassName(searchCSS.dotgov_input);
         var searchbar =
           searchbarElements.length > 0 ? searchbarElements[0] : null;
 
@@ -156,7 +180,7 @@
 
   function repositionSearchBox(currentWindowWidth) {
     var $targetContainer = $getSearchContainer();
-    var intervalCheck = setInterval(function() {
+    var intervalCheck = setInterval(function () {
       if (
         $getSearchContainer.length &&
         $(".gsc-control-searchbox-only").length
@@ -185,19 +209,23 @@
     }
   };
 
-  const handleClick = clickEvent => {
+  const handleClick = (clickEvent) => {
     var compareElement = $.trim(clickEvent.target.classList);
     var gscElement = document.getElementsByClassName(
       "gsc-completion-container"
     );
     if (
       compareElement == "no-cssgridlegacy cssgrid" ||
-      compareElement == "dg_search-container"
+      compareElement == searchCSS.dotgov_container ||
+      compareElement == searchCSS.loop_container
     ) {
       gscElementShowHide(gscElement, "none");
       document.getElementById("gsc-i-id1").value = "";
       return;
-    } else if (compareElement == "dg_search-input") {
+    } else if (
+      compareElement == searchCSS.dotgov_input ||
+      compareElement == searchCSS.loop_input
+    ) {
       gscElementShowHide(gscElement, "");
       return;
     } else {
