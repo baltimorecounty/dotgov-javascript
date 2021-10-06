@@ -13,7 +13,7 @@ const searchCSS = {
 };
 
 const url = window.location.href;
-const isLoopApp = url.indexOf("the-loop") > -1;
+const isLoopApp = url.indexOf("baltcoloop") > -1;
 
 (function onTemplateEventsInit($) {
   var resizeTimer;
