@@ -44,7 +44,8 @@ function AddIconToPdf() {
     .filter((item) => item.href.indexOf("tel:") != 0)
     .filter((item) => item.href.indexOf("javascript:") != 0)
     .filter((item) => item.href.indexOf("https://cse.google.com/") != 0)
-    .filter((item) => item.href.indexOf("https://www.google.com/search") != 0);
+    .filter((item) => item.href.indexOf("https://www.google.com/search") != 0)
+    .filter((item) => item.href.indexOf("https://www.youtube.com/embed/") != 0);
 
   for (var i = 0; i < neededElements.length; i++) {
     var imgPDF = new Image();
