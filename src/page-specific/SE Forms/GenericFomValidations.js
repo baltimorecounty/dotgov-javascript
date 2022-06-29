@@ -26,12 +26,13 @@ function onSubmit() {
   alertMessage += checkButtonInputs(requiredElementsRadio);
 
   if (alertMessage === "") {
-    document.getElementById("agingFMlottery").submit();
+    document.getElementById("agingFMlottery").submit(); //This ID must match the name of the form or else an alert will not display
   } else {
     alert(alertMessage);
   }
 }
 
+//This function picks through an input set and determines if anything has been selected. If so then we ignore it. If not then we add an alert message to select an option.
 function checkButtonInputs(buttonSet) {
   var dict = {};
   buttonSet.forEach((obj) => {
