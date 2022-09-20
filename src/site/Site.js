@@ -12,6 +12,7 @@ import "./SiteNavigation";
 import "./SeForm";
 import "./SiteSearch";
 import "./SocialMedia";
+import "./translateButton";
 import "../utilities/googlesearch";
 import "../utilities/hideShowButton";
 import "../utilities/stickyHeader";
