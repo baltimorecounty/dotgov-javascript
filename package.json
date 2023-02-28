@@ -35,7 +35,7 @@
     "@baltimorecounty/javascript-utilities": "^1.0.7",
     "a11y-dialog": "^5.3.2",
     "axios": "^0.21.2",
-    "datatables.net-dt": "^1.10.23",
+    "datatables.net-dt": "^1.13.3",
     "date-fns": "^2.15.0",
     "es6-promise": "^4.2.8",
     "focus-trap": "^5.1.0",
