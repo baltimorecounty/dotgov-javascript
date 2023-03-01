@@ -41,6 +41,7 @@
     "es6-promise": "^4.2.8",
     "focus-trap": "^5.1.0",
     "jquery": "^3.5.1",
+    "jsdom": "^21.1.0",
     "little-loader": "^0.2.0",
     "regenerator": "^0.14.7"
   }
