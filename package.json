@@ -27,9 +27,9 @@
     "babel-loader": "^8.1.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "jest": "^24.9.0",
-    "webpack": "^4.44.1",
+    "webpack": "^5.75.0",
     "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.3"
+    "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
     "@baltimorecounty/javascript-utilities": "^1.0.7",
