@@ -42,7 +42,9 @@ function CreateTable() {
   $.fn.dataTable.moment("MM/DD/YYYY");
 
   if (!$.fn.DataTable.isDataTable(".responsive-main-table")) {
-    $(".responsive-main-table").DataTable({
+    var table = $(".responsive-main-table");
+    table.DataTable().clear();
+    table.DataTable({
       info: false,
       paging: false,
       bFilter: false,
