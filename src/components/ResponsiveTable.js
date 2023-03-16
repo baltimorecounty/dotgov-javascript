@@ -1,21 +1,22 @@
 import load from "little-loader";
 
 var scriptDatetimeMoment =
-  "https://cdn.datatables.net/plug-ins/1.10.22/sorting/datetime-moment.js";
+  "https://cdn.datatables.net/plug-ins/1.13.3/sorting/datetime-moment.js";
 var scriptDatatables =
-  "https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js";
+  "https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js";
 var scriptMoment = "https://momentjs.com/downloads/moment.min.js";
 var scriptJqueryDataTables =
-  "https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js";
+  "https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js";
 
 load(scriptJqueryDataTables, function () {
   load(scriptDatatables, function () {
     load(scriptMoment, function () {
       load(scriptDatetimeMoment, function () {
         document.addEventListener("readystatechange", function () {
-          if (document.readyState === "complete") {
+          const pageState = document.readyState;
+
+          if (pageState === "complete") {
             CreateTable();
-          } else {
           }
         });
       });
@@ -43,7 +44,7 @@ function CreateTable() {
 
   if (!$.fn.DataTable.isDataTable(".responsive-main-table")) {
     var table = $(".responsive-main-table");
-    table.DataTable().clear();
+    //table.DataTable().clear();
     table.DataTable({
       info: false,
       paging: false,
